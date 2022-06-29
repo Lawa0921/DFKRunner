@@ -1,0 +1,225 @@
+{
+    "pollingInterval": "120",
+    "listStamina": 20,
+    "unlistStamina": 24,
+    "quests": [
+        {
+            "name": "Fishing",
+            "professionHeroes": [
+                "200501", "215972", "225816", "244783", "244669", "198747",
+                "143228", "207779", "194486", "221301", "225412", "219723",
+                "206487", "211172", "219722", "240288", "238435", "245862",
+                "247349", "245802", "248182", "248625", "249397", "203766"
+            ],
+            "nonProfessionHeroes": [],
+            "holding": [],
+            "proMinStam": 25,
+            "normMinStam": 21,
+            "contractAddress": "0xE259e8386d38467f0E7fFEdB69c3c9C935dfaeFc"
+        },
+        {
+            "name": "Foraging",
+            "professionHeroes": [
+                "220169", "200659", "231332", "189485", "238302", "236356",
+                "231170", "243095", "196869", "230777", "194654", "30166",
+                "195274", "197335", "188623", "206915", "197273", "197275",
+                "200149", "196393", "239243", "224504", "34321", "169406",
+                "246258", "235887", "225740", "222254", "235049", "229756",
+                "248456", "247641", "250156"
+            ],
+            "nonProfessionHeroes": [],
+            "holdingArea": [],
+            "proMinStam": 25,
+            "normMinStam": 21,
+            "contractAddress": "0x3132c76acF2217646fB8391918D28a16bD8A8Ef4"
+        },
+        {
+            "name": "WishingWell",
+            "professionHeroes": [],
+            "nonProfessionHeroes": [],
+            "contractAddress": "0x0548214A0760a897aF53656F4b69DbAD688D8f29"
+        },
+        {
+            "name": "GoldMining",
+            "professionHeroes": [],
+            "nonProfessionHeroes": [],
+            "holdingArea": [],
+            "proMinStam": 25,
+            "normMinStam": 25,
+            "contractAddress": "0x569e6a4c2e3af31b337be00657b4c040c828dd73"
+        },
+        {
+            "name": "JewelMining",
+            "professionHeroes": [],
+            "nonProfessionHeroes": [],
+            "proMinStam": 25,
+            "normMinStam": 25,
+            "contractAddress": "0x6ff019415ee105acf2ac52483a33f5b43eadb8d0"
+        },
+        {
+            "name": "Gardening",
+            "DO_NOT_USE": "5,8,12,13,14,17",
+            "professionHeroes": [
+                {"heroID": "220580", "gardenID": "0"},
+                {"heroID": "239450", "gardenID": "0"},
+                {"heroID": "239288", "gardenID": "1"},
+                {"heroID": "241577", "gardenID": "1"},
+                {"heroID": "200248", "gardenID": "2"},
+                {"heroID": "243136", "gardenID": "2"},
+                {"heroID": "232951", "gardenID": "3"},
+                {"heroID": "246966", "gardenID": "3"},
+                {"heroID": "239289", "gardenID": "4"},
+                {"heroID": "245528", "gardenID": "4"},
+                {"heroID": "221062", "gardenID": "6"},
+                {"heroID": "246334", "gardenID": "6"},
+                {"heroID": "227216", "gardenID": "7"},
+                {"heroID": "1565", "gardenID": "7"},
+                {"heroID": "244697", "gardenID": "9"},
+                {"heroID": "247427", "gardenID": "9"},
+                {"heroID": "201655", "gardenID": "10"},
+                {"heroID": "247709", "gardenID": "10"},
+                {"heroID": "123617", "gardenID": "11"},
+                {"heroID": "249395", "gardenID": "11"},
+                {"heroID": "227895", "gardenID": "15"},
+                {"heroID": "245502", "gardenID": "15"},
+                {"heroID": "210943", "gardenID": "16"},
+                {"heroID": "250153", "gardenID": "16"},
+                {"heroID": "97669", "gardenID": "18"}
+            ],
+            "nonProfessionHeroes": [],
+            "proMinStam": 25,
+            "normMinStam": 25,
+            "poolID": 1,
+            "holdingArea": [],
+            "contractAddress": "0xe4154b6e5d240507f9699c730a496790a722df19"
+        }        
+    ],
+    "statQuests": [
+    {
+        "name": "StatQuest_Str",
+        "heroes": [
+            "233167", "69246"
+        ],
+        "normMinStam": 25
+    },
+    {
+        "name": "StatQuest_Dex",
+        "heroes": [],
+        "normMinStam": 25
+    },
+    {
+        "name": "StatQuest_Agi",
+        "heroes": [
+            "5207", "235497"
+        ],
+        "normMinStam": 25
+    },
+    {
+        "name": "StatQuest_Vit",
+        "heroes": [
+            "238885"
+        ],
+        "normMinStam": 25
+    },
+    {
+        "name": "StatQuest_End",
+        "heroes": [
+            "235300", "230478"
+        ],
+        "normMinStam": 25
+    },
+    {
+        "name": "StatQuest_Int",
+        "heroes": [
+            "243344"
+        ],
+        "normMinStam": 25
+    },
+    {
+        "name": "StatQuest_Wis",
+        "heroes": [
+            "243093", "245359", "248554", "247280"
+        ],
+        "normMinStam": 25
+    },
+    {
+        "name": "StatQuest_Luk",
+        "heroes": [],
+        "normMinStam": 25
+    }],
+    "heroForSale": [
+        { "id": "1565", "price": 15000, "notes": "L2 R G0 thief"},
+        { "id":"243136", "price": 4500, "notes": "L1 C 1/1 dreadknight" },
+        { "id":"200248", "price": 95, "notes": "L3 UC 7/10 priest" },
+        { "id":"123617", "price": 350, "notes": "L6 UC 4/5 knight PJ" },
+        { "id":"201655", "price": 59, "notes": "L3 UC 5/5 warrior" },
+        { "id": "97669", "price": 350, "notes": "L6 UC 6/8 knight PJ" },
+        { "id": "221062", "price": 55, "notes": "L2 UC 6/6 priest" },
+        { "id": "227216", "price": 55, "notes": "L2 UC 7/8 thief" },
+        { "id": "245359", "price": 85, "notes": "L1 R 8/8 priest" },
+        { "id": "229756", "price": 55, "notes": "L1 C 0/5 paladin"},
+        { "id": "247280", "price": 50, "notes": "L1 C 6/6 wizard" },
+        { "id": "246334", "price": 99, "notes": "L1 R 0/0 darkknight"},
+        { "id": "248182", "price": 250, "notes": "L1 C 5/5 ninja" },
+        { "id": "248554", "price": 50 },
+        { "id": "203766", "price": 59 },
+        { "id": "243344", "price": 50 },
+        { "id": "243093", "price": 50 },
+        { "id": "245502", "price": 55 },
+        { "id": "250153", "price": 55 }
+    ],
+    "todo": [
+        { "id":"197335", "price": 69, "notes": "L2 UC 4/5 priest"},
+        { "id":"207779", "price": 69, "notes": "L3 UC 5/7 knight" },
+        { "id":"225412", "price": 65, "notes": "L2 UC 7/9 wizard" },
+        { "id":"143228", "price": 75, "notes": "L2 C 6/6 priest" },
+        { "id":"194486", "price": 65, "notes": "L1 C 5/5 warrior" },
+        { "id":"230777", "price": 60, "notes": "L1 C 4/5 thief" },
+        { "id":"194654", "price": 65, "notes": "L1 C 5/5 monk" },
+        { "id":"206487", "price": 65, "notes": "L1 C 4/5 monk" },
+        { "id":"198747", "price": 65, "notes": "L1 C 4/6 monk" },
+        { "id":"221301", "price": 60, "notes": "L1 C 5/5 wizard" },
+        { "id":"219722", "price": 60, "notes": "L2 UC 6/6 wizard" },
+        { "id":"219723", "price": 60, "notes": "L1 C 6/7 monk" },
+        { "id": "195274", "price": 69, "notes": "L2 C 4/5 pirate" },
+        { "id": "211172", "price": 55, "notes": "L1 C 5/5 warrior" },
+        { "id": "188623", "price": 65, "notes": "L2 C 7/9 knight" },
+        { "id": "206915", "price": 65, "notes": "L2 C 6/8 archer" },
+        { "id": "197273", "price": 60, "notes": "L2 UC 7/8 warrior" },
+        { "id": "200149", "price": 60, "notes": "L2 UC 5/6 warrior" },
+        { "id": "196393", "price": 69, "notes": "L2 UC 8/9 knight" },
+        { "id": "197275", "price": 65, "notes": "L1 C 7/9 warrior" },
+        { "id":"189485", "price": 69, "notes": "L3 C 5/10 knight" },
+        { "id":"200501", "price": 69, "notes":"L1 C 5/10 knight" },
+        { "id":"200659", "price": 69, "notes": "L1 C 5/10 monk"}
+    ],
+    "questContract": "0x5100Bd31b822371108A0f63DCFb6594b9919Eaf4",
+    "questContract_21Apr2022": "0xAa9a289ce0565E4D6548e63a441e7C084E6B52F6",
+    "heroContract": "0x5f753dcdf9b1ad9aabc1346614d1f4746fd6ce5c",
+    "tavernContract": "0x13a65B9F8039E2c032Bc022171Dc05B30c3f2892",
+    "useRpcIndex": 0,
+    "rpcs": [
+        "https://api.harmony.one",
+        "https://harmony-0-rpc.gateway.pokt.network",
+        "https://api.0xvalidator.one",
+        "https://rpc.hermesdefi.io",
+        "https://api.fuzz.fi",
+        "https://api.s0.t.hmny.io",
+        "https://a.api.s0.t.hmny.io",
+        "https://rpc.foxswap.fi",
+        "https://iad.api.harmony.one",
+        "https://rpc.heavenswail.one",
+        "https://rpc.hermesdefi.io",
+        "https://rpc.cosmicuniverse.one",
+        "https://rpc.onechain.services"
+    ],
+    "webSocketsRpcs": [
+        "wss://ws-harmony-mainnet.chainstacklabs.com/",
+        "wss://ws.s0.t.hmny.io/"
+    ],
+    "gasPrice": 35000000000,
+    "gasLimit": 10000000,
+    "queryHeroEndPoint": "https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
+    "unconditionalPurchasePrice": 30,
+    "g0ConditionsOfPurchase": 5000
+}
