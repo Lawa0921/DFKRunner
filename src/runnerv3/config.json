@@ -221,5 +221,5 @@
     "gasLimit": 10000000,
     "queryHeroEndPoint": "https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
     "unconditionalPurchasePrice": 30,
-    "g0ConditionsOfPurchase": 5000
+    "g0ConditionsOfPurchase": 2000
 }
