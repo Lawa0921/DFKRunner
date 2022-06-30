@@ -39,17 +39,37 @@ const tavernContract = new Contract(
   defaultGasPrice: config.gasPrice
 }, wallet)
 
+const isUnderUnconditionalPurchasePrice = (price) => {
+  return price <= config.unconditionalPurchasePrice ? true : false;
+}
+
+const g0PurchaseConditions = (hero, price) => {
+  if (hero.generation !== 0) {
+    return false;
+  } else {
+    return price <= config.g0ConditionsOfPurchase ? true : false;
+  }
+}
+
 const saleHandler = async (tokenId, price) => {
   await axios.post("https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
     {"limit":1,"params":[{"field":"id","operator":"=","value":tokenId.toString()}],"offset":0}
   ).then(async (res) => {
     const valuator = new Valuator(price, new Hero(res.data[0]));
-    autils.watchHeroLog(valuator.hero, price);
+    await valuator.execute();
 
-    if (valuator.execute()) {
+    autils.watchHeroLog(valuator.hero, price, valuator.valuation);
+
+    if (isUnderUnconditionalPurchasePrice(valuator.hero.price) || g0PurchaseConditions(valuator.hero, valuator.price)) {
       await bidHero(valuator.id, valuator.price);
       console.log("!!! Purchased !!!")
+    } else if (!valuator.hero.isOwning()) {
+      if (valuator.price <= valuator.valuation) {
+        await bidHero(valuator.id, valuator.price);
+        console.log("!!! Purchased !!!")
+      }
     }
+
   }).catch(err => {
     console.log(err);
     return;

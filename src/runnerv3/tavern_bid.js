@@ -5,11 +5,11 @@ const { Harmony } = require('@harmony-js/core');
 const { ChainID, ChainType, hexToNumber } = require('@harmony-js/utils');
 
 tavernBidPattern = (heroIdInt, jewelPriceInt) => {
-    let rv = ""
-    rv += "0x598647f8" // signature of bid
-    rv += autils.intToInput(heroIdInt) // heroid
-    rv += autils.intToInput(jewelPriceInt) // bid amount
-    return rv;
+  let rv = ""
+  rv += "0x598647f8" // signature of bid
+  rv += autils.intToInput(heroIdInt) // heroid
+  rv += autils.intToInput(jewelPriceInt) // bid amount
+  return rv;
 }
 
 exports.bidHero = async (hero) => {
@@ -30,7 +30,7 @@ exports.bidHero = async (hero) => {
       gasLimit: config.gasLimit,
       shardID: 0,
       toShardID: 0,
-      gasPrice: config.gasPrice,
+      gasPrice: config.bidGasPrice,
       data: tavernBidPattern(parseInt(hero.id), parseInt(hero.saleprice))
     });
     console.log("!!! bid hero txn created !!!")
@@ -42,7 +42,7 @@ exports.bidHero = async (hero) => {
     console.log("!!! bid hero txn confirmed !!!")
 
     autils.bidHeroLog(`Purchased hero: ${hero.id} use ${parseInt(hero.saleprice) / Math.pow(10, 18)} Jewel`)
-  } catch {
+  } catch(error) {
     if (error.toString().includes('Maximum call stack size exceeded')) {
         autils.log(error.toString(), true);
     } else if (error.toString().includes('The transaction is still not confirmed after 20 attempts')) {
