@@ -12,36 +12,36 @@ tavernBidPattern = (heroIdInt, jewelPriceInt) => {
   return rv;
 }
 
-exports.bidHero = async (hero) => {
+exports.bidHero = async (heroId, price) => {
   try {
-    const hmy = new Harmony(
+    const harmony = new Harmony(
       autils.getRpc(config.useRpcIndex),
       {
           chainType: ChainType.Harmony,
           chainId: ChainID.HmyMainnet,
       },
     );
-  
-    hmy.addByPrivateKey(process.env.PRIVATE_KEY);
+    
+    harmony.wallet.addByPrivateKey(process.env.PRIVATE_KEY);
 
-    const unSignedTxn = hmy.transactions.newTx({
+    const unSignedTxn = harmony.transactions.newTx({
       to: config.tavernContract,
       value: 0,
       gasLimit: config.gasLimit,
       shardID: 0,
       toShardID: 0,
       gasPrice: config.bidGasPrice,
-      data: tavernBidPattern(parseInt(hero.id), parseInt(hero.saleprice))
+      data: tavernBidPattern(parseInt(heroId), parseInt(price))
     });
     console.log("!!! bid hero txn created !!!")
 
-    const signedTxn = await hmy.wallet.signTransaction(unSignedTxn);
+    const signedTxn = await harmony.wallet.signTransaction(unSignedTxn);
     console.log("!!! bid hero txn signed !!!");
 
-    await hmy.blockchain.createObservedTransaction(signedTxn).promise;
+    await harmony.blockchain.createObservedTransaction(signedTxn).promise;
     console.log("!!! bid hero txn confirmed !!!")
 
-    autils.bidHeroLog(`Purchased hero: ${hero.id} use ${parseInt(hero.saleprice) / Math.pow(10, 18)} Jewel`)
+    autils.bidHeroLog(`Purchased hero: ${heroId} use ${parseInt(price) / Math.pow(10, 18)} Jewel`)
   } catch(error) {
     if (error.toString().includes('Maximum call stack size exceeded')) {
         autils.log(error.toString(), true);

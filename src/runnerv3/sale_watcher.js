@@ -53,7 +53,7 @@ const g0PurchaseConditions = (hero, price) => {
 
 const saleHandler = async (tokenId, price) => {
   await axios.post("https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
-    {"limit":1,"params":[{"field":"id","operator":"=","value":tokenId.toString()}],"offset":0}
+    {"limit":1,"params":[{"field":"id","operator":"=","value":tokenId}],"offset":0}
   ).then(async (res) => {
     const valuator = new Valuator(price, new Hero(res.data[0]));
     await valuator.execute();
@@ -61,17 +61,19 @@ const saleHandler = async (tokenId, price) => {
     autils.watchHeroLog(valuator.hero, price, valuator.valuation);
 
     if (isUnderUnconditionalPurchasePrice(valuator.hero.price) || g0PurchaseConditions(valuator.hero, valuator.price)) {
-      await bidHero(valuator.id, valuator.price);
+      await bidHero(tokenId, price);
       console.log("!!! Purchased !!!")
     } else if (!valuator.hero.isOwning()) {
       if (valuator.price <= valuator.valuation) {
-        await bidHero(valuator.id, valuator.price);
-        console.log("!!! Purchased !!!")
+        await bidHero(tokenId, price);
+        console.log("!!! Purchased !!!");
       }
     }
 
   }).catch(err => {
-    console.log(err);
+    if (err.toString().includes('Request failed with status code 500')) {
+        autils.log(err.toString(), true);
+    }
     return;
   })
 }

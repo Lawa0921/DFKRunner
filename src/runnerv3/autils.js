@@ -62,7 +62,7 @@ exports.rewardLog = (myString) => {
 }
 
 exports.watchHeroLog = (hero, price, valuator) => {
-    str = `time: ${new Date().toLocaleTimeString()} id: ${hero.id}, ${hero.formatRarity()} LV${hero.level} ${hero.profession} G${hero.generation} ${hero.summons_remaining}/${hero.maxsummons} ${hero.formatMainclass()}/${hero.formatSubclass()}, ${hero.statboost1} ${hero.statboost2} listed ${parseInt(price) / Math.pow(10, 18)} J, valuate: ${valuator} J`
+    str = `${new Date().toLocaleTimeString()} id: ${hero.id}, ${hero.formatRarity()} LV${hero.level} ${hero.profession} G${hero.generation} ${hero.summons_remaining}/${hero.maxsummons} ${hero.formatMainclass()}/${hero.formatSubclass()}, ${hero.statboost1} ${hero.statboost2} listed ${parseInt(price) / Math.pow(10, 18)} J, valuate: ${valuator} J `
     console.log(str);
     fs.appendFileSync("watch_history", str + "\n");
 }

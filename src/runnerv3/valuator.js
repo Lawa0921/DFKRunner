@@ -202,11 +202,11 @@ module.exports = class Valuator {
         if (this.hero.summons_remaining === 7) {
           this.summonPrice += 5;
         } else if (this.hero.summons_remaining === 8) {
-          this.summonPrice += 8;
+          this.summonPrice += 10;
         } else if (this.hero.summons_remaining === 9) {
-          this.summonPrice += 20;
+          this.summonPrice += 30;
         } else if (this.hero.summons_remaining === 10) {
-          this.summonPrice += 40;
+          this.summonPrice += 50;
         }
       }
     } else if (heroMainclassTier === "Advanced") {
