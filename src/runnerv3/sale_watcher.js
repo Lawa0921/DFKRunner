@@ -60,16 +60,10 @@ const saleHandler = async (tokenId, price) => {
 
     autils.watchHeroLog(valuator.hero, price, valuator.valuation);
 
-    if (isUnderUnconditionalPurchasePrice(valuator.hero.price) || g0PurchaseConditions(valuator.hero, valuator.price)) {
+    if (!valuator.hero.isOwning() && valuator.price <= valuator.valuation) {
       await bidHero(tokenId, price);
-      console.log("!!! Purchased !!!")
-    } else if (!valuator.hero.isOwning()) {
-      if (valuator.price <= valuator.valuation) {
-        await bidHero(tokenId, price);
-        console.log("!!! Purchased !!!");
-      }
+      console.log("!!! Hero Purchased !!!");
     }
-
   }).catch(err => {
     if (err.toString().includes('Request failed with status code 500')) {
         autils.log(err.toString(), true);
