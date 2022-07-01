@@ -1210,16 +1210,4 @@ module.exports = class Valuator {
 
     this.valuation += this.subclassPrice;
   }
-
-  isUnderUnconditionalPurchasePrice() {
-    return this.price <= config.unconditionalPurchasePrice ? true : false;
-  }
-
-  g0PurchaseConditions() {
-    if (this.hero.generation !== 0) {
-      return false;
-    } else {
-      return this.price <= config.g0ConditionsOfPurchase ? true : false;
-    }
-  }
 }
