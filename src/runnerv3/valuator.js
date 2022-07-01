@@ -208,6 +208,8 @@ module.exports = class Valuator {
         } else if (this.hero.summons_remaining === 10) {
           this.summonPrice += 50;
         }
+      } else if (this.hero.generation === 0) {
+        this.summonPrice += config.g0ConditionsOfPurchase;
       }
     } else if (heroMainclassTier === "Advanced") {
       if (this.hero.generation >= 4) {
