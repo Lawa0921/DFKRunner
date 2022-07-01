@@ -15,6 +15,7 @@ module.exports = class Valuator {
     this.stylePrice = 0;
     this.skillPrice = 0;
     this.statPrice = 0;
+    this.subclassPrice = 0;
   }
 
   execute() {
@@ -26,6 +27,7 @@ module.exports = class Valuator {
     this.evaluateStylePrice();
     this.evaluateSkillPrice();
     this.evaluateStatPrice();
+    this.evaluateSubclassPrice();
   }
 
   evaluateMainclassPrice() {
@@ -970,6 +972,243 @@ module.exports = class Valuator {
     }
 
     this.valuation += this.statPrice;
+  }
+
+  evaluateSubclassPrice() {
+    const heroMainclass = this.hero.formatMainclass();
+    const heroSubclass = this.hero.formatSubclass();
+    const heroRarity = this.hero.formatRarity();
+
+    switch(heroMainclass) {
+      case "Warrior":
+        if (heroSubclass === "Warrior" || heroSubclass === "Knight" || heroSubclass === "Summoner" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 30;
+        }
+        break;
+      case "Knight":
+        if (heroSubclass === "Warrior" || heroSubclass === "Knight" || heroSubclass === "Summoner" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 30;
+        }
+        break;
+      case "Thief":
+        if (heroSubclass === "Thief" || heroSubclass === "Summoner" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 30;
+        }
+        break;
+      case "Archer":
+        if (heroSubclass === "Archer" || heroSubclass === "Summoner" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 30;
+        }
+        break;
+      case "Priest":
+        if (heroSubclass === "Priest" || heroSubclass === "Wizard" || heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Summoner" || heroSubclass === "Ninja") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 30;
+        }
+        break;
+      case "Wizard":
+        if (heroSubclass === "Priest" || heroSubclass === "Wizard" || heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Summoner" || heroSubclass === "Ninja") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 30;
+        }
+        break;
+      case "Monk":
+        if (heroSubclass === "Monk" || heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Summoner" || heroSubclass === "Ninja") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 30;
+        }
+        break;
+      case "Pirate":
+        if (heroSubclass === "Pirate" || heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Summoner" || heroSubclass === "Ninja") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 30;
+        }
+        break;
+      case "Berserker":
+        if (heroSubclass === "Berserker" || heroSubclass === "Summoner" || heroSubclass === "Ninja") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 30;
+        }
+        break;
+      case "Seer":
+        if (heroSubclass === "Seer" || heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Ninja") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Summoner" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 30;
+        }
+        break;
+      case "Paladin":
+        if (heroSubclass === "Warrior" || heroSubclass === "Knight" || heroSubclass === "Berserker") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Summoner" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 30;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 80;
+        }
+        break;
+      case "DarkKnight":
+        if (heroSubclass === "Warrior" || heroSubclass === "Knight" || heroSubclass === "Berserker") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Summoner" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 30;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 80;
+        }
+        break;
+      case "Summoner":
+        if (heroSubclass === "Wizard" || heroSubclass === "Priest" || heroSubclass === "Seer") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Shapeshifter" || heroSubclass === "Ninja") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Summoner") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 30;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 80;
+        }
+        break;
+      case "Ninja":
+        if (heroSubclass === "Thief") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Summoner") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Shapeshifter" || heroSubclass === "Ninja") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 30;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 80;
+        }
+        break;
+      case "Shapeshifter":
+        if (heroSubclass === "Thief" || heroSubclass === "Pirate") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Summoner") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Shapeshifter" || heroSubclass === "Ninja") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 30;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 80;
+        }
+        break;
+      case "Dragoon":
+        if (heroSubclass === "Warrior" || heroSubclass === "Knight" || heroSubclass === "Berserker") {
+          this.subclassPrice += 1;
+        } else if (heroSubclass === "Summoner") {
+          this.subclassPrice += 5;
+        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 15;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 50;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 100;
+        }
+        break;
+      case "Sage":
+        if (heroSubclass === "Wizard" || heroSubclass === "Priest" || heroSubclass === "Seer") {
+          this.subclassPrice += 3;
+        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
+          this.subclassPrice += 5;
+        } else if (heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "Summoner") {
+          this.subclassPrice += 25;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 50;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 100;
+        }
+        break;
+      case "DreadKnight":
+        if (heroSubclass === "Warrior" || heroSubclass === "Knight" || heroSubclass === "Berserker") {
+          this.subclassPrice += 10;
+        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
+          this.subclassPrice += 50;
+        } else if (heroSubclass === "Summoner") {
+          this.subclassPrice += 25;
+        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
+          this.subclassPrice += 100;
+        } else if (heroSubclass === "DreadKnight") {
+          this.subclassPrice += 500;
+        }
+        break;
+    }
+
+    if (heroRarity === "UnCommon") {
+      this.subclassPrice = this.subclassPrice * 1.1;
+    } else if (heroRarity === "Rare") {
+      this.subclassPrice = this.subclassPrice * 1.2;
+    } else if (heroRarity === "Legendary") {
+      this.subclassPrice = this.subclassPrice * 1.3;
+    } else if (heroRarity === "Mythic") {
+      this.subclassPrice = this.subclassPrice * 1.4;
+    }
+
+    this.valuation += this.subclassPrice;
   }
 
   isUnderUnconditionalPurchasePrice() {
