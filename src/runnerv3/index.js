@@ -410,10 +410,8 @@ async function GetLatestBlock()
 // ==========================================
 let prevBlock = 0;
 let didProcessTx = 0;
-let cleanExit = 0;
 async function main() {
     try {
-        
         console.log("now(): " + GetCurrentDateTime(true).toLocaleTimeString());
         console.log("simTime(): " + GetCurrentDateTime().toLocaleTimeString());
         didProcessTx = 0;
@@ -457,13 +455,11 @@ async function main() {
         {
             // can't do anything about a memory leak...
             autils.log(error.toString(), true);
-            cleanExit = 1;
         }
         if (error.toString().includes('The transaction is still not confirmed after 20 attempts'))
         {
             // failure to recover from @harmony-js/core package. restart
             autils.log(error.toString(), true);
-            cleanExit = 1;
         }
         eBreakCount += 1;
         if (error.toString() === '[object Object]')
@@ -473,11 +469,6 @@ async function main() {
         else {
             autils.log(error.toString(), true);
         }
-        
-    }
-
-    if (cleanExit)
-    {
         process.exit(0);
     }
 }

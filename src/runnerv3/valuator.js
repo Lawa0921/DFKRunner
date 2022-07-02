@@ -75,9 +75,9 @@ module.exports = class Valuator {
       } else if (heroRarity === "Rare") {
         this.rarityPrice += 25;
       } else if (heroRarity === "Legendary") {
-        this.rarityPrice += 150;
+        this.rarityPrice += 200;
       } else if (heroRarity === "Mythic") {
-        this.rarityPrice += 550;
+        this.rarityPrice += 650;
       }
     } else if (heroMainclassTier === "Elite") {
       if (heroRarity === "UnCommon") {
@@ -85,9 +85,9 @@ module.exports = class Valuator {
       } else if (heroRarity === "Rare") {
         this.rarityPrice += 150;
       } else if (heroRarity === "Legendary") {
-        this.rarityPrice += 800;
+        this.rarityPrice += 1000;
       } else if (heroRarity === "Mythic") {
-        this.rarityPrice += 2000;
+        this.rarityPrice += 2500;
       }
     } else if (heroMainclassTier === "Transcendant") {
       if (heroRarity === "UnCommon") {
@@ -129,8 +129,14 @@ module.exports = class Valuator {
         }
         break;
       case "Priest":
+        if (this.hero.profession === "foraging") {
+          this.professionPrice += 5;
+        }
         break;
       case "Wizard":
+        if (this.hero.profession === "foraging") {
+          this.professionPrice += 5;
+        }
         break;
       case "Monk":
         break;
@@ -142,6 +148,9 @@ module.exports = class Valuator {
         }
         break;
       case "Seer":
+        if (this.hero.profession === "foraging") {
+          this.professionPrice += 5;
+        }
         break;
       case "Paladin":
         if (this.hero.profession === "mining") {
@@ -218,57 +227,57 @@ module.exports = class Valuator {
         return;
       } else if (this.hero.generation === 3) {
         if (this.hero.summons_remaining === 2) {
-          this.summonPrice += 3;
+          this.summonPrice += 12;
         } else if (this.hero.summons_remaining === 3) {
-          this.summonPrice += 8;
-        } else if (this.hero.summons_remaining === 4) {
           this.summonPrice += 25;
+        } else if (this.hero.summons_remaining === 4) {
+          this.summonPrice += 40;
         } else if (this.hero.summons_remaining === 5) {
-          this.summonPrice += 50;
+          this.summonPrice += 75;
         }
       } else if (this.hero.generation === 2) {
         if (this.hero.summons_remaining === 2) {
-          this.summonPrice += 5;
+          this.summonPrice += 15;
         } else if (this.hero.summons_remaining === 3) {
-          this.summonPrice += 20;
-        } else if (this.hero.summons_remaining === 4) {
           this.summonPrice += 35;
+        } else if (this.hero.summons_remaining === 4) {
+          this.summonPrice += 55;
         } else if (this.hero.summons_remaining === 5) {
-          this.summonPrice += 80;
+          this.summonPrice += 100;
         }
       } else if (this.hero.generation === 1) {
         if (this.hero.summons_remaining === 1) {
-          this.summonPrice += 5;
+          this.summonPrice += 10;
         } else if (this.hero.summons_remaining === 2) {
           this.summonPrice += 20;
         } else if (this.hero.summons_remaining === 3) {
-          this.summonPrice += 40;
+          this.summonPrice += 60;
         } else if (this.hero.summons_remaining === 4) {
-          this.summonPrice += 65;
+          this.summonPrice += 90;
         } else if (this.hero.summons_remaining === 5) {
-          this.summonPrice += 100;
+          this.summonPrice += 125;
         }
       }
 
       if (heroMainclass === "Shapeshifter") {
-        this.summonPrice = this.summonPrice * 0.75;
+        this.summonPrice = this.summonPrice * 0.65;
       }
     } else if (heroMainclassTier === "Elite") {
       if (this.hero.generation >= 5) {
         if (this.hero.summons_remaining === 1) {
-          this.summonPrice += 50;
+          this.summonPrice += 80;
         } else if (this.hero.summons_remaining === 2) {
-          this.summonPrice += 180;
+          this.summonPrice += 220;
         } else if (this.hero.summons_remaining === 3) {
-          this.summonPrice += 400;
+          this.summonPrice += 440;
         }
       } else if (this.hero.generation <= 4) {
         if (this.hero.summons_remaining === 1) {
-          this.summonPrice += 60;
+          this.summonPrice += 90;
         } else if (this.hero.summons_remaining === 2) {
-          this.summonPrice += 200;
+          this.summonPrice += 230;
         } else if (this.hero.summons_remaining === 3) {
-          this.summonPrice += 430;
+          this.summonPrice += 450;
         }
       }
     } else if (heroMainclassTier === "Transcendant") {
@@ -278,13 +287,13 @@ module.exports = class Valuator {
     }
 
     if (heroRarity === "UnCommon") {
-      this.summonPrice = this.summonPrice * 1.05;
-    } else if (heroRarity === "Rare") {
       this.summonPrice = this.summonPrice * 1.1;
-    } else if (heroRarity === "Legendary") {
+    } else if (heroRarity === "Rare") {
       this.summonPrice = this.summonPrice * 1.2;
+    } else if (heroRarity === "Legendary") {
+      this.summonPrice = this.summonPrice * 1.5;
     } else if (heroRarity === "Mythic") {
-      this.summonPrice = this.summonPrice * 1.3;
+      this.summonPrice = this.summonPrice * 2.25;
     }
 
     this.valuation += this.summonPrice;
@@ -305,11 +314,11 @@ module.exports = class Valuator {
     }
 
     if (heroRarity === "UnCommon") {
-      this.levelPrice = this.levelPrice * 1.1;
+      this.levelPrice = this.levelPrice * 1.2;
     } else if (heroRarity === "Rare") {
-      this.levelPrice = this.levelPrice * 1.4;
+      this.levelPrice = this.levelPrice * 1.5;
     } else if (heroRarity === "Legendary") {
-      this.levelPrice = this.levelPrice * 2.5;
+      this.levelPrice = this.levelPrice * 3;
     } else if (heroRarity === "Mythic") {
       this.levelPrice = this.levelPrice * 5;
     }
