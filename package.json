@@ -6,6 +6,7 @@
   "dependencies": {
     "@harmony-js/core": "^0.1.57",
     "axios": "^0.26.0",
+    "axios-retry": "^3.3.1",
     "date-and-time": "^2.2.1",
     "dotenv": "^16.0.1",
     "ethers": "^5.5.2",
