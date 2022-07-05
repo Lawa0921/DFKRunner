@@ -154,7 +154,7 @@ module.exports = class Hero {
   }
 
   isOwning() {
-    return this.owner.toLowerCase() === process.env.PRIVATE_KEY.toLowerCase() ? true : false
+    return this.owner.toLowerCase() === process.env.WALLET_ADDRESS.toLowerCase() ? true : false
   }
 
   formatRarity() {
