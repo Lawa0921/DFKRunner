@@ -150,10 +150,7 @@ exports.CheckAndSendFishers = async (heroesStruct, isPro) => {
             console.log("!!! sending the message on the wire !!!");
         }
         console.log("Sent " + LocalBatching + " on a Fishing Quest")
-        return 1;
-    }
-    
-    return 0;
+    }    
 }
 
 exports.SendFisherOnQuest = async (heroID, attempts) => {

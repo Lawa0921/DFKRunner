@@ -169,10 +169,7 @@ async function CheckAndSendGoldMiners(heroesStruct, isPro)
         }
         
         console.log("Sent " + LocalBatching + " on a Gold Mining Quest")
-        return 1;
     }
-    
-    return 0;
 }
 
 async function CheckAndSendJewelMiners(heroesStruct, isPro)
@@ -265,10 +262,7 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
         }
         
         console.log("Sent " + LocalBatching + " on a Jewel Mining Quest")
-        return 1;
-    }
-    
-    return 0;
+    }    
 }
 
 async function CheckAndSendGardeners(heroesStruct, isPro)
@@ -347,10 +341,7 @@ async function CheckAndSendGardeners(heroesStruct, isPro)
         }
         
         console.log("Sent " + LocalBatching[0].heroID + " on a Garderning Quest")
-        return 1;
-    }
-    
-    return 0;
+    }    
 }
 
 function GetCurrentDateTime(useRealTime = false)
@@ -414,7 +405,6 @@ async function main() {
     try {
         console.log("now(): " + GetCurrentDateTime(true).toLocaleTimeString());
         console.log("simTime(): " + GetCurrentDateTime().toLocaleTimeString());
-        didProcessTx = 0;
 
         let lastBlock = await GetLatestBlock()-1;
         if (lastBlock <= prevBlock)
@@ -432,19 +422,19 @@ async function main() {
         let heroesStruct = ParseActiveQuests(activeQuests);
         let heroesStruct2 = ParseActiveQuests(activeQuests2);
 
-        didProcessTx += await CompleteQuests(heroesStruct, config.questContract);
-        didProcessTx += await CompleteQuests(heroesStruct2, config.questContract_21Apr2022);
+        await CompleteQuests(heroesStruct, config.questContract);
+        await CompleteQuests(heroesStruct2, config.questContract_21Apr2022);
 
         await runSalesLogic();
 
-        didProcessTx += await CheckAndSendFishers(heroesStruct2, true);
-        didProcessTx += await CheckAndSendForagers(heroesStruct2, true);
+        await CheckAndSendFishers(heroesStruct2, true);
+        await CheckAndSendForagers(heroesStruct2, true);
 
-        didProcessTx += await CheckAndSendGoldMiners(heroesStruct, true);
-        didProcessTx += await CheckAndSendJewelMiners(heroesStruct, true);
-        didProcessTx += await CheckAndSendGardeners(heroesStruct, true);
+        await CheckAndSendGoldMiners(heroesStruct, true);
+        await CheckAndSendJewelMiners(heroesStruct, true);
+        await CheckAndSendGardeners(heroesStruct, true);
 
-        didProcessTx += await CheckAndSendStatQuests(heroesStruct2);
+        await CheckAndSendStatQuests(heroesStruct2);
 
         console.log("runok!");
         console.log("");
