@@ -9,9 +9,6 @@ const tavernContractAddress = "0x13a65B9F8039E2c032Bc022171Dc05B30c3f2892"
 const config = require("./config.json");
 const autils = require("./autils")
 const axios = require('axios')
-const { SendFisherOnQuest } = require('./quest_fishing');
-const { SendForagerOnQuest } = require('./quest_foraging');
-const { SendHeroOnStatQuest } = require('./quest_stats');
 
 const LocalSignOn = true;
 
@@ -51,8 +48,6 @@ let heroContract = hmy.contracts.createContract(
         defaultGasPrice: config.gasPrice
     });
     heroContract
-
-const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
 
 const isHeroOnSale = (ownerAddress) => {
     return ownerAddress.toLowerCase() === tavernContractAddress.toLowerCase();
@@ -164,28 +159,6 @@ const listHero = async (heroID, price) => {
     return;
 }
 
-const questHero = async (heroID, questType) => {
-    const id = parseInt(heroID, 10);
-    autils.logSimulation(`questing hero: ${parseInt(id)}: ${questType}`);
-    switch (questType) {
-        case 'fishing':
-            await SendFisherOnQuest(id, 5);
-            break;
-        case 'foraging':
-            await SendForagerOnQuest(id, 5);
-            break;
-        case 'trash':
-            await SendFisherOnQuest(id, 3);
-        default:
-            break;
-    }
-    if (questType.includes('StatQuest_'))
-    {
-        await SendHeroOnStatQuest(id, questType);
-    }
-    return;
-}
-
 const isAPIv6Owner = async (heroID) => {
     let returnValue = false;
     let debugData;
@@ -205,24 +178,11 @@ const isAPIv6Owner = async (heroID) => {
     return returnValue;
 }
 
-/*
-0x96b5a755 // cancel auction
-000000000000000000000000000000000000000000000000000000000002b8a3 // hero id
-*/
 const cancelAuctionPattern = (heroID) => {
     let rv = '0x96b5a755'
     rv += autils.intToInput(heroID);
     return rv
 }
-
-/*
-0x4ee42914 // create auction
-000000000000000000000000000000000000000000000000000000000002b114 // hero id
-0000000000000000000000000000000000000000000000f0e8e396adcbf00000 // start price
-0000000000000000000000000000000000000000000000f0e8e396adcbf00000 // end price
-000000000000000000000000000000000000000000000000000000000000003c // duration
-0000000000000000000000000000000000000000000000000000000000000000 // private winner
-*/
 
 const createAuctionPattern = (heroID, price) => {
     let rv = '0x4ee42914'
