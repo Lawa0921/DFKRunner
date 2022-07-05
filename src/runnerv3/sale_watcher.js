@@ -2,6 +2,7 @@ require('dotenv').config()
 const config = require("./config.json");
 const autils = require("./autils")
 const axios = require('axios')
+const axiosRetry = require('axios-retry');
 const tavernABI_27apr2022 = require('./abi/tavernABI_27apr2022.json')
 const date = require('date-and-time');
 
@@ -23,13 +24,6 @@ const wallet = new Wallet(
   ),
 );
 
-const hmy = new Harmony(
-    autils.getRpc(config.useRpcIndex), {
-      chainType: ChainType.Harmony,
-      chainId: ChainID.HmyMainnet,
-    },
-);
-
 wallet.addByPrivateKey(process.env.PRIVATE_KEY);
 
 const tavernContract = new Contract(
@@ -39,17 +33,17 @@ const tavernContract = new Contract(
   defaultGasPrice: config.gasPrice
 }, wallet)
 
-const isUnderUnconditionalPurchasePrice = (price) => {
-  return price <= config.unconditionalPurchasePrice ? true : false;
-}
-
-const g0PurchaseConditions = (hero, price) => {
-  if (hero.generation !== 0) {
-    return false;
-  } else {
-    return price <= config.g0ConditionsOfPurchase ? true : false;
-  }
-}
+axiosRetry(axios, {
+  retries: 5, // number of retries
+  retryDelay: (retryCount) => {
+    console.log(`retry attempt: ${retryCount}`);
+    return retryCount * 2000; // time interval between retries
+  },
+  retryCondition: (error) => {
+    // if retry condition is not specified, by default idempotent requests are retried
+    return error.response.status === 500;
+  },
+});
 
 const saleHandler = async (tokenId, price) => {
   await axios.post("https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
@@ -62,7 +56,6 @@ const saleHandler = async (tokenId, price) => {
 
     if (!valuator.hero.isOwning() && valuator.price <= valuator.valuation) {
       await bidHero(tokenId, price);
-      console.log("!!! Hero Purchased !!!");
     }
   }).catch(err => {
     if (err.toString().includes('Request failed with status code 500')) {
@@ -75,14 +68,22 @@ const saleHandler = async (tokenId, price) => {
 async function main() {
   console.log(`${date.addMinutes(new Date(Date.now()), 0)}: start watching`);
 
-  tavernContract.events.AuctionCreated().
-    on(
-      'data', (event) => {
-        const { tokenId, startingPrice } = event.returnValues;
+  let timerId = setTimeout(() => {
+    console.log(`${date.addMinutes(new Date(Date.now()), 0)}: restart process`)
+    process.exit(0);
+  }, 120000);
 
-        saleHandler(tokenId, startingPrice);
-      }
-    )
+  tavernContract.events.AuctionCreated().onData((event) => {
+    clearTimeout(timerId);
+    const { tokenId, startingPrice } = event.returnValues;
+
+    saleHandler(tokenId, startingPrice);
+
+    timerId = setTimeout(() => {
+      console.log(`${date.addMinutes(new Date(Date.now()), 0)}: restart process`)
+      process.exit(0);
+    }, 120000);
+  });
 }
 
 main()

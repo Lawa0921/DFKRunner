@@ -38,10 +38,16 @@ exports.bidHero = async (heroId, price) => {
     const signedTxn = await harmony.wallet.signTransaction(unSignedTxn);
     console.log("!!! bid hero txn signed !!!");
 
-    await harmony.blockchain.createObservedTransaction(signedTxn).promise;
-    console.log("!!! bid hero txn confirmed !!!")
+    const txn = await harmony.blockchain.createObservedTransaction(signedTxn).promise;
 
-    autils.bidHeroLog(`Purchased hero: ${heroId} use ${parseInt(price) / Math.pow(10, 18)} Jewel`)
+    if (txn.txStatus === 'CONFIRMED') {
+      console.log(`!!! bid hero txn confirmed !!! txn: ${JSON.stringify(txn)}`)
+
+      autils.bidHeroLog(`${new Date().toLocaleTimeString()} Purchased hero: ${heroId} use ${parseInt(price) / Math.pow(10, 18)} Jewel`)
+    } else {
+      autils.bidHeroLog(`${new Date().toLocaleTimeString()} !!! bid hero failed !!! txn: ${JSON.stringify(txn)}`)
+    }
+
   } catch(error) {
     if (error.toString().includes('Maximum call stack size exceeded')) {
         autils.log(error.toString(), true);
