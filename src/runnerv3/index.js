@@ -22,9 +22,6 @@ const { CheckAndSendStatQuests } = require('./quest_stats');
 
 const { runSalesLogic } = require('./sales_handler');
 
-// file local vars
-const GlobalSignOn = true;
-
 const hmy = new Harmony(
     autils.getRpc(config.useRpcIndex),
     {
@@ -158,12 +155,9 @@ async function CheckAndSendGoldMiners(heroesStruct, isPro)
         // sign the transaction use wallet;
         const signedTxn = await hmy.wallet.signTransaction(txn);
         //  console.log(signedTxn);
-        if (GlobalSignOn === true)
-        {
-            const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
-            console.log("!!! sending the message on the wire !!!");
-            //  console.log(txnHash);
-        }
+        const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
+        console.log("!!! sending the message on the wire !!!");
+        //  console.log(txnHash);
         
         console.log("Sent " + LocalBatching + " on a Gold Mining Quest")
     }
@@ -251,11 +245,8 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
         // sign the transaction use wallet;
         const signedTxn = await hmy.wallet.signTransaction(txn);
         //  console.log(signedTxn);
-        if (GlobalSignOn === true)
-        {
-            console.log("!!! sending the message on the wire !!!");
-            const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
-        }
+        console.log("!!! sending the message on the wire !!!");
+        const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
         
         console.log("Sent " + LocalBatching + " on a Jewel Mining Quest")
     }    
@@ -328,12 +319,9 @@ async function CheckAndSendGardeners(heroesStruct, isPro)
         // sign the transaction use wallet;
         const signedTxn = await hmy.wallet.signTransaction(txn);
         //  console.log(signedTxn);
-        if (GlobalSignOn === true)
-        {
-            console.log("!!! sending the message on the wire !!!");
-            const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
-            //  console.log(txnHash);
-        }
+        console.log("!!! sending the message on the wire !!!");
+        const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
+        //  console.log(txnHash);
         
         console.log("Sent " + LocalBatching[0].heroID + " on a Garderning Quest")
     }    
