@@ -420,6 +420,7 @@ async function main() {
 
         console.log("process completed");
         console.log("");
+        process.exit(0);
     }
     catch(error)
     {
@@ -445,4 +446,3 @@ async function main() {
 }
 
 main();
-setInterval(main, config.pollingInterval * 1000);
