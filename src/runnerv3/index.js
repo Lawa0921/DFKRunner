@@ -24,8 +24,6 @@ const { runSalesLogic } = require('./sales_handler');
 
 // file local vars
 const GlobalSignOn = true;
-let eBreakCount = 0;
-const eBreakLimit = 10;
 
 const hmy = new Harmony(
     autils.getRpc(config.useRpcIndex),
@@ -436,7 +434,7 @@ async function main() {
 
         await CheckAndSendStatQuests(heroesStruct2);
 
-        console.log("runok!");
+        console.log("process completed");
         console.log("");
     }
     catch(error)
@@ -451,7 +449,6 @@ async function main() {
             // failure to recover from @harmony-js/core package. restart
             autils.log(error.toString(), true);
         }
-        eBreakCount += 1;
         if (error.toString() === '[object Object]')
         {
             autils.log(JSON.stringify(error), true);
