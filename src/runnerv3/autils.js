@@ -75,3 +75,12 @@ exports.logSimulation = (myString) => {
     console.log(myString);
     // fs.appendFileSync("simulation", myString + "\n");
 }
+
+exports.txnFailLog = (txn) => {
+    str = `${new Date().toLocaleTimeString()} txn fail, detail: ${JSON.stringify(txn)}`
+    console.log(str);
+}
+
+exports.gasSettingFormater = () => {
+    return { gasPrice: config.gasPrice, gasLimit: config.gasLimit };
+}
