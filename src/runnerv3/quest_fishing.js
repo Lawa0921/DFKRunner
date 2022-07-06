@@ -69,8 +69,6 @@ exports.CheckAndSendFishers = async (heroesStruct, isPro) => {
 		}
 	}
 
-	console.log("Fishing Batches" + (isPro ? " (P): " : " (N): ") + LocalBatching)
-
 	if (LocalBatching.length > 0) {
 		await questContract.methods.startQuest(LocalBatching, config.quests[0].contractAddress, fishingTries, 0).send(autils.gasSettingFormater()).then((txnHash) => {
 			if (txnHash.transaction.txStatus === 'CONFIRMED') {

@@ -64,8 +64,6 @@ exports.CheckAndSendForagers = async (heroesStruct, isPro) => {
 			break;
 		}
 	}
-
-	console.log("Forager Batches: " + LocalBatching)
     
 	if (LocalBatching.length > 0) {
 		await questContract.methods.startQuest(LocalBatching, config.quests[1].contractAddress, foragingTries, 0).send(autils.gasSettingFormater()).then((txnHash) => {

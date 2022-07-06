@@ -87,8 +87,7 @@
                 {"heroID": "97669", "gardenID": "18"}
             ],
             "nonProfessionHeroes": [],
-            "proMinStam": 25,
-            "normMinStam": 25,
+            "MinStam": 20,
             "poolID": 1,
             "holdingArea": [],
             "contractAddress": "0xe4154b6e5d240507f9699c730a496790a722df19"
