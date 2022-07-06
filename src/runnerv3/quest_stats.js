@@ -35,14 +35,9 @@ let questContract_21Apr2022 = hmy.contracts.createContract(
         defaultGasPrice: config.gasPrice
     });
 
-const LocalSignOn = true;
-
 exports.CheckAndSendStatQuests = async (heroesStruct) => {
-
-    let sentTx = 0;
     let counter = 0;
-    while (counter < 8)
-    {
+    while (counter < 8) {
         let questType = config.statQuests[counter]
         let minBatch = 1
         let maxBatch = 1;
@@ -92,8 +87,7 @@ exports.CheckAndSendStatQuests = async (heroesStruct) => {
         console.log(questType.name + ': ' + LocalBatching)
 
         // be lazy only send 1 batch for now.. next minute can send another
-        if (numHeroesToSend >= minBatch && minBatch > 0)
-        {
+        if (numHeroesToSend >= minBatch && minBatch > 0) {
             const txn = hmy.transactions.newTx({
                 // quest contract address
                 to: config.questContract_21Apr2022,
@@ -114,19 +108,17 @@ exports.CheckAndSendStatQuests = async (heroesStruct) => {
 
             // sign the transaction use wallet;
             const signedTxn = await hmy.wallet.signTransaction(txn);
-            if (LocalSignOn === true)
-            {
-                const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
-                console.log("!!! sending the message on the wire !!!");
-            }
-            
-            console.log("Sent " + LocalBatching + " on a " + questType.name)
-            sentTx += 1;
-        }
-        counter += 1;
-    }
 
-    return sentTx;
+            const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
+
+            if (txnHash.transaction.txStatus === 'CONFIRMED') {
+				console.log("Sent " + LocalBatching + " on a " + questType.name)
+			} else {
+				autils.txnFailLog(txnHash);
+			} 
+        }
+        counter++;
+    }
 }
 
 const statQuestPattern = (hero, stat, attempts) => {
@@ -193,35 +185,4 @@ const statAddress = (input) => {
     default:
         throw new Error('Invalid Stat!');
     }
-}
-
-exports.SendHeroOnStatQuest = async (heroID, questName) =>{
-    const id = parseInt(heroID,10);
-    const txn = hmy.transactions.newTx({
-        // quest contract address
-        to: config.questContract_21Apr2022,
-        // amount of one
-        value: 0,
-        // gas limit, you can use string
-        gasLimit: config.gasLimit,
-        // send token from shardID
-        shardID: 0,
-        // send token to toShardID
-        toShardID: 0,
-        // gas Price, you can use Unit class, and use Gwei, then remember to use toWei(), which will be transformed to BN
-        gasPrice: config.gasPrice,
-        // tx data
-        data: statQuestPattern(id, questName, 5)
-    });
-
-
-    // sign the transaction use wallet;
-    const signedTxn = await hmy.wallet.signTransaction(txn);
-    if (LocalSignOn === true)
-    {
-        console.log("!!! sending the message on the wire !!!");
-        const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
-    }
-    console.log("Sent " + heroID + " on a " + questName)
-    return 1;
 }
