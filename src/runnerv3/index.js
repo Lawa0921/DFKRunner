@@ -162,7 +162,6 @@ async function CheckAndSendGoldMiners(heroesStruct, isPro)
         {
             const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
             console.log("!!! sending the message on the wire !!!");
-            ++eBreakCount;
             //  console.log(txnHash);
         }
         
@@ -256,7 +255,6 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
         {
             console.log("!!! sending the message on the wire !!!");
             const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
-            ++eBreakCount;
         }
         
         console.log("Sent " + LocalBatching + " on a Jewel Mining Quest")
@@ -334,7 +332,6 @@ async function CheckAndSendGardeners(heroesStruct, isPro)
         {
             console.log("!!! sending the message on the wire !!!");
             const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
-            ++eBreakCount;
             //  console.log(txnHash);
         }
         
