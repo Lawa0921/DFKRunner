@@ -15,7 +15,7 @@
             "holding": [],
             "proMinStam": 25,
             "normMinStam": 21,
-            "contractAddress": "0xE259e8386d38467f0E7fFEdB69c3c9C935dfaeFc"
+            "contractAddress": "one14hla9gj4kdujsuafs6y4cccjara6elyt0076c8"
         },
         {
             "name": "Foraging",
@@ -31,7 +31,7 @@
             "holdingArea": [],
             "proMinStam": 25,
             "normMinStam": 21,
-            "contractAddress": "0x3132c76acF2217646fB8391918D28a16bD8A8Ef4"
+            "contractAddress": "one1k3jlgkgqjhdd2rlwdmst03nsptptqn0cl226mx"
         },
         {
             "name": "WishingWell",

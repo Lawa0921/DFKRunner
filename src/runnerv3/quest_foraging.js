@@ -67,7 +67,7 @@ exports.CheckAndSendForagers = async (heroesStruct, isPro) => {
 
 	console.log("Forager Batches: " + LocalBatching)
     
-	if (LocalBatching.length >= 0) {
+	if (LocalBatching.length > 0) {
 		await questContract.methods.startQuest(LocalBatching, config.quests[1].contractAddress, foragingTries, 0).send(autils.gasSettingFormater()).then((txnHash) => {
 			if (txnHash.transaction.txStatus === 'CONFIRMED') {
 				console.log("Sent " + LocalBatching + " on a " + (isPro ? "professional" : "normal") + "Foraging Quest")
@@ -77,5 +77,7 @@ exports.CheckAndSendForagers = async (heroesStruct, isPro) => {
 		}).catch((error) => {
 			console.log(error);
 		});
+	} else {
+		console.log("No Foraging Sent")
 	}
 }
