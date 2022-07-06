@@ -395,7 +395,6 @@ async function GetLatestBlock()
 
 // ==========================================
 let prevBlock = 0;
-let didProcessTx = 0;
 async function main() {
     try {
         console.log("now(): " + GetCurrentDateTime(true).toLocaleTimeString());
@@ -417,8 +416,8 @@ async function main() {
         let heroesStruct = ParseActiveQuests(activeQuests);
         let heroesStruct2 = ParseActiveQuests(activeQuests2);
 
-        await CompleteQuests(heroesStruct, config.questContract);
-        await CompleteQuests(heroesStruct2, config.questContract_21Apr2022);
+        await CompleteQuests(heroesStruct, config.questContract, questABI);
+        await CompleteQuests(heroesStruct2, config.questContract_21Apr2022, questABI_21apr2022);
 
         await runSalesLogic();
 
@@ -457,5 +456,5 @@ async function main() {
     }
 }
 
-main()
+main();
 setInterval(main, config.pollingInterval * 1000);

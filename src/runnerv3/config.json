@@ -219,7 +219,7 @@
     ],
     "gasPrice": 110000000000,
     "bidGasPrice": 110100000000,
-    "gasLimit":  2092892,
+    "gasLimit":  3592892,
     "queryHeroEndPoint": "https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
     "unconditionalPurchasePrice": 30,
     "g0ConditionsOfPurchase": 2000
