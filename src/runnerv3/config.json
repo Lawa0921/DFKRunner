@@ -217,9 +217,9 @@
         "wss://ws-harmony-mainnet.chainstacklabs.com/",
         "wss://ws.s0.t.hmny.io/"
     ],
-    "gasPrice": 35000000000,
-    "bidGasPrice": 135000000000,
-    "gasLimit": 10000000,
+    "gasPrice": 110000000000,
+    "bidGasPrice": 100100000000,
+    "gasLimit": 825835,
     "queryHeroEndPoint": "https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
     "unconditionalPurchasePrice": 30,
     "g0ConditionsOfPurchase": 2000
