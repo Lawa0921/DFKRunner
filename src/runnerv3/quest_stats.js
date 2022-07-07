@@ -111,7 +111,7 @@ exports.CheckAndSendStatQuests = async (heroesStruct) => {
 
             const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
 
-            if (txnHash.transaction.txStatus === 'CONFIRMED') {
+            if (txnHash.txStatus === 'CONFIRMED') {
 				console.log("Sent " + LocalBatching + " on a " + questType.name)
 			} else {
 				autils.txnFailLog(txnHash);
