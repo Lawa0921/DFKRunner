@@ -207,8 +207,12 @@ module.exports = class Valuator {
     const heroRarity = this.hero.formatRarity();
 
     if (heroMainclassTier === "Basic") {
-      if (this.hero.generation >= 2) {
+      if (this.hero.generation >= 3) {
         return;
+      } else if (this.hero.generation === 2) {
+        if (this.hero.summons_remaining >= 7) {
+          this.summonPrice += 2;
+        }
       } else if (this.hero.generation === 1) {
         if (this.hero.summons_remaining === 7) {
           this.summonPrice += 5;
@@ -223,8 +227,20 @@ module.exports = class Valuator {
         this.summonPrice += config.g0ConditionsOfPurchase;
       }
     } else if (heroMainclassTier === "Advanced") {
-      if (this.hero.generation >= 4) {
-        return;
+      if (this.hero.generation >= 5) {
+        if (this.hero.summons_remaining === 4) {
+          this.summonPrice += 5;
+        } else if (this.hero.summons_remaining === 5) {
+          this.summonPrice += 20;
+        }
+      } else if (this.hero.generation === 4) {
+        if (this.hero.summons_remaining === 3) {
+          this.summonPrice += 5;
+        } else if (this.hero.summons_remaining === 4) {
+          this.summonPrice += 20;
+        } else if (this.hero.summons_remaining === 5) {
+          this.summonPrice += 40;
+        }
       } else if (this.hero.generation === 3) {
         if (this.hero.summons_remaining === 2) {
           this.summonPrice += 12;
@@ -265,11 +281,11 @@ module.exports = class Valuator {
     } else if (heroMainclassTier === "Elite") {
       if (this.hero.generation >= 5) {
         if (this.hero.summons_remaining === 1) {
-          this.summonPrice += 80;
+          this.summonPrice += 100;
         } else if (this.hero.summons_remaining === 2) {
-          this.summonPrice += 220;
+          this.summonPrice += 250;
         } else if (this.hero.summons_remaining === 3) {
-          this.summonPrice += 440;
+          this.summonPrice += 450;
         }
       } else if (this.hero.generation <= 4) {
         if (this.hero.summons_remaining === 1) {
@@ -351,6 +367,10 @@ module.exports = class Valuator {
       this.stylePrice = this.stylePrice * 1.2;
     } else if (heroRarity === "Mythic") {
       this.stylePrice = this.stylePrice * 1.3;
+    }
+
+    if (this.summonPrice === 0) {
+      this.stylePrice = this.stylePrice * 0.3;
     }
 
     this.valuation += this.stylePrice;
