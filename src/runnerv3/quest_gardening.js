@@ -54,14 +54,14 @@ gardeningQuestPattern = (heroIdInt, poolIdInt) => {
 
 exports.CheckAndSendGardeners = async (heroesStruct) => {
 	let questType = config.questSetting.gardening;
-	let StartminStam = questType.StartMinStam;
+	let startminStam = questType.startMinStam;
 	let configGardeners = questType.heroIdAndGardenIdMappings;
 	let possibleGardeners = [];
 
 	for (let index = 0; configGardeners.length > index; index++) {
 		let heroStamina = await questContract.methods.getCurrentStamina(configGardeners[index].heroID).call();
 
-		if (heroStamina >= StartminStam && !heroesStruct.allQuesters.includes(configGardeners[index].heroID)) {
+		if (heroStamina >= startminStam && !heroesStruct.allQuesters.includes(configGardeners[index].heroID)) {
 				possibleGardeners.push(configGardeners[index]);
 		}
 	}

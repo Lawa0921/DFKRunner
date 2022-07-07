@@ -3,7 +3,7 @@
     "foraging": {
       "listStamina": 24,
       "unlistStamina": 25,
-      "StartMinStam": 25,
+      "startMinStam": 25,
       "heroIds": [
         "220169", "200659", "231332", "189485", "238302", "236356",
         "231170", "243095", "196869", "230777", "194654", "30166",
@@ -20,7 +20,7 @@
     "fishing": {
       "listStamina": 24,
       "unlistStamina": 25,
-      "StartMinStam": 25,
+      "startMinStam": 25,
       "heroIds": [
         "200501", "215972", "225816", "244783", "244669", "198747",
         "143228", "207779", "194486", "221301", "225412", "219723",
@@ -34,7 +34,7 @@
     "gardening": {
       "listStamina": 19,
       "unlistStamina": 20,
-      "StartMinStam": 20,
+      "startMinStam": 20,
       "heroIdAndGardenIdMappings": [
         {"heroID": "220580", "gardenID": "0"},
         {"heroID": "239450", "gardenID": "0"},
@@ -79,21 +79,21 @@
     "goldMining": {
       "listStamina": 19,
       "unlistStamina": 20,
-      "StartMinStam": 20,
+      "startMinStam": 20,
       "heroIds": [],
       "contractAddress": "0x569e6a4c2e3af31b337be00657b4c040c828dd73"
     },
     "jewelMining": {
       "listStamina": 19,
       "unlistStamina": 20,
-      "StartMinStam": 20,
+      "startMinStam": 20,
       "heroIds": [],
       "contractAddress": "0x6ff019415ee105acf2ac52483a33f5b43eadb8d0"
     },
     "statQuestStr": {
       "listStamina": 24,
       "unlistStamina": 25,
-      "StartMinStam": 25,
+      "startMinStam": 25,
       "heroIds": [
         "233167", "69246"
       ]
@@ -101,7 +101,7 @@
     "statQuestDex": {
       "listStamina": 24,
       "unlistStamina": 25,
-      "StartMinStam": 25,
+      "startMinStam": 25,
       "heroIds": [
         "177216"
       ]
@@ -109,7 +109,7 @@
     "statQuestAgi": {
       "listStamina": 24,
       "unlistStamina": 25,
-      "StartMinStam": 25,
+      "startMinStam": 25,
       "heroIds": [
         "5207", "159753", "232647", "241915"
       ]
@@ -117,7 +117,7 @@
     "statQuestVit": {
       "listStamina": 24,
       "unlistStamina": 25,
-      "StartMinStam": 25,
+      "startMinStam": 25,
       "heroIds": [
         "238885"
       ]
@@ -125,7 +125,7 @@
     "statQuestEnd": {
       "listStamina": 24,
       "unlistStamina": 25,
-      "StartMinStam": 25,
+      "startMinStam": 25,
       "heroIds": [
         "235300", "230478"
       ]
@@ -133,7 +133,7 @@
     "statQuestInt": {
       "listStamina": 24,
       "unlistStamina": 25,
-      "StartMinStam": 25,
+      "startMinStam": 25,
       "heroIds": [
         "250199", "165529", "243027", "171776"
       ]
@@ -141,7 +141,7 @@
     "statQuestWis": {
       "listStamina": 24,
       "unlistStamina": 25,
-      "StartMinStam": 25,
+      "startMinStam": 25,
       "heroIds": [
         "165533", "171763"
       ]
@@ -149,7 +149,7 @@
     "statQuestLck": {
       "listStamina": 24,
       "unlistStamina": 25,
-      "StartMinStam": 25,
+      "startMinStam": 25,
       "heroIds": [
         "248921"
       ]
