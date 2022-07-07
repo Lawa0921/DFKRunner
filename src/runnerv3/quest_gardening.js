@@ -4,7 +4,7 @@ const {
   ChainType,
 } = require('@harmony-js/utils');
 const autils = require("./autils")
-const config = require("./config.json");
+const config = require("./new_config.json");
 const questABI = require("./abi/abi.json")
 
 const hmy = new Harmony(
@@ -53,19 +53,15 @@ gardeningQuestPattern = (heroIdInt, poolIdInt) => {
 }
 
 exports.CheckAndSendGardeners = async (heroesStruct) => {
-	let questType = config.quests[5]
-	if (questType.name !== "Gardening") {
-		throw new Error("Gardening config index was changed");
-	}
-	
-	let minStam = questType.MinStam;
-	let configGardeners = questType.professionHeroes;
+	let questType = config.questSetting.gardening;
+	let StartminStam = questType.StartMinStam;
+	let configGardeners = questType.heroIdAndGardenIdMappings;
 	let possibleGardeners = [];
 
 	for (let index = 0; configGardeners.length > index; index++) {
 		let heroStamina = await questContract.methods.getCurrentStamina(configGardeners[index].heroID).call();
 
-		if (heroStamina >= minStam && !heroesStruct.allQuesters.includes(configGardeners[index].heroID)) {
+		if (heroStamina >= StartminStam && !heroesStruct.allQuesters.includes(configGardeners[index].heroID)) {
 				possibleGardeners.push(configGardeners[index]);
 		}
 	}
@@ -89,7 +85,7 @@ exports.CheckAndSendGardeners = async (heroesStruct) => {
 			if (txnHash.txStatus === 'CONFIRMED') {
 				console.log("Sent " + possibleGardeners[index].heroID + " on a " + possibleGardeners[index].gardenID + " Gardening Quest")
 			} else {
-				console.log(`fail hero ${possibleGardeners}`);
+				console.log(`fail hero ${possibleGardeners[index].heroID}`);
 				autils.txnFailLog(txnHash);
 			}
 		}
