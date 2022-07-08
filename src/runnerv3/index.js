@@ -282,7 +282,6 @@ function ParseActiveQuests(activeQuests)
                 completedQuestsArray.push(element.heroes[0].toString());
                 completedQuestersCountArray.push(element.heroes.length);
             }
-            console.log(element.heroes[0].toString() + " Questing till: " +  questCompletedDate.toLocaleTimeString())
             element.heroes.forEach(hero => {
                 allQuestersArray.push(hero.toString());
             })
