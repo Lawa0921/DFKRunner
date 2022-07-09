@@ -69,6 +69,8 @@ exports.CheckAndSendGardeners = async (heroesStruct) => {
 
   if (possibleGardeners.length > 0) {
 		for (let index = 0; possibleGardeners.length > index; index++) {
+			console.log("senting " + possibleGardeners[index].heroID + " to gardening quest");
+
 			const txn = hmy.transactions.newTx({
 				to: config.questContract,
 				value: 0,
@@ -85,8 +87,7 @@ exports.CheckAndSendGardeners = async (heroesStruct) => {
 			if (txnHash.txStatus === 'CONFIRMED') {
 				console.log("Sent " + possibleGardeners[index].heroID + " on a " + possibleGardeners[index].gardenID + " Gardening Quest")
 			} else {
-				console.log(`fail hero ${possibleGardeners[index]}`);
-				autils.txnFailLog(txnHash);
+				autils.txnFailLog("sent " + JSON.stringify(possibleGardeners[index]) + " failed");
 			}
 		}
   } else {

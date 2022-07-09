@@ -337,7 +337,7 @@ async function main() {
 
         await CheckAndSendGoldMiners(heroesStruct, true);
         await CheckAndSendJewelMiners(heroesStruct, true);
-        await CheckAndSendGardeners(heroesStruct, true);
+        await CheckAndSendGardeners(heroesStruct);
 
         await CheckAndSendStatQuests(heroesStruct2);
 
