@@ -222,4 +222,5 @@
     "queryHeroEndPoint": "https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
     "unconditionalPurchasePrice": 30,
     "g0ConditionsOfPurchase": 2000
+    "graphqlEndPoint": "https://defi-kingdoms-community-api-gateway-co06z8vi.uc.gateway.dev/graphql",
 }

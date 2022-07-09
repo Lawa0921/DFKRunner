@@ -310,7 +310,6 @@ let prevBlock = 0;
 async function main() {
     try {
         console.log("now(): " + GetCurrentDateTime(true).toLocaleTimeString());
-        console.log("simTime(): " + GetCurrentDateTime().toLocaleTimeString());
 
         let lastBlock = await GetLatestBlock()-1;
         if (lastBlock <= prevBlock)

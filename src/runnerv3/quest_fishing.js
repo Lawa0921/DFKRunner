@@ -70,11 +70,12 @@ exports.CheckAndSendFishers = async (heroesStruct, isPro) => {
 	}
 
 	if (LocalBatching.length > 0) {
+		console.log("senting " + LocalBatching + " to fishing quest");
 		await questContract.methods.startQuest(LocalBatching, config.quests[0].contractAddress, fishingTries, 0).send(autils.gasSettingFormater()).then((txnHash) => {
 			if (txnHash.transaction.txStatus === 'CONFIRMED') {
 				console.log("Sent " + LocalBatching + " on a " + (isPro ? "professional" : "normal") + "Fishing Quest")
 			} else {
-				autils.txnFailLog(txnHash);
+				autils.txnFailLog("sent " + LocalBatching + " failed");
 			}
 		}).catch((error) => {
 			console.log(error);
