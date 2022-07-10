@@ -293,14 +293,6 @@ async function CheckAndSendGardeners(heroesStruct, isPro)
     }
 
     if (LocalBatching.length > 0) {
-        console.log("Gardeners To Send" + (isPro ? " (P): " : " (N): ") + LocalBatching[0].heroID);
-    }
-    else {
-        console.log("No Gardeners to Send " + (isPro ? " (P): " : " (N): "));
-    }
-
-    if (LocalBatching.length > 0)
-    {
         const txn = hmy.transactions.newTx({
             to: config.questContract,
             value: 0,
@@ -316,15 +308,17 @@ async function CheckAndSendGardeners(heroesStruct, isPro)
             data: gardeningQuestPattern(LocalBatching[0].heroID,LocalBatching[0].gardenID)
         });
           
-        // sign the transaction use wallet;
         const signedTxn = await hmy.wallet.signTransaction(txn);
-        //  console.log(signedTxn);
-        console.log("!!! sending the message on the wire !!!");
         const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
-        //  console.log(txnHash);
-        
-        console.log("Sent " + LocalBatching[0].heroID + " on a Garderning Quest")
-    }    
+
+        if (txnHash.transaction.txStatus === 'CONFIRMED') {
+            console.log("Sent " + LocalBatching.heroID + " on a " + LocalBatching[0].gardenID + " Gardening Quest")
+        } else {
+            autils.txnFailLog("sent " + LocalBatching.heroID + " failed");
+        }        
+    } else {
+        console.log("No Gardener sent")
+    }
 }
 
 
@@ -412,8 +406,8 @@ async function main() {
         await CheckAndSendFishers(heroesStruct2, true);
         await CheckAndSendForagers(heroesStruct2, true);
 
-        await CheckAndSendGoldMiners(heroesStruct, true);
-        await CheckAndSendJewelMiners(heroesStruct, true);
+        // await CheckAndSendGoldMiners(heroesStruct, true);
+        // await CheckAndSendJewelMiners(heroesStruct, true);
         await CheckAndSendGardeners(heroesStruct, true);
 
         await CheckAndSendStatQuests(heroesStruct2);

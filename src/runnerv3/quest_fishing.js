@@ -81,6 +81,6 @@ exports.CheckAndSendFishers = async (heroesStruct, isPro) => {
 			console.log(error);
 		});
 	} else {
-		console.log("No Fishing sent")
+		console.log("No Fisher sent")
 	} 
 }

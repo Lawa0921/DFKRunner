@@ -77,6 +77,6 @@ exports.CheckAndSendForagers = async (heroesStruct, isPro) => {
 			console.log(error);
 		});
 	} else {
-		console.log("No Foraging Sent")
+		console.log("No Forager Sent")
 	}
 }
