@@ -17,7 +17,7 @@ const { CheckAndSendFishers } = require('./quest_fishing');
 const { CheckAndSendForagers } = require('./quest_foraging');
 const { jewelMiningPattern } = require('./quest_jewelmining');
 const { goldMiningPattern } = require('./quest_goldmining');
-const { CheckAndSendGardeners } = require('./quest_gardening');
+const { gardeningQuestPattern } = require('./quest_gardening');
 const { CheckAndSendStatQuests } = require('./quest_stats');
 
 const { runSalesLogic } = require('./sales_handler');
@@ -252,6 +252,83 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
     }    
 }
 
+async function CheckAndSendGardeners(heroesStruct, isPro)
+{
+    // too lazy to change struct in config
+    let questType = config.quests[5]
+    if (questType.name !== "Gardening")
+    {
+        throw new Error("Gardening config index was changed");
+    }
+    
+    let minStam = isPro ? questType.proMinStam : questType.normMinStam
+
+    let activeQuesters = heroesStruct.allQuesters
+    let configGardeners = isPro ? questType.professionHeroes : questType.nonProfessionHeroes
+
+    let possibleGardeners = [];
+    
+    if (configGardeners.length > 0)
+    {
+        possibleGardeners = configGardeners.filter((e) => {
+            return (activeQuesters.indexOf(e.heroID) < 0);
+        });
+    }
+
+    let GardenerPromises = []
+    possibleGardeners.forEach(heroDetails => {
+        GardenerPromises.push(questContract.methods.getCurrentStamina(heroDetails.heroID).call(undefined, autils.getLatestBlockNumber()))
+    });
+
+    let staminaValues = await Promise.allSettled(GardenerPromises);
+    staminaValues = staminaValues.map(res => res = res.value?.toNumber() || 0);
+
+    LocalBatching = []
+    for (let index = 0; index < possibleGardeners.length; index++) {
+        const stam = staminaValues[index];
+        if ( stam >= minStam )
+        {
+            LocalBatching.push(possibleGardeners[index]);
+        }
+    }
+
+    if (LocalBatching.length > 0) {
+        console.log("Gardeners To Send" + (isPro ? " (P): " : " (N): ") + LocalBatching[0].heroID);
+    }
+    else {
+        console.log("No Gardeners to Send " + (isPro ? " (P): " : " (N): "));
+    }
+
+    if (LocalBatching.length > 0)
+    {
+        const txn = hmy.transactions.newTx({
+            to: config.questContract,
+            value: 0,
+            // gas limit, you can use string
+            gasLimit: config.gasLimit,
+            // send token from shardID
+            shardID: 0,
+            // send token to toShardID
+            toShardID: 0,
+            // gas Price, you can use Unit class, and use Gwei, then remember to use toWei(), which will be transformed to BN
+            gasPrice: config.gasPrice,
+            // tx data
+            data: gardeningQuestPattern(LocalBatching[0].heroID,LocalBatching[0].gardenID)
+        });
+          
+        // sign the transaction use wallet;
+        const signedTxn = await hmy.wallet.signTransaction(txn);
+        //  console.log(signedTxn);
+        console.log("!!! sending the message on the wire !!!");
+        const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
+        //  console.log(txnHash);
+        
+        console.log("Sent " + LocalBatching[0].heroID + " on a Garderning Quest")
+    }    
+}
+
+
+
 function GetCurrentDateTime(useRealTime = false)
 {
     if (useRealTime)
@@ -337,7 +414,7 @@ async function main() {
 
         await CheckAndSendGoldMiners(heroesStruct, true);
         await CheckAndSendJewelMiners(heroesStruct, true);
-        await CheckAndSendGardeners(heroesStruct);
+        await CheckAndSendGardeners(heroesStruct, true);
 
         await CheckAndSendStatQuests(heroesStruct2);
 
