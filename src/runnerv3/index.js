@@ -311,7 +311,7 @@ async function CheckAndSendGardeners(heroesStruct, isPro)
         const signedTxn = await hmy.wallet.signTransaction(txn);
         const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
 
-        if (txnHash.transaction.txStatus === 'CONFIRMED') {
+        if (txnHash.txStatus === 'CONFIRMED') {
             console.log("Sent " + LocalBatching.heroID + " on a " + LocalBatching[0].gardenID + " Gardening Quest")
         } else {
             autils.txnFailLog("sent " + LocalBatching.heroID + " failed");
