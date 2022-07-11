@@ -82,7 +82,8 @@ exports.gasSettingFormater = () => {
 
 exports.watchHeroLog = async (hero, price, valuator) => {
     let idAndRarity = `${hero.id} ${hero.formatRarity()}`;
-    let info = `\x1b[3m LV${hero.level} ${hero.profession} G${hero.generation} ${hero.summons_remaining}/${hero.maxsummons} \x1b[0m`;
+    let profession = `${hero.profession}`
+    let info = `\x1b[3m LV${hero.level} G${hero.generation} ${hero.summons_remaining}/${hero.maxsummons} \x1b[0m`;
     let mainClass = hero.formatMainclass();
     let subClass =  hero.formatSubclass();
     let skillInfo = `${heroSkillDyer(hero, "active1")}/${heroSkillDyer(hero, "active2")}/${heroSkillDyer(hero, "passive1")}/${heroSkillDyer(hero, "passive2")}`
@@ -114,7 +115,15 @@ exports.watchHeroLog = async (hero, price, valuator) => {
         subClass = strToAnsiRed(subClass);
     }
 
-    str = idAndRarity + ", " + mainClass + "/" + subClass + " " + info + " +" + strToAnsiGreen(hero.statboost1) + "/" + strToAnsiBlue(hero.statboost2) + " " + skillInfo + " " + listInfo
+    if (hero.selfProfessionMatch() && hero.summonProfessionMatch()) {
+        profession = strToAnsiRed(profession);
+    } else if (hero.selfProfessionMatch()) {
+        profession = strToAnsiBrown(profession);
+    } else if (hero.summonProfessionMatch()) {
+        profession = strToAnsiGreen(profession);
+    }
+
+    str = idAndRarity + ", " + mainClass + "/" + subClass + " " + profession + " " + info + " +" + strToAnsiGreen(hero.statboost1) + "/" + strToAnsiBlue(hero.statboost2) + " " + skillInfo + " " + listInfo
     console.log(str);
 }
 

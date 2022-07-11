@@ -342,4 +342,91 @@ module.exports = class Hero {
       return "attributes without class concept"
     }
   }
+
+  selfProfessionMatch() {    
+    const profession = this.profession;
+
+    switch(this.formatMainclass()) {
+      case "Warrior":
+        return profession === "mining" ? true : false;
+      case "Knight":
+        return profession === "mining" ? true : false;
+      case "Thief":
+        return profession === "fishing" || profession === "mining" ? true : false;
+      case "Archer":
+        return profession === "foraging" || profession === "mining" ? true : false;
+      case "Priest":
+        return profession === "foraging" || profession === "gardening" ? true : false;
+      case "Wizard":
+        return profession === "foraging" || profession === "gardening" ? true : false;
+      case "Monk":
+        return profession === "fishing" ? true : false;
+      case "Pirate":
+        return profession === "fishing" ? true : false;
+      case "Berserker":
+        return profession === "mining" ? true : false;
+      case "Seer":
+        return profession === "foraging" ? true : false;
+      case "Paladin":
+        return profession === "mining" || profession === "gardening" ? true : false;
+      case "DarkKnight":
+        return profession === "mining" || profession === "foraging" ? true : false;
+      case "Summoner":
+        return profession === "foraging" || profession === "gardening" ? true : false;
+      case "Ninja":
+        return profession === "fishing" || profession === "foraging" ? true : false;
+      case "Shapeshifter":
+        return profession === "fishing" ? true : false;
+      case "Dragoon":
+        return profession === "mining" ? true : false;
+      case "Sage":
+        return profession === "foraging" || profession === "gardening" ? true : false;
+      case "DreadKnight":
+        return profession === "mining" ? true : false;
+    }
+  }
+
+  summonProfessionMatch() {
+    const profession = this.profession;
+
+    switch(this.formatMainclass()) {
+      case "Warrior":
+        return profession === "mining" || profession === "gardening" ? true : false;
+      case "Knight":
+        return profession === "mining" || profession === "gardening" ? true : false;
+      case "Thief":
+        return profession === "foraging" || profession === "mining" ? true : false;
+      case "Archer":
+        return profession === "foraging" || profession === "mining" ? true : false;
+      case "Priest":
+        return profession === "foraging" || profession === "gardening" ? true : false;
+      case "Wizard":
+        return profession === "foraging" || profession === "gardening" ? true : false;
+      case "Monk":
+        return profession === "fishing" || profession === "foraging" ? true : false;
+      case "Pirate":
+        return profession === "fishing" || profession === "foraging" ? true : false;
+      case "Berserker":
+        return profession === "fishing" ? true : false;
+      case "Seer":
+        return profession === "fishing" ? true : false;
+      case "Paladin":
+        return profession === "mining" ? true : false;
+      case "DarkKnight":
+        return profession === "mining" ? true : false;
+      case "Summoner":
+        return profession === "foraging" || profession === "gardening" ? true : false;
+      case "Ninja":
+        return profession === "foraging" || profession === "gardening" ? true : false;
+      case "Shapeshifter":
+        return false;
+      case "Dragoon":
+        return profession === "mining" ? true : false;
+      case "Sage":
+        return profession === "mining" ? true : false;
+      case "DreadKnight":
+        return false;
+    }
+  }
+
 }
