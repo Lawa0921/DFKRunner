@@ -32,7 +32,7 @@ async function main() {
   const onSaleHeroIds = config.heroForSale.map((heroData) => { return heroData.id });
 
   for (let index = 0; onSaleHeroIds.length > index; index++) {
-    if (isAPIv6Owner(onSaleHeroIds[index])) {
+    if (await isAPIv6Owner(onSaleHeroIds[index])) {
       console.log(`Holding hero ${onSaleHeroIds[index]}`)
     } else {
       console.log(`Hero ${onSaleHeroIds[index]} is sold!`)
