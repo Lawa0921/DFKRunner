@@ -85,8 +85,8 @@ exports.watchHeroLog = async (hero, price, valuator) => {
     let info = `\x1b[3m LV${hero.level} ${hero.profession} G${hero.generation} ${hero.summons_remaining}/${hero.maxsummons} \x1b[0m`;
     let mainClass = hero.formatMainclass();
     let subClass =  hero.formatSubclass();
-    let skillInfo = `skill: ${heroSkillDyer(hero, "active1")}/${heroSkillDyer(hero, "active2")}/${heroSkillDyer(hero, "passive1")}/${heroSkillDyer(hero, "passive2")}`
-    let listInfo = `listed ${strToAnsiRed(parseInt(price) / Math.pow(10, 18))} J, valuate: ${strToAnsiRed(valuator)} J`
+    let skillInfo = `${heroSkillDyer(hero, "active1")}/${heroSkillDyer(hero, "active2")}/${heroSkillDyer(hero, "passive1")}/${heroSkillDyer(hero, "passive2")}`
+    let listInfo = `${strToAnsiRed(parseInt(price) / Math.pow(10, 18))} J, valuate: ${strToAnsiRed(valuator)} J`
 
     if (hero.formatRarity()=== "UnCommon") {
         idAndRarity = strToAnsiGreen(idAndRarity);

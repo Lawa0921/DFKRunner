@@ -276,7 +276,7 @@ module.exports = class Valuator {
       }
 
       if (heroMainclass === "Shapeshifter") {
-        this.summonPrice = this.summonPrice * 0.65;
+        this.summonPrice = this.summonPrice * 0.55;
       }
     } else if (heroMainclassTier === "Elite") {
       if (this.hero.generation >= 5) {
