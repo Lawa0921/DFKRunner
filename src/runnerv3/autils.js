@@ -87,6 +87,8 @@ exports.watchHeroLog = async (hero, price, valuator) => {
     let mainClass = hero.formatMainclass();
     let subClass =  hero.formatSubclass();
     let skillInfo = `${heroSkillDyer(hero, "active1")}/${heroSkillDyer(hero, "active2")}/${heroSkillDyer(hero, "passive1")}/${heroSkillDyer(hero, "passive2")}`
+    let hair = "hair";
+    let backappendage = "back";
     let listInfo = `${strToAnsiRed(parseInt(price) / Math.pow(10, 18))} J, valuate: ${strToAnsiRed(valuator)} J`
 
     if (hero.formatRarity()=== "UnCommon") {
@@ -115,6 +117,22 @@ exports.watchHeroLog = async (hero, price, valuator) => {
         subClass = strToAnsiRed(subClass);
     }
 
+    if (hero.attributeTier("hairstyle") === "Advanced") {
+        hair = strToAnsiGreen(hair);
+    } else if (hero.attributeTier("hairstyle") === "Elite") {
+        hair = strToAnsiBrown(hair);
+    } else if (hero.attributeTier("hairstyle") === "Transcendant") {
+        hair = strToAnsiRed(hair);
+    }
+
+    if (hero.attributeTier("backappendage") === "Advanced") {
+        backappendage = strToAnsiGreen(backappendage);
+    } else if (hero.attributeTier("backappendage") === "Elite") {
+        backappendage = strToAnsiBrown(backappendage);
+    } else if (hero.attributeTier("backappendage") === "Transcendant") {
+        backappendage = strToAnsiRed(backappendage);
+    }
+
     if (hero.selfProfessionMatch() && hero.summonProfessionMatch()) {
         profession = strToAnsiRed(profession);
     } else if (hero.selfProfessionMatch()) {
@@ -123,7 +141,7 @@ exports.watchHeroLog = async (hero, price, valuator) => {
         profession = strToAnsiGreen(profession);
     }
 
-    str = idAndRarity + ", " + mainClass + "/" + subClass + " " + profession + " " + info + " +" + strToAnsiGreen(hero.statboost1) + "/" + strToAnsiBlue(hero.statboost2) + " " + skillInfo + " " + listInfo
+    str = idAndRarity + ", " + mainClass + "/" + subClass + " " + profession + " " + info + " +" + strToAnsiGreen(hero.statboost1) + "/" + strToAnsiBlue(hero.statboost2) + " " + skillInfo + " " + hair + "/" + backappendage + " " + listInfo
     console.log(str);
 }
 
