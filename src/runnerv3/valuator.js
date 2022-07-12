@@ -243,9 +243,9 @@ module.exports = class Valuator {
         }
       } else if (this.hero.generation === 3) {
         if (this.hero.summons_remaining === 2) {
-          this.summonPrice += 12;
+          this.summonPrice += 8;
         } else if (this.hero.summons_remaining === 3) {
-          this.summonPrice += 25;
+          this.summonPrice += 20;
         } else if (this.hero.summons_remaining === 4) {
           this.summonPrice += 40;
         } else if (this.hero.summons_remaining === 5) {
@@ -377,7 +377,6 @@ module.exports = class Valuator {
   }
 
   evaluateSkillPrice() {
-    const heroMainclassTier = this.hero.attributeTier("mainclass");
     const heroRarity = this.hero.formatRarity();
     const heroSkillsTier = [
       this.hero.attributeTier("active1"),
@@ -385,41 +384,70 @@ module.exports = class Valuator {
       this.hero.attributeTier("passive1"),
       this.hero.attributeTier("passive2")
     ]
+    let skillCount = 0;
+    let skillScore = 0;
 
-    for (let i = 0; heroSkillsTier.length < i; i++ ) {
-      if (heroMainclassTier === "Basic") {
-        if (heroSkillsTier[i] === "Advanced") {
-          this.skillPrice += 1;
-        } else if (heroSkillsTier[i] === "Elite") {
-          this.skillPrice += 5;
-        } else if (heroSkillsTier[i] === "Transcendant") {
-          this.skillPrice += 10;
-        }
-      } else if (heroMainclassTier === "Advanced") {
-        if (heroSkillsTier[i] === "Advanced") {
-          this.skillPrice += 5;
-        } else if (heroSkillsTier[i] === "Elite") {
-          this.skillPrice += 25;
-        } else if (heroSkillsTier[i] === "Transcendant") {
-          this.skillPrice += 50;
-        }
-      } else if (heroMainclassTier === "Elite") {
-        if (heroSkillsTier[i] === "Advanced") {
-          this.skillPrice += 10;
-        } else if (heroSkillsTier[i] === "Elite") {
-          this.skillPrice += 30;
-        } else if (heroSkillsTier[i] === "Transcendant") {
-          this.skillPrice += 50;
-        }
-      } else if (heroMainclassTier === "Transcendant") {
-        if (heroSkillsTier[i] === "Advanced") {
-          this.skillPrice += 20;
-        } else if (heroSkillsTier[i] === "Elite") {
-          this.skillPrice += 100;
-        } else if (heroSkillsTier[i] === "Transcendant") {
-          this.skillPrice += 150;
-        }
+    heroSkillsTier.forEach((data) => {
+      if (data === "Advanced") {
+        skillCount ++;
+        skillScore += 1;
+      } else if (data === "Elite") {
+        skillCount ++;
+        skillScore += 2;
+      } else if (data === "Transcendant") {
+        skillCount ++;
+        skillScore += 3;
       }
+    })
+
+    if (skillScore === 1) {
+      this.skillPrice += 1;
+    } else if (skillScore === 2) {
+      if (skillCount === 1) {
+        this.skillPrice += 10;
+      } else if (skillCount === 2) {
+        this.skillPrice += 20;
+      }
+    } else if (skillScore === 3) {
+      if (skillCount === 1) {
+        this.skillPrice += 20;
+      } else if (skillCount === 2) {
+        this.skillPrice += 40;
+      } else if (skillCount === 3) {
+        this.skillPrice += 60;
+      }
+    } else if (skillScore === 4) {
+      if (skillCount === 2) {
+        this.skillPrice += 50;
+      } else if (skillCount === 3) {
+        this.skillPrice += 100;
+      } else if (skillCount === 4) {
+        this.skillPrice += 200;
+      }
+    } else if (skillScore === 5) {
+      if (skillCount === 2) {
+        this.skillPrice += 80;
+      } else if (skillCount === 3) {
+        this.skillPrice += 150;
+      } else if (skillCount === 4) {
+        this.skillPrice += 300;
+      }
+    } else if (skillScore === 6) {
+      if (skillCount === 2) {
+        this.skillPrice += 100;
+      } else if (skillCount === 3) {
+        this.skillPrice += 200;
+      } else if (skillCount === 4) {
+        this.skillPrice += 300;
+      }
+    } else if (skillScore >= 7) {
+      this.skillPrice += 400;
+    }
+
+    if (this.summonPrice === 0) {
+      this.skillPrice = this.skillPrice * 0.1;
+    } else if (this.summonPrice <= 10) {
+      this.skillPrice = this.skillPrice * 0.5;
     }
 
     if (heroRarity === "UnCommon") {
