@@ -65,7 +65,7 @@ module.exports = class Valuator {
       if (heroRarity === "Rare") {
         this.rarityPrice += 15;
       } else if (heroRarity === "Legendary") {
-        this.rarityPrice += 50;
+        this.rarityPrice += 80;
       } else if (heroRarity === "Mythic") {
         this.rarityPrice += 300;
       }
@@ -289,11 +289,11 @@ module.exports = class Valuator {
         }
       } else if (this.hero.generation <= 4) {
         if (this.hero.summons_remaining === 1) {
-          this.summonPrice += 90;
+          this.summonPrice += 120;
         } else if (this.hero.summons_remaining === 2) {
-          this.summonPrice += 230;
+          this.summonPrice += 300;
         } else if (this.hero.summons_remaining === 3) {
-          this.summonPrice += 450;
+          this.summonPrice += 500;
         }
       }
     } else if (heroMainclassTier === "Transcendant") {
@@ -404,44 +404,44 @@ module.exports = class Valuator {
       this.skillPrice += 1;
     } else if (skillScore === 2) {
       if (skillCount === 1) {
-        this.skillPrice += 10;
+        this.skillPrice += 30;
       } else if (skillCount === 2) {
-        this.skillPrice += 20;
+        this.skillPrice += 50;
       }
     } else if (skillScore === 3) {
       if (skillCount === 1) {
         this.skillPrice += 20;
       } else if (skillCount === 2) {
-        this.skillPrice += 40;
-      } else if (skillCount === 3) {
-        this.skillPrice += 60;
-      }
-    } else if (skillScore === 4) {
-      if (skillCount === 2) {
-        this.skillPrice += 50;
+        this.skillPrice += 80;
       } else if (skillCount === 3) {
         this.skillPrice += 100;
-      } else if (skillCount === 4) {
-        this.skillPrice += 200;
       }
-    } else if (skillScore === 5) {
+    } else if (skillScore === 4) {
       if (skillCount === 2) {
         this.skillPrice += 80;
       } else if (skillCount === 3) {
         this.skillPrice += 150;
       } else if (skillCount === 4) {
-        this.skillPrice += 300;
+        this.skillPrice += 220;
       }
-    } else if (skillScore === 6) {
+    } else if (skillScore === 5) {
       if (skillCount === 2) {
-        this.skillPrice += 100;
+        this.skillPrice += 120;
       } else if (skillCount === 3) {
         this.skillPrice += 200;
       } else if (skillCount === 4) {
-        this.skillPrice += 300;
+        this.skillPrice += 400;
+      }
+    } else if (skillScore === 6) {
+      if (skillCount === 2) {
+        this.skillPrice += 130;
+      } else if (skillCount === 3) {
+        this.skillPrice += 250;
+      } else if (skillCount === 4) {
+        this.skillPrice += 500;
       }
     } else if (skillScore >= 7) {
-      this.skillPrice += 400;
+      this.skillPrice += 600;
     }
 
     if (this.summonPrice === 0) {
