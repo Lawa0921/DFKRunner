@@ -33,19 +33,19 @@ exports.bidHero = async (heroId, price) => {
       gasPrice: config.bidGasPrice,
       data: tavernBidPattern(parseInt(heroId), parseInt(price))
     });
-    console.log("!!! bid hero txn created !!!")
+    console.log(`!!! bid hero ${heroId} txn created !!!`)
 
     const signedTxn = await harmony.wallet.signTransaction(unSignedTxn);
-    console.log("!!! bid hero txn signed !!!");
+    console.log(`!!! bid hero ${heroId} txn signed !!!`);
 
     const txn = await harmony.blockchain.createObservedTransaction(signedTxn).promise;
 
     if (txn.txStatus === 'CONFIRMED') {
-      console.log(`!!! bid hero txn confirmed !!! txn: ${JSON.stringify(txn)}`)
+      console.log(`!!! bid hero ${heroId} txn confirmed !!! txn: ${JSON.stringify(txn)}`)
 
       autils.bidHeroLog(`${new Date().toLocaleTimeString()} Purchased hero: ${heroId} use ${parseInt(price) / Math.pow(10, 18)} Jewel`)
     } else {
-      autils.bidHeroLog(`${new Date().toLocaleTimeString()} !!! bid hero failed !!! txn: ${JSON.stringify(txn)}`)
+      autils.bidHeroLog(`${new Date().toLocaleTimeString()} !!! bid hero ${heroId} failed !!! txn: ${JSON.stringify(txn)}`)
     }
 
   } catch(error) {
