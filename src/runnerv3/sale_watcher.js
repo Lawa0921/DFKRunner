@@ -14,7 +14,7 @@ const { ChainID, ChainType, hexToNumber } = require('@harmony-js/utils');
 const Hero = require('./hero');
 const Valuator = require('./valuator');
 const { bidHero } = require('./tavern_bid');
-const ws = new WSProvider(config.webSocketsRpcs[0]);
+const ws = new WSProvider(config.webSocketsRpcs[1]);
 
 const wallet = new Wallet(
   new Messenger(
@@ -52,11 +52,11 @@ const saleHandler = async (tokenId, price) => {
     const valuator = new Valuator(price, new Hero(res.data[0]));
     await valuator.execute();
 
-    autils.watchHeroLog(valuator.hero, price, valuator.valuation);
-
     if (!valuator.hero.isOwning() && valuator.price <= valuator.valuation) {
       await bidHero(tokenId, price);
     }
+
+    autils.watchHeroLog(valuator.hero, price, valuator.valuation);
   }).catch(err => {
     if (err.toString().includes('Request failed with status code 500')) {
         autils.log(err.toString(), true);

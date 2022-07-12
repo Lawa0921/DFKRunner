@@ -104,7 +104,7 @@ exports.watchHeroLog = async (hero, price, valuator) => {
     if (hero.attributeTier("mainclass") === "Advanced") {
         mainClass = strToAnsiGreen(mainClass);
     } else if (hero.attributeTier("mainclass") === "Elite") {
-        mainClass = strToAnsiBrown(mainClass);
+        mainClass = strToAnsiCyan(mainClass);
     } else if (hero.attributeTier("mainclass") === "Transcendant") {
         mainClass = strToAnsiRed(mainClass);
     }
@@ -112,7 +112,7 @@ exports.watchHeroLog = async (hero, price, valuator) => {
     if (hero.attributeTier("subclass") === "Advanced") {
         subClass = strToAnsiGreen(subClass);
     } else if (hero.attributeTier("subclass") === "Elite") {
-        subClass = strToAnsiBrown(subClass);
+        subClass = strToAnsiCyan(subClass);
     } else if (hero.attributeTier("subclass") === "Transcendant") {
         subClass = strToAnsiRed(subClass);
     }
@@ -120,7 +120,7 @@ exports.watchHeroLog = async (hero, price, valuator) => {
     if (hero.attributeTier("hairstyle") === "Advanced") {
         hair = strToAnsiGreen(hair);
     } else if (hero.attributeTier("hairstyle") === "Elite") {
-        hair = strToAnsiBrown(hair);
+        hair = strToAnsiCyan(hair);
     } else if (hero.attributeTier("hairstyle") === "Transcendant") {
         hair = strToAnsiRed(hair);
     }
@@ -128,7 +128,7 @@ exports.watchHeroLog = async (hero, price, valuator) => {
     if (hero.attributeTier("backappendage") === "Advanced") {
         backappendage = strToAnsiGreen(backappendage);
     } else if (hero.attributeTier("backappendage") === "Elite") {
-        backappendage = strToAnsiBrown(backappendage);
+        backappendage = strToAnsiCyan(backappendage);
     } else if (hero.attributeTier("backappendage") === "Transcendant") {
         backappendage = strToAnsiRed(backappendage);
     }
@@ -136,7 +136,7 @@ exports.watchHeroLog = async (hero, price, valuator) => {
     if (hero.selfProfessionMatch() && hero.summonProfessionMatch()) {
         profession = strToAnsiRed(profession);
     } else if (hero.selfProfessionMatch()) {
-        profession = strToAnsiBrown(profession);
+        profession = strToAnsiCyan(profession);
     } else if (hero.summonProfessionMatch()) {
         profession = strToAnsiGreen(profession);
     }
