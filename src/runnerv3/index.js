@@ -314,7 +314,7 @@ async function CheckAndSendGardeners(heroesStruct, isPro)
         if (txnHash.txStatus === 'CONFIRMED') {
             console.log("Sent " + LocalBatching[0].heroID + " on a " + LocalBatching[0].gardenID + " Gardening Quest")
         } else {
-            autils.txnFailLog("sent " + LocalBatching.heroID + " failed");
+            autils.txnFailLog("sent " + LocalBatching[0].heroID + " failed");
         }        
     } else {
         console.log("No Gardener sent")
