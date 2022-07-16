@@ -1,5 +1,4 @@
-require('dotenv').config();
-const config = require("./config.json");
+const config = require("../../config.js");
 const autils = require("./autils")
 const { Harmony } = require('@harmony-js/core');
 const { ChainID, ChainType, hexToNumber } = require('@harmony-js/utils');
@@ -22,7 +21,7 @@ exports.bidHero = async (heroId, price) => {
       },
     );
     
-    harmony.wallet.addByPrivateKey(process.env.PRIVATE_KEY);
+    harmony.wallet.addByPrivateKey(config.privateKey);
 
     const unSignedTxn = harmony.transactions.newTx({
       to: config.tavernContract,

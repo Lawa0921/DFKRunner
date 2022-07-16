@@ -1,7 +1,5 @@
-const config = require("./config.json");
+const config = require("../../config.js");
 const autils = require("./autils")
-require('dotenv').config();
-
 module.exports = class Valuator {
   constructor(price, hero) {
     this.price = parseInt(price) / Math.pow(10, 18);

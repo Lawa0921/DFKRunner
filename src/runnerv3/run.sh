@@ -2,5 +2,5 @@
 
 while true
 do
-  node index.js
+  node src/runnerv3/index.js
 done

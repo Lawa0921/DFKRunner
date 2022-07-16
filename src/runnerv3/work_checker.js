@@ -1,5 +1,4 @@
-require('dotenv').config()
-const config = require("./config.json");
+const config = require("../../config.js");
 const autils = require("./autils")
 const axios = require('axios')
 const axiosRetry = require('axios-retry');
@@ -18,7 +17,7 @@ axiosRetry(axios, {
 const getOwningHeroIds = async () => {
   let heroIds;
   const queryStr = `{
-    heroes(where: {owner: ${JSON.stringify(process.env.WALLET_ADDRESS)}}) { 
+    heroes(where: {owner: ${JSON.stringify(config.walletAddress)}}) { 
       id
     }
   }`

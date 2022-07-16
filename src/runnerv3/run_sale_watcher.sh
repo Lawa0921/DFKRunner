@@ -2,5 +2,5 @@
 
 while true
 do
-  node sale_watcher.js
+  node src/runnerv3/sale_watcher.js
 done

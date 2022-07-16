@@ -1,14 +1,10 @@
-// external includes
-require('dotenv').config()
 const { Harmony } = require('@harmony-js/core');
 const {
     ChainID,
     ChainType,
 } = require('@harmony-js/utils');
 const date = require('date-and-time');
-
-// internal includes
-const config = require("./config.json");
+const config = require("../../config.js");
 const autils = require("./autils")
 const questABI = require("./abi/abi.json")
 const questABI_21apr2022 = require('./abi/questABI_21apr2022.json')
@@ -30,7 +26,7 @@ const hmy = new Harmony(
     },
 );
 
-hmy.wallet.addByPrivateKey(process.env.PRIVATE_KEY);
+hmy.wallet.addByPrivateKey(config.privateKey);
 
 let questContract = hmy.contracts.createContract(
     questABI,
@@ -50,7 +46,7 @@ let questContract_21Apr2022 = hmy.contracts.createContract(
 async function getActiveQuests()
 {
     let returnValue;
-    await questContract.methods.getActiveQuests(process.env.WALLET_ADDRESS).call(undefined, autils.getLatestBlockNumber())
+    await questContract.methods.getActiveQuests(config.walletAddress).call(undefined, autils.getLatestBlockNumber())
     .catch(ex => {
         autils.log(`getActiveQuests failed: ${JSON.stringify(ex), returnValue}`, true);
         throw ex;
@@ -63,7 +59,7 @@ async function getActiveQuests()
 async function getActiveAccountQuests()
 {
     let returnValue;
-    await questContract_21Apr2022.methods.getAccountActiveQuests(process.env.WALLET_ADDRESS).call(undefined, autils.getLatestBlockNumber())
+    await questContract_21Apr2022.methods.getAccountActiveQuests(config.walletAddress).call(undefined, autils.getLatestBlockNumber())
     .catch(ex => {
         autils.log(`getActiveAccountQuests failed: ${JSON.stringify(ex)} rv:${returnValue}`, true);
         throw ex;

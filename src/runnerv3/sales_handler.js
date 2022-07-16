@@ -1,4 +1,3 @@
-require('dotenv').config()
 const { Harmony } = require('@harmony-js/core');
 const {
     ChainID,
@@ -6,7 +5,7 @@ const {
   } = require('@harmony-js/utils');
 
 const tavernContractAddress = "0x13a65B9F8039E2c032Bc022171Dc05B30c3f2892"
-const config = require("./config.json");
+const config = require("../../config.js");
 const autils = require("./autils")
 const axios = require('axios')
 
@@ -19,7 +18,7 @@ const hmy = new Harmony(
         chainId: ChainID.HmyMainnet,
     },
 );
-hmy.wallet.addByPrivateKey(process.env.PRIVATE_KEY);
+hmy.wallet.addByPrivateKey(config.privateKey);
 
 const questABI_21apr2022 = require('./abi/questABI_21apr2022.json');
 let questContract = hmy.contracts.createContract(
@@ -54,7 +53,7 @@ const isHeroOnSale = (ownerAddress) => {
 }
 
 const isOwning = (ownerAddress) => {
-    return ownerAddress.toLowerCase() === process.env.WALLET_ADDRESS.toLowerCase();
+    return ownerAddress.toLowerCase() === config.walletAddress.toLowerCase();
 }
 
 const isShouldList = (ownerAddress, stamina) => {
@@ -166,7 +165,7 @@ const isAPIv6Owner = async (heroID) => {
         {"limit":1,"params":[{"field":"id","operator":"=","value":heroID.toString()}],"offset":0}
     ).then( (reply) => {
         debugData = reply;
-        if (reply.data[0].owner_address.toLowerCase() === process.env.WALLET_ADDRESS.toLowerCase()) {
+        if (reply.data[0].owner_address.toLowerCase() === config.walletAddress.toLowerCase()) {
             returnValue = true;
         }
     }).catch(err => {

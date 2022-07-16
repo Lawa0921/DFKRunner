@@ -1,11 +1,10 @@
-require('dotenv').config()
 const { Harmony } = require('@harmony-js/core');
 const {
     ChainID,
     ChainType,
   } = require('@harmony-js/utils');
 
-const config = require("./config.json");
+const config = require("../../config.js");
 const autils = require("./autils")
 
 const { REWARD_ADDRESS_TO_NAME, REWARD_ADDRESS_TO_DECIMAL } = require('./quest_rewards');
@@ -17,7 +16,7 @@ const hmy = new Harmony(
         chainId: ChainID.HmyMainnet,
     },
 );
-hmy.wallet.addByPrivateKey(process.env.PRIVATE_KEY);
+hmy.wallet.addByPrivateKey(config.privateKey);
 
 const BigIntWithDecimalToString = (amount, decimals) => {
     const amountBN = BigInt(amount);

@@ -1,11 +1,10 @@
-require('dotenv').config()
 const { Harmony } = require('@harmony-js/core');
 const {
     ChainID,
     ChainType,
   } = require('@harmony-js/utils');
 
-const config = require("./config.json");
+const config = require("../../config.js");
 const autils = require("./autils")
 
 const hmy = new Harmony(
@@ -15,7 +14,7 @@ const hmy = new Harmony(
         chainId: ChainID.HmyMainnet,
     },
 );
-hmy.wallet.addByPrivateKey(process.env.PRIVATE_KEY);
+hmy.wallet.addByPrivateKey(config.privateKey);
 
 const questABI_21apr2022 = require('./abi/questABI_21apr2022.json');
 let questContract = hmy.contracts.createContract(

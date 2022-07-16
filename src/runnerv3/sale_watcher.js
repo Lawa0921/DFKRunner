@@ -1,5 +1,4 @@
-require('dotenv').config()
-const config = require("./config.json");
+const config = require("../../config.js");
 const autils = require("./autils")
 const axios = require('axios')
 const axiosRetry = require('axios-retry');
@@ -24,7 +23,7 @@ const wallet = new Wallet(
   ),
 );
 
-wallet.addByPrivateKey(process.env.PRIVATE_KEY);
+wallet.addByPrivateKey(config.privateKey);
 
 const tavernContract = new Contract(
   tavernABI_27apr2022,

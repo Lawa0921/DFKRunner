@@ -129,8 +129,7 @@
   xp_progress: 0.1075
 }
 */
-
-
+const config = require("../../config.js");
 module.exports = class Hero {
   constructor(heroInfo) {
     this.id = heroInfo.id;
@@ -154,7 +153,7 @@ module.exports = class Hero {
   }
 
   isOwning() {
-    return this.owner.toLowerCase() === process.env.WALLET_ADDRESS.toLowerCase() ? true : false
+    return this.owner.toLowerCase() === config.walletAddress.toLowerCase() ? true : false
   }
 
   formatRarity() {
