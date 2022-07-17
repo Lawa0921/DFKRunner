@@ -2,5 +2,5 @@
 
 while true
 do
-  node src/runnerv3/index.js
+  node src/harmony/index.js
 done
