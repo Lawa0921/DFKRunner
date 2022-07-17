@@ -24,11 +24,10 @@ const hmy = new Harmony(
     },
 );
 hmy.wallet.addByPrivateKey(config.privateKey);
-
-const questABI_21apr2022 = require('./abi/questABI_21apr2022.json')
+const questCoreV2 = require('../../abis/QuestCoreV2.json');
 let questContract_21Apr2022 = hmy.contracts.createContract(
-    questABI_21apr2022,
-    config.questContract_21Apr2022,   
+    questCoreV2,
+    config.questCoreV2,   
     {
         defaultGas: config.gasLimit,
         defaultGasPrice: config.gasPrice
@@ -89,7 +88,7 @@ exports.CheckAndSendStatQuests = async (heroesStruct) => {
         if (numHeroesToSend >= minBatch && minBatch > 0) {
             const txn = hmy.transactions.newTx({
                 // quest contract address
-                to: config.questContract_21Apr2022,
+                to: config.questCoreV2,
                 // amount of one
                 value: 0,
                 // gas limit, you can use string

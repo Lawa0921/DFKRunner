@@ -6,7 +6,7 @@ const {
 
 const config = require("../../config.js");
 const autils = require("./autils")
-const questABI_21apr2022 = require('./abi/questABI_21apr2022.json')
+const questCoreV2 = require('../../abis/QuestCoreV2.json')
 
 const hmy = new Harmony(
 	autils.getRpc(config.useRpcIndex),
@@ -18,8 +18,8 @@ const hmy = new Harmony(
 hmy.wallet.addByPrivateKey(config.privateKey);
 
 const questContract = hmy.contracts.createContract(
-	questABI_21apr2022,
-	config.questContract_21Apr2022
+	questCoreV2,
+	config.questCoreV2
 );
 
 exports.CheckAndSendForagers = async (heroesStruct, isPro) => {

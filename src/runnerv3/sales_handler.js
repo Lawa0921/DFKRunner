@@ -4,7 +4,6 @@ const {
     ChainType,
   } = require('@harmony-js/utils');
 
-const tavernContractAddress = "0x13a65B9F8039E2c032Bc022171Dc05B30c3f2892"
 const config = require("../../config.js");
 const autils = require("./autils")
 const axios = require('axios')
@@ -20,36 +19,34 @@ const hmy = new Harmony(
 );
 hmy.wallet.addByPrivateKey(config.privateKey);
 
-const questABI_21apr2022 = require('./abi/questABI_21apr2022.json');
+const questCoreV2 = require('../../abis/QuestCoreV2.json');
 let questContract = hmy.contracts.createContract(
-    questABI_21apr2022,
-    config.questContract_21Apr2022,   
+    questCoreV2,
+    config.questCoreV2,   
     {
         defaultGas: config.gasLimit,
         defaultGasPrice: config.gasPrice
     });
-
-const tavernABI_27apr2022 = require('./abi/tavernABI_27apr2022.json')
+const saleAuctionABI = require('../../abis/SaleAuction.json')
 let tavernContract = hmy.contracts.createContract(
-    tavernABI_27apr2022,
-    config.tavernContract,
+    saleAuctionABI,
+    config.saleAuction,
     {
         defaultGas: config.gasLimit,
         defaultGasPrice: config.gasPrice
     });
 
-const heroAbi = require('./abi/heroABI_27apr2022.json')
+const heroCoreABI = require('../../abis/HeroCore.json')
 let heroContract = hmy.contracts.createContract(
-    heroAbi,
-    config.heroContract,
+    heroCoreABI,
+    config.heroCore,
     {
         defaultGas: config.gasLimit,
         defaultGasPrice: config.gasPrice
     });
-    heroContract
 
 const isHeroOnSale = (ownerAddress) => {
-    return ownerAddress.toLowerCase() === tavernContractAddress.toLowerCase();
+    return ownerAddress.toLowerCase() === config.saleAuction.toLowerCase();
 }
 
 const isOwning = (ownerAddress) => {
@@ -105,7 +102,7 @@ const unlistHero = async (heroID) => {
     autils.logSimulation(`unlisting hero: ${id}`);
     const txn = hmy.transactions.newTx({
         // contract address
-        to: config.tavernContract,
+        to: config.saleAuction,
         // amount of one to send
         value: 0,
         // gas limit, you can use string
@@ -134,7 +131,7 @@ const listHero = async (heroID, price) => {
     autils.logSimulation(`listing hero: ${parseInt(id)}: ${price}`);
     const txn = hmy.transactions.newTx({
         // contract address
-        to: config.tavernContract,
+        to: config.saleAuction,
         // amount of one to send
         value: 0,
         // gas limit, you can use string

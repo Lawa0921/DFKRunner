@@ -2,7 +2,7 @@ const config = require("../../config.js");
 const autils = require("./autils")
 const axios = require('axios')
 const axiosRetry = require('axios-retry');
-const tavernABI_27apr2022 = require('./abi/tavernABI_27apr2022.json')
+const saleAuctionABI = require('../../abis/SaleAuction.json')
 const date = require('date-and-time');
 
 const { Harmony } = require('@harmony-js/core');
@@ -26,8 +26,8 @@ const wallet = new Wallet(
 wallet.addByPrivateKey(config.privateKey);
 
 const tavernContract = new Contract(
-  tavernABI_27apr2022,
-  config.tavernContract, {
+  saleAuctionABI,
+  config.saleAuction, {
   defaultGas: config.gasLimit,
   defaultGasPrice: config.gasPrice
 }, wallet)

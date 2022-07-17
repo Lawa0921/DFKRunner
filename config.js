@@ -253,10 +253,10 @@ const config = {
       { "id":"200501", "price": 69, "notes":"L1 C 5/10 knight" },
       { "id":"200659", "price": 69, "notes": "L1 C 5/10 monk"}
   ],
-  "questContract": "0x5100Bd31b822371108A0f63DCFb6594b9919Eaf4",
-  "questContract_21Apr2022": "0xAa9a289ce0565E4D6548e63a441e7C084E6B52F6",
-  "heroContract": "0x5f753dcdf9b1ad9aabc1346614d1f4746fd6ce5c",
-  "tavernContract": "0x13a65B9F8039E2c032Bc022171Dc05B30c3f2892",
+  "questCoreV1": "0x5100Bd31b822371108A0f63DCFb6594b9919Eaf4",
+  "questCoreV2": "0xAa9a289ce0565E4D6548e63a441e7C084E6B52F6",
+  "heroCore": "0x5f753dcdf9b1ad9aabc1346614d1f4746fd6ce5c",
+  "saleAuction": "0x13a65B9F8039E2c032Bc022171Dc05B30c3f2892",
   "useRpcIndex": 1,
   "rpcs": [
       "https://nd-918-448-543.p2pify.com/4b353b2b9c548ca58a7e6e01ce3bba7a",

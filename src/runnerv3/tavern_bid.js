@@ -24,7 +24,7 @@ exports.bidHero = async (heroId, price) => {
     harmony.wallet.addByPrivateKey(config.privateKey);
 
     const unSignedTxn = harmony.transactions.newTx({
-      to: config.tavernContract,
+      to: config.saleAuction,
       value: 0,
       gasLimit: config.gasLimit,
       shardID: 0,

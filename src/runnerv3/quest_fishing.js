@@ -16,10 +16,10 @@ const hmy = new Harmony(
 );
 hmy.wallet.addByPrivateKey(config.privateKey);
 
-const questABI_21apr2022 = require('./abi/questABI_21apr2022.json');
+const questCoreV2 = require('../../abis/QuestCoreV2.json')
 let questContract = hmy.contracts.createContract(
-    questABI_21apr2022,
-    config.questContract_21Apr2022,   
+		questCoreV2,
+    config.questCoreV2,   
     {
         defaultGas: config.gasLimit,
         defaultGasPrice: config.gasPrice

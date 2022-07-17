@@ -6,8 +6,8 @@ const {
 const date = require('date-and-time');
 const config = require("../../config.js");
 const autils = require("./autils")
-const questABI = require("./abi/abi.json")
-const questABI_21apr2022 = require('./abi/questABI_21apr2022.json')
+const questCoreV1ABI = require("../../abis/QuestCoreV1.json")
+const questCoreV2ABI = require('../../abis/QuestCoreV2.json')
 const { CompleteQuests } = require('./quest_complete');
 const { CheckAndSendFishers } = require('./quest_fishing');
 const { CheckAndSendForagers } = require('./quest_foraging');
@@ -28,16 +28,16 @@ const hmy = new Harmony(
 
 hmy.wallet.addByPrivateKey(config.privateKey);
 
-let questContract = hmy.contracts.createContract(
-    questABI,
-    config.questContract,   
+let questCoreV1Contract = hmy.contracts.createContract(
+    questCoreV1ABI,
+    config.questCoreV1,   
     {
         defaultGas: config.gasLimit,
         defaultGasPrice: config.gasPrice
     });
-let questContract_21Apr2022 = hmy.contracts.createContract(
-    questABI_21apr2022,
-    config.questContract_21Apr2022,   
+let questCoreV2Contract = hmy.contracts.createContract(
+    questCoreV2ABI,
+    config.questCoreV2,   
     {
         defaultGas: config.gasLimit,
         defaultGasPrice: config.gasPrice
@@ -46,7 +46,7 @@ let questContract_21Apr2022 = hmy.contracts.createContract(
 async function getActiveQuests()
 {
     let returnValue;
-    await questContract.methods.getActiveQuests(config.walletAddress).call(undefined, autils.getLatestBlockNumber())
+    await questCoreV1Contract.methods.getActiveQuests(config.walletAddress).call(undefined, autils.getLatestBlockNumber())
     .catch(ex => {
         autils.log(`getActiveQuests failed: ${JSON.stringify(ex), returnValue}`, true);
         throw ex;
@@ -59,7 +59,7 @@ async function getActiveQuests()
 async function getActiveAccountQuests()
 {
     let returnValue;
-    await questContract_21Apr2022.methods.getAccountActiveQuests(config.walletAddress).call(undefined, autils.getLatestBlockNumber())
+    await questCoreV2Contract.methods.getAccountActiveQuests(config.walletAddress).call(undefined, autils.getLatestBlockNumber())
     .catch(ex => {
         autils.log(`getActiveAccountQuests failed: ${JSON.stringify(ex)} rv:${returnValue}`, true);
         throw ex;
@@ -93,7 +93,7 @@ async function CheckAndSendGoldMiners(heroesStruct, isPro)
 
     let GoldMinerPromises = []
     possibleGoldMiners.forEach(hero => {
-        GoldMinerPromises.push(questContract.methods.getCurrentStamina(hero).call(undefined, autils.getLatestBlockNumber()))
+        GoldMinerPromises.push(questCoreV1Contract.methods.getCurrentStamina(hero).call(undefined, autils.getLatestBlockNumber()))
     });
 
     let staminaValues = await Promise.allSettled(GoldMinerPromises);
@@ -133,7 +133,7 @@ async function CheckAndSendGoldMiners(heroesStruct, isPro)
     if (numHeroesToSend >= minBatch && minBatch > 0)
     {
          const txn = hmy.transactions.newTx({
-            to: config.questContract,
+            to: config.questCoreV1,
             value: 0,
             // gas limit, you can use string
             gasLimit: config.gasLimit,
@@ -183,7 +183,7 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
 
     let JewelMinerPromises = []
     possibleJewelMiners.forEach(hero => {
-        JewelMinerPromises.push(questContract.methods.getCurrentStamina(hero).call(undefined, autils.getLatestBlockNumber()))
+        JewelMinerPromises.push(questCoreV1Contract.methods.getCurrentStamina(hero).call(undefined, autils.getLatestBlockNumber()))
     });
 
     let staminaValues = await Promise.allSettled(JewelMinerPromises);
@@ -223,7 +223,7 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
     if (numHeroesToSend >= minBatch && minBatch > 0)
     {
         const txn = hmy.transactions.newTx({
-            to: config.questContract,
+            to: config.questCoreV1,
             value: 0,
             // gas limit, you can use string
             gasLimit: config.gasLimit,
@@ -273,7 +273,7 @@ async function CheckAndSendGardeners(heroesStruct, isPro)
 
     let GardenerPromises = []
     possibleGardeners.forEach(heroDetails => {
-        GardenerPromises.push(questContract.methods.getCurrentStamina(heroDetails.heroID).call(undefined, autils.getLatestBlockNumber()))
+        GardenerPromises.push(questCoreV1Contract.methods.getCurrentStamina(heroDetails.heroID).call(undefined, autils.getLatestBlockNumber()))
     });
 
     let staminaValues = await Promise.allSettled(GardenerPromises);
@@ -290,7 +290,7 @@ async function CheckAndSendGardeners(heroesStruct, isPro)
 
     if (LocalBatching.length > 0) {
         const txn = hmy.transactions.newTx({
-            to: config.questContract,
+            to: config.questCoreV1,
             value: 0,
             // gas limit, you can use string
             gasLimit: config.gasLimit,
@@ -394,8 +394,8 @@ async function main() {
         let heroesStruct = ParseActiveQuests(activeQuests);
         let heroesStruct2 = ParseActiveQuests(activeQuests2);
 
-        await CompleteQuests(heroesStruct, config.questContract, questABI);
-        await CompleteQuests(heroesStruct2, config.questContract_21Apr2022, questABI_21apr2022);
+        await CompleteQuests(heroesStruct, config.questCoreV1, questCoreV1ABI);
+        await CompleteQuests(heroesStruct2, config.questCoreV2, questCoreV2ABI);
 
         await runSalesLogic();
 
