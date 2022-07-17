@@ -1,4 +1,4 @@
-const config = require("../../config.js");
+const config = require("~/config.js");
 const autils = require("./autils")
 const axios = require('axios')
 const axiosRetry = require('axios-retry');

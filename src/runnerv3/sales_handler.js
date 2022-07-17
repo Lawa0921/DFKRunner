@@ -4,7 +4,7 @@ const {
     ChainType,
   } = require('@harmony-js/utils');
 
-const config = require("../../config.js");
+const config = require("~/config.js");
 const autils = require("./autils")
 const axios = require('axios')
 
@@ -19,7 +19,7 @@ const hmy = new Harmony(
 );
 hmy.wallet.addByPrivateKey(config.privateKey);
 
-const questCoreV2 = require('../../abis/QuestCoreV2.json');
+const questCoreV2 = require('~/abis/QuestCoreV2.json');
 let questContract = hmy.contracts.createContract(
     questCoreV2,
     config.questCoreV2,   
@@ -27,7 +27,7 @@ let questContract = hmy.contracts.createContract(
         defaultGas: config.gasLimit,
         defaultGasPrice: config.gasPrice
     });
-const saleAuctionABI = require('../../abis/SaleAuction.json')
+const saleAuctionABI = require('~/abis/SaleAuction.json')
 let tavernContract = hmy.contracts.createContract(
     saleAuctionABI,
     config.saleAuction,
@@ -36,7 +36,7 @@ let tavernContract = hmy.contracts.createContract(
         defaultGasPrice: config.gasPrice
     });
 
-const heroCoreABI = require('../../abis/HeroCore.json')
+const heroCoreABI = require('~/abis/HeroCore.json')
 let heroContract = hmy.contracts.createContract(
     heroCoreABI,
     config.heroCore,

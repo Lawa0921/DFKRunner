@@ -1,4 +1,4 @@
-const config = require("../../config.js");
+const config = require("~/config.js");
 const autils = require("./autils")
 const { Harmony } = require('@harmony-js/core');
 const { ChainID, ChainType, hexToNumber } = require('@harmony-js/utils');

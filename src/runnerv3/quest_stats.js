@@ -13,7 +13,7 @@ const {
     ChainType,
   } = require('@harmony-js/utils');
 
-const config = require("../../config.js");
+const config = require("~/config.js");
 const autils = require("./autils")
 
 const hmy = new Harmony(
@@ -24,7 +24,7 @@ const hmy = new Harmony(
     },
 );
 hmy.wallet.addByPrivateKey(config.privateKey);
-const questCoreV2 = require('../../abis/QuestCoreV2.json');
+const questCoreV2 = require('~/abis/QuestCoreV2.json');
 let questContract_21Apr2022 = hmy.contracts.createContract(
     questCoreV2,
     config.questCoreV2,   

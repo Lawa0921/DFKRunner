@@ -129,7 +129,7 @@
   xp_progress: 0.1075
 }
 */
-const config = require("../../config.js");
+const config = require("~/config.js");
 module.exports = class Hero {
   constructor(heroInfo) {
     this.id = heroInfo.id;

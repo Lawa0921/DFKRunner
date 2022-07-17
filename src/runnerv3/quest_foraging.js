@@ -4,9 +4,9 @@ const {
 	ChainType,
 } = require('@harmony-js/utils');
 
-const config = require("../../config.js");
+const config = require("~/config.js");
 const autils = require("./autils")
-const questCoreV2 = require('../../abis/QuestCoreV2.json')
+const questCoreV2 = require('~/abis/QuestCoreV2.json')
 
 const hmy = new Harmony(
 	autils.getRpc(config.useRpcIndex),

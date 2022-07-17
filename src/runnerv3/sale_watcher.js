@@ -1,8 +1,8 @@
-const config = require("../../config.js");
+const config = require("~/config.js");
 const autils = require("./autils")
 const axios = require('axios')
 const axiosRetry = require('axios-retry');
-const saleAuctionABI = require('../../abis/SaleAuction.json')
+const saleAuctionABI = require('~/abis/SaleAuction.json')
 const date = require('date-and-time');
 
 const { Harmony } = require('@harmony-js/core');
