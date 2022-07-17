@@ -3,7 +3,7 @@ const date = require('date-and-time');
 const fs = require('fs');
 
 exports.getRpc = function getRpc(index) {
-    return config.rpcs[index];
+    return config.harmony.rpcs[index];
 }
 
 exports.displayTime = function displayTime(timestamp) {
@@ -77,7 +77,7 @@ exports.txnFailLog = (txn) => {
 }
 
 exports.gasSettingFormater = () => {
-    return { gasPrice: config.gasPrice, gasLimit: config.gasLimit };
+    return { gasPrice: config.harmony.gasPrice, gasLimit: config.harmony.gasLimit };
 }
 
 exports.watchHeroLog = async (hero, price, valuator) => {

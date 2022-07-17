@@ -2,7 +2,7 @@ const config = require("~/config.js");
 const fs = require('fs');
 
 exports.getRpc = function getRpc(index) {
-    return config.rpcs[index];
+    return config.harmony.rpcs[index];
 }
 
 exports.displayTime = function displayTime(timestamp) {

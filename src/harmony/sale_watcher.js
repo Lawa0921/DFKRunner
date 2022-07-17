@@ -13,7 +13,7 @@ const { ChainID, ChainType, hexToNumber } = require('@harmony-js/utils');
 const Hero = require('./hero');
 const Valuator = require('./valuator');
 const { bidHero } = require('./tavern_bid');
-const ws = new WSProvider(config.webSocketsRpcs[1]);
+const ws = new WSProvider(config.harmony.webSocketsRpcs[1]);
 
 const wallet = new Wallet(
   new Messenger(
@@ -27,9 +27,9 @@ wallet.addByPrivateKey(config.privateKey);
 
 const tavernContract = new Contract(
   saleAuctionABI,
-  config.saleAuction, {
-  defaultGas: config.gasLimit,
-  defaultGasPrice: config.gasPrice
+  config.harmony.saleAuction, {
+  defaultGas: config.harmony.gasLimit,
+  defaultGasPrice: config.harmony.gasPrice
 }, wallet)
 
 axiosRetry(axios, {

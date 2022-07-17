@@ -27,7 +27,7 @@ const isAPIv6Owner = async (heroID) => {
 }
 
 async function main() {
-  const onSaleHeroIds = config.heroForSale.map((heroData) => { return heroData.id });
+  const onSaleHeroIds = config.harmony.heroForSale.map((heroData) => { return heroData.id });
 
   for (let index = 0; onSaleHeroIds.length > index; index++) {
     if (await isAPIv6Owner(onSaleHeroIds[index])) {

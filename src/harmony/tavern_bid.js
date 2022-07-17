@@ -14,7 +14,7 @@ tavernBidPattern = (heroIdInt, jewelPriceInt) => {
 exports.bidHero = async (heroId, price) => {
   try {
     const harmony = new Harmony(
-      autils.getRpc(config.useRpcIndex),
+      autils.getRpc(config.harmony.useRpcIndex),
       {
           chainType: ChainType.Harmony,
           chainId: ChainID.HmyMainnet,
@@ -24,12 +24,12 @@ exports.bidHero = async (heroId, price) => {
     harmony.wallet.addByPrivateKey(config.privateKey);
 
     const unSignedTxn = harmony.transactions.newTx({
-      to: config.saleAuction,
+      to: config.harmony.saleAuction,
       value: 0,
-      gasLimit: config.gasLimit,
+      gasLimit: config.harmony.gasLimit,
       shardID: 0,
       toShardID: 0,
-      gasPrice: config.bidGasPrice,
+      gasPrice: config.harmony.bidGasPrice,
       data: tavernBidPattern(parseInt(heroId), parseInt(price))
     });
     console.log(`!!! bid hero ${heroId} txn created !!!`)

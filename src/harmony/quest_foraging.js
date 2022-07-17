@@ -9,7 +9,7 @@ const autils = require("./autils")
 const questCoreV2 = require('~/abis/QuestCoreV2.json')
 
 const hmy = new Harmony(
-	autils.getRpc(config.useRpcIndex),
+	autils.getRpc(config.harmony.useRpcIndex),
 	{
 		chainType: ChainType.Harmony,
 		chainId: ChainID.HmyMainnet,
@@ -19,11 +19,11 @@ hmy.wallet.addByPrivateKey(config.privateKey);
 
 const questContract = hmy.contracts.createContract(
 	questCoreV2,
-	config.questCoreV2
+	config.harmony.questCoreV2
 );
 
 exports.CheckAndSendForagers = async (heroesStruct, isPro) => {
-	let questType = config.quests[1]
+	let questType = config.harmony.quests[1]
 	if (questType.name !== "Foraging") {
 		throw new Error("config index was changed");
 	}
@@ -66,7 +66,7 @@ exports.CheckAndSendForagers = async (heroesStruct, isPro) => {
     
 	if (LocalBatching.length > 0) {
 		console.log("senting " + LocalBatching + " to foraging quest");
-		await questContract.methods.startQuest(LocalBatching, config.quests[1].contractAddress, foragingTries, 0).send(autils.gasSettingFormater()).then((txnHash) => {
+		await questContract.methods.startQuest(LocalBatching, config.harmony.quests[1].contractAddress, foragingTries, 0).send(autils.gasSettingFormater()).then((txnHash) => {
 			if (txnHash.transaction.txStatus === 'CONFIRMED') {
 				console.log("Sent " + LocalBatching + " on a " + (isPro ? "professional" : "normal") + "Foraging Quest")
 			} else {

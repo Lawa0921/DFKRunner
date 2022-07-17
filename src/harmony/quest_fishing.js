@@ -8,7 +8,7 @@ const config = require("~/config.js");
 const autils = require("./autils")
 
 const hmy = new Harmony(
-    autils.getRpc(config.useRpcIndex),
+    autils.getRpc(config.harmony.useRpcIndex),
     {
         chainType: ChainType.Harmony,
         chainId: ChainID.HmyMainnet,
@@ -19,14 +19,14 @@ hmy.wallet.addByPrivateKey(config.privateKey);
 const questCoreV2 = require('~/abis/QuestCoreV2.json')
 let questContract = hmy.contracts.createContract(
 		questCoreV2,
-    config.questCoreV2,   
+    config.harmony.questCoreV2,   
     {
-        defaultGas: config.gasLimit,
-        defaultGasPrice: config.gasPrice
+        defaultGas: config.harmony.gasLimit,
+        defaultGasPrice: config.harmony.gasPrice
     });
 
 exports.CheckAndSendFishers = async (heroesStruct, isPro) => {
-	let questType = config.quests[0]
+	let questType = config.harmony.quests[0]
 	if (questType.name !== "Fishing")
 	{
 			throw new Error("config index was changed");
@@ -70,7 +70,7 @@ exports.CheckAndSendFishers = async (heroesStruct, isPro) => {
 
 	if (LocalBatching.length > 0) {
 		console.log("senting " + LocalBatching + " to fishing quest");
-		await questContract.methods.startQuest(LocalBatching, config.quests[0].contractAddress, fishingTries, 0).send(autils.gasSettingFormater()).then((txnHash) => {
+		await questContract.methods.startQuest(LocalBatching, config.harmony.quests[0].contractAddress, fishingTries, 0).send(autils.gasSettingFormater()).then((txnHash) => {
 			if (txnHash.transaction.txStatus === 'CONFIRMED') {
 				console.log("Sent " + LocalBatching + " on a " + (isPro ? "professional" : "normal") + "Fishing Quest")
 			} else {

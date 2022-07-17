@@ -11,7 +11,7 @@ const axios = require('axios')
 const LocalSignOn = true;
 
 const hmy = new Harmony(
-    autils.getRpc(config.useRpcIndex),
+    autils.getRpc(config.harmony.useRpcIndex),
     {
         chainType: ChainType.Harmony,
         chainId: ChainID.HmyMainnet,
@@ -22,31 +22,31 @@ hmy.wallet.addByPrivateKey(config.privateKey);
 const questCoreV2 = require('~/abis/QuestCoreV2.json');
 let questContract = hmy.contracts.createContract(
     questCoreV2,
-    config.questCoreV2,   
+    config.harmony.questCoreV2,   
     {
-        defaultGas: config.gasLimit,
-        defaultGasPrice: config.gasPrice
+        defaultGas: config.harmony.gasLimit,
+        defaultGasPrice: config.harmony.gasPrice
     });
 const saleAuctionABI = require('~/abis/SaleAuction.json')
 let tavernContract = hmy.contracts.createContract(
     saleAuctionABI,
-    config.saleAuction,
+    config.harmony.saleAuction,
     {
-        defaultGas: config.gasLimit,
-        defaultGasPrice: config.gasPrice
+        defaultGas: config.harmony.gasLimit,
+        defaultGasPrice: config.harmony.gasPrice
     });
 
 const heroCoreABI = require('~/abis/HeroCore.json')
 let heroContract = hmy.contracts.createContract(
     heroCoreABI,
-    config.heroCore,
+    config.harmony.heroCore,
     {
-        defaultGas: config.gasLimit,
-        defaultGasPrice: config.gasPrice
+        defaultGas: config.harmony.gasLimit,
+        defaultGasPrice: config.harmony.gasPrice
     });
 
 const isHeroOnSale = (ownerAddress) => {
-    return ownerAddress.toLowerCase() === config.saleAuction.toLowerCase();
+    return ownerAddress.toLowerCase() === config.harmony.saleAuction.toLowerCase();
 }
 
 const isOwning = (ownerAddress) => {
@@ -54,7 +54,7 @@ const isOwning = (ownerAddress) => {
 }
 
 const isShouldList = (ownerAddress, stamina) => {
-    return isOwning(ownerAddress) && !isHeroOnSale(ownerAddress) && stamina < config.listStamina && stamina !== -1;
+    return isOwning(ownerAddress) && !isHeroOnSale(ownerAddress) && stamina < config.harmony.listStamina && stamina !== -1;
 }
 
 const isShouldUnList = async (ownerAddress, stamina, heroId) => {
@@ -62,7 +62,7 @@ const isShouldUnList = async (ownerAddress, stamina, heroId) => {
 }
 
 exports.runSalesLogic = async () => {
-    const heroList = config.heroForSale;
+    const heroList = config.harmony.heroForSale;
     // get stamina of the registed heroes to be on sale
     const staminaPromises = []
     heroList.forEach((heroToSell) => {
@@ -102,17 +102,17 @@ const unlistHero = async (heroID) => {
     autils.logSimulation(`unlisting hero: ${id}`);
     const txn = hmy.transactions.newTx({
         // contract address
-        to: config.saleAuction,
+        to: config.harmony.saleAuction,
         // amount of one to send
         value: 0,
         // gas limit, you can use string
-        gasLimit: config.gasLimit,
+        gasLimit: config.harmony.gasLimit,
         // send token from shardID
         shardID: 0,
         // send token to toShardID
         toShardID: 0,
         // gas Price, you can use Unit class, and use Gwei, then remember to use toWei(), which will be transformed to BN
-        gasPrice: config.gasPrice,
+        gasPrice: config.harmony.gasPrice,
         // tx data
         data: cancelAuctionPattern(id)
     });
@@ -131,17 +131,17 @@ const listHero = async (heroID, price) => {
     autils.logSimulation(`listing hero: ${parseInt(id)}: ${price}`);
     const txn = hmy.transactions.newTx({
         // contract address
-        to: config.saleAuction,
+        to: config.harmony.saleAuction,
         // amount of one to send
         value: 0,
         // gas limit, you can use string
-        gasLimit: config.gasLimit,
+        gasLimit: config.harmony.gasLimit,
         // send token from shardID
         shardID: 0,
         // send token to toShardID
         toShardID: 0,
         // gas Price, you can use Unit class, and use Gwei, then remember to use toWei(), which will be transformed to BN
-        gasPrice: config.gasPrice,
+        gasPrice: config.harmony.gasPrice,
         // tx data
         data: createAuctionPattern(id, price)
     });

@@ -10,7 +10,7 @@ const autils = require("./autils")
 const { REWARD_ADDRESS_TO_NAME, REWARD_ADDRESS_TO_DECIMAL } = require('./quest_rewards');
 
 const hmy = new Harmony(
-    autils.getRpc(config.useRpcIndex),
+    autils.getRpc(config.harmony.useRpcIndex),
     {
         chainType: ChainType.Harmony,
         chainId: ChainID.HmyMainnet,
@@ -33,8 +33,8 @@ exports.CompleteQuests = async (heroesStruct, contractAddress, contractAbi) => {
       contractAbi,
       contractAddress,
       {
-        defaultGas: config.gasLimit,
-        defaultGasPrice: config.gasPrice
+        defaultGas: config.harmony.gasLimit,
+        defaultGasPrice: config.harmony.gasPrice
       }
     )
 

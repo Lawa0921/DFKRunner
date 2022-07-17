@@ -19,7 +19,7 @@ const { CheckAndSendStatQuests } = require('./quest_stats');
 const { runSalesLogic } = require('./sales_handler');
 
 const hmy = new Harmony(
-    autils.getRpc(config.useRpcIndex),
+    autils.getRpc(config.harmony.useRpcIndex),
     {
         chainType: ChainType.Harmony,
         chainId: ChainID.HmyMainnet,
@@ -30,17 +30,17 @@ hmy.wallet.addByPrivateKey(config.privateKey);
 
 let questCoreV1Contract = hmy.contracts.createContract(
     questCoreV1ABI,
-    config.questCoreV1,   
+    config.harmony.questCoreV1,
     {
-        defaultGas: config.gasLimit,
-        defaultGasPrice: config.gasPrice
+        defaultGas: config.harmony.gasLimit,
+        defaultGasPrice: config.harmony.gasPrice
     });
 let questCoreV2Contract = hmy.contracts.createContract(
     questCoreV2ABI,
-    config.questCoreV2,   
+    config.harmony.questCoreV2,   
     {
-        defaultGas: config.gasLimit,
-        defaultGasPrice: config.gasPrice
+        defaultGas: config.harmony.gasLimit,
+        defaultGasPrice: config.harmony.gasPrice
     });
 
 async function getActiveQuests()
@@ -72,7 +72,7 @@ async function getActiveAccountQuests()
 async function CheckAndSendGoldMiners(heroesStruct, isPro)
 {
     // too lazy to change struct in config
-    let questType = config.quests[3]
+    let questType = config.harmony.quests[3]
     if (questType.name !== "GoldMining")
     {
         throw new Error("GoldMining config index was changed");
@@ -133,16 +133,16 @@ async function CheckAndSendGoldMiners(heroesStruct, isPro)
     if (numHeroesToSend >= minBatch && minBatch > 0)
     {
          const txn = hmy.transactions.newTx({
-            to: config.questCoreV1,
+            to: config.harmony.questCoreV1,
             value: 0,
             // gas limit, you can use string
-            gasLimit: config.gasLimit,
+            gasLimit: config.harmony.gasLimit,
             // send token from shardID
             shardID: 0,
             // send token to toShardID
             toShardID: 0,
             // gas Price, you can use Unit class, and use Gwei, then remember to use toWei(), which will be transformed to BN
-            gasPrice: config.gasPrice,
+            gasPrice: config.harmony.gasPrice,
             // tx data
             data: goldMiningPattern(LocalBatching[0],LocalBatching[1],LocalBatching[2],LocalBatching[3],LocalBatching[4],LocalBatching[5])
         });
@@ -162,7 +162,7 @@ async function CheckAndSendGoldMiners(heroesStruct, isPro)
 async function CheckAndSendJewelMiners(heroesStruct, isPro)
 {
     // too lazy to change struct in config
-    let questType = config.quests[4]
+    let questType = config.harmomy.quests[4]
     if (questType.name !== "JewelMining")
     {
         throw new Error("JewelMining config index was changed");
@@ -223,16 +223,16 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
     if (numHeroesToSend >= minBatch && minBatch > 0)
     {
         const txn = hmy.transactions.newTx({
-            to: config.questCoreV1,
+            to: config.harmony.questCoreV1,
             value: 0,
             // gas limit, you can use string
-            gasLimit: config.gasLimit,
+            gasLimit: config.harmony.gasLimit,
             // send token from shardID
             shardID: 0,
             // send token to toShardID
             toShardID: 0,
             // gas Price, you can use Unit class, and use Gwei, then remember to use toWei(), which will be transformed to BN
-            gasPrice: config.gasPrice,
+            gasPrice: config.harmony.gasPrice,
             // tx data
             data: jewelMiningPattern(LocalBatching[0],LocalBatching[1],LocalBatching[2],LocalBatching[3],LocalBatching[4],LocalBatching[5])
         });
@@ -251,7 +251,7 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
 async function CheckAndSendGardeners(heroesStruct, isPro)
 {
     // too lazy to change struct in config
-    let questType = config.quests[5]
+    let questType = config.harmony.quests[5]
     if (questType.name !== "Gardening")
     {
         throw new Error("Gardening config index was changed");
@@ -290,16 +290,16 @@ async function CheckAndSendGardeners(heroesStruct, isPro)
 
     if (LocalBatching.length > 0) {
         const txn = hmy.transactions.newTx({
-            to: config.questCoreV1,
+            to: config.harmony.questCoreV1,
             value: 0,
             // gas limit, you can use string
-            gasLimit: config.gasLimit,
+            gasLimit: config.harmony.gasLimit,
             // send token from shardID
             shardID: 0,
             // send token to toShardID
             toShardID: 0,
             // gas Price, you can use Unit class, and use Gwei, then remember to use toWei(), which will be transformed to BN
-            gasPrice: config.gasPrice,
+            gasPrice: config.harmony.gasPrice,
             // tx data
             data: gardeningQuestPattern(LocalBatching[0].heroID,LocalBatching[0].gardenID)
         });
@@ -335,7 +335,7 @@ function ParseActiveQuests(activeQuests)
     let completedQuestsArray = [];
     let completedQuestersCountArray = []
 
-    const listOfOnSaleHeroes = config.heroForSale.map( (heroObject) => heroObject = heroObject.id );
+    const listOfOnSaleHeroes = config.harmony.heroForSale.map( (heroObject) => heroObject = heroObject.id );
 
     activeQuests.forEach(element => {
         if (element.id.toString() !== "16305")
@@ -394,8 +394,8 @@ async function main() {
         let heroesStruct = ParseActiveQuests(activeQuests);
         let heroesStruct2 = ParseActiveQuests(activeQuests2);
 
-        await CompleteQuests(heroesStruct, config.questCoreV1, questCoreV1ABI);
-        await CompleteQuests(heroesStruct2, config.questCoreV2, questCoreV2ABI);
+        await CompleteQuests(heroesStruct, config.harmony.questCoreV1, questCoreV1ABI);
+        await CompleteQuests(heroesStruct2, config.harmony.questCoreV2, questCoreV2ABI);
 
         await runSalesLogic();
 

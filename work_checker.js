@@ -33,16 +33,16 @@ const getOwningHeroIds = async () => {
 const getConfigOwningHeroIds = async () => {
   let heroIds = [];
 
-  for (let i = 0; i < config.quests.length; i++ ) {
-    if (config.quests[i].name === "Gardening") {
-      heroIds = heroIds.concat(config.quests[i].professionHeroes.map((heroData) => { return heroData.heroID }))
+  for (let i = 0; i < config.harmony.quests.length; i++ ) {
+    if (config.harmony.quests[i].name === "Gardening") {
+      heroIds = heroIds.concat(config.harmony.quests[i].professionHeroes.map((heroData) => { return heroData.heroID }))
     } else {
-      heroIds = heroIds.concat(config.quests[i].professionHeroes);
+      heroIds = heroIds.concat(config.harmony.quests[i].professionHeroes);
     }
   }
 
-  for (let i = 0; i < config.statQuests.length; i++ ) {
-    heroIds = heroIds.concat(config.statQuests[i].heroes);
+  for (let i = 0; i < config.harmony.statQuests.length; i++ ) {
+    heroIds = heroIds.concat(config.harmony.statQuests[i].heroes);
   }
 
   return heroIds;

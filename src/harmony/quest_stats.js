@@ -17,7 +17,7 @@ const config = require("~/config.js");
 const autils = require("./autils")
 
 const hmy = new Harmony(
-    autils.getRpc(config.useRpcIndex),
+    autils.getRpc(config.harmony.useRpcIndex),
     {
         chainType: ChainType.Harmony,
         chainId: ChainID.HmyMainnet,
@@ -27,16 +27,16 @@ hmy.wallet.addByPrivateKey(config.privateKey);
 const questCoreV2 = require('~/abis/QuestCoreV2.json');
 let questContract_21Apr2022 = hmy.contracts.createContract(
     questCoreV2,
-    config.questCoreV2,   
+    config.harmony.questCoreV2,   
     {
-        defaultGas: config.gasLimit,
-        defaultGasPrice: config.gasPrice
+        defaultGas: config.harmony.gasLimit,
+        defaultGasPrice: config.harmony.gasPrice
     });
 
 exports.CheckAndSendStatQuests = async (heroesStruct) => {
     let counter = 0;
     while (counter < 8) {
-        let questType = config.statQuests[counter]
+        let questType = config.harmony.statQuests[counter]
         let minBatch = 1
         let maxBatch = 1;
         let minStam = questType.normMinStam
@@ -88,17 +88,17 @@ exports.CheckAndSendStatQuests = async (heroesStruct) => {
         if (numHeroesToSend >= minBatch && minBatch > 0) {
             const txn = hmy.transactions.newTx({
                 // quest contract address
-                to: config.questCoreV2,
+                to: config.harmony.questCoreV2,
                 // amount of one
                 value: 0,
                 // gas limit, you can use string
-                gasLimit: config.gasLimit,
+                gasLimit: config.harmony.gasLimit,
                 // send token from shardID
                 shardID: 0,
                 // send token to toShardID
                 toShardID: 0,
                 // gas Price, you can use Unit class, and use Gwei, then remember to use toWei(), which will be transformed to BN
-                gasPrice: config.gasPrice,
+                gasPrice: config.harmony.gasPrice,
                 // tx data
                 data: statQuestPattern(LocalBatching[0], questType.name, minStam / 5)
             });

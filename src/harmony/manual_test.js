@@ -10,7 +10,7 @@ const questABI = require("~/abis/QuestCoreV2.json")
 const axios = require('axios')
 
 const hmy = new Harmony(
-  autils.getRpc(config.useRpcIndex),
+  autils.getRpc(config.harmony.useRpcIndex),
   {
       chainType: ChainType.Harmony,
       chainId: ChainID.HmyMainnet,
@@ -18,15 +18,6 @@ const hmy = new Harmony(
 );
 
 hmy.wallet.addByPrivateKey(config.privateKey);
-
-const questContract = hmy.contracts.createContract(
-  questABI,
-  config.questContract_21Apr2022,   
-  {
-      defaultGas: config.gasLimit,
-      defaultGasPrice: config.gasPrice
-  });
-
 
 async function test() {
 }
