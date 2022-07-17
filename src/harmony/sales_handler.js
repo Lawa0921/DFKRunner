@@ -58,7 +58,7 @@ const isShouldList = (ownerAddress, stamina) => {
 }
 
 const isShouldUnList = async (ownerAddress, stamina, heroId) => {
-    return isHeroOnSale(ownerAddress) && stamina > config.unlistStamina && await isAPIv6Owner(heroId);
+    return isHeroOnSale(ownerAddress) && stamina > config.harmony.unlistStamina && await isAPIv6Owner(heroId);
 }
 
 exports.runSalesLogic = async () => {
