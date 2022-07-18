@@ -368,16 +368,14 @@ async function GetLatestBlock()
 {
     const res = await hmy.blockchain.getBlockNumber(0);
     const lastblock = parseInt(res.result,16);
-    console.log('lastblock:', lastblock);
     return lastblock;
 }
 
 // ==========================================
 let prevBlock = 0;
-async function main() {
+exports.runHarmonyQuest = async () => {
     try {
-        console.log("now(): " + GetCurrentDateTime(true).toLocaleTimeString());
-
+        console.log("--- Harmony quest ---");
         let lastBlock = await GetLatestBlock()-1;
         if (lastBlock <= prevBlock)
         {
@@ -387,7 +385,6 @@ async function main() {
         autils.setLatestBlockNumber(lastBlock);
         prevBlock = lastBlock;
 
-        // it also sets the defaultblock
         let activeQuests = await getActiveQuests();
         let activeQuests2 = await getActiveAccountQuests();
 
@@ -408,9 +405,7 @@ async function main() {
 
         await CheckAndSendStatQuests(heroesStruct2);
 
-        console.log("process completed");
-        console.log("");
-        process.exit(0);
+        console.log("--- Harmony quest process completed ---");
     }
     catch(error)
     {
@@ -431,8 +426,5 @@ async function main() {
         else {
             autils.log(error.toString(), true);
         }
-        process.exit(0);
     }
 }
-
-main();

@@ -8,7 +8,7 @@ const questCoreV2Contract = new QuestCoreV2("dfk")
 
 exports.runDFKChainQuest = async () => {
   try {
-    console.log("DFK Chain quest");
+    console.log("--- DFK Chain quest ---");
     const activeQuests = await questCoreV2Contract.getAccountActiveQuests();
     const heroesStruct = await dataParser.heroDataParse(activeQuests);
 
@@ -16,7 +16,7 @@ exports.runDFKChainQuest = async () => {
     await CheckAndSendDFKFishers(heroesStruct, true);
     await CheckAndSendDFKForagers(heroesStruct, true);
 
-    console.log("DFK Chain quest process completed");
+    console.log("--- DFK Chain quest process completed ---");
   } catch(error) {
     autils.log(error.toString(), true);
   }

@@ -2,5 +2,5 @@
 
 while true
 do
-  node src/harmony/index.js
+  node main_quest_runner.js
 done

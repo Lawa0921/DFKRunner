@@ -1,4 +1,5 @@
-const { runDFKChainQuest } = require('~/src/defikingdoms/quest_runner')
+const { runDFKChainQuest } = require('~/src/defikingdoms/quest_runner');
+const { runHarmonyQuest } = require('~/src/harmony/quest_runner');
 const autils = require("~/src/services/autils")
 
 async function main() {
@@ -6,13 +7,14 @@ async function main() {
     console.log(autils.getCurrentDateTime().toLocaleTimeString());
 
     await runDFKChainQuest();
+    await runHarmonyQuest();
 
     console.log("main process completed");
+    process.exit();
   } catch(error) {
     autils.log(error.toString(), true);
+    process.exit();
   }
 }
 
-while (true) {
-  main();
-}
+main();
