@@ -1,4 +1,4 @@
-const autils = require('./autils');
+const autils = require('~/src/services/autils')
 
 exports.gardeningQuestPattern = (heroIdInt, poolIdInt) => {
     let rv = ""

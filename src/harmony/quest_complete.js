@@ -5,7 +5,7 @@ const {
   } = require('@harmony-js/utils');
 
 const config = require("~/config.js");
-const autils = require("./autils")
+const autils = require('~/src/services/autils')
 
 const { REWARD_ADDRESS_TO_NAME, REWARD_ADDRESS_TO_DECIMAL } = require('./quest_rewards');
 

@@ -1,5 +1,5 @@
 const config = require("~/config.js");
-const autils = require("./autils")
+const autils = require('~/src/services/autils');
 module.exports = class Valuator {
   constructor(price, hero) {
     this.price = parseInt(price) / Math.pow(10, 18);

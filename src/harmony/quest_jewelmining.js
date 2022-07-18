@@ -1,4 +1,4 @@
-const autils = require('./autils');
+const autils = require('~/src/services/autils')
 
 /*
 0xc855dea3

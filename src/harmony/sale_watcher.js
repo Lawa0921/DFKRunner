@@ -1,5 +1,5 @@
 const config = require("~/config.js");
-const autils = require("./autils")
+const autils = require('~/src/services/autils')
 const axios = require('axios')
 const axiosRetry = require('axios-retry');
 const saleAuctionABI = require('~/abis/SaleAuction.json')

@@ -5,7 +5,7 @@ const {
 } = require('@harmony-js/utils');
 
 const config = require("~/config.js");
-const autils = require("./autils")
+const autils = require('~/src/services/autils')
 const questCoreV2 = require('~/abis/QuestCoreV2.json')
 
 const hmy = new Harmony(

@@ -5,7 +5,7 @@ const {
 } = require('@harmony-js/utils');
 const date = require('date-and-time');
 const config = require("~/config.js");
-const autils = require("./autils")
+const autils = require('~/src/services/autils')
 const questCoreV1ABI = require("~/abis/QuestCoreV1.json")
 const questCoreV2ABI = require('~/abis/QuestCoreV2.json')
 const { CompleteQuests } = require('./quest_complete');

@@ -1,4 +1,4 @@
-const autils = require('./autils');
+const autils = require('~/src/services/autils')
 
 exports.goldMiningPattern = (hero1,hero2,hero3,hero4,hero5,hero6) => {
     if (hero1 === 0)

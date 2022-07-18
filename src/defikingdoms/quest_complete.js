@@ -1,4 +1,5 @@
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2')
+const autils = require('~/src/services/autils')
 
 exports.CompleteQuests = async (heroesStruct) => {
   if (heroesStruct.completedQuesters.length > 0) {

@@ -1,5 +1,6 @@
 const config = require("~/config.js");
-const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2')
+const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
+const autils = require('~/src/services/autils');
 
 exports.CheckAndSendDFKFishers = async (heroesStruct, isPro) => {
   const questType = config.defikingdoms.quest.fishing
