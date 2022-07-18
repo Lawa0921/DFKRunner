@@ -80,6 +80,10 @@ exports.gasSettingFormater = () => {
     return { gasPrice: config.harmony.gasPrice, gasLimit: config.harmony.gasLimit };
 }
 
+exports.getCurrentDateTime = () => {
+    return date.addMinutes(new Date(Date.now()), 0);
+}
+
 exports.watchHeroLog = async (hero, price, valuator) => {
     let idAndRarity = `${hero.id} ${hero.formatRarity()}`;
     let profession = `${hero.profession}`
