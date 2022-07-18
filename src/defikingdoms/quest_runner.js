@@ -2,7 +2,7 @@ const dataParser = require('~/src/services/data_parser')
 const QuestCoreV2 = require("~/src/defikingdoms/contracts/questCoreV2");
 const { CheckAndSendDFKFishers } = require("~/src/defikingdoms/quest_fishing");
 const { CheckAndSendDFKForagers } = require("~/src/defikingdoms/quest_foraging");
-const config = require('~/config.js')
+const { CompleteQuests } = require('~/src/defikingdoms/quest_complete');
 const autils = require("~/src/services/autils")
 const questCoreV2Contract = new QuestCoreV2("dfk")
 
@@ -12,6 +12,7 @@ exports.runDFKChainQuest = async () => {
     const activeQuests = await questCoreV2Contract.getAccountActiveQuests();
     const heroesStruct = await dataParser.heroDataParse(activeQuests);
 
+    await CompleteQuests(heroesStruct);
     await CheckAndSendDFKFishers(heroesStruct, true);
     await CheckAndSendDFKForagers(heroesStruct, true);
 
