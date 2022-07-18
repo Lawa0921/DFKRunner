@@ -260,7 +260,37 @@ const config = {
     "unconditionalPurchasePrice": 35,
     "g0ConditionsOfPurchase": 5000,
   },
-  "defikingdoms": {},
+  "defikingdoms": {
+    "quest": {
+        "fishing": {
+            "professionHeroes": [
+                "206487"
+            ],
+            "nonProfessionHeroes": [],
+            "proMinStam": 20,
+            "normMinStam": 21,
+            "contractAddress": "0x407ab39B3675f29A719476af6eb3B9E5d93969E6"
+        },
+        "foraging": {
+            "professionHeroes": [],
+            "nonProfessionHeroes": [],
+            "proMinStam": 25,
+            "normMinStam": 21,
+            "contractAddress": "0xAd51199B453075C73FA106aFcAAD59f705EF7872"
+        }
+    },
+    "heroForSale": [],
+    "listStamina": 24,
+    "unlistStamina": 24,
+    "useRpcIndex": 0,
+    "rpcs": [
+      "https://subnets.avax.network/defi-kingdoms/dfk-chain/rpc",
+      "https://avax-dfk.gateway.pokt.network/v1/lb/6244818c00b9f0003ad1b619/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc"
+    ],
+    "questCoreV2": "0xE9AbfBC143d7cef74b5b793ec5907fa62ca53154",
+    "heroCore": "0xEb9B61B145D6489Be575D3603F4a704810e143dF",
+    "saleAuction": "0xc390fAA4C7f66E4D62E59C231D5beD32Ff77BEf0"
+  },
   "queryHeroEndPoint": "https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
   "graphqlEndPoint": "https://defi-kingdoms-community-api-gateway-co06z8vi.uc.gateway.dev/graphql"
 }
