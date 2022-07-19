@@ -28,13 +28,6 @@ let questContract = hmy.contracts.createContract(
         defaultGasPrice: config.harmony.gasPrice
     });
 const saleAuctionABI = require('~/abis/SaleAuction.json')
-let tavernContract = hmy.contracts.createContract(
-    saleAuctionABI,
-    config.harmony.saleAuction,
-    {
-        defaultGas: config.harmony.gasLimit,
-        defaultGasPrice: config.harmony.gasPrice
-    });
 
 const heroCoreABI = require('~/abis/HeroCore.json')
 let heroContract = hmy.contracts.createContract(
@@ -99,7 +92,7 @@ exports.runSalesLogic = async () => {
 
 const unlistHero = async (heroID) => {
     const id = parseInt(heroID, 10);
-    autils.logSimulation(`unlisting hero: ${id}`);
+    console.log(`unlisting hero: ${id}`);
     const txn = hmy.transactions.newTx({
         // contract address
         to: config.harmony.saleAuction,
@@ -121,14 +114,14 @@ const unlistHero = async (heroID) => {
     if (LocalSignOn === true)
     {
         await hmy.blockchain.createObservedTransaction(signedTxn).promise;
-        autils.logSimulation(`unlisting hero: ${id} COMPLETED!`);
+        console.log(`unlisting hero: ${id} COMPLETED!`);
     }
     return;
 }
 
 const listHero = async (heroID, price) => {
     const id = parseInt(heroID, 10);
-    autils.logSimulation(`listing hero: ${parseInt(id)}: ${price}`);
+    console.log(`listing hero: ${parseInt(id)}: ${price}`);
     const txn = hmy.transactions.newTx({
         // contract address
         to: config.harmony.saleAuction,
@@ -150,7 +143,7 @@ const listHero = async (heroID, price) => {
     if (LocalSignOn === true)
     {
         await hmy.blockchain.createObservedTransaction(signedTxn).promise;
-        autils.logSimulation(`listing hero: ${id} COMPLETED!`);
+        console.log(`listing hero: ${id} COMPLETED!`);
     }
     return;
 }

@@ -66,11 +66,6 @@ exports.bidHeroLog = (message) => {
     fs.appendFileSync("bid_heros", message + "\n");
 }
 
-exports.logSimulation = (myString) => {
-    console.log(myString);
-    // fs.appendFileSync("simulation", myString + "\n");
-}
-
 exports.txnFailLog = (txn) => {
     str = `${new Date().toLocaleTimeString()} txn fail, detail: ${JSON.stringify(txn)}`
     console.log(str);
