@@ -17,13 +17,7 @@ const hmy = new Harmony(
 hmy.wallet.addByPrivateKey(config.privateKey);
 
 const questCoreV2 = require('~/abis/QuestCoreV2.json')
-let questContract = hmy.contracts.createContract(
-		questCoreV2,
-    config.harmony.questCoreV2,   
-    {
-        defaultGas: config.harmony.gasLimit,
-        defaultGasPrice: config.harmony.gasPrice
-    });
+const questContract = hmy.contracts.createContract(questCoreV2, config.harmony.questCoreV2);
 
 exports.CheckAndSendFishers = async (heroesStruct, isPro) => {
 	let questType = config.harmony.quests[0]

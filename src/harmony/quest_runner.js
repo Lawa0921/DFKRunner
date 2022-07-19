@@ -28,20 +28,8 @@ const hmy = new Harmony(
 
 hmy.wallet.addByPrivateKey(config.privateKey);
 
-let questCoreV1Contract = hmy.contracts.createContract(
-    questCoreV1ABI,
-    config.harmony.questCoreV1,
-    {
-        defaultGas: config.harmony.gasLimit,
-        defaultGasPrice: config.harmony.gasPrice
-    });
-let questCoreV2Contract = hmy.contracts.createContract(
-    questCoreV2ABI,
-    config.harmony.questCoreV2,   
-    {
-        defaultGas: config.harmony.gasLimit,
-        defaultGasPrice: config.harmony.gasPrice
-    });
+const questCoreV1Contract = hmy.contracts.createContract(questCoreV1ABI, config.harmony.questCoreV1);
+const questCoreV2Contract = hmy.contracts.createContract(questCoreV2ABI, config.harmony.questCoreV2);
 
 async function getActiveQuests()
 {

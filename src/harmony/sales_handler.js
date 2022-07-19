@@ -20,23 +20,11 @@ const hmy = new Harmony(
 hmy.wallet.addByPrivateKey(config.privateKey);
 
 const questCoreV2 = require('~/abis/QuestCoreV2.json');
-let questContract = hmy.contracts.createContract(
-    questCoreV2,
-    config.harmony.questCoreV2,   
-    {
-        defaultGas: config.harmony.gasLimit,
-        defaultGasPrice: config.harmony.gasPrice
-    });
+const questContract = hmy.contracts.createContract(questCoreV2, config.harmony.questCoreV2);
 const saleAuctionABI = require('~/abis/SaleAuction.json')
 
 const heroCoreABI = require('~/abis/HeroCore.json')
-let heroContract = hmy.contracts.createContract(
-    heroCoreABI,
-    config.harmony.heroCore,
-    {
-        defaultGas: config.harmony.gasLimit,
-        defaultGasPrice: config.harmony.gasPrice
-    });
+const heroContract = hmy.contracts.createContract(heroCoreABI, config.harmony.heroCore);
 
 const isHeroOnSale = (ownerAddress) => {
     return ownerAddress.toLowerCase() === config.harmony.saleAuction.toLowerCase();

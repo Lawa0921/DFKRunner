@@ -25,12 +25,7 @@ const wallet = new Wallet(
 
 wallet.addByPrivateKey(config.privateKey);
 
-const tavernContract = new Contract(
-  saleAuctionABI,
-  config.harmony.saleAuction, {
-  defaultGas: config.harmony.gasLimit,
-  defaultGasPrice: config.harmony.gasPrice
-}, wallet)
+const tavernContract = new Contract(saleAuctionABI, config.harmony.saleAuction, {}, wallet)
 
 axiosRetry(axios, {
   retries: 5, // number of retries

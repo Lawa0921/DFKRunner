@@ -254,9 +254,7 @@ const config = {
         "wss://ws-harmony-mainnet.chainstacklabs.com/",
         "wss://ws.s0.t.hmny.io/"
     ],
-    "gasPrice": 110000000000,
     "bidGasPrice": 200100000000,
-    "gasLimit":  3000000,
     "unconditionalPurchasePrice": 35,
     "g0ConditionsOfPurchase": 5000,
   },

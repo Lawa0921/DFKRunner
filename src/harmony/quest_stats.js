@@ -25,13 +25,7 @@ const hmy = new Harmony(
 );
 hmy.wallet.addByPrivateKey(config.privateKey);
 const questCoreV2 = require('~/abis/QuestCoreV2.json');
-let questContract_21Apr2022 = hmy.contracts.createContract(
-    questCoreV2,
-    config.harmony.questCoreV2,   
-    {
-        defaultGas: config.harmony.gasLimit,
-        defaultGasPrice: config.harmony.gasPrice
-    });
+const questContract_21Apr2022 = hmy.contracts.createContract(questCoreV2, config.harmony.questCoreV2);
 
 exports.CheckAndSendStatQuests = async (heroesStruct) => {
     let counter = 0;
