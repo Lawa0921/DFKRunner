@@ -3,7 +3,7 @@ const ethers = require('ethers');
 const saleAuctionABI = require('~/abis/SaleAuction.json');
 const autils = require('~/src/services/autils');
 
-module.exports = class saleAuction {
+module.exports = class SaleAuction {
   constructor() {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     this.wallet = new ethers.Wallet(config.privateKey, this.provider)
