@@ -255,6 +255,8 @@ const config = {
         "wss://ws.s0.t.hmny.io/"
     ],
     "bidGasPrice": 200100000000,
+    "gasPrice": 110000000000,
+    "gasLimit":  3000000,
     "unconditionalPurchasePrice": 35,
     "g0ConditionsOfPurchase": 5000,
   },

@@ -29,7 +29,7 @@ const BigIntWithDecimalToString = (amount, decimals) => {
 
 exports.CompleteQuests = async (heroesStruct, contractAddress, contractAbi) => {
   if (heroesStruct.completedQuesters.length > 0) {
-    const questContract = hmy.contracts.createContract(contractAbi, contractAddress)
+    const questContract = hmy.contracts.createContract(contractAbi, contractAddress);
 
     for (let index = 0; index < heroesStruct.completedQuesters.length; index++) {
       await questContract.methods.completeQuest(heroesStruct.completedQuesters[index]).send(autils.gasSettingFormater()).then((result) => {
