@@ -279,7 +279,10 @@ const config = {
             "contractAddress": "0xAd51199B453075C73FA106aFcAAD59f705EF7872"
         }
     },
-    "heroForSale": [],
+    "heroForSale": [
+        { "id": "206487", "price": 55 },
+        { "id": "197335", "price": 60 }
+    ],
     "listStamina": 24,
     "unlistStamina": 24,
     "useRpcIndex": 0,
