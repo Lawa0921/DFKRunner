@@ -3,9 +3,9 @@ const autils = require('~/src/services/autils');
 const QuestCoreV2 = require("~/src/defikingdoms/contracts/questCoreV2");
 const HeroCore = require("~/src/defikingdoms/contracts/heroCore");
 const SaleAuction = require("~/src/defikingdoms/contracts/saleAuction");
-const questCoreV2Contract = new QuestCoreV2("dfk");
-const heroCoreContract = new HeroCore("dfk");
-const saleAuctionContract = new SaleAuction("dfk");
+const questCoreV2Contract = new QuestCoreV2();
+const heroCoreContract = new HeroCore();
+const saleAuctionContract = new SaleAuction();
 
 const isHeroOnSale = (ownerAddress) => {
   return ownerAddress.toLowerCase() === config.defikingdoms.saleAuction.toLowerCase();

@@ -3,7 +3,7 @@ const autils = require('~/src/services/autils')
 
 exports.CompleteQuests = async (heroesStruct) => {
   if (heroesStruct.completedQuesters.length > 0) {
-    const questCoreV2Contract = new QuestCoreV2("dfk")
+    const questCoreV2Contract = new QuestCoreV2();
 
     for (let index = 0; index < heroesStruct.completedQuesters.length; index++) {
       const tx = await questCoreV2Contract.completeQuest(heroesStruct.completedQuesters[index])

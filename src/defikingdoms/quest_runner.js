@@ -4,8 +4,8 @@ const { CheckAndSendDFKFishers } = require("~/src/defikingdoms/quest_fishing");
 const { CheckAndSendDFKForagers } = require("~/src/defikingdoms/quest_foraging");
 const { CompleteQuests } = require('~/src/defikingdoms/quest_complete');
 const { runDFKSalesLogic } = require('~/src/defikingdoms/sales_handler');
-const autils = require("~/src/services/autils")
-const questCoreV2Contract = new QuestCoreV2("dfk")
+const autils = require("~/src/services/autils");
+const questCoreV2Contract = new QuestCoreV2();
 
 exports.runDFKChainQuest = async () => {
   try {

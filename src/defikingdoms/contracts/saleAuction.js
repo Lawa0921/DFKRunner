@@ -4,16 +4,10 @@ const saleAuctionABI = require('~/abis/SaleAuction.json');
 const autils = require('~/src/services/autils');
 
 module.exports = class saleAuction {
-  constructor(network) {
-    this.network = network
-
-    if (network === "dfk") {
-      this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
-      this.wallet = new ethers.Wallet(config.privateKey, this.provider)
-      this.contract = new ethers.Contract(config.defikingdoms.saleAuction, saleAuctionABI, this.wallet)
-    } else if (network === "harmony") {
-      // to do
-    }
+  constructor() {
+    this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
+    this.wallet = new ethers.Wallet(config.privateKey, this.provider)
+    this.contract = new ethers.Contract(config.defikingdoms.saleAuction, saleAuctionABI, this.wallet)
   }
 
   async cancelAuction(heroId) {

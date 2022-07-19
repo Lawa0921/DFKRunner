@@ -23,7 +23,7 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, isPro) => {
   let ForagerPromises = []
 
 	for (let i = 0; i < possibleForagers.length; i++ ) {
-		ForagerPromises.push(await new QuestCoreV2("dfk").getCurrentStamina(possibleForagers[i]))
+		ForagerPromises.push(await new QuestCoreV2().getCurrentStamina(possibleForagers[i]))
 	}
 
 
@@ -44,7 +44,7 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, isPro) => {
 
   if (LocalBatching.length > 0) {
     console.log("senting " + LocalBatching + " to foraging quest");
-    const tx = await new QuestCoreV2("dfk").startForagingQuest(LocalBatching, foragingTries)
+    const tx = await new QuestCoreV2().startForagingQuest(LocalBatching, foragingTries)
 		let res = await tx.wait();
 
 		if (res.status === 1) {

@@ -23,7 +23,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, isPro) => {
   let FisherPromises = []
 
 	for (let i = 0; i < possibleFishers.length; i++ ) {
-		FisherPromises.push(await new QuestCoreV2("dfk").getCurrentStamina(possibleFishers[i]))
+		FisherPromises.push(await new QuestCoreV2().getCurrentStamina(possibleFishers[i]))
 	}
 
 
@@ -44,7 +44,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, isPro) => {
 
   if (LocalBatching.length > 0) {
     console.log("senting " + LocalBatching + " to fishing quest");
-    const tx = await new QuestCoreV2("dfk").startFishingQuest(LocalBatching, fishingTries)
+    const tx = await new QuestCoreV2().startFishingQuest(LocalBatching, fishingTries)
 		let res = await tx.wait();
 
 		if (res.status === 1) {
