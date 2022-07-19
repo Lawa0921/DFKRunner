@@ -1,6 +1,19 @@
 const config = require("~/config.js");
 const date = require('date-and-time');
 const fs = require('fs');
+const axios = require('axios');
+const axiosRetry = require('axios-retry');
+
+axiosRetry(axios, {
+    retries: 5, // number of retries
+    retryDelay: (retryCount) => {
+      console.log(`retry attempt: ${retryCount}`);
+      return retryCount * 2000; // time interval between retries
+    },
+    retryCondition: (error) => {
+      return error.response.status === 500;
+    },
+});
 
 exports.getRpc = function getRpc(index) {
     return config.harmony.rpcs[index];
@@ -77,6 +90,20 @@ exports.gasSettingFormater = () => {
 
 exports.getCurrentDateTime = () => {
     return date.addMinutes(new Date(Date.now()), 0);
+}
+
+exports.isAPIv6Owner = async (heroId) => {
+    let returnValue = false;
+    await axios.post(config.queryHeroEndPoint,
+        {"limit":1,"params":[{"field":"id","operator":"=","value":heroId.toString()}],"offset":0}
+    ).then((reply) => {
+        if (reply.data[0].owner_address.toLowerCase() === config.walletAddress.toLowerCase()) {
+            returnValue = true;
+        }
+    }).catch((_err) => {
+        returnValue = false;
+    })
+    return returnValue;
 }
 
 exports.watchHeroLog = async (hero, price, valuator) => {

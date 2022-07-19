@@ -51,7 +51,7 @@ const isShouldList = (ownerAddress, stamina) => {
 }
 
 const isShouldUnList = async (ownerAddress, stamina, heroId) => {
-    return isHeroOnSale(ownerAddress) && stamina > config.harmony.unlistStamina && await isAPIv6Owner(heroId);
+    return isHeroOnSale(ownerAddress) && stamina > config.harmony.unlistStamina && await autils.isAPIv6Owner(heroId);
 }
 
 exports.runSalesLogic = async () => {
@@ -146,25 +146,6 @@ const listHero = async (heroID, price) => {
         console.log(`listing hero: ${id} COMPLETED!`);
     }
     return;
-}
-
-const isAPIv6Owner = async (heroID) => {
-    let returnValue = false;
-    let debugData;
-    await axios.post(config.queryHeroEndPoint,
-        {"limit":1,"params":[{"field":"id","operator":"=","value":heroID.toString()}],"offset":0}
-    ).then( (reply) => {
-        debugData = reply;
-        if (reply.data[0].owner_address.toLowerCase() === config.walletAddress.toLowerCase()) {
-            returnValue = true;
-        }
-    }).catch(err => {
-        // errors are fine, just say not owned for now, next iteration can will-recheck
-        returnValue = false;
-    })
-    //console.log('debugData', debugData);
-    console.log(heroID, ' isAPIv6Owner: ',returnValue);
-    return returnValue;
 }
 
 const cancelAuctionPattern = (heroID) => {
