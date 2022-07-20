@@ -133,23 +133,23 @@ const config = require("~/config.js");
 module.exports = class Hero {
   constructor(heroInfo) {
     this.id = heroInfo.id;
-    this.owner = heroInfo.owner;
+    this.owner = heroInfo.owner.owner;
     this.rarity = heroInfo.rarity;
-    this.summons_remaining = heroInfo.summons_remaining;
+    this.summons_remaining = heroInfo.summonsRemaining;
     this.profession = heroInfo.profession;
-    this.mainclass = heroInfo.mainclass;
-    this.subclass = heroInfo.subclass;
+    this.mainclass = heroInfo.mainClass;
+    this.subclass = heroInfo.subClass;
     this.generation = heroInfo.generation;
     this.level = heroInfo.level;
     this.passive1 = heroInfo.passive1;
     this.passive2 = heroInfo.passive2;
     this.active1 = heroInfo.active1;
     this.active2 = heroInfo.active2;
-    this.statboost1 = heroInfo.statboost1;
-    this.statboost2 = heroInfo.statboost2;
-    this.hairstyle = heroInfo.hairstyle;
-    this.backappendage = heroInfo.backappendage;
-    this.maxsummons = heroInfo.maxsummons;
+    this.statboost1 = heroInfo.statBoost1;
+    this.statboost2 = heroInfo.statBoost2;
+    this.hairstyle = heroInfo.hairStyle;
+    this.backappendage = heroInfo.backAppendage;
+    this.maxsummons = heroInfo.maxSummons;
   }
 
   isOwning() {
@@ -177,136 +177,6 @@ module.exports = class Hero {
         break;
       default:
         returnValue = "Out of rarity";
-    }
-
-    return returnValue;
-  }
-
-  formatMainclass() {
-    let returnValue;
-
-    switch(this.mainclass) {
-      case '0':
-        returnValue = "Warrior";
-        break;
-      case '1':
-        returnValue = "Knight";
-        break;
-      case '2':
-        returnValue = "Thief";
-        break;
-      case '3':
-        returnValue = "Archer";
-        break;
-      case '4':
-        returnValue = "Priest";
-        break;
-      case '5':
-        returnValue = "Wizard";
-        break;
-      case '6':
-        returnValue = "Monk";
-        break;
-      case '7':
-        returnValue = "Pirate";
-        break;
-      case '8':
-        returnValue = "Berserker";
-        break;
-      case '9':
-        returnValue = "Seer";
-        break;
-      case '16':
-        returnValue = "Paladin";
-        break;
-      case '17':
-        returnValue = "DarkKnight";
-        break;
-      case '18':
-        returnValue = "Summoner";
-        break;
-      case '19':
-        returnValue = "Ninja";
-        break;
-      case '20':
-        returnValue = "Shapeshifter";
-        break;
-      case '24':
-        returnValue = "Dragoon";
-        break;
-      case '25':
-        returnValue = "Sage";
-        break;
-      case '28':
-        returnValue = "DreadKnight";
-        break;
-      default:
-        returnValue = "Out of mainClass"
-    }
-
-    return returnValue;
-  }
-
-  formatSubclass() {
-    let returnValue;
-
-    switch(this.subclass) {
-      case '0':
-        returnValue = "Warrior";
-        break;
-      case '1':
-        returnValue = "Knight";
-        break;
-      case '2':
-        returnValue = "Thief";
-        break;
-      case '3':
-        returnValue = "Archer";
-        break;
-      case '4':
-        returnValue = "Priest";
-        break;
-      case '5':
-        returnValue = "Wizard";
-        break;
-      case '6':
-        returnValue = "Monk";
-        break;
-      case '7':
-        returnValue = "Pirate";
-        break;
-      case '8':
-        returnValue = "Berserker";
-        break;
-      case '9':
-        returnValue = "Seer";
-        break;
-      case '16':
-        returnValue = "Paladin";
-        break;
-      case '17':
-        returnValue = "DarkKnight";
-        break;
-      case '18':
-        returnValue = "Summoner";
-        break;
-      case '19':
-        returnValue = "Ninja";
-        break;
-      case '20':
-        returnValue = "Shapeshifter";
-        break;
-      case '24':
-        returnValue = "Dragoon";
-        break;
-      case '25':
-        returnValue = "Sage";
-        break;
-      case '28':
-        returnValue = "DreadKnight";
-        break;
-      default:
-        returnValue = "Out of mainClass"
     }
 
     return returnValue;
@@ -345,7 +215,7 @@ module.exports = class Hero {
   selfProfessionMatch() {    
     const profession = this.profession;
 
-    switch(this.formatMainclass()) {
+    switch(this.mainclass) {
       case "Warrior":
         return profession === "mining" ? true : false;
       case "Knight":
@@ -388,7 +258,7 @@ module.exports = class Hero {
   summonProfessionMatch() {
     const profession = this.profession;
 
-    switch(this.formatMainclass()) {
+    switch(this.mainclass) {
       case "Warrior":
         return profession === "mining" || profession === "gardening" ? true : false;
       case "Knight":

@@ -3,6 +3,7 @@ const date = require('date-and-time');
 const fs = require('fs');
 const axios = require('axios');
 const axiosRetry = require('axios-retry');
+const Hero = require('~/src/harmony/hero');
 
 axiosRetry(axios, {
     retries: 5, // number of retries
@@ -106,12 +107,57 @@ exports.isAPIv6Owner = async (heroId) => {
     return returnValue;
 }
 
+exports.getHerosInfo = async (heroIds) => {
+    let heroObjects;
+    queryStr = `{
+        heroes(where: {id_in: ${JSON.stringify(heroIds)}}) {
+            id
+            owner {
+                owner
+            }
+            rarity
+            network
+            mainClass
+            subClass
+            summonsRemaining
+            profession
+            generation
+            level
+            passive1
+            passive2
+            active1
+            active2
+            statBoost1
+            statBoost2
+            hairStyle
+            backAppendage
+            maxSummons
+            saleAuction {
+                startingPrice
+                open
+            }
+            assistingAuction {
+                startingPrice
+                open
+            }
+        }
+      }`
+
+    await axios.post(config.graphqlEndPoint, { query: queryStr }).then((res) => {
+        heroObjects = res.data.data.heroes.map((heroData) => { return new Hero(heroData) });
+    }).catch((err) => {
+        console.log(err);
+    })
+
+    return heroObjects;
+}
+
 exports.watchHeroLog = async (hero, price, valuator) => {
     let idAndRarity = `${hero.id} ${hero.formatRarity()}`;
     let profession = `${hero.profession}`
     let info = `\x1b[3m LV${hero.level} G${hero.generation} ${hero.summons_remaining}/${hero.maxsummons} \x1b[0m`;
-    let mainClass = hero.formatMainclass();
-    let subClass =  hero.formatSubclass();
+    let mainClass = hero.mainclass;
+    let subClass =  hero.subclass;
     let skillInfo = `${heroSkillDyer(hero, "active1")}/${heroSkillDyer(hero, "active2")}/${heroSkillDyer(hero, "passive1")}/${heroSkillDyer(hero, "passive2")}`
     let hair = "hair";
     let backappendage = "back";

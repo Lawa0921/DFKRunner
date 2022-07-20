@@ -103,7 +103,7 @@ module.exports = class Valuator {
   }
 
   evaluateProfessionPrice() {
-    const heroMainclass = this.hero.formatMainclass();
+    const heroMainclass = this.hero.mainclass;
     
     switch(heroMainclass) {
       case "Warrior":
@@ -200,7 +200,7 @@ module.exports = class Valuator {
   }
 
   evaluateSummonPrice() {
-    const heroMainclass = this.hero.formatMainclass();
+    const heroMainclass = this.hero.mainclass;
     const heroMainclassTier = this.hero.attributeTier("mainclass");
     const heroRarity = this.hero.formatRarity();
 
@@ -462,7 +462,7 @@ module.exports = class Valuator {
   }
 
   evaluateStatPrice() {
-    const heroMainclass = this.hero.formatMainclass();
+    const heroMainclass = this.hero.mainclass;
     const heroGreenStatBoost = this.hero.statboost1;
     const heroBlueStatBoost = this.hero.statboost2;
     const heroRarity = this.hero.formatRarity();
@@ -1030,8 +1030,8 @@ module.exports = class Valuator {
   }
 
   evaluateSubclassPrice() {
-    const heroMainclass = this.hero.formatMainclass();
-    const heroSubclass = this.hero.formatSubclass();
+    const heroMainclass = this.hero.mainclass;
+    const heroSubclass = this.hero.subclass;
     const heroRarity = this.hero.formatRarity();
 
     switch(heroMainclass) {

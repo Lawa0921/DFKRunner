@@ -40,23 +40,16 @@ axiosRetry(axios, {
 });
 
 const saleHandler = async (tokenId, price) => {
-  await axios.post("https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
-    {"limit":1,"params":[{"field":"id","operator":"=","value":tokenId}],"offset":0}
-  ).then(async (res) => {
-    const valuator = new Valuator(price, new Hero(res.data[0]));
-    await valuator.execute();
+  let heroObjects = await autils.getHerosInfo([tokenId]);
 
-    if (!valuator.hero.isOwning() && valuator.price <= valuator.valuation) {
-      await bidHero(tokenId, price);
-    }
+  const valuator = new Valuator(price, heroObjects[0]);
+  await valuator.execute();
 
-    autils.watchHeroLog(valuator.hero, price, valuator.valuation);
-  }).catch(err => {
-    if (err.toString().includes('Request failed with status code 500')) {
-        autils.log(err.toString(), true);
-    }
-    return;
-  })
+  if (!valuator.hero.isOwning() && valuator.price <= valuator.valuation) {
+    await bidHero(tokenId, price);
+  }
+
+  autils.watchHeroLog(valuator.hero, price, valuator.valuation);
 }
 
 async function main() {
