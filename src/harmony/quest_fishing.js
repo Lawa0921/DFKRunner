@@ -1,23 +1,6 @@
-const { Harmony } = require('@harmony-js/core');
-const {
-    ChainID,
-    ChainType,
-  } = require('@harmony-js/utils');
-
 const config = require("~/config.js");
-const autils = require('~/src/services/autils')
-
-const hmy = new Harmony(
-    autils.getRpc(config.harmony.useRpcIndex),
-    {
-        chainType: ChainType.Harmony,
-        chainId: ChainID.HmyMainnet,
-    },
-);
-hmy.wallet.addByPrivateKey(config.privateKey);
-
-const questCoreV2 = require('~/abis/QuestCoreV2.json')
-const questContract = hmy.contracts.createContract(questCoreV2, config.harmony.questCoreV2);
+const QuestCoreV2 = require('~/src/harmony/contracts/questCoreV2');
+const questCoreV2Contract = new QuestCoreV2();
 
 exports.CheckAndSendFishers = async (heroesStruct, isPro) => {
 	let questType = config.harmony.quests[0]
@@ -42,13 +25,10 @@ exports.CheckAndSendFishers = async (heroesStruct, isPro) => {
 		return (activeQuesters.indexOf(e) < 0);
 	});
 
-	let FisherPromises = []
-	possibleFishers.forEach(fisher => {
-		FisherPromises.push(questContract.methods.getCurrentStamina(fisher).call(undefined, autils.getLatestBlockNumber()))
-	});
-
-	let staminaValues = await Promise.allSettled(FisherPromises);
-	staminaValues = staminaValues.map(res => res = res.value?.toNumber() || 0);
+	let staminaValues = [];
+	for ( let i = 0; i < possibleFishers.length; i++ ) {
+		staminaValues.push(await questCoreV2Contract.getCurrentStamina(possibleFishers[i]));
+	}
 	
 	LocalBatching = []
 	for (let index = 0; index < possibleFishers.length; index++) {
@@ -64,15 +44,7 @@ exports.CheckAndSendFishers = async (heroesStruct, isPro) => {
 
 	if (LocalBatching.length > 0) {
 		console.log("senting " + LocalBatching + " to fishing quest");
-		await questContract.methods.startQuest(LocalBatching, config.harmony.quests[0].contractAddress, fishingTries, 0).send(autils.gasSettingFormater()).then((txnHash) => {
-			if (txnHash.transaction.txStatus === 'CONFIRMED') {
-				console.log("Sent " + LocalBatching + " on a " + (isPro ? "professional" : "normal") + "Fishing Quest")
-			} else {
-				autils.txnFailLog("sent " + LocalBatching + " failed");
-			}
-		}).catch((error) => {
-			console.log(error);
-		});
+		await questCoreV2Contract.startFishingQuest(LocalBatching, fishingTries);
 	} else {
 		console.log("No Fisher sent")
 	} 
