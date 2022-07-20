@@ -155,9 +155,9 @@ exports.getHerosInfo = async (heroIds) => {
 exports.watchHeroLog = async (hero, price, valuator) => {
     let idAndRarity = `${hero.id} ${hero.formatRarity()}`;
     let profession = `${hero.profession}`
-    let info = `\x1b[3m LV${hero.level} G${hero.generation} ${hero.summons_remaining}/${hero.maxsummons} \x1b[0m`;
-    let mainClass = hero.mainclass;
-    let subClass =  hero.subclass;
+    let info = `\x1b[3m LV${hero.level} G${hero.generation} ${hero.summonsRemaining}/${hero.maxSummons} \x1b[0m`;
+    let mainClass = hero.mainClass;
+    let subClass =  hero.subClass;
     let skillInfo = `${heroSkillDyer(hero, "active1")}/${heroSkillDyer(hero, "active2")}/${heroSkillDyer(hero, "passive1")}/${heroSkillDyer(hero, "passive2")}`
     let hair = "hair";
     let backappendage = "back";
