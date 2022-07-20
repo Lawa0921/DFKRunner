@@ -27,10 +27,12 @@ exports.CheckAndSendFishers = async (heroesStruct, isPro) => {
 
 	let staminaValues = [];
 	for ( let i = 0; i < possibleFishers.length; i++ ) {
-		staminaValues.push(await questCoreV2Contract.getCurrentStamina(possibleFishers[i]));
+		staminaValues.push(questCoreV2Contract.getCurrentStamina(possibleFishers[i]));
 	}
+
+	staminaValues = await Promise.all(staminaValues);
 	
-	LocalBatching = []
+	let LocalBatching = []
 	for (let index = 0; index < possibleFishers.length; index++) {
 		const stam = staminaValues[index];
 		if ( stam >= minStam ) {

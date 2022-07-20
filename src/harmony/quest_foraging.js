@@ -1,26 +1,6 @@
-const { Harmony } = require('@harmony-js/core');
-const {
-	ChainID,
-	ChainType,
-} = require('@harmony-js/utils');
-
 const config = require("~/config.js");
-const autils = require('~/src/services/autils')
-const questCoreV2 = require('~/abis/QuestCoreV2.json')
-
-const hmy = new Harmony(
-	autils.getRpc(config.harmony.useRpcIndex),
-	{
-		chainType: ChainType.Harmony,
-		chainId: ChainID.HmyMainnet,
-	},
-);
-hmy.wallet.addByPrivateKey(config.privateKey);
-
-const questContract = hmy.contracts.createContract(
-	questCoreV2,
-	config.harmony.questCoreV2
-);
+const QuestCoreV2 = require('~/src/harmony/contracts/questCoreV2');
+const questCoreV2Contract = new QuestCoreV2();
 
 exports.CheckAndSendForagers = async (heroesStruct, isPro) => {
 	let questType = config.harmony.quests[1]
@@ -44,15 +24,14 @@ exports.CheckAndSendForagers = async (heroesStruct, isPro) => {
 		return (activeQuesters.indexOf(e) < 0);
 	});
 
-	let ForagerPromises = []
-	possibleForagers.forEach(hero => {
-		ForagerPromises.push(questContract.methods.getCurrentStamina(hero).call(undefined, autils.getLatestBlockNumber()))
-	});
+	let staminaValues = [];
+	for ( let i = 0; i < possibleForagers.length; i++ ) {
+		staminaValues.push(questCoreV2Contract.getCurrentStamina(possibleForagers[i]));
+	}
 
-	let staminaValues = await Promise.allSettled(ForagerPromises);
-	staminaValues = staminaValues.map(res => res = res.value?.toNumber() || 0);
+	staminaValues = await Promise.all(staminaValues);
 
-	LocalBatching = []
+	let LocalBatching = []
 	for (let index = 0; index < possibleForagers.length; index++) {
 		const stam = staminaValues[index];
 		if ( stam >= minStam ) {
@@ -66,15 +45,7 @@ exports.CheckAndSendForagers = async (heroesStruct, isPro) => {
     
 	if (LocalBatching.length > 0) {
 		console.log("senting " + LocalBatching + " to foraging quest");
-		await questContract.methods.startQuest(LocalBatching, config.harmony.quests[1].contractAddress, foragingTries, 0).send(autils.gasSettingFormater()).then((txnHash) => {
-			if (txnHash.transaction.txStatus === 'CONFIRMED') {
-				console.log("Sent " + LocalBatching + " on a " + (isPro ? "professional" : "normal") + "Foraging Quest")
-			} else {
-				autils.txnFailLog("sent " + LocalBatching + " failed");
-			}
-		}).catch((error) => {
-			console.log(error);
-		});
+		await questCoreV2Contract.startForagingQuest(LocalBatching, foragingTries);
 	} else {
 		console.log("No Forager Sent")
 	}
