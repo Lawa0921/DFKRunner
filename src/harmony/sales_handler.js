@@ -19,8 +19,8 @@ hmy.wallet.addByPrivateKey(config.privateKey);
 const questCoreV2 = require('~/abis/QuestCoreV2.json');
 const questContract = hmy.contracts.createContract(questCoreV2, config.harmony.questCoreV2);
 
-const heroCoreABI = require('~/abis/HeroCore.json')
-const heroContract = hmy.contracts.createContract(heroCoreABI, config.harmony.heroCore);
+const HeroCore = require('~/src/harmony/contracts/heroCore');
+let heroCoreContract = new HeroCore();
 const SaleAuction = require('~/src/harmony/contracts/saleAuction');
 let saleAuctionContract = new SaleAuction();
 
@@ -50,23 +50,16 @@ exports.runSalesLogic = async () => {
     let staminaValues = await Promise.allSettled(staminaPromises)
     staminaValues = staminaValues.map( res => res.value ? Number(res.value) : -1 )
 
-    const heroOwnersPromises = []
-    heroList.forEach((hero) => {
-        heroOwnersPromises.push(heroContract.methods.ownerOf(hero.id).call(undefined, autils.getLatestBlockNumber()));
-    });
-
-    let heroOwners = await Promise.allSettled(heroOwnersPromises);
-    heroOwners = heroOwners.map( res => res.value || -1)
+    let heroOwners = [];
+    for (let i = 0; i < heroList.length; i++ ) {
+        heroOwners.push(await heroCoreContract.ownerOf(heroList[i].id));
+    }
 
     for (let i = 0; i < heroOwners.length; i++) {
-        if (heroOwners[i] === -1) {
-            return;
-        } else {
-            if (await isShouldUnList(heroOwners[i], staminaValues[i], heroList[i].id)) {
-                await saleAuctionContract.unlistHero(heroList[i].id);
-            } else if (isShouldList(heroOwners[i], staminaValues[i])) {
-                await saleAuctionContract.listHero(heroList[i].id, heroList[i].price);
-            }
+        if (await isShouldUnList(heroOwners[i], staminaValues[i], heroList[i].id)) {
+            await saleAuctionContract.unlistHero(heroList[i].id);
+        } else if (isShouldList(heroOwners[i], staminaValues[i])) {
+            await saleAuctionContract.listHero(heroList[i].id, heroList[i].price);
         }
     }
 

@@ -27,7 +27,7 @@ module.exports = class SaleAuction {
     const tx = await this.createAuction(id, price)
     const res = await tx.wait();
     if (res.status === 1) {
-      console.log(`listing hero: ${id} completeed`);
+      console.log(`listing hero: ${id} completed`);
     } else {
       autils.txnFailLog(`list hero: ${id} failed`);
     }

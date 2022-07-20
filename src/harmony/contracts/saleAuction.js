@@ -50,7 +50,7 @@ module.exports = class HeroBridgeContract {
     const id = parseInt(heroId, 10);
     console.log(`unlisting hero: ${id}`);
 
-    const { transaction } = await this.cancelAuction(id).send()
+    const { transaction } = await this.cancelAuction(id);
 
     if (transaction.txStatus === "CONFIRMED") {
       console.log(`unlisting hero: ${id} completed`);
