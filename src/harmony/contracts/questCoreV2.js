@@ -22,7 +22,7 @@ module.exports = class QuestCoreV2 {
   }
 
   async getAccountActiveQuests() {
-    return await this.contract.methods.getAccountActiveQuests(this.wallet.address).call();
+    return await this.contract.methods.getAccountActiveQuests(config.walletAddress).call();
   }
 
   async completeQuest(heroId) {

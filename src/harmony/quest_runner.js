@@ -7,7 +7,6 @@ const date = require('date-and-time');
 const config = require("~/config.js");
 const autils = require('~/src/services/autils')
 const questCoreV1ABI = require("~/abis/QuestCoreV1.json")
-const questCoreV2ABI = require('~/abis/QuestCoreV2.json')
 const { CompleteQuests } = require('./quest_complete');
 const { CheckAndSendFishers } = require('./quest_fishing');
 const { CheckAndSendForagers } = require('./quest_foraging');
@@ -15,6 +14,9 @@ const { jewelMiningPattern } = require('./quest_jewelmining');
 const { goldMiningPattern } = require('./quest_goldmining');
 const { gardeningQuestPattern } = require('./quest_gardening');
 const { CheckAndSendStatQuests } = require('./quest_stats');
+const questCoreV2ABI = require('~/abis/QuestCoreV2.json')
+const QuestCoreV2 = require('~/src/harmony/contracts/questCoreV2');
+const questCoreV2Contract = new QuestCoreV2();
 
 const { runSalesLogic } = require('./sales_handler');
 
@@ -29,7 +31,6 @@ const hmy = new Harmony(
 hmy.wallet.addByPrivateKey(config.privateKey);
 
 const questCoreV1Contract = hmy.contracts.createContract(questCoreV1ABI, config.harmony.questCoreV1);
-const questCoreV2Contract = hmy.contracts.createContract(questCoreV2ABI, config.harmony.questCoreV2);
 
 async function getActiveQuests()
 {
@@ -42,19 +43,6 @@ async function getActiveQuests()
         returnValue = res;
     })
     return returnValue;
-}
-
-async function getActiveAccountQuests()
-{
-    let returnValue;
-    await questCoreV2Contract.methods.getAccountActiveQuests(config.walletAddress).call(undefined, autils.getLatestBlockNumber())
-    .catch(ex => {
-        autils.log(`getActiveAccountQuests failed: ${JSON.stringify(ex)} rv:${returnValue}`, true);
-        throw ex;
-    }).then((res) => {
-        returnValue = res;
-    })
-    return returnValue
 }
 
 async function CheckAndSendGoldMiners(heroesStruct, isPro)
@@ -374,7 +362,7 @@ exports.runHarmonyQuest = async () => {
         prevBlock = lastBlock;
 
         let activeQuests = await getActiveQuests();
-        let activeQuests2 = await getActiveAccountQuests();
+        let activeQuests2 = await questCoreV2Contract.getAccountActiveQuests();
 
         let heroesStruct = ParseActiveQuests(activeQuests);
         let heroesStruct2 = ParseActiveQuests(activeQuests2);
