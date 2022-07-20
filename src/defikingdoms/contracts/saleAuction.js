@@ -20,6 +20,10 @@ module.exports = class SaleAuction {
     return await this.contract.createAuction(heroId, formatPrice, formatPrice, 60, "0x0000000000000000000000000000000000000000")
   }
 
+  async isOnAuction(heroId) {
+    return this.contract.isOnAuction(heroId);
+  }
+
   async listHero(heroId, price) {
     const id = parseInt(heroId, 10);
     console.log(`listing hero: ${id}: ${price}`);

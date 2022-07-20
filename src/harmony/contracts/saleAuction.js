@@ -31,6 +31,10 @@ module.exports = class HeroBridgeContract {
     return await this.contract.methods.createAuction(heroId, formatPrice, formatPrice, 60, "0x0000000000000000000000000000000000000000").send(autils.gasSettingFormater());
   }
 
+  async isOnAuction(heroId) {
+    return this.contract.methods.isOnAuction(heroId).call();
+  }
+
   async listHero(heroId, price) {
     const id = parseInt(heroId, 10);
     console.log(`listing hero: ${id}: ${price}`);
