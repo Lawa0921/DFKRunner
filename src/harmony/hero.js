@@ -150,6 +150,9 @@ module.exports = class Hero {
     this.hairstyle = heroInfo.hairStyle;
     this.backappendage = heroInfo.backAppendage;
     this.maxsummons = heroInfo.maxSummons;
+    this.network = heroInfo.network;
+    this.isOnSale = heroInfo.saleAuction !== null ? true : false;
+    this.isOnRent = heroInfo.assistingAuction !== null ? true : false;
   }
 
   isOwning() {
