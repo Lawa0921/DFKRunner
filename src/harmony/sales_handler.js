@@ -1,24 +1,7 @@
-const { Harmony } = require('@harmony-js/core');
-const {
-    ChainID,
-    ChainType,
-  } = require('@harmony-js/utils');
-
 const config = require("~/config.js");
 const autils = require('~/src/services/autils')
-
-const hmy = new Harmony(
-    autils.getRpc(config.harmony.useRpcIndex),
-    {
-        chainType: ChainType.Harmony,
-        chainId: ChainID.HmyMainnet,
-    },
-);
-hmy.wallet.addByPrivateKey(config.privateKey);
-
-const questCoreV2 = require('~/abis/QuestCoreV2.json');
-const questContract = hmy.contracts.createContract(questCoreV2, config.harmony.questCoreV2);
-
+const QuestCoreV2 = require('~/src/harmony/contracts/questCoreV2');
+const questCoreV2Contract = new QuestCoreV2();
 const HeroCore = require('~/src/harmony/contracts/heroCore');
 let heroCoreContract = new HeroCore();
 const SaleAuction = require('~/src/harmony/contracts/saleAuction');
@@ -42,18 +25,19 @@ const isShouldUnList = async (ownerAddress, stamina, heroId) => {
 
 exports.runSalesLogic = async () => {
     const heroList = config.harmony.heroForSale;
-    const staminaPromises = []
-    heroList.forEach((heroToSell) => {
-        staminaPromises.push(questContract.methods.getCurrentStamina(parseInt(heroToSell.id, 10)).call(undefined, autils.getLatestBlockNumber()))
-    })
+    let staminaValues = [];
+	for ( let i = 0; i < heroList.length; i++ ) {
+		staminaValues.push(questCoreV2Contract.getCurrentStamina(heroList[i].id));
+	}
 
-    let staminaValues = await Promise.allSettled(staminaPromises)
-    staminaValues = staminaValues.map( res => res.value ? Number(res.value) : -1 )
+	staminaValues = await Promise.all(staminaValues);
 
     let heroOwners = [];
     for (let i = 0; i < heroList.length; i++ ) {
-        heroOwners.push(await heroCoreContract.ownerOf(heroList[i].id));
+        heroOwners.push(heroCoreContract.ownerOf(heroList[i].id));
     }
+
+    heroOwners = await Promise.all(heroOwners);
 
     for (let i = 0; i < heroOwners.length; i++) {
         if (await isShouldUnList(heroOwners[i], staminaValues[i], heroList[i].id)) {
