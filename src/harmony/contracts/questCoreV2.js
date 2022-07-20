@@ -54,7 +54,7 @@ module.exports = class QuestCoreV2 {
   }
 
   async startStatQuest(heroIds, attempt, address, type) {
-    const { transaction } = await this.contract.methods.startQuest(heroIds, address, attempt, 0).send(autils.gasSettingFormater());
+    const { transaction } = await this.contract.methods.startQuest(heroIds, address, attempt, 1).send(autils.gasSettingFormater());
 
     if (transaction.txStatus === "CONFIRMED") {
       console.log("Sent " + heroIds + " on a " + type + " Stat Quest completed")
