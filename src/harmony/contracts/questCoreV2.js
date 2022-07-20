@@ -53,6 +53,18 @@ module.exports = class QuestCoreV2 {
     return transaction;
   }
 
+  async startStatQuest(heroIds, attempt, address, type) {
+    const { transaction } = await this.contract.methods.startQuest(heroIds, address, attempt, 0).send(autils.gasSettingFormater());
+
+    if (transaction.txStatus === "CONFIRMED") {
+      console.log("Sent " + heroIds + " on a " + type + " Stat Quest completed")
+    } else {
+      console.log("Sent " + heroIds + " on a " + type + " Stat Quest failed")
+    }
+
+    return transaction;
+  }
+
   async getCurrentStamina(heroId) {
     return await this.contract.methods.getCurrentStamina(heroId).call();
   }
