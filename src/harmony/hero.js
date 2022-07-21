@@ -86,7 +86,7 @@ module.exports = class Hero {
         return "Basic"
       } else if (["DarkKnight", "Paladin", "Ninja", "Summoner", "Shapeshifter"].includes(attribute)) {
         return "Advanced"
-      } else if (["Dragoon", "Sage"].includes(attribure)) {
+      } else if (["Dragoon", "Sage"].includes(attribute)) {
         return "Elite"
       } else if (attribute === "DreadKnight") {
         return "Transcendant"
