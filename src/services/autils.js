@@ -156,6 +156,10 @@ exports.getHerosInfo = async (heroIds) => {
     return heroObjects;
 }
 
+exports.get0xAddress = () => {
+    return "0x0000000000000000000000000000000000000000"
+}
+
 exports.watchHeroLog = async (hero, price, valuator) => {
     let idAndRarity = `${hero.id} ${hero.formatRarity()}`;
     let profession = `${hero.profession}`

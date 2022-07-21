@@ -15,7 +15,7 @@ module.exports = class SaleAuction {
   }
 
   async createAuction(heroId, price) {
-    return await this.contract.createAuction(heroId, autils.formatPrice(price), autils.formatPrice(price), 60, "0x0000000000000000000000000000000000000000")
+    return await this.contract.createAuction(heroId, autils.formatPrice(price), autils.formatPrice(price), 60, autils.get0xAddress());
   }
 
   async isOnAuction(heroId) {

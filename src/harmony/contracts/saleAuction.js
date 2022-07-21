@@ -26,7 +26,7 @@ module.exports = class HeroBridgeContract {
   }
 
   async createAuction(heroId, price) {
-    return await this.contract.methods.createAuction(heroId, autils.formatPrice(price), autils.formatPrice(price), 60, "0x0000000000000000000000000000000000000000").send(autils.gasSettingFormater());
+    return await this.contract.methods.createAuction(heroId, autils.formatPrice(price), autils.formatPrice(price), 60, autils.get0xAddress()).send(autils.gasSettingFormater());
   }
 
   async isOnAuction(heroId) {
