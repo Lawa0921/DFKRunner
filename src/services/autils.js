@@ -173,35 +173,35 @@ exports.watchHeroLog = async (hero, price, valuator) => {
         idAndRarity = strToAnsiPurple(idAndRarity);
     }
 
-    if (hero.attributeTier("mainclass") === "Advanced") {
+    if (hero.attributeTier("mainClass") === "Advanced") {
         mainClass = strToAnsiGreen(mainClass);
-    } else if (hero.attributeTier("mainclass") === "Elite") {
+    } else if (hero.attributeTier("mainClass") === "Elite") {
         mainClass = strToAnsiCyan(mainClass);
-    } else if (hero.attributeTier("mainclass") === "Transcendant") {
+    } else if (hero.attributeTier("mainClass") === "Transcendant") {
         mainClass = strToAnsiRed(mainClass);
     }
 
-    if (hero.attributeTier("subclass") === "Advanced") {
+    if (hero.attributeTier("subClass") === "Advanced") {
         subClass = strToAnsiGreen(subClass);
-    } else if (hero.attributeTier("subclass") === "Elite") {
+    } else if (hero.attributeTier("subClass") === "Elite") {
         subClass = strToAnsiCyan(subClass);
-    } else if (hero.attributeTier("subclass") === "Transcendant") {
+    } else if (hero.attributeTier("subClass") === "Transcendant") {
         subClass = strToAnsiRed(subClass);
     }
 
-    if (hero.attributeTier("hairstyle") === "Advanced") {
+    if (hero.attributeTier("hairStyle") === "Advanced") {
         hair = strToAnsiGreen(hair);
-    } else if (hero.attributeTier("hairstyle") === "Elite") {
+    } else if (hero.attributeTier("hairStyle") === "Elite") {
         hair = strToAnsiCyan(hair);
-    } else if (hero.attributeTier("hairstyle") === "Transcendant") {
+    } else if (hero.attributeTier("hairStyle") === "Transcendant") {
         hair = strToAnsiRed(hair);
     }
 
-    if (hero.attributeTier("backappendage") === "Advanced") {
+    if (hero.attributeTier("backAppendage") === "Advanced") {
         backappendage = strToAnsiGreen(backappendage);
-    } else if (hero.attributeTier("backappendage") === "Elite") {
+    } else if (hero.attributeTier("backAppendage") === "Elite") {
         backappendage = strToAnsiCyan(backappendage);
-    } else if (hero.attributeTier("backappendage") === "Transcendant") {
+    } else if (hero.attributeTier("backAppendage") === "Transcendant") {
         backappendage = strToAnsiRed(backappendage);
     }
 
