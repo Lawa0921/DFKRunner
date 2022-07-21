@@ -22,6 +22,8 @@ module.exports = class Hero {
     this.network = heroInfo.network;
     this.isOnSale = heroInfo.saleAuction !== null ? true : false;
     this.isOnRent = heroInfo.assistingAuction !== null ? true : false;
+    this.salePrice = heroInfo.saleAuction ? heroInfo.saleAuction.startingPrice : '0';
+    this.rentPrice = heroInfo.assistingAuction ? heroInfo.assistingAuction.startingPrice : '0';
   }
 
   isOwning() {
