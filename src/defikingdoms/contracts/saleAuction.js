@@ -24,6 +24,10 @@ module.exports = class SaleAuction {
     return this.contract.isOnAuction(heroId);
   }
 
+  async bid(heroId, price) {
+    return this.contract.bid(heroId, price);
+  }
+
   async listHero(heroId, price) {
     const id = parseInt(heroId, 10);
     console.log(`listing hero: ${id}: ${price}`);
