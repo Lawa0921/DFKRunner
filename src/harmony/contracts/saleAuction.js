@@ -66,4 +66,19 @@ module.exports = class HeroBridgeContract {
 
     return transaction;
   }
+
+  async buyHero(heroId) {
+    const id = parseInt(heroId, 10);
+    const heroesData = await autils.getHerosInfo([id])
+
+    const { transaction } = await this.bid(id, heroesData[0].salePrice);
+
+    if (transaction.txStatus === "CONFIRMED") {
+      console.log(`buy hero: ${id} use ${parseInt(heroesData[0].salePrice) / Math.pow(10, 18)} J completed`);
+    } else {
+      console.log(`buy hero: ${id} use ${parseInt(heroesData[0].salePrice) / Math.pow(10, 18)} J failed`);
+    }
+
+    return transaction;
+  }
 }
