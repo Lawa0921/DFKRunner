@@ -26,9 +26,7 @@ module.exports = class HeroBridgeContract {
   }
 
   async createAuction(heroId, price) {
-    const formatPrice = (BigInt(price) * BigInt(10 ** 18)).toString();
-
-    return await this.contract.methods.createAuction(heroId, formatPrice, formatPrice, 60, "0x0000000000000000000000000000000000000000").send(autils.gasSettingFormater());
+    return await this.contract.methods.createAuction(heroId, autils.formatPrice(price), autils.formatPrice(price), 60, "0x0000000000000000000000000000000000000000").send(autils.gasSettingFormater());
   }
 
   async isOnAuction(heroId) {

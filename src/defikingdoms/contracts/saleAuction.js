@@ -15,9 +15,7 @@ module.exports = class SaleAuction {
   }
 
   async createAuction(heroId, price) {
-    const formatPrice = (BigInt(price) * BigInt(10 ** 18)).toString();
-
-    return await this.contract.createAuction(heroId, formatPrice, formatPrice, 60, "0x0000000000000000000000000000000000000000")
+    return await this.contract.createAuction(heroId, autils.formatPrice(price), autils.formatPrice(price), 60, "0x0000000000000000000000000000000000000000")
   }
 
   async isOnAuction(heroId) {

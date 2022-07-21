@@ -107,6 +107,10 @@ exports.isAPIv6Owner = async (heroId) => {
     return returnValue;
 }
 
+exports.formatPrice = (price) => {
+    return (BigInt(price) * BigInt(10 ** 18)).toString();
+}
+
 exports.getHerosInfo = async (heroIds) => {
     let heroObjects;
     queryStr = `{
