@@ -136,6 +136,8 @@ exports.getHerosInfo = async (heroIds) => {
             hairStyle
             backAppendage
             maxSummons
+            currentQuest
+            xp
             saleAuction {
                 startingPrice
                 open

@@ -1,4 +1,5 @@
 const config = require("~/config.js");
+const autils = require("~/src/services/autils");
 module.exports = class Hero {
   constructor(heroInfo) {
     this.id = heroInfo.id;
@@ -20,6 +21,10 @@ module.exports = class Hero {
     this.backAppendage = heroInfo.backAppendage;
     this.maxSummons = heroInfo.maxSummons;
     this.network = heroInfo.network;
+    this.xp = heroInfo.xp;
+    this.maxXp = this.maxXp();
+    this.isXpFull = this.xp >= this.maxXp;
+    this.isOnQuesting = heroInfo.currentQuest !== autils.get0xAddress();
     this.isOnSale = heroInfo.saleAuction !== null ? true : false;
     this.isOnRent = heroInfo.assistingAuction !== null ? true : false;
     this.salePrice = heroInfo.saleAuction ? heroInfo.saleAuction.startingPrice : '0';
@@ -184,4 +189,21 @@ module.exports = class Hero {
     }
   }
 
+  maxXp() {
+    const nextLevel = this.level + 1;
+    
+    if (this.level < 6) {
+      return nextLevel * 1000;
+    } else if (this.level < 9) {
+      return 4000 + (nextLevel - 5) * 2000;
+    } else if (this.level < 16) {
+      return 12000 + (nextLevel - 9) * 4000;
+    } else if (this.level < 36) {
+      return 40000 + (nextLevel - 16) * 5000;
+    } else if (this.level < 56) {
+      return 140000 + (nextLevel - 36) * 7500;
+    } else {
+      return 290000 + (nextLevel - 56) * 10000;
+    }
+  }
 }
