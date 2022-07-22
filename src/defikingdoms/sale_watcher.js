@@ -11,7 +11,17 @@ const saleHandler = async (tokenId, price) => {
   await valuator.execute();
 
   if (!valuator.hero.isOwning() && valuator.price <= valuator.valuation) {
-    await saleAuctionContract.bid(tokenId, price);
+    console.log(`!!! bid hero ${tokenId} txn created !!!`)
+    const txn = await saleAuctionContract.bid(tokenId, price);
+    const res = await txn.wait();
+
+    if (res.status === 1) {
+      console.log(`!!! bid hero ${tokenId} txn confirmed !!! txn: ${JSON.stringify(res)}`)
+
+      autils.bidHeroLog(`${new Date().toLocaleTimeString()} Purchased hero: ${tokenId} use ${parseInt(price) / Math.pow(10, 18)} C`)
+    } else {
+      autils.bidHeroLog(`${new Date().toLocaleTimeString()} !!! bid hero ${tokenId} failed !!! txn: ${JSON.stringify(res)}`)
+    }
   }
 
   autils.watchHeroLog(valuator.hero, price, valuator.valuation, "dfk");
