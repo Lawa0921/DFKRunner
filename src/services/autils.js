@@ -162,6 +162,39 @@ exports.get0xAddress = () => {
     return "0x0000000000000000000000000000000000000000"
 }
 
+exports.getHarmonyOwningHeroIds = () => {
+    let heroIds = [];
+
+    for (let i = 0; i < config.harmony.quests.length; i++ ) {
+      if (config.harmony.quests[i].name === "Gardening") {
+        heroIds = heroIds.concat(config.harmony.quests[i].professionHeroes.map((heroData) => { return heroData.heroID }));
+        heroIds = heroIds.concat(config.harmony.quests[i].nonProfessionHeroes.map((heroData) => { return heroData.heroID }))
+      } else {
+        heroIds = heroIds.concat(config.harmony.quests[i].professionHeroes);
+        heroIds = heroIds.concat(config.harmony.quests[i].nonProfessionHeroes);
+      }
+    }
+  
+    for (let i = 0; i < config.harmony.statQuests.length; i++ ) {
+      heroIds = heroIds.concat(config.harmony.statQuests[i].heroes);
+    }
+
+    return heroIds;
+}
+
+exports.getDFKOwningHeroIds = () => {
+    let heroIds = [];
+
+    heroIds = heroIds.concat(config.defikingdoms.quest.fishing.professionHeroes);
+    heroIds = heroIds.concat(config.defikingdoms.quest.foraging.professionHeroes);
+  
+    return heroIds;
+}
+
+exports.getAllConfigHeroIds = () => {
+    return this.getHarmonyOwningHeroIds().concat(this.getDFKOwningHeroIds());
+}
+
 exports.watchHeroLog = async (hero, price, valuator) => {
     let idAndRarity = `${hero.id} ${hero.formatRarity()}`;
     let profession = `${hero.profession}`

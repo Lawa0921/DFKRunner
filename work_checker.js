@@ -1,4 +1,5 @@
 const config = require("~/config.js");
+const autils = require("~/src/services/autils");
 const axios = require('axios')
 const axiosRetry = require('axios-retry');
 
@@ -30,30 +31,9 @@ const getOwningHeroIds = async () => {
   return heroIds;
 }
 
-const getConfigOwningHeroIds = async () => {
-  let heroIds = [];
-
-  for (let i = 0; i < config.harmony.quests.length; i++ ) {
-    if (config.harmony.quests[i].name === "Gardening") {
-      heroIds = heroIds.concat(config.harmony.quests[i].professionHeroes.map((heroData) => { return heroData.heroID }))
-    } else {
-      heroIds = heroIds.concat(config.harmony.quests[i].professionHeroes);
-    }
-  }
-
-  for (let i = 0; i < config.harmony.statQuests.length; i++ ) {
-    heroIds = heroIds.concat(config.harmony.statQuests[i].heroes);
-  }
-
-  heroIds = heroIds.concat(config.defikingdoms.quest.fishing.professionHeroes);
-  heroIds = heroIds.concat(config.defikingdoms.quest.foraging.professionHeroes);
-
-  return heroIds;
-}
-
 async function main() {
   const owningHeroIds = await getOwningHeroIds()
-  const configHeroIds = await getConfigOwningHeroIds()
+  const configHeroIds = await autils.getAllConfigHeroIds();
 
   for (let i = 0; i < owningHeroIds.length; i++ ) {
     if (!configHeroIds.includes(owningHeroIds[i])) {
