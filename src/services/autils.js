@@ -3,7 +3,7 @@ const date = require('date-and-time');
 const fs = require('fs');
 const axios = require('axios');
 const axiosRetry = require('axios-retry');
-const Hero = require('~/src/harmony/hero');
+const Hero = require('~/src/services/hero');
 
 axiosRetry(axios, {
     retries: 5, // number of retries

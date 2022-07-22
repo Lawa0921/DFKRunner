@@ -5,13 +5,11 @@ const axiosRetry = require('axios-retry');
 const saleAuctionABI = require('~/abis/SaleAuction.json')
 const date = require('date-and-time');
 
-const { Harmony } = require('@harmony-js/core');
 const { Wallet } = require('@harmony-js/account');
 const { Contract } = require("@harmony-js/contract")
 const { Messenger, WSProvider } = require('@harmony-js/network');
 const { ChainID, ChainType, hexToNumber } = require('@harmony-js/utils');
-const Hero = require('./hero');
-const Valuator = require('./valuator');
+const Valuator = require('~/src/services/valuator');
 const { bidHero } = require('./tavern_bid');
 const ws = new WSProvider(config.harmony.webSocketsRpcs[1]);
 
