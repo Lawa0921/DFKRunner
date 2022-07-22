@@ -33,6 +33,10 @@ module.exports = class MeditationCircle {
     return await this.contract.methods.getActiveMeditations(config.walletAddress).call();
   }
 
+  async getRequiredRunes(level) {
+    return await this.contract.methods._getRequiredRunes(level).call();
+  }
+
   getStatInt(stat) {
     const stats = {
       'STR': 0,

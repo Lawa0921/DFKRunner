@@ -21,6 +21,10 @@ module.exports = class MeditationCircle {
     return await this.contract.getActiveMeditations(config.walletAddress);
   }
 
+  async getRequiredRunes(level) {
+    return await this.contract._getRequiredRunes(level);
+  }
+
   getStatInt(stat) {
     const stats = {
       'STR': 0,

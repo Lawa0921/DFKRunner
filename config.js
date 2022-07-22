@@ -259,6 +259,8 @@ const config = {
     "saleAuction": "0x13a65B9F8039E2c032Bc022171Dc05B30c3f2892",
     "heroBridge": "0x573e407Be90a50EAbA28748cbb62Ff9d6038A3e9",
     "meditationCircle": "0x0594D86b2923076a2316EaEA4E1Ca286dAA142C1",
+    "shvasRune": "0x66F5BfD910cd83d3766c4B39d13730C911b2D286",
+    "mokshaRune": "0x8F655142104478724bbC72664042EA09EBbF7B38",
     "useRpcIndex": 1,
     "rpcs": [
         "https://nd-918-448-543.p2pify.com/4b353b2b9c548ca58a7e6e01ce3bba7a",
@@ -350,6 +352,8 @@ const config = {
     "heroCore": "0xEb9B61B145D6489Be575D3603F4a704810e143dF",
     "saleAuction": "0xc390fAA4C7f66E4D62E59C231D5beD32Ff77BEf0",
     "meditationCircle": "0xD507b6b299d9FC835a0Df92f718920D13fA49B47",
+    "shvasRune": "0x75E8D8676d774C9429FbB148b30E304b5542aC3d",
+    "mokshaRune": "0xCd2192521BD8e33559b0CA24f3260fE6A26C28e4",
   },
   "queryHeroEndPoint": "https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
   "graphqlEndPoint": "https://defi-kingdoms-community-api-gateway-co06z8vi.uc.gateway.dev/graphql"
