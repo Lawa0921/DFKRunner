@@ -1,5 +1,7 @@
 const config = require("~/config.js");
 const autils = require("~/src/services/autils");
+const MeditationCircle = require('~/src/harmony/contracts/meditationCircle');
+const meditationCircleContract = new MeditationCircle();
 module.exports = class Hero {
   constructor(heroInfo) {
     this.id = heroInfo.id;
@@ -525,5 +527,15 @@ module.exports = class Hero {
     }
 
     return [mainGrowth, subGrowth1, subGrowth2]
+  }
+
+  levelUpable() {
+    return (this.isXpFull && !this.isOnQuesting && !this.isOnSale) ? true : false;
+  }
+
+  async requireRunes() {
+    const [requireShvasRuneCount, requireMokshaRuneCount, ...unknowRunes] = await meditationCircleContract.getRequiredRunes(this.level)
+
+    return [requireShvasRuneCount, requireMokshaRuneCount];
   }
 }

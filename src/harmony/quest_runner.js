@@ -14,6 +14,7 @@ const { jewelMiningPattern } = require('./quest_jewelmining');
 const { goldMiningPattern } = require('./quest_goldmining');
 const { gardeningQuestPattern } = require('./quest_gardening');
 const { CheckAndSendStatQuests } = require('./quest_stats');
+const { runLevelUpLogic } = require('~/src/harmony/hero_level_up');
 const questCoreV2ABI = require('~/abis/QuestCoreV2.json')
 const QuestCoreV2 = require('~/src/harmony/contracts/questCoreV2');
 const questCoreV2Contract = new QuestCoreV2();
@@ -370,6 +371,7 @@ exports.runHarmonyQuest = async () => {
         await CompleteQuests(heroesStruct, config.harmony.questCoreV1, questCoreV1ABI);
         await CompleteQuests(heroesStruct2, config.harmony.questCoreV2, questCoreV2ABI);
 
+        await runLevelUpLogic();
         await runSalesLogic();
 
         await CheckAndSendFishers(heroesStruct2, true);

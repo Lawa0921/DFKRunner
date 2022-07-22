@@ -8,7 +8,7 @@ const {
   } = require('@harmony-js/utils');
 
 const hmy = new Harmony(
-  autils.getRpc(config.harmony.useRpcIndex), {
+  config.harmony.rpcs[config.harmony.useRpcIndex], {
     chainType: ChainType.Harmony,
     chainId: ChainID.HmyMainnet,
   }
@@ -35,6 +35,10 @@ module.exports = class MeditationCircle {
 
   async getRequiredRunes(level) {
     return await this.contract.methods._getRequiredRunes(level).call();
+  }
+
+  async getActiveMeditations() {
+    return await this.contract.methods.getActiveMeditations(config.walletAddress).call();
   }
 
   getStatInt(stat) {
