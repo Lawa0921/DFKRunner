@@ -197,7 +197,7 @@ exports.getAllConfigHeroIds = () => {
 
 exports.watchHeroLog = async (hero, price, valuator, network) => {
     const networkCurrencies = {
-        harmomy: "J",
+        harmony: "J",
         dfk: "C"
     }
     let idAndRarity = `${hero.id} ${hero.formatRarity()}`;
