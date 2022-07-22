@@ -45,6 +45,9 @@ const getConfigOwningHeroIds = async () => {
     heroIds = heroIds.concat(config.harmony.statQuests[i].heroes);
   }
 
+  heroIds = heroIds.concat(config.defikingdoms.quest.fishing.professionHeroes);
+  heroIds = heroIds.concat(config.defikingdoms.quest.foraging.professionHeroes);
+
   return heroIds;
 }
 
