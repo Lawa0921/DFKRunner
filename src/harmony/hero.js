@@ -206,4 +206,324 @@ module.exports = class Hero {
       return 290000 + (nextLevel - 56) * 10000;
     }
   }
+
+  growthStats() {
+    let mainGrowth;
+    let subGrowth1;
+    let subGrowth2;
+    const profession = this.profession;
+
+    switch(this.mainClass) {
+      case "Warrior":
+        mainGrowth = "STR";
+
+        if (profession === "mining") {
+          subGrowth1 = "END";
+          subGrowth2 = "DEX";
+        } else {
+          subGrowth1 = "VIT";
+          subGrowth2 = "DEX";
+        }
+        break;
+      case "Knight":
+        mainGrowth = "VIT";
+        subGrowth1 = "END";
+        subGrowth2 = "STR";
+        break;
+      case "Thief":
+        mainGrowth = "AGI";
+        subGrowth1 = "LCK";
+        if (profession === "foraging") {
+          subGrowth2 = "DEX";
+        } else {
+          subGrowth2 = "STR";
+        }
+        break;
+      case "Archer":
+        mainGrowth = "DEX";
+
+        if (profession === "mining") {
+          subGrowth1 = "END";
+          subGrowth2 = "STR";
+        } else if (profession === "foraging") {
+          subGrowth1 = "INT";
+          subGrowth2 = "STR";
+        } else if (profession === "fishing") {
+          subGrowth1 = "AGI";
+          subGrowth2 = "LCK";
+        } else if (profession === "gardening") {
+          subGrowth1 = "VIT";
+          subGrowth2 = "STR";
+        }
+        break;
+      case "Priest":
+        if (profession === "foraging") {
+          mainGrowth = "INT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "VIT";
+        } else if (profession === "gardening") {
+          mainGrowth = "WIS";
+          subGrowth1 = "INT";
+          subGrowth2 = "VIT";
+        } else if (profession === "mining") {
+          mainGrowth = "WIS";
+          subGrowth1 = "INT";
+          subGrowth2 = "END";
+        } else if (profession === "fishing") {
+          mainGrowth = "WIS";
+          subGrowth1 = "INT";
+          subGrowth2 = "AGI";
+        }
+        break;
+      case "Wizard":
+        if (profession === "foraging") {
+          mainGrowth = "INT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "VIT";
+        } else if (profession === "gardening") {
+          mainGrowth = "WIS";
+          subGrowth1 = "INT";
+          subGrowth2 = "VIT";
+        } else if (profession === "mining") {
+          mainGrowth = "INT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "END";
+        } else if (profession === "fishing") {
+          mainGrowth = "INT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "AGI";
+        }
+        break;
+      case "Monk":
+        if (profession === "foraging") {
+          mainGrowth = "DEX";
+          subGrowth1 = "INT";
+          subGrowth2 = "VIT";
+        } else if (profession === "gardening") {
+          mainGrowth = "VIT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "STR";
+        } else if (profession === "mining") {
+          mainGrowth = "STR";
+          subGrowth1 = "END";
+          subGrowth2 = "VIT";
+        } else if (profession === "fishing") {
+          mainGrowth = "AGI";
+          subGrowth1 = "LCK";
+          subGrowth2 = "VIT";
+        }
+        break;
+      case "Pirate":
+        if (profession === "foraging") {
+          mainGrowth = "DEX";
+          subGrowth1 = "STR";
+          subGrowth2 = "VIT";
+        } else if (profession === "gardening") {
+          mainGrowth = "VIT";
+          subGrowth1 = "STR";
+          subGrowth2 = "DEX";
+        } else if (profession === "mining") {
+          mainGrowth = "STR";
+          subGrowth1 = "END";
+          subGrowth2 = "DEX";
+        } else if (profession === "fishing") {
+          mainGrowth = "DEX";
+          subGrowth1 = "STR";
+          subGrowth2 = "AGI";
+        }
+        break;
+      case "Berserker":
+        if (profession === "foraging") {
+          mainGrowth = "STR";
+          subGrowth1 = "DEX";
+          subGrowth2 = "VIT";
+        } else if (profession === "gardening") {
+          mainGrowth = "STR";
+          subGrowth1 = "VIT";
+          subGrowth2 = "DEX";
+        } else if (profession === "mining") {
+          mainGrowth = "STR";
+          subGrowth1 = "END";
+          subGrowth2 = "DEX";
+        } else if (profession === "fishing") {
+          mainGrowth = "STR";
+          subGrowth1 = "DEX";
+          subGrowth2 = "AGI";
+        }
+        break;
+      case "Seer":
+        if (profession === "foraging") {
+          mainGrowth = "INT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "VIT";
+        } else if (profession === "gardening") {
+          mainGrowth = "WIS";
+          subGrowth1 = "INT";
+          subGrowth2 = "VIT";
+        } else if (profession === "mining") {
+          mainGrowth = "WIS";
+          subGrowth1 = "INT";
+          subGrowth2 = "END";
+        } else if (profession === "fishing") {
+          mainGrowth = "WIS";
+          subGrowth1 = "INT";
+          subGrowth2 = "AGI";
+        }
+        break;
+      case "Paladin":
+        if (profession === "foraging") {
+          mainGrowth = "VIT";
+          subGrowth1 = "STR";
+          subGrowth2 = "END";
+        } else if (profession === "gardening") {
+          mainGrowth = "VIT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "END";
+        } else if (profession === "mining") {
+          mainGrowth = "VIT";
+          subGrowth1 = "STR";
+          subGrowth2 = "END";
+        } else if (profession === "fishing") {
+          mainGrowth = "VIT";
+          subGrowth1 = "STR";
+          subGrowth2 = "END";
+        }
+        break;
+      case "DarkKnight":
+        if (profession === "foraging") {
+          mainGrowth = "STR";
+          subGrowth1 = "DEX";
+          subGrowth2 = "INT";
+        } else if (profession === "gardening") {
+          mainGrowth = "STR";
+          subGrowth1 = "VIT";
+          subGrowth2 = "INT";
+        } else if (profession === "mining") {
+          mainGrowth = "STR";
+          subGrowth1 = "VIT";
+          subGrowth2 = "END";
+        } else if (profession === "fishing") {
+          mainGrowth = "STR";
+          subGrowth1 = "VIT";
+          subGrowth2 = "INT";
+        }
+        break;
+      case "Summoner":
+        if (profession === "foraging") {
+          mainGrowth = "INT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "VIT";
+        } else if (profession === "gardening") {
+          mainGrowth = "WIS";
+          subGrowth1 = "INT";
+          subGrowth2 = "VIT";
+        } else if (profession === "mining") {
+          mainGrowth = "INT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "END";
+        } else if (profession === "fishing") {
+          mainGrowth = "INT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "AGI";
+        }
+        break;
+      case "Ninja":
+        if (profession === "foraging") {
+          mainGrowth = "DEX";
+          subGrowth1 = "AGI";
+          subGrowth2 = "INT";
+        } else if (profession === "gardening") {
+          mainGrowth = "AGI";
+          subGrowth1 = "DEX";
+          subGrowth2 = "VIT";
+        } else if (profession === "mining") {
+          mainGrowth = "AGI";
+          subGrowth1 = "STR";
+          subGrowth2 = "DEX";
+        } else if (profession === "fishing") {
+          mainGrowth = "AGI";
+          subGrowth1 = "DEX";
+          subGrowth2 = "LCK";
+        }
+        break;
+      case "Shapeshifter":
+        if (profession === "foraging") {
+          mainGrowth = "DEX";
+          subGrowth1 = "AGI";
+          subGrowth2 = "STR";
+        } else if (profession === "gardening") {
+          mainGrowth = "AGI";
+          subGrowth1 = "DEX";
+          subGrowth2 = "VIT";
+        } else if (profession === "mining") {
+          mainGrowth = "STR";
+          subGrowth1 = "END";
+          subGrowth2 = "AGI";
+        } else if (profession === "fishing") {
+          mainGrowth = "AGI";
+          subGrowth1 = "LCK";
+          subGrowth2 = "DEX";
+        }
+        break;
+      case "Dragoon":
+        if (profession === "foraging") {
+          mainGrowth = "DEX";
+          subGrowth1 = "VIT";
+          subGrowth2 = "STR";
+        } else if (profession === "gardening") {
+          mainGrowth = "VIT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "STR";
+        } else if (profession === "mining") {
+          mainGrowth = "STR";
+          subGrowth1 = "END";
+          subGrowth2 = "DEX";
+        } else if (profession === "fishing") {
+          mainGrowth = "AGI";
+          subGrowth1 = "LCK";
+          subGrowth2 = "STR";
+        }
+        break;
+      case "Sage":
+        if (profession === "foraging") {
+          mainGrowth = "INT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "VIT";
+        } else if (profession === "gardening") {
+          mainGrowth = "WIS";
+          subGrowth1 = "INT";
+          subGrowth2 = "VIT";
+        } else if (profession === "mining") {
+          mainGrowth = "INT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "END";
+        } else if (profession === "fishing") {
+          mainGrowth = "INT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "AGI";
+        }
+        break;
+      case "DreadKnight":
+        if (profession === "foraging") {
+          mainGrowth = "STR";
+          subGrowth1 = "DEX";
+          subGrowth2 = "INT";
+        } else if (profession === "gardening") {
+          mainGrowth = "STR";
+          subGrowth1 = "VIT";
+          subGrowth2 = "DEX";
+        } else if (profession === "mining") {
+          mainGrowth = "STR";
+          subGrowth1 = "END";
+          subGrowth2 = "DEX";
+        } else if (profession === "fishing") {
+          mainGrowth = "STR";
+          subGrowth1 = "DEX";
+          subGrowth2 = "AGI";
+        }
+        break;
+    }
+
+    return [mainGrowth, subGrowth1, subGrowth2]
+  }
 }
