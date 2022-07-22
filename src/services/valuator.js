@@ -26,6 +26,7 @@ module.exports = class Valuator {
     this.evaluateSkillPrice();
     this.evaluateStatPrice();
     this.evaluateSubclassPrice();
+    this.networkPriceAdjustment();
   }
 
   evaluateMainclassPrice() {
@@ -1264,5 +1265,13 @@ module.exports = class Valuator {
     }
 
     this.valuation += this.subclassPrice;
+  }
+
+  networkPriceAdjustment() {
+    const network = this.hero.network;
+
+    if (network === "dfk") {
+      this.valuation = this.valuation * 0.7;
+    }
   }
 }

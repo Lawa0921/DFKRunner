@@ -47,7 +47,7 @@ const saleHandler = async (tokenId, price) => {
     await bidHero(tokenId, price);
   }
 
-  autils.watchHeroLog(valuator.hero, price, valuator.valuation);
+  autils.watchHeroLog(valuator.hero, price, valuator.valuation, "harmony");
 }
 
 async function main() {

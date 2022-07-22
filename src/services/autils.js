@@ -195,7 +195,11 @@ exports.getAllConfigHeroIds = () => {
     return this.getHarmonyOwningHeroIds().concat(this.getDFKOwningHeroIds());
 }
 
-exports.watchHeroLog = async (hero, price, valuator) => {
+exports.watchHeroLog = async (hero, price, valuator, network) => {
+    const networkCurrencies = {
+        harmomy: "J",
+        dfk: "C"
+    }
     let idAndRarity = `${hero.id} ${hero.formatRarity()}`;
     let profession = `${hero.profession}`
     let info = `\x1b[3m LV${hero.level} G${hero.generation} ${hero.summonsRemaining}/${hero.maxSummons} \x1b[0m`;
@@ -204,7 +208,7 @@ exports.watchHeroLog = async (hero, price, valuator) => {
     let skillInfo = `${heroSkillDyer(hero, "active1")}/${heroSkillDyer(hero, "active2")}/${heroSkillDyer(hero, "passive1")}/${heroSkillDyer(hero, "passive2")}`
     let hair = "hair";
     let backappendage = "back";
-    let listInfo = `${strToAnsiRed(parseInt(price) / Math.pow(10, 18))} J, valuate: ${strToAnsiRed(valuator)} J`
+    let listInfo = `${strToAnsiRed(parseInt(price) / Math.pow(10, 18))} ${networkCurrencies[network]}, valuate: ${strToAnsiRed(valuator)} ${networkCurrencies[network]}`
 
     if (hero.formatRarity()=== "UnCommon") {
         idAndRarity = strToAnsiGreen(idAndRarity);
