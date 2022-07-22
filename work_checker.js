@@ -9,7 +9,7 @@ axiosRetry(axios, {
     return retryCount * 2000; // time interval between retries
   },
   retryCondition: (error) => {
-    return error.response.status === 500;
+    return error.response.status === 500 || error.response.status === 504;
   },
 });
 
