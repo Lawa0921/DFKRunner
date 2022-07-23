@@ -37,6 +37,10 @@ module.exports = class Hero {
     return this.owner.toLowerCase() === config.walletAddress.toLowerCase() ? true : false
   }
 
+  isAvailableQuest() {
+    return (this.isOwning() && !this.isOnQuesting && !this.isOnSale) ? true : false;
+  }
+
   formatRarity() {
     let returnValue;
 

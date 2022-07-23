@@ -5,7 +5,7 @@ const autils = require('~/src/services/autils');
 const date = require('date-and-time');
 
 const saleHandler = async (tokenId, price) => {
-  let heroObjects = await autils.getHerosInfo([tokenId]);
+  let heroObjects = await autils.getHerosInfo([parseInt(tokenId)]);
 
   const valuator = new Valuator(price, heroObjects[0]);
   await valuator.execute();
@@ -36,7 +36,7 @@ main = async () => {
   }, 120000);
 
   saleAuctionContract.contract.on("AuctionCreated", (auctionId, owner, tokenId, startingPrice, endingPrice, duration, winner, event) => {
-    saleHandler(parseInt(tokenId), parseInt(startingPrice));
+    saleHandler(tokenId, startingPrice);
 
     timerId = setTimeout(() => {
       console.log(`${date.addMinutes(new Date(Date.now()), 0)}: restart process`)
