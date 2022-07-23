@@ -31,9 +31,9 @@ exports.runDFKLevelUpLogic = async () => {
       const mokshaRuneBalanceOf = await mokshaRuneContract.balanceOf();
       const [shvasRuneRequireCount, mokshaRuneRequireCount] = await meditationCircleContract.getRequiredRunes(levelUpableHeros[i].level);
 
-      if (shvasRuneRequireCount > shvasRuneBalanceOf) {
+      if (parseInt(shvasRuneRequireCount) > parseInt(shvasRuneBalanceOf)) {
         console.log(`shvasRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
-      } else if (mokshaRuneRequireCount > mokshaRuneBalanceOf) {
+      } else if (parseInt(mokshaRuneRequireCount) > parseInt(mokshaRuneBalanceOf)) {
         console.log(`mokshaRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
       } else {
         const [mainGrowth, subGrowth1, subGrowth2] = levelUpableHeros[i].growthStats();
