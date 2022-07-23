@@ -36,6 +36,7 @@ main = async () => {
   }, 120000);
 
   saleAuctionContract.contract.on("AuctionCreated", (auctionId, owner, tokenId, startingPrice, endingPrice, duration, winner, event) => {
+    clearTimeout(timerId);
     saleHandler(tokenId, startingPrice);
 
     timerId = setTimeout(() => {
