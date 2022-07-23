@@ -218,12 +218,15 @@ module.exports = class Hero {
     switch(this.mainClass) {
       case "Warrior":
         mainGrowth = "STR";
+        subGrowth1 = "VIT";
 
         if (profession === "mining") {
-          subGrowth1 = "END";
+          subGrowth2 = "END";
+        } else if (profession === "foraging") {
           subGrowth2 = "DEX";
-        } else {
-          subGrowth1 = "VIT";
+        } else if (profession === "fishing") {
+          subGrowth2 = "AGI";
+        } else if (profession === "gardening") {
           subGrowth2 = "DEX";
         }
         break;
