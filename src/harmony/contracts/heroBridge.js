@@ -15,6 +15,7 @@ const hmy = new Harmony(
 );
 
 const harmonyBridgeFee = 160000000000000000;
+const DFKChainId = 53935;
 
 hmy.wallet.addByPrivateKey(config.privateKey);
 
@@ -27,7 +28,7 @@ module.exports = class HeroBridgeContract {
     let sendValue = {};
     Object.assign(sendValue, autils.gasSettingFormater(), { value: harmonyBridgeFee })
 
-    return await this.contract.methods.sendHero(heroId, 53935).send(sendValue);
+    return await this.contract.methods.sendHero(heroId, DFKChainId).send(sendValue);
   }
 
   async bridgeHero(heroId) {
