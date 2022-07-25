@@ -138,6 +138,14 @@ exports.getHerosInfo = async (heroIds) => {
             maxSummons
             currentQuest
             xp
+            strength
+            intelligence
+            wisdom
+            luck
+            agility
+            vitality
+            endurance
+            dexterity
             saleAuction {
                 startingPrice
                 open

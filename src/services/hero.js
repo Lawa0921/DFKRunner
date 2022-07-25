@@ -23,6 +23,15 @@ module.exports = class Hero {
     this.backAppendage = heroInfo.backAppendage;
     this.maxSummons = heroInfo.maxSummons;
     this.network = heroInfo.network;
+    this.strength = heroInfo.strength;
+    this.intelligence = heroInfo.intelligence;
+    this.wisdom = heroInfo.wisdom;
+    this.luck = heroInfo.luck;
+    this.agility = heroInfo.agility;
+    this.vitality = heroInfo.vitality;
+    this.endurance = heroInfo.endurance;
+    this.dexterity = heroInfo.dexterity;
+    this.totalPoint = this.strength + this.intelligence + this.wisdom + this.luck + this.agility + this.vitality + this.endurance + this.dexterity;
     this.xp = heroInfo.xp;
     this.maxXp = this.maxXp();
     this.isXpFull = this.xp >= this.maxXp;
