@@ -166,6 +166,63 @@ exports.getHerosInfo = async (heroIds) => {
     return heroObjects;
 }
 
+exports.getOnAuctionHeroInfos = async () => {
+    let skipCount = 0;
+    let heroObjects = [];
+
+    while(skipCount === 0 || skipCount % 1000 === 0) {
+        const queryStr = `{
+            saleAuctions (where: {open: true}, skip: ${JSON.stringify(skipCount)}) {
+            id
+            tokenId {
+                id
+                owner {
+                    owner
+                }
+                rarity
+                network
+                mainClass
+                subClass
+                summonsRemaining
+                profession
+                generation
+                level
+                passive1
+                passive2
+                active1
+                active2
+                statBoost1
+                statBoost2
+                hairStyle
+                backAppendage
+                maxSummons
+                currentQuest
+                xp
+                strength
+                intelligence
+                wisdom
+                luck
+                agility
+                vitality
+                endurance
+                dexterity
+            }
+            startingPrice
+            open
+          }
+        }`
+
+        await axios.post(config.graphqlEndPoint, { query: queryStr }).then((res) => {
+            heroObjects = heroObjects.concat(res.data.data.saleAuctions.map((onAuctionHeroInfo) => { return { price: onAuctionHeroInfo.startingPrice, hero: new Hero(onAuctionHeroInfo.tokenId) }}))
+            skipCount += res.data.data.saleAuctions.length;
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
+
+    return heroObjects;
+}
+
 exports.get0xAddress = () => {
     return "0x0000000000000000000000000000000000000000"
 }
@@ -205,7 +262,7 @@ exports.getAllConfigHeroIds = () => {
 
 exports.watchHeroLog = async (hero, price, valuator, network) => {
     const networkCurrencies = {
-        harmony: "J",
+        hmy: "J",
         dfk: "C"
     }
     let idAndRarity = `${hero.id} ${hero.formatRarity()}`;

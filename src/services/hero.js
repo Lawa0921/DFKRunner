@@ -514,7 +514,7 @@ module.exports = class Hero {
         } else if (profession === "mining") {
           mainGrowth = "INT";
           subGrowth1 = "WIS";
-          subGrowth2 = "END";
+          subGrowth2 = "AGI";
         } else if (profession === "fishing") {
           mainGrowth = "INT";
           subGrowth1 = "WIS";
