@@ -261,6 +261,8 @@ const config = {
     "meditationCircle": "0x0594D86b2923076a2316EaEA4E1Ca286dAA142C1",
     "shvasRune": "0x66F5BfD910cd83d3766c4B39d13730C911b2D286",
     "mokshaRune": "0x8F655142104478724bbC72664042EA09EBbF7B38",
+    "uniswapV2Factory": "0x9014B937069918bd319f80e8B3BB4A2cf6FAA5F7",
+    "uniswapV2Router02": "0x24ad62502d1C652Cc7684081169D04896aC20f30",
     "useRpcIndex": 1,
     "rpcs": [
         "https://nd-918-448-543.p2pify.com/4b353b2b9c548ca58a7e6e01ce3bba7a",
@@ -354,6 +356,9 @@ const config = {
     "meditationCircle": "0xD507b6b299d9FC835a0Df92f718920D13fA49B47",
     "shvasRune": "0x75E8D8676d774C9429FbB148b30E304b5542aC3d",
     "mokshaRune": "0xCd2192521BD8e33559b0CA24f3260fE6A26C28e4",
+    "heroBridge": "0x739B1666c2956f601f095298132773074c3E184b",
+    "uniswapV2Factory": "0x794C07912474351b3134E6D6B3B7b3b4A07cbAAa",
+    "uniswapV2Router02": "0x3C351E1afdd1b1BC44e931E12D4E05D6125eaeCa",
   },
   "queryHeroEndPoint": "https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
   "graphqlEndPoint": "https://defi-kingdoms-community-api-gateway-co06z8vi.uc.gateway.dev/graphql"
