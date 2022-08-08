@@ -32,6 +32,7 @@ module.exports = class Hero {
     this.endurance = heroInfo.endurance;
     this.dexterity = heroInfo.dexterity;
     this.totalPoint = this.strength + this.intelligence + this.wisdom + this.luck + this.agility + this.vitality + this.endurance + this.dexterity;
+    this.stamina = heroInfo.stamina;
     this.xp = heroInfo.xp;
     this.maxXp = this.maxXp();
     this.isXpFull = this.xp >= this.maxXp;

@@ -253,6 +253,9 @@ const config = {
         { "id": "272783", "price": 59 },
         { "id": "273242", "price": 650 }
     ],
+    "useStaminaVialHeroIds": [
+        "240170"
+    ],
     "questCoreV1": "0x5100Bd31b822371108A0f63DCFb6594b9919Eaf4",
     "questCoreV2": "0xAa9a289ce0565E4D6548e63a441e7C084E6B52F6",
     "heroCore": "0x5f753dcdf9b1ad9aabc1346614d1f4746fd6ce5c",
