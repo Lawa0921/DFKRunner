@@ -263,7 +263,7 @@ const config = {
     "mokshaRune": "0x8F655142104478724bbC72664042EA09EBbF7B38",
     "uniswapV2Factory": "0x9014B937069918bd319f80e8B3BB4A2cf6FAA5F7",
     "uniswapV2Router02": "0x24ad62502d1C652Cc7684081169D04896aC20f30",
-    "staminaVial ": "0x959ba19508827d1ed2333B1b503Bd5ab006C710e",
+    "staminaVial": "0x959ba19508827d1ed2333B1b503Bd5ab006C710e",
     "useRpcIndex": 1,
     "rpcs": [
         "https://nd-918-448-543.p2pify.com/4b353b2b9c548ca58a7e6e01ce3bba7a",
