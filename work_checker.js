@@ -40,7 +40,7 @@ async function main() {
       console.log(`hero ${owningHeroIds[i]} not working!`)
     }
   }
-
+  console.log(`owning ${owningHeroIds.length} heros`)
   console.log("process complete")
 }
 

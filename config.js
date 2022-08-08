@@ -263,6 +263,7 @@ const config = {
     "mokshaRune": "0x8F655142104478724bbC72664042EA09EBbF7B38",
     "uniswapV2Factory": "0x9014B937069918bd319f80e8B3BB4A2cf6FAA5F7",
     "uniswapV2Router02": "0x24ad62502d1C652Cc7684081169D04896aC20f30",
+    "staminaVial ": "0x959ba19508827d1ed2333B1b503Bd5ab006C710e",
     "useRpcIndex": 1,
     "rpcs": [
         "https://nd-918-448-543.p2pify.com/4b353b2b9c548ca58a7e6e01ce3bba7a",
@@ -359,6 +360,7 @@ const config = {
     "heroBridge": "0x739B1666c2956f601f095298132773074c3E184b",
     "uniswapV2Factory": "0x794C07912474351b3134E6D6B3B7b3b4A07cbAAa",
     "uniswapV2Router02": "0x3C351E1afdd1b1BC44e931E12D4E05D6125eaeCa",
+    "staminaVial": "0x242078edFDca25ef2A497C8D9f256Fd641472E5F",
   },
   "queryHeroEndPoint": "https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
   "graphqlEndPoint": "https://defi-kingdoms-community-api-gateway-co06z8vi.uc.gateway.dev/graphql"

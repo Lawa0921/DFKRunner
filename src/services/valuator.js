@@ -1264,6 +1264,12 @@ module.exports = class Valuator {
       this.subclassPrice = this.subclassPrice * 1.4;
     }
 
+    if (this.summonPrice === 0) {
+      this.subclassPrice = this.subclassPrice * 0.2;
+    } else if (this.summonPrice <= 10) {
+      this.subclassPrice = this.subclassPrice * 0.5;
+    }
+
     this.valuation += this.subclassPrice;
   }
 
