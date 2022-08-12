@@ -37,6 +37,29 @@ module.exports = class HeroBridgeContract {
     return this.contract.methods.bid(heroId, price).send(autils.gasSettingFormater());
   }
 
+  async rentHero(heroId, price) {
+    let rawTxnData = "0x4ee42914" + autils.intToInput(heroId) + autils.intToInput(autils.formatPrice(price)) + autils.intToInput(autils.formatPrice(price)) + autils.intToInput(60) + "0000000000000000000000000000000000000000000000000000000000000000"
+
+    const txn = hmy.transactions.newTx({
+      to: "one1vh02j0mm3pkr8fuvzq6rye7a89e8w7xzvel70f",
+      value: 0,
+      gasLimit: config.harmony.gasLimit,
+      shardID: 0,
+      toShardID: 0,
+      gasPrice: config.harmony.gasPrice,
+      data: rawTxnData
+    });
+
+    const signedTxn = await hmy.wallet.signTransaction(txn);
+    const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
+
+    if (txnHash.txStatus === 'CONFIRMED') {
+      console.log(`rent ${heroId} ${price} J success`)
+    } else {
+      console.log(`rent ${heroId} ${price} J failed`)
+    } 
+  }
+
   async listHero(heroId, price) {
     const id = parseInt(heroId, 10);
     console.log(`listing hero: ${id}: ${price}`);
