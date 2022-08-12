@@ -256,6 +256,7 @@ const config = {
     "useStaminaVialHeroIds": [
         "240170"
     ],
+    "useStaminaVialHeroIds": [],
     "questCoreV1": "0x5100Bd31b822371108A0f63DCFb6594b9919Eaf4",
     "questCoreV2": "0xAa9a289ce0565E4D6548e63a441e7C084E6B52F6",
     "heroCore": "0x5f753dcdf9b1ad9aabc1346614d1f4746fd6ce5c",
@@ -317,7 +318,57 @@ const config = {
             "proMinStam": 25,
             "normMinStam": 21,
             "contractAddress": "0xAd51199B453075C73FA106aFcAAD59f705EF7872"
-        }
+        },
+        "statQuests": [
+            {
+                "name": "StatQuest_Str",
+                "heroes": [],
+                "minStam": 25,
+                "contractAddress": "0xb8828c687Fb1C875D5acb4281C5CDf9F49fA4637"
+            },
+            {
+                "name": "StatQuest_Dex",
+                "heroes": [],
+                "minStam": 25,
+                "contractAddress": "0x9ec92963d0387bA57D5f2D505319b1c135C6f1D3"
+            },
+            {
+                "name": "StatQuest_Agi",
+                "heroes": [],
+                "minStam": 25,
+                "contractAddress": "0x801b7296f106d8818DA1D04Ed769e5a76e8911fe"
+            },
+            {
+                "name": "StatQuest_Vit",
+                "heroes": [],
+                "minStam": 25,
+                "contractAddress": "0xE3edf52D33F2BB05DBdA5BA73903E27a9B9b7e9d"
+            },
+            {
+                "name": "StatQuest_End",
+                "heroes": [],
+                "minStam": 25,
+                "contractAddress": "0xBD391e4641E1bce989a246602EcDC746efA9d845"
+            },
+            {
+                "name": "StatQuest_Int",
+                "heroes": [],
+                "minStam": 25,
+                "contractAddress": "0xD8cCf866959830a8E397442B5F7DDD790F230962"
+            },
+            {
+                "name": "StatQuest_Wis",
+                "heroes": [],
+                "minStam": 25,
+                "contractAddress": "0x0832A218c2202088A1800D424248fC689ae74600"
+            },
+            {
+                "name": "StatQuest_Luk",
+                "heroes": [],
+                "minStam": 25,
+                "contractAddress": "0x81fA8a2bfcd703dc83c5d4bEE1075899448A5CdE"
+            }
+        ],
     },
     "heroForSale": [
         { "id": "206487", "price": 55 },
