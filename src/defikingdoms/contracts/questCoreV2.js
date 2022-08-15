@@ -25,6 +25,18 @@ module.exports = class QuestCoreV2 {
     return await this.contract.startQuest(heroId, config.defikingdoms.quest.foraging.contractAddress, attempt, 0)
   }
 
+  async startStatQuest(heroIds, attempt, address, type) {
+    const tx = await this.contract.startQuest(heroIds, address, attempt, 1)
+    const res = await tx.wait();
+    if (res.status === 1) {
+      console.log("Sent " + heroIds + " on a " + type + " Stat Quest completed")
+    } else {
+      console.log("Sent " + heroIds + " on a " + type + " Stat Quest failed")
+    }
+
+    return res;
+  }
+
   async getCurrentStamina(heroId) {
     return await this.contract.getCurrentStamina(heroId)
   }

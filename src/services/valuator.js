@@ -1277,7 +1277,7 @@ module.exports = class Valuator {
     const network = this.hero.network;
 
     if (network === "dfk") {
-      this.valuation = this.valuation * 0.7;
+      this.valuation = this.valuation * 0.5;
     }
   }
 }
