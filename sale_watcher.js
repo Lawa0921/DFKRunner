@@ -59,7 +59,7 @@ const DFKSaleHandler = async (tokenId, price) => {
 
   if (!valuator.hero.isOwning() && valuator.price <= valuator.valuation) {
     console.log(`!!! bid hero ${tokenId} txn created !!!`)
-    const txn = await saleAuctionContract.bid(tokenId, price);
+    const txn = await DFKSaleAuctionContract.bid(tokenId, price);
     const res = await txn.wait();
 
     if (res.status === 1) {
