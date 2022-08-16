@@ -60,6 +60,29 @@ module.exports = class HeroBridgeContract {
     } 
   }
 
+  async unrentHero(heroId) {
+    let rawTxnData = "0x96b5a755" + autils.intToInput(heroId)
+
+    const txn = hmy.transactions.newTx({
+      to: "one1vh02j0mm3pkr8fuvzq6rye7a89e8w7xzvel70f",
+      value: 0,
+      gasLimit: config.harmony.gasLimit,
+      shardID: 0,
+      toShardID: 0,
+      gasPrice: config.harmony.gasPrice,
+      data: rawTxnData
+    });
+
+    const signedTxn = await hmy.wallet.signTransaction(txn);
+    const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
+
+    if (txnHash.txStatus === 'CONFIRMED') {
+      console.log(`unrent ${heroId} success`)
+    } else {
+      console.log(`unrent ${heroId} failed`)
+    } 
+  }
+
   async listHero(heroId, price) {
     const id = parseInt(heroId, 10);
     console.log(`listing hero: ${id}: ${price}`);
