@@ -3,12 +3,7 @@ const QuestCoreV2 = require('~/src/harmony/contracts/questCoreV2');
 const questCoreV2Contract = new QuestCoreV2();
 
 exports.CheckAndSendFishers = async (heroesStruct, isPro) => {
-	let questType = config.harmony.quests[0]
-	if (questType.name !== "Fishing")
-	{
-			throw new Error("config index was changed");
-	}
-
+	const questType = config.harmony.quest.fishing
 	let minBatch = isPro ? questType.professionHeroes.length : questType.nonProfessionHeroes.length;
 	let maxBatch = 1;
 	minBatch = minBatch > maxBatch ? maxBatch : minBatch;

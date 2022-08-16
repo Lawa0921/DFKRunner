@@ -6,10 +6,9 @@ const questCoreV2Contract = new QuestCoreV2();
 exports.CheckAndSendStatQuests = async (heroesStruct) => {
     let counter = 0;
     while (counter < 8) {
-        let questType = config.harmony.statQuests[counter]
-        let minBatch = 1
+        let questType = config.harmony.quest.statQuests[counter]
         let maxBatch = 1;
-        let minStam = questType.normMinStam
+        let minStam = questType.minStam
 
         let activeQuesters = heroesStruct.allQuesters;
         let questHeroes = questType.heroes;

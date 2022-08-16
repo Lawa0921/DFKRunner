@@ -49,13 +49,7 @@ async function getActiveQuests()
 
 async function CheckAndSendGoldMiners(heroesStruct, isPro)
 {
-    // too lazy to change struct in config
-    let questType = config.harmony.quests[3]
-    if (questType.name !== "GoldMining")
-    {
-        throw new Error("GoldMining config index was changed");
-    }
-
+    const questType = config.harmony.quest.goldMining
     let minBatch = isPro ? questType.professionHeroes.length : questType.nonProfessionHeroes.length;
     let maxBatch = 6;
     minBatch = minBatch > maxBatch ? maxBatch : minBatch;
@@ -63,8 +57,6 @@ async function CheckAndSendGoldMiners(heroesStruct, isPro)
 
     let activeQuesters = heroesStruct.allQuesters
     let configGoldMiners = isPro ? questType.professionHeroes : questType.nonProfessionHeroes
-    //console.log(activeQuesters);
-    //console.log(configForagers);
     let possibleGoldMiners = configGoldMiners.filter((e) => {
         return (activeQuesters.indexOf(e) < 0);
       });
@@ -77,7 +69,6 @@ async function CheckAndSendGoldMiners(heroesStruct, isPro)
     let staminaValues = await Promise.allSettled(GoldMinerPromises);
     staminaValues = staminaValues.map(res => res = res.value?.toNumber() || 0);
     
-    // Batching heroes. we only take 6. -> next iteration then we go again
     LocalBatching = []
     for (let index = 0; index < possibleGoldMiners.length; index++) {
         const stam = staminaValues[index];
@@ -86,7 +77,6 @@ async function CheckAndSendGoldMiners(heroesStruct, isPro)
             LocalBatching.push(possibleGoldMiners[index]);
         }
 
-        // list full
         if (LocalBatching.length === maxBatch)
         {
             break;
@@ -139,13 +129,7 @@ async function CheckAndSendGoldMiners(heroesStruct, isPro)
 
 async function CheckAndSendJewelMiners(heroesStruct, isPro)
 {
-    // too lazy to change struct in config
-    let questType = config.harmomy.quests[4]
-    if (questType.name !== "JewelMining")
-    {
-        throw new Error("JewelMining config index was changed");
-    }
-
+    const questType = config.harmony.quest.jewelMining
     let minBatch = isPro ? questType.professionHeroes.length : questType.nonProfessionHeroes.length;
     let maxBatch = 1;
     minBatch = minBatch > maxBatch ? maxBatch : minBatch;
@@ -153,8 +137,6 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
 
     let activeQuesters = heroesStruct.allQuesters
     let configJewelMiners = isPro ? questType.professionHeroes : questType.nonProfessionHeroes
-    //console.log(activeQuesters);
-    //console.log(configForagers);
     let possibleJewelMiners = configJewelMiners.filter((e) => {
         return (activeQuesters.indexOf(e) < 0);
       });
@@ -167,7 +149,6 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
     let staminaValues = await Promise.allSettled(JewelMinerPromises);
     staminaValues = staminaValues.map(res => res = res.value?.toNumber() || 0);
     
-    // Batching heroes. we only take 6. -> next iteration then we go again
     LocalBatching = []
     for (let index = 0; index < possibleJewelMiners.length; index++) {
         const stam = staminaValues[index];
@@ -176,7 +157,6 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
             LocalBatching.push(possibleJewelMiners[index]);
         }
 
-        // list full
         if (LocalBatching.length === maxBatch)
         {
             break;
@@ -185,7 +165,6 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
 
     let numHeroesToSend = LocalBatching.length;
 
-    // fill the last batch up
     if (LocalBatching.length > 0)
     {
         while(LocalBatching.length < maxBatch)
@@ -195,8 +174,6 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
     }
 
     console.log("Jewel Miner Batches" + (isPro ? " (P): " : " (N): ") + LocalBatching)
-
-    // be lazy only send 1 batch for now.. next minute can send another
     
     if (numHeroesToSend >= minBatch && minBatch > 0)
     {
@@ -228,20 +205,11 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
 
 async function CheckAndSendGardeners(heroesStruct, isPro)
 {
-    // too lazy to change struct in config
-    let questType = config.harmony.quests[5]
-    if (questType.name !== "Gardening")
-    {
-        throw new Error("Gardening config index was changed");
-    }
-    
+    const questType = config.harmony.quest.gardening
     let minStam = isPro ? questType.proMinStam : questType.normMinStam
-
     let activeQuesters = heroesStruct.allQuesters
     let configGardeners = isPro ? questType.professionHeroes : questType.nonProfessionHeroes
-
     let possibleGardeners = [];
-    
     if (configGardeners.length > 0)
     {
         possibleGardeners = configGardeners.filter((e) => {

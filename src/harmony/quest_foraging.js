@@ -3,11 +3,7 @@ const QuestCoreV2 = require('~/src/harmony/contracts/questCoreV2');
 const questCoreV2Contract = new QuestCoreV2();
 
 exports.CheckAndSendForagers = async (heroesStruct, isPro) => {
-	let questType = config.harmony.quests[1]
-	if (questType.name !== "Foraging") {
-		throw new Error("config index was changed");
-	}
-
+	const questType = config.harmony.quest.foraging
 	let minBatch = isPro ? questType.professionHeroes.length : questType.nonProfessionHeroes.length;
 	let maxBatch = 1;
 	minBatch = minBatch > maxBatch ? maxBatch : minBatch;

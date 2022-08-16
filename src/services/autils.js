@@ -230,16 +230,18 @@ exports.get0xAddress = () => {
 
 exports.getHarmonyOwningHeroIds = () => {
     let heroIds = [];
+    const questConfig = config.harmony.quest 
 
-    for (let i = 0; i < config.harmony.quests.length; i++ ) {
-      if (config.harmony.quests[i].name === "Gardening") {
-        heroIds = heroIds.concat(config.harmony.quests[i].professionHeroes.map((heroData) => { return heroData.heroID }));
-        heroIds = heroIds.concat(config.harmony.quests[i].nonProfessionHeroes.map((heroData) => { return heroData.heroID }))
-      } else {
-        heroIds = heroIds.concat(config.harmony.quests[i].professionHeroes);
-        heroIds = heroIds.concat(config.harmony.quests[i].nonProfessionHeroes);
-      }
-    }
+    heroIds = heroIds.concat(questConfig.foraging.professionHeroes);
+    heroIds = heroIds.concat(questConfig.foraging.nonProfessionHeroes);
+    heroIds = heroIds.concat(questConfig.fishing.professionHeroes);
+    heroIds = heroIds.concat(questConfig.fishing.nonProfessionHeroes);
+    heroIds = heroIds.concat(questConfig.goldMining.professionHeroes);
+    heroIds = heroIds.concat(questConfig.goldMining.nonProfessionHeroes);
+    heroIds = heroIds.concat(questConfig.jewelMining.professionHeroes);
+    heroIds = heroIds.concat(questConfig.jewelMining.nonProfessionHeroes);
+    heroIds = heroIds.concat(questConfig.gardening.professionHeroes.map((heroData) => { return heroData.heroID }));
+    heroIds = heroIds.concat(questConfig.gardening.nonProfessionHeroes.map((heroData) => { return heroData.heroID }));
   
     for (let i = 0; i < config.harmony.statQuests.length; i++ ) {
       heroIds = heroIds.concat(config.harmony.statQuests[i].heroes);
