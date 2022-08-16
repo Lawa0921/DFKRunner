@@ -5,6 +5,8 @@ const saleAuctionContract = new SaleAuction();
 const autils = require('~/src/services/autils');
 
 async function main() {
+  // 在 bridgeHeroIds 裡面填入想要跨到 dfk 的 hero id 即可
+  // 例： ["271701", "270338", "273173", "71605"]
   const bridgeHeroIds = [];
   const heroObjects = await autils.getHerosInfo(bridgeHeroIds);
 
