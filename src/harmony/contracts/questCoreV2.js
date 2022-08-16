@@ -8,7 +8,7 @@ const {
   } = require('@harmony-js/utils');
 
 const hmy = new Harmony(
-  autils.getRpc(config.harmony.useRpcIndex), {
+  config.harmony.rpcs[config.harmony.useRpcIndex], {
     chainType: ChainType.Harmony,
     chainId: ChainID.HmyMainnet,
   }
@@ -30,7 +30,7 @@ module.exports = class QuestCoreV2 {
   }
 
   async startFishingQuest(heroIds, attempt) {
-    const { transaction } = await this.contract.methods.startQuest(heroIds, config.harmony.quests[0].contractAddress, attempt, 0).send(autils.gasSettingFormater());
+    const { transaction } = await this.contract.methods.startQuest(heroIds, config.harmony.quest.fishing.contractAddress, attempt, 0).send(autils.gasSettingFormater());
 
     if (transaction.txStatus === "CONFIRMED") {
       console.log("Sent " + heroIds + " on a Fishing Quest completed")
@@ -42,7 +42,7 @@ module.exports = class QuestCoreV2 {
   }
 
   async startForagingQuest(heroIds, attempt) {
-    const { transaction } = await this.contract.methods.startQuest(heroIds, config.harmony.quests[1].contractAddress, attempt, 0).send(autils.gasSettingFormater());
+    const { transaction } = await this.contract.methods.startQuest(heroIds, config.harmony.quest.foraging.contractAddress, attempt, 0).send(autils.gasSettingFormater());
 
     if (transaction.txStatus === "CONFIRMED") {
       console.log("Sent " + heroIds + " on a Foraging Quest completed")
