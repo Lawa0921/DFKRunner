@@ -233,10 +233,8 @@ exports.getHarmonyOwningHeroIds = () => {
     let heroIds = [];
     const questConfig = config.harmony.quest 
 
-    heroIds = heroIds.concat(questConfig.foraging.professionHeroes);
-    heroIds = heroIds.concat(questConfig.foraging.nonProfessionHeroes);
-    heroIds = heroIds.concat(questConfig.fishing.professionHeroes);
-    heroIds = heroIds.concat(questConfig.fishing.nonProfessionHeroes);
+    heroIds = heroIds.concat(questConfig.foraging.heroes);
+    heroIds = heroIds.concat(questConfig.fishing.heroes);
     heroIds = heroIds.concat(questConfig.goldMining.professionHeroes);
     heroIds = heroIds.concat(questConfig.goldMining.nonProfessionHeroes);
     heroIds = heroIds.concat(questConfig.jewelMining.professionHeroes);
