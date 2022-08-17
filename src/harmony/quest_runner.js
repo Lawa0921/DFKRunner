@@ -9,7 +9,7 @@ const autils = require('~/src/services/autils');
 const dataParser = require('~/src/services/data_parser');
 const questCoreV1ABI = require("~/abis/QuestCoreV1.json")
 const { CompleteQuests } = require('./quest_complete');
-const { CheckAndSendFishers } = require('./quest_fishing');
+const { CheckAndSendFishers } = require('~/src/harmony/quest_fishing');
 const { CheckAndSendForagers } = require('~/src/harmony/quest_foraging');
 const { jewelMiningPattern } = require('./quest_jewelmining');
 const { goldMiningPattern } = require('./quest_goldmining');
@@ -298,7 +298,7 @@ exports.runHarmonyQuest = async () => {
         await runVialLogic();
         await runSalesLogic();
 
-        await CheckAndSendFishers(heroesStruct2, true);
+        await CheckAndSendFishers(heroesStruct2);
         await CheckAndSendForagers(heroesStruct2)
 
         // await CheckAndSendGoldMiners(heroesStruct, true);

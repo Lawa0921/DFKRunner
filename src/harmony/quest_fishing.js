@@ -1,48 +1,22 @@
 const config = require("~/config.js");
+const autils = require('~/src/services/autils');
 const QuestCoreV2 = require('~/src/harmony/contracts/questCoreV2');
 const questCoreV2Contract = new QuestCoreV2();
+const minStamina = 25;
 
-exports.CheckAndSendFishers = async (heroesStruct, isPro) => {
+exports.CheckAndSendFishers = async (heroesStruct) => {
 	const questType = config.harmony.quest.fishing
-	let minBatch = isPro ? questType.professionHeroes.length : questType.nonProfessionHeroes.length;
-	let maxBatch = 1;
-	minBatch = minBatch > maxBatch ? maxBatch : minBatch;
-	let proStamUsage = 5;
-	let normStamUsage = 7;
-	let minStam = isPro ? questType.proMinStam : questType.normMinStam;
-	let proFishingTries = Math.round(minStam/proStamUsage);
-	let normFishingTries = Math.round(minStam/normStamUsage);
-	let fishingTries = isPro ? proFishingTries : normFishingTries;
+	const activeQuesterIds = heroesStruct.allQuesters
+	const heroObjects = await autils.getHerosInfo(questType.heroes)
+	const possibleFishers = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina >= minStamina })
 
-	let activeQuesters = heroesStruct.allQuesters
-	let configFishers = isPro ? questType.professionHeroes : questType.nonProfessionHeroes
-	let possibleFishers = configFishers.filter((e) => {
-		return (activeQuesters.indexOf(e) < 0);
-	});
-
-	let staminaValues = [];
-	for ( let i = 0; i < possibleFishers.length; i++ ) {
-		staminaValues.push(questCoreV2Contract.getCurrentStamina(possibleFishers[i]));
-	}
-
-	staminaValues = await Promise.all(staminaValues);
-	
-	let LocalBatching = []
-	for (let index = 0; index < possibleFishers.length; index++) {
-		const stam = staminaValues[index];
-		if ( stam >= minStam ) {
-			LocalBatching.push(possibleFishers[index]);
+	if (possibleFishers.length > 0) {
+		for (let i = 0; i < possibleFishers.length; i++) {
+			console.log(`senting ${possibleFishers[i].id} to fishing quest`);
+			const attemp = possibleFishers[i].profession === "fishing" ? Math.floor(possibleFishers[i].currentStamina / 5) : Math.floor(possibleFishers[i].currentStamina / 7)
+			await questCoreV2Contract.startFishingQuest([possibleFishers[i].id], attemp);
 		}
-
-		if (LocalBatching.length === maxBatch) {
-			break;
-		}
-	}
-
-	if (LocalBatching.length > 0) {
-		console.log("senting " + LocalBatching + " to fishing quest");
-		await questCoreV2Contract.startFishingQuest(LocalBatching, fishingTries);
 	} else {
-		console.log("No Fisher sent")
-	} 
+		console.log("No fisher sent")
+	}
 }

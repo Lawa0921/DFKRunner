@@ -8,7 +8,7 @@ const config = {
     "unlistStamina": 24,
     "quest": {
         "fishing": {
-            "professionHeroes": [
+            "heroes": [
                 "244783", "270247", "265263", "277704", "292587",
                 "240170", "17049", "263373", "277691", "284245", "287661",
                 "238435", "245862", "264762", "276051", "284017",
@@ -22,9 +22,6 @@ const config = {
                 "55794", "288910", "284058", "286003", "290211", "290178",
                 "286871", "290790", "285939", "292069", "290284"
             ],
-            "nonProfessionHeroes": [],
-            "proMinStam": 25,
-            "normMinStam": 21,
             "contractAddress": "one14hla9gj4kdujsuafs6y4cccjara6elyt0076c8"
         },
         "foraging": {
