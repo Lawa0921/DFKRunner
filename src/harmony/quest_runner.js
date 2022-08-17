@@ -10,7 +10,7 @@ const dataParser = require('~/src/services/data_parser');
 const questCoreV1ABI = require("~/abis/QuestCoreV1.json")
 const { CompleteQuests } = require('./quest_complete');
 const { CheckAndSendFishers } = require('./quest_fishing');
-const { CheckAndSendForagers } = require('./quest_foraging');
+const { CheckAndSendForagers } = require('~/src/harmony/quest_foraging');
 const { jewelMiningPattern } = require('./quest_jewelmining');
 const { goldMiningPattern } = require('./quest_goldmining');
 const { gardeningQuestPattern } = require('./quest_gardening');
@@ -299,7 +299,7 @@ exports.runHarmonyQuest = async () => {
         await runSalesLogic();
 
         await CheckAndSendFishers(heroesStruct2, true);
-        await CheckAndSendForagers(heroesStruct2, true);
+        await CheckAndSendForagers(heroesStruct2)
 
         // await CheckAndSendGoldMiners(heroesStruct, true);
         // await CheckAndSendJewelMiners(heroesStruct, true);

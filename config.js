@@ -28,7 +28,7 @@ const config = {
             "contractAddress": "one14hla9gj4kdujsuafs6y4cccjara6elyt0076c8"
         },
         "foraging": {
-            "professionHeroes": [
+            "heroes": [
                 "238302", "236356", "240867", "272347", "277457", "293836",
                 "196869", "30166", "270676", "273379",
                 "274898", "265269", "234853", "265602", "281743", "1000000001718",
@@ -43,9 +43,6 @@ const config = {
                 "283946", "288177", "288436", "283539", "170651", "287552",
                 "286161", "292523", "279164"
             ],
-            "nonProfessionHeroes": [],
-            "proMinStam": 25,
-            "normMinStam": 21,
             "contractAddress": "one1k3jlgkgqjhdd2rlwdmst03nsptptqn0cl226mx"
         },
         "goldMining": {
