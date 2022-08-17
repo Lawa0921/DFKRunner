@@ -255,6 +255,10 @@ exports.getDFKOwningHeroIds = () => {
 
     heroIds = heroIds.concat(config.defikingdoms.quest.fishing.professionHeroes);
     heroIds = heroIds.concat(config.defikingdoms.quest.foraging.professionHeroes);
+
+    for (let i = 0; i < config.harmony.quest.statQuests.length; i++ ) {
+        heroIds = heroIds.concat(config.defikingdoms.quest.statQuests[i].heroes);
+      }
   
     return heroIds;
 }

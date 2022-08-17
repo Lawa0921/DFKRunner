@@ -1,4 +1,3 @@
-const config = require('~/config.js');
 const autils = require('~/src/services/autils');
 
 exports.heroDataParse = function heroDataParse(activeQuests) {
