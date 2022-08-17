@@ -13,7 +13,7 @@ exports.runDFKChainQuest = async () => {
   try {
     console.log("--- DFK Chain quest ---");
     const activeQuests = await questCoreV2Contract.getAccountActiveQuests();
-    const heroesStruct = await dataParser.heroDataParse(activeQuests);
+    const heroesStruct = dataParser.heroDataParse(activeQuests);
 
     await CompleteQuests(heroesStruct);
     await runDFKSalesLogic();

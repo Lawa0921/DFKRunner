@@ -5,7 +5,8 @@ const {
 } = require('@harmony-js/utils');
 const date = require('date-and-time');
 const config = require("~/config.js");
-const autils = require('~/src/services/autils')
+const autils = require('~/src/services/autils');
+const dataParser = require('~/src/services/data_parser');
 const questCoreV1ABI = require("~/abis/QuestCoreV1.json")
 const { CompleteQuests } = require('./quest_complete');
 const { CheckAndSendFishers } = require('./quest_fishing');
@@ -263,48 +264,6 @@ async function CheckAndSendGardeners(heroesStruct, isPro)
     }
 }
 
-
-
-function GetCurrentDateTime(useRealTime = false)
-{
-    if (useRealTime)
-    {
-        return date.addMinutes(new Date(Date.now()), 0);
-    }
-    return date.addMinutes(new Date(Date.now()), 0);
-}
-
-function ParseActiveQuests(activeQuests)
-{
-    let leadQuestersArray = [];
-    let allQuestersArray = [];
-    let completedQuestsArray = [];
-    let completedQuestersCountArray = []
-
-    const listOfOnSaleHeroes = config.harmony.heroForSale.map( (heroObject) => heroObject = heroObject.id );
-
-    activeQuests.forEach(element => {
-        leadQuestersArray.push(element.heroes[0].toString());
-        let questCompletedDate = new Date(element.completeAtTime*1000)
-        const useRealTime = (listOfOnSaleHeroes.findIndex(heroOnSale => element.heroes[0].toString() === heroOnSale) !== -1) ? true : false;
-        if (questCompletedDate < GetCurrentDateTime(useRealTime)) {
-            completedQuestsArray.push(element.heroes[0].toString());
-            completedQuestersCountArray.push(element.heroes.length);
-        }
-        element.heroes.forEach(hero => {
-            allQuestersArray.push(hero.toString());
-        })
-    });
-
-    let rv = {
-        leadQuesters: leadQuestersArray,
-        allQuesters: allQuestersArray,
-        completedQuesters: completedQuestsArray,
-        completedQuestersCount: completedQuestersCountArray
-    }
-    return rv;
-}
-
 async function GetLatestBlock()
 {
     const res = await hmy.blockchain.getBlockNumber(0);
@@ -329,8 +288,8 @@ exports.runHarmonyQuest = async () => {
         let activeQuests = await getActiveQuests();
         let activeQuests2 = await questCoreV2Contract.getAccountActiveQuests();
 
-        let heroesStruct = ParseActiveQuests(activeQuests);
-        let heroesStruct2 = ParseActiveQuests(activeQuests2);
+        const heroesStruct = dataParser.heroDataParse(activeQuests);
+        const heroesStruct2 = dataParser.heroDataParse(activeQuests2);
 
         await CompleteQuests(heroesStruct, config.harmony.questCoreV1, questCoreV1ABI);
         await CompleteQuests(heroesStruct2, config.harmony.questCoreV2, questCoreV2ABI);
