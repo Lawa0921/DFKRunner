@@ -19,7 +19,7 @@ exports.runDFKChainQuest = async () => {
     await runDFKSalesLogic();
     await runDFKLevelUpLogic();
     await CheckAndSendDFKFishers(heroesStruct, true);
-    await CheckAndSendDFKForagers(heroesStruct, true);
+    await CheckAndSendDFKForagers(heroesStruct);
     await CheckAndSendDFKStatQuests(heroesStruct);
 
     console.log("--- DFK Chain quest process completed ---");

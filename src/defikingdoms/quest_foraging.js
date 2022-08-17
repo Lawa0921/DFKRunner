@@ -1,58 +1,22 @@
 const config = require("~/config.js");
+const autils = require('~/src/services/autils');
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
-const autils = require('~/src/services/autils')
+const questCoreV2Contract = new QuestCoreV2();
+const minStamina = 25;
 
-exports.CheckAndSendDFKForagers = async (heroesStruct, isPro) => {
-  const questType = config.defikingdoms.quest.foraging
-  let minBatch = isPro ? questType.professionHeroes.length : questType.nonProfessionHeroes.length;
-	let maxBatch = 1;
-	minBatch = minBatch > maxBatch ? maxBatch : minBatch;
-	let proStamUsage = 5;
-	let normStamUsage = 7;
-	let minStam = isPro ? questType.proMinStam : questType.normMinStam;
-	let proForagingTries = Math.floor(minStam/proStamUsage);
-	let normForagingTries = Math.floor(minStam/normStamUsage);
-	let foragingTries = isPro ? proForagingTries : normForagingTries;
+exports.CheckAndSendDFKForagers = async (heroesStruct) => {
+	const questType = config.defikingdoms.quest.foraging
+	const activeQuesterIds = heroesStruct.allQuesters
+	const heroObjects = await autils.getHerosInfo(questType.heroes)
+	const possibleForagers = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina >= minStamina && heroObject.owner === config.walletAddress })
 
-	let activeQuesters = heroesStruct.allQuesters
-	let configForagers = isPro ? questType.professionHeroes : questType.nonProfessionHeroes
-	let possibleForagers = configForagers.filter((e) => {
-		return (activeQuesters.indexOf(e) < 0);
-	});
-
-  let ForagerPromises = []
-
-	for (let i = 0; i < possibleForagers.length; i++ ) {
-		ForagerPromises.push(await new QuestCoreV2().getCurrentStamina(possibleForagers[i]))
+	if (possibleForagers.length > 0) {
+		for (let i = 0; i < possibleForagers.length; i++) {
+			console.log(`senting ${possibleForagers[i].id} to foraging quest`);
+			const attemp = possibleForagers[i].profession === "foraging" ? Math.floor(possibleForagers[i].currentStamina / 5) : Math.floor(possibleForagers[i].currentStamina / 7)
+			await questCoreV2Contract.startForagingQuest([possibleForagers[i].id], attemp)
+		}
+	} else {
+		console.log("No Forager Sent")
 	}
-
-
-	let staminaValues = await Promise.allSettled(ForagerPromises);
-	staminaValues = staminaValues.map(res => res = res.value?.toNumber() || 0);
-	
-	LocalBatching = []
-	for (let index = 0; index < possibleForagers.length; index++) {
-		const stam = staminaValues[index];
-		if ( stam >= minStam ) {
-			LocalBatching.push(possibleForagers[index]);
-		}
-
-		if (LocalBatching.length === maxBatch) {
-			break;
-		}
-	}
-
-  if (LocalBatching.length > 0) {
-    console.log("senting " + LocalBatching + " to foraging quest");
-    const tx = await new QuestCoreV2().startForagingQuest(LocalBatching, foragingTries)
-		let res = await tx.wait();
-
-		if (res.status === 1) {
-			console.log("Sent " + LocalBatching + " on a " + (isPro ? "professional" : "normal") + "Fishing Quest")
-		} else {
-			autils.txnFailLog("sent " + LocalBatching + " failed");
-		}
-  } else {
-		console.log("No Forager sent")
-	} 
 }

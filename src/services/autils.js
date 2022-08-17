@@ -257,7 +257,7 @@ exports.getDFKOwningHeroIds = () => {
 
     for (let i = 0; i < config.harmony.quest.statQuests.length; i++ ) {
         heroIds = heroIds.concat(config.defikingdoms.quest.statQuests[i].heroes);
-      }
+    }
   
     return heroIds;
 }
