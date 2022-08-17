@@ -2,6 +2,7 @@ const config = require("~/config.js");
 const autils = require("~/src/services/autils");
 const MeditationCircle = require('~/src/harmony/contracts/meditationCircle');
 const meditationCircleContract = new MeditationCircle();
+const recoveryOneStaminaRequireSeconds = 1200;
 module.exports = class Hero {
   constructor(heroInfo) {
     this.id = heroInfo.id;
@@ -33,6 +34,7 @@ module.exports = class Hero {
     this.dexterity = heroInfo.dexterity;
     this.totalPoint = this.strength + this.intelligence + this.wisdom + this.luck + this.agility + this.vitality + this.endurance + this.dexterity;
     this.stamina = heroInfo.stamina;
+    this.currentStamina = this.stamina - Math.ceil((heroInfo.staminaFullAt.valueOf() - Math.floor(new Date().getTime() / 1000)) / recoveryOneStaminaRequireSeconds);
     this.xp = heroInfo.xp;
     this.maxXp = this.maxXp();
     this.isXpFull = this.xp >= this.maxXp;
