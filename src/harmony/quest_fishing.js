@@ -8,7 +8,7 @@ exports.CheckAndSendFishers = async (heroesStruct) => {
 	const questType = config.harmony.quest.fishing
 	const activeQuesterIds = heroesStruct.allQuesters
 	const heroObjects = await autils.getHerosInfo(questType.heroes)
-	const possibleFishers = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina >= minStamina })
+	const possibleFishers = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina >= minStamina && heroObject.owner === config.walletAddress })
 
 	if (possibleFishers.length > 0) {
 		for (let i = 0; i < possibleFishers.length; i++) {

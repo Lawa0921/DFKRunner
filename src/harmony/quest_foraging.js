@@ -8,7 +8,7 @@ exports.CheckAndSendForagers = async (heroesStruct) => {
 	const questType = config.harmony.quest.foraging
 	const activeQuesterIds = heroesStruct.allQuesters
 	const heroObjects = await autils.getHerosInfo(questType.heroes)
-	const possibleForagers = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina >= minStamina })
+	const possibleForagers = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina >= minStamina && heroObject.owner === config.walletAddress })
 
 	if (possibleForagers.length > 0) {
 		for (let i = 0; i < possibleForagers.length; i++) {
