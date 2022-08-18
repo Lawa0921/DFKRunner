@@ -4,7 +4,6 @@ exports.heroDataParse = function heroDataParse(activeQuests) {
   let leadQuestersArray = [];
   let allQuestersArray = [];
   let completedQuestsArray = [];
-  let completedQuestersCountArray = []
 
   activeQuests.forEach(element => {
     leadQuestersArray.push(element.heroes[0].toString());
@@ -12,7 +11,6 @@ exports.heroDataParse = function heroDataParse(activeQuests) {
 
     if (questCompletedDate < autils.getCurrentDateTime()) {
       completedQuestsArray.push(element.heroes[0].toString());
-      completedQuestersCountArray.push(element.heroes.length);
     }
     element.heroes.forEach(hero => {
       allQuestersArray.push(hero.toString());
@@ -23,7 +21,6 @@ exports.heroDataParse = function heroDataParse(activeQuests) {
     leadQuesters: leadQuestersArray,
     allQuesters: allQuestersArray,
     completedQuesters: completedQuestsArray,
-    completedQuestersCount: completedQuestersCountArray
   }
   return rv;
 }
