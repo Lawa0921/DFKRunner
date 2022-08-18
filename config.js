@@ -264,14 +264,14 @@ const config = {
     ],
     "bidGasPrice": 200100000000,
     "gasPrice": 100000000000,
-    "gasLimit": 2500001,
+    "gasLimit": 2800001,
     "unconditionalPurchasePrice": 32,
     "g0ConditionsOfPurchase": 5000,
   },
   "defikingdoms": {
     "quest": {
         "fishing": {
-            "professionHeroes": [
+            "heroes": [
                 "215972", "1000000001285", "247349", "252703", "262591",
                 "219722", "272408", "194486", "221301", "269842", "274762",
                 "261253", "219723", "265760", "211172", "225412", "265329",
@@ -280,9 +280,6 @@ const config = {
                 "285688", "270338", "271701", "273173", "286044", "260505",
                 "286853"
             ],
-            "nonProfessionHeroes": [],
-            "proMinStam": 25,
-            "normMinStam": 21,
             "contractAddress": "0x407ab39B3675f29A719476af6eb3B9E5d93969E6"
         },
         "foraging": {

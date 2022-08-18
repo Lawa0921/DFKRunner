@@ -33,7 +33,7 @@ const getOwningHeroIds = async () => {
 
 async function main() {
   const owningHeroIds = await getOwningHeroIds()
-  const configHeroIds = await autils.getAllConfigHeroIds();
+  const configHeroIds = autils.getAllConfigHeroIds();
 
   for (let i = 0; i < owningHeroIds.length; i++ ) {
     if (!configHeroIds.includes(owningHeroIds[i])) {

@@ -1,58 +1,22 @@
 const config = require("~/config.js");
-const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const autils = require('~/src/services/autils');
+const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
+const questCoreV2Contract = new QuestCoreV2();
+const minStamina = 25;
 
-exports.CheckAndSendDFKFishers = async (heroesStruct, isPro) => {
-  const questType = config.defikingdoms.quest.fishing
-  let minBatch = isPro ? questType.professionHeroes.length : questType.nonProfessionHeroes.length;
-	let maxBatch = 1;
-	minBatch = minBatch > maxBatch ? maxBatch : minBatch;
-	let proStamUsage = 5;
-	let normStamUsage = 7;
-	let minStam = isPro ? questType.proMinStam : questType.normMinStam;
-	let proFishingTries = Math.floor(minStam/proStamUsage);
-	let normFishingTries = Math.floor(minStam/normStamUsage);
-	let fishingTries = isPro ? proFishingTries : normFishingTries;
+exports.CheckAndSendDFKFishers = async (heroesStruct) => {
+	const questType = config.defikingdoms.quest.fishing
+	const activeQuesterIds = heroesStruct.allQuesters
+	const heroObjects = await autils.getHerosInfo(questType.heroes)
+	const possibleFishers = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina >= minStamina && heroObject.owner === config.walletAddress })
 
-	let activeQuesters = heroesStruct.allQuesters
-	let configFishers = isPro ? questType.professionHeroes : questType.nonProfessionHeroes
-	let possibleFishers = configFishers.filter((e) => {
-		return (activeQuesters.indexOf(e) < 0);
-	});
-
-  let FisherPromises = []
-
-	for (let i = 0; i < possibleFishers.length; i++ ) {
-		FisherPromises.push(await new QuestCoreV2().getCurrentStamina(possibleFishers[i]))
+	if (possibleFishers.length > 0) {
+		for (let i = 0; i < possibleFishers.length; i++) {
+			console.log(`senting ${possibleFishers[i].id} to fishing quest`);
+			const attemp = possibleFishers[i].profession === "fishing" ? Math.floor(possibleFishers[i].currentStamina / 5) : Math.floor(possibleFishers[i].currentStamina / 7)
+			await questCoreV2Contract.startFishingQuest([possibleFishers[i].id], attemp)
+		}
+	} else {
+		console.log("No Fisher Sent")
 	}
-
-
-	let staminaValues = await Promise.allSettled(FisherPromises);
-	staminaValues = staminaValues.map(res => res = res.value?.toNumber() || 0);
-	
-	LocalBatching = []
-	for (let index = 0; index < possibleFishers.length; index++) {
-		const stam = staminaValues[index];
-		if ( stam >= minStam ) {
-			LocalBatching.push(possibleFishers[index]);
-		}
-
-		if (LocalBatching.length === maxBatch) {
-			break;
-		}
-	}
-
-  if (LocalBatching.length > 0) {
-    console.log("senting " + LocalBatching + " to fishing quest");
-    const tx = await new QuestCoreV2().startFishingQuest(LocalBatching, fishingTries)
-		let res = await tx.wait();
-
-		if (res.status === 1) {
-			console.log("Sent " + LocalBatching + " on a " + (isPro ? "professional" : "normal") + "Fishing Quest")
-		} else {
-			autils.txnFailLog("sent " + LocalBatching + " failed");
-		}
-  } else {
-		console.log("No Fisher sent")
-	} 
 }

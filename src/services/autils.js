@@ -252,7 +252,7 @@ exports.getHarmonyOwningHeroIds = () => {
 exports.getDFKOwningHeroIds = () => {
     let heroIds = [];
 
-    heroIds = heroIds.concat(config.defikingdoms.quest.fishing.professionHeroes);
+    heroIds = heroIds.concat(config.defikingdoms.quest.fishing.heroes);
     heroIds = heroIds.concat(config.defikingdoms.quest.foraging.heroes);
 
     for (let i = 0; i < config.harmony.quest.statQuests.length; i++ ) {

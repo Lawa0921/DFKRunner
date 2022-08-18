@@ -17,8 +17,16 @@ module.exports = class QuestCoreV2 {
     return await this.contract.completeQuest(heroId);
   }
 
-  async startFishingQuest(heroId, attempt) {
-    return await this.contract.startQuest(heroId, config.defikingdoms.quest.fishing.contractAddress, attempt, 0)
+  async startFishingQuest(heroIds, attempt) {
+    const txn = await this.contract.startQuest(heroIds, config.defikingdoms.quest.fishing.contractAddress, attempt, 0)
+    const res = await txn.wait();
+    if (res.status === 1) {
+      console.log("Sent " + heroIds + " on a Fishing Quest completed")
+    } else {
+      console.log("Sent " + heroIds + " on a Fishing Quest failed")
+    }
+
+    return res;
   }
 
   async startForagingQuest(heroIds, attempt) {
