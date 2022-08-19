@@ -22,7 +22,8 @@ const config = {
                 "55794", "288910", "284058", "286003", "290211", "290178",
                 "286871", "290790", "285939", "292069", "290284"
             ],
-            "contractAddress": "one14hla9gj4kdujsuafs6y4cccjara6elyt0076c8"
+            "contractAddress": "one14hla9gj4kdujsuafs6y4cccjara6elyt0076c8",
+            "contract0xAddress": "0xADFFD2A255B3792873a986895c6312e8FbacFc8B"
         },
         "foraging": {
             "heroes": [
@@ -40,7 +41,8 @@ const config = {
                 "283946", "288177", "288436", "283539", "170651", "287552",
                 "286161", "292523", "279164"
             ],
-            "contractAddress": "one1k3jlgkgqjhdd2rlwdmst03nsptptqn0cl226mx"
+            "contractAddress": "one1k3jlgkgqjhdd2rlwdmst03nsptptqn0cl226mx",
+            "contract0xAddress": "0xB465F4590095daD50FEe6Ee0B7c6700AC2b04dF8"
         },
         "goldMining": {
             "professionHeroes": [],
