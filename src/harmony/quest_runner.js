@@ -3,7 +3,6 @@ const {
     ChainID,
     ChainType,
 } = require('@harmony-js/utils');
-const date = require('date-and-time');
 const config = require("~/config.js");
 const autils = require('~/src/services/autils');
 const dataParser = require('~/src/services/data_parser');
@@ -288,8 +287,8 @@ exports.runHarmonyQuest = async () => {
         let activeQuests = await getActiveQuests();
         let activeQuests2 = await questCoreV2Contract.getAccountActiveQuests();
 
-        const heroesStruct = dataParser.heroDataParse(activeQuests);
-        const heroesStruct2 = dataParser.heroDataParse(activeQuests2);
+        const heroesStruct = dataParser.questDataParser(activeQuests);
+        const heroesStruct2 = dataParser.questDataParser(activeQuests2);
 
         await CompleteQuests(heroesStruct, config.harmony.questCoreV1, questCoreV1ABI);
         await CompleteQuests(heroesStruct2, config.harmony.questCoreV2, questCoreV2ABI);
