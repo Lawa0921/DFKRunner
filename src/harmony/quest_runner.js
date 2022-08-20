@@ -10,7 +10,6 @@ const questCoreV1ABI = require("~/abis/QuestCoreV1.json")
 const { CompleteQuests } = require('./quest_complete');
 const { CheckAndSendFishers } = require('~/src/harmony/quest_fishing');
 const { CheckAndSendForagers } = require('~/src/harmony/quest_foraging');
-const { gardeningQuestPattern } = require('./quest_gardening');
 const { CheckAndSendStatQuests } = require('./quest_stats');
 const { runLevelUpLogic } = require('~/src/harmony/hero_level_up');
 const { runVialLogic } = require('~/src/harmony/vial_consumer');
@@ -166,29 +165,7 @@ async function CheckAndSendGardeners(heroesStruct, isPro)
     }
 
     if (LocalBatching.length > 0) {
-        const txn = hmy.transactions.newTx({
-            to: config.harmony.questCoreV1,
-            value: 0,
-            // gas limit, you can use string
-            gasLimit: config.harmony.gasLimit,
-            // send token from shardID
-            shardID: 0,
-            // send token to toShardID
-            toShardID: 0,
-            // gas Price, you can use Unit class, and use Gwei, then remember to use toWei(), which will be transformed to BN
-            gasPrice: config.harmony.gasPrice,
-            // tx data
-            data: gardeningQuestPattern(LocalBatching[0].heroID,LocalBatching[0].gardenID)
-        });
-          
-        const signedTxn = await hmy.wallet.signTransaction(txn);
-        const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
-
-        if (txnHash.txStatus === 'CONFIRMED') {
-            console.log("Sent " + LocalBatching[0].heroID + " on a " + LocalBatching[0].gardenID + " Gardening Quest")
-        } else {
-            autils.txnFailLog("sent " + LocalBatching[0].heroID + " failed");
-        }        
+        await questCoreV1Contract.startGardening(LocalBatching[0].heroID, LocalBatching[0].gardenID)   
     } else {
         console.log("No Gardener sent")
     }

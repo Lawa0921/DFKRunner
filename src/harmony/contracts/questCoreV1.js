@@ -60,7 +60,7 @@ module.exports = class QuestCoreV1 {
     } 
   }
 
-  async startJewelMining (heroIds) {
+  async startJewelMining(heroIds) {
     let rawTxnData = "0xc855dea3" +
       "0000000000000000000000000000000000000000000000000000000000000060" +
       "0000000000000000000000006ff019415ee105acf2ac52483a33f5b43eadb8d0" +
@@ -89,5 +89,39 @@ module.exports = class QuestCoreV1 {
     } else {
       console.log(`Sent ${heroIds} jewel mining quest failed`)
     } 
+  }
+
+  async startGardening(heroId, poolId) {
+    let rawTxnData = "0xc855dea3" +
+      "0000000000000000000000000000000000000000000000000000000000000080" +
+      "000000000000000000000000e4154b6e5d240507f9699c730a496790a722df19" +
+      autils.intToInput(1) +
+      "00000000000000000000000000000000000000000000000000000000000000c0" +
+      "0000000000000000000000000000000000000000000000000000000000000001" +
+      autils.intToInput(heroId) +
+      autils.intToInput(poolId) +
+      "0000000000000000000000000000000000000000000000000000000000000000".repeat(5) +
+      "0000000000000000000000000000000000000000000000000000000000000180" +
+      "00000000000000000000000000000000000000000000000000000000000001a0" +
+      "0000000000000000000000000000000000000000000000000000000000000000".repeat(6)
+    
+    const txn = hmy.transactions.newTx({
+      to: config.harmony.questCoreV1,
+      value: 0,
+      gasLimit: config.harmony.gasLimit,
+      shardID: 0,
+      toShardID: 0,
+      gasPrice: config.harmony.gasPrice,
+      data: rawTxnData
+    });
+      
+    const signedTxn = await hmy.wallet.signTransaction(txn);
+    const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
+
+    if (txnHash.txStatus === 'CONFIRMED') {
+      console.log(`Sent ${heroId} on a ${poolId} gardening quest success`)
+    } else {
+      console.log(`Sent ${heroId} on a ${poolId} gardening quest failed`)
+    }   
   }
 }
