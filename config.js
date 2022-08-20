@@ -132,7 +132,6 @@ const config = {
                     "238735", "246739", "235300", "79678", "289658", "282128",
                     "290749", "280111", "291670", "290301"
                 ],
-                "minStam": 25,
                 "contractAddress": "one17c908geth98rjhshcu9td9wedrehh5hympjq6z"
             },
             {
@@ -140,7 +139,6 @@ const config = {
                 "heroes": [
                     "232306", "282840"
                 ],
-                "minStam": 25,
                 "contractAddress": "one1uqlafchkggd3y5ffwfqvu5jg2zxfzp8dnqra8p"
             },
             {
@@ -149,19 +147,16 @@ const config = {
                     "159753", "232647", "286379", "284716", "282496", "281291",
                     "288259", "224608", "275885", "293448", "243727", "269798"
                 ],
-                "minStam": 25,
                 "contractAddress": "one1lgstyxyj0v840gypje6rfzx8c7g22cjm9eyzqt"
             },
             {
                 "name": "StatQuest_Vit",
                 "heroes": [],
-                "minStam": 25,
                 "contractAddress": "one1y96thma7l0tkvvn2036n37f60rdna4zfslzqnn"
             },
             {
                 "name": "StatQuest_End",
                 "heroes": [],
-                "minStam": 25,
                 "contractAddress": "one1edv55fxcqtxlv5qq4pxuqpvamcgun52lmzylq0"
             },
             {
@@ -170,7 +165,6 @@ const config = {
                     "165529", "272569", "147830", "287460", "275725",
                     "272084", "274423", "165234"
                 ],
-                "minStam": 25,
                 "contractAddress": "one1v9mwahs6ayf86kfxduvh44vcv5lylryjm2n8xh"
             },
             {
@@ -180,7 +174,6 @@ const config = {
                     "267606", "271465", "271802", "273845", "273716", "275599",
                     "285793"
                 ],
-                "minStam": 25,
                 "contractAddress": "one1x3cfw3205xf35n5qmn0tkv0jnlp4tj7wgxkz8r"
             },
             {
@@ -188,7 +181,6 @@ const config = {
                 "heroes": [
                     "293948"
                 ],
-                "minStam": 25,
                 "contractAddress": "one1z0n5unnysp08lk3crjd778nhe5tqsmjktctwgy"
             }
         ],
@@ -301,49 +293,41 @@ const config = {
                 "heroes": [
                     "280117", "279275"
                 ],
-                "minStam": 25,
                 "contractAddress": "0xb8828c687Fb1C875D5acb4281C5CDf9F49fA4637"
             },
             {
                 "name": "StatQuest_Dex",
                 "heroes": [],
-                "minStam": 25,
                 "contractAddress": "0x9ec92963d0387bA57D5f2D505319b1c135C6f1D3"
             },
             {
                 "name": "StatQuest_Agi",
                 "heroes": [],
-                "minStam": 25,
                 "contractAddress": "0x801b7296f106d8818DA1D04Ed769e5a76e8911fe"
             },
             {
                 "name": "StatQuest_Vit",
                 "heroes": [],
-                "minStam": 25,
                 "contractAddress": "0xE3edf52D33F2BB05DBdA5BA73903E27a9B9b7e9d"
             },
             {
                 "name": "StatQuest_End",
                 "heroes": [],
-                "minStam": 25,
                 "contractAddress": "0xBD391e4641E1bce989a246602EcDC746efA9d845"
             },
             {
                 "name": "StatQuest_Int",
                 "heroes": [],
-                "minStam": 25,
                 "contractAddress": "0xD8cCf866959830a8E397442B5F7DDD790F230962"
             },
             {
                 "name": "StatQuest_Wis",
                 "heroes": [],
-                "minStam": 25,
                 "contractAddress": "0x0832A218c2202088A1800D424248fC689ae74600"
             },
             {
                 "name": "StatQuest_Luk",
                 "heroes": [],
-                "minStam": 25,
                 "contractAddress": "0x81fA8a2bfcd703dc83c5d4bEE1075899448A5CdE"
             }
         ],
