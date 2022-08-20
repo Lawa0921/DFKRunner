@@ -134,26 +134,11 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
     }    
 }
 
-async function GetLatestBlock()
-{
-    const res = await hmy.blockchain.getBlockNumber(0);
-    const lastblock = parseInt(res.result,16);
-    return lastblock;
-}
-
 // ==========================================
 let prevBlock = 0;
 exports.runHarmonyQuest = async () => {
     try {
         console.log("--- Harmony quest ---");
-        let lastBlock = await GetLatestBlock()-1;
-        if (lastBlock <= prevBlock)
-        {
-            autils.log("RPC Lagging..", true);
-            return;
-        }
-        autils.setLatestBlockNumber(lastBlock);
-        prevBlock = lastBlock;
 
         let activeQuests = await questCoreV1Contract.getActiveQuests();
         let activeQuests2 = await questCoreV2Contract.getAccountActiveQuests();

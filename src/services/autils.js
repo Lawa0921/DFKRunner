@@ -46,16 +46,6 @@ exports.intToInput = function intToInput(myint)
     return parseInt(myint).toString(16).padStart(64,"0");
 }
 
-// latest block number
-let _localLatest = 0;
-exports.getLatestBlockNumber = () => {
-    return _localLatest;
-}
-
-exports.setLatestBlockNumber = (latestBlock) => {
-    _localLatest = latestBlock;
-}
-
 // rewards parsing
 let _localRewardsTxns = [];
 exports.addRewardTx = (txnHash) => {
