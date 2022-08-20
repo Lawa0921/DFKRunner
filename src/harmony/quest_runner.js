@@ -19,6 +19,8 @@ const { runVialLogic } = require('~/src/harmony/vial_consumer');
 const questCoreV2ABI = require('~/abis/QuestCoreV2.json')
 const QuestCoreV2 = require('~/src/harmony/contracts/questCoreV2');
 const questCoreV2Contract = new QuestCoreV2();
+const QuestCoreV1 = require('~/src/harmony/contracts/questCoreV1');
+const questCoreV1Contract = new QuestCoreV1();
 
 const { runSalesLogic } = require('./sales_handler');
 
@@ -31,21 +33,6 @@ const hmy = new Harmony(
 );
 
 hmy.wallet.addByPrivateKey(config.privateKey);
-
-const questCoreV1Contract = hmy.contracts.createContract(questCoreV1ABI, config.harmony.questCoreV1);
-
-async function getActiveQuests()
-{
-    let returnValue;
-    await questCoreV1Contract.methods.getActiveQuests(config.walletAddress).call(undefined, autils.getLatestBlockNumber())
-    .catch(ex => {
-        autils.log(`getActiveQuests failed: ${JSON.stringify(ex), returnValue}`, true);
-        throw ex;
-    }).then((res) => {
-        returnValue = res;
-    })
-    return returnValue;
-}
 
 async function CheckAndSendGoldMiners(heroesStruct, isPro)
 {
@@ -63,7 +50,7 @@ async function CheckAndSendGoldMiners(heroesStruct, isPro)
 
     let GoldMinerPromises = []
     possibleGoldMiners.forEach(hero => {
-        GoldMinerPromises.push(questCoreV1Contract.methods.getCurrentStamina(hero).call(undefined, autils.getLatestBlockNumber()))
+        GoldMinerPromises.push(questCoreV1Contract.getCurrentStamina(hero))
     });
 
     let staminaValues = await Promise.allSettled(GoldMinerPromises);
@@ -143,7 +130,7 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
 
     let JewelMinerPromises = []
     possibleJewelMiners.forEach(hero => {
-        JewelMinerPromises.push(questCoreV1Contract.methods.getCurrentStamina(hero).call(undefined, autils.getLatestBlockNumber()))
+        JewelMinerPromises.push(questCoreV1Contract.getCurrentStamina(hero))
     });
 
     let staminaValues = await Promise.allSettled(JewelMinerPromises);
@@ -219,7 +206,7 @@ async function CheckAndSendGardeners(heroesStruct, isPro)
 
     let GardenerPromises = []
     possibleGardeners.forEach(heroDetails => {
-        GardenerPromises.push(questCoreV1Contract.methods.getCurrentStamina(heroDetails.heroID).call(undefined, autils.getLatestBlockNumber()))
+        GardenerPromises.push(questCoreV1Contract.getCurrentStamina(heroDetails.heroID))
     });
 
     let staminaValues = await Promise.allSettled(GardenerPromises);
@@ -284,7 +271,7 @@ exports.runHarmonyQuest = async () => {
         autils.setLatestBlockNumber(lastBlock);
         prevBlock = lastBlock;
 
-        let activeQuests = await getActiveQuests();
+        let activeQuests = await questCoreV1Contract.getActiveQuests();
         let activeQuests2 = await questCoreV2Contract.getAccountActiveQuests();
 
         const heroesStruct = dataParser.questDataParser(activeQuests);
