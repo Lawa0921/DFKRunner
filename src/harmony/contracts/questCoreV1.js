@@ -1,4 +1,5 @@
 const config = require("~/config.js");
+const autils = require('~/src/services/autils');
 const questCoreV1ABI = require('~/abis/QuestCoreV1.json')
 const { Harmony } = require('@harmony-js/core');
 const {
@@ -26,5 +27,36 @@ module.exports = class QuestCoreV1 {
 
   async getCurrentStamina(heroId) {
     return await this.contract.methods.getCurrentStamina(heroId).call();
+  }
+
+  async startGoldMining(heroIds) {
+    let rawTxnData = "0xc855dea3" + 
+      "0000000000000000000000000000000000000000000000000000000000000060" +
+      "000000000000000000000000569e6a4c2e3af31b337be00657b4c040c828dd73" +
+      autils.intToInput(1) +
+      autils.intToInput(heroIds.length)
+
+    heroIds.forEach((heroId) => {
+      rawTxnData += autils.intToInput(heroId)
+    })
+
+    const txn = hmy.transactions.newTx({
+      to: config.harmony.questCoreV1,
+      value: 0,
+      gasLimit: config.harmony.gasLimit,
+      shardID: 0,
+      toShardID: 0,
+      gasPrice: config.harmony.gasPrice,
+      data: rawTxnData
+    })
+
+    const signedTxn = await hmy.wallet.signTransaction(txn);
+    const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
+
+    if (txnHash.txStatus === 'CONFIRMED') {
+      console.log(`Sent ${heroIds} gold mining quest success`)
+    } else {
+      console.log(`Sent ${heroIds} gold mining quest failed`)
+    } 
   }
 }
