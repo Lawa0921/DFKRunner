@@ -2,51 +2,24 @@ const config = require("~/config.js");
 const autils = require('~/src/services/autils')
 const QuestCoreV2 = require('~/src/harmony/contracts/questCoreV2');
 const questCoreV2Contract = new QuestCoreV2();
+const minStamina = 25;
 
 exports.CheckAndSendStatQuests = async (heroesStruct) => {
-    let counter = 0;
-    while (counter < 8) {
-        let questType = config.harmony.quest.statQuests[counter]
-        let maxBatch = 1;
-        let minStam = questType.minStam
+    for (let i = 0; i < config.harmony.quest.statQuests.length; i++) {
+        const questType = config.harmony.quest.statQuests[i]
 
-        let activeQuesters = heroesStruct.allQuesters;
-        let questHeroes = questType.heroes;
-        let possibleQuestHeroes = questHeroes.filter((e) => {
-            return (activeQuesters.indexOf(e) < 0);
-        });
-
-        let staminaValues = [];
-        for ( let i = 0; i < possibleQuestHeroes.length; i++ ) {
-            staminaValues.push(questCoreV2Contract.getCurrentStamina(possibleQuestHeroes[i]));
-        }
+        if (questType.heroes.length !== 0) {
+            const activeQuesterIds = heroesStruct.allQuesters
+            const heroObjects = await autils.getHerosInfo(questType.heroes)
+            const possibleHeroes = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina >= minStamina && heroObject.owner === config.walletAddress })
     
-        staminaValues = await Promise.all(staminaValues);
-
-        LocalBatching = []
-        for (let index = 0; index < possibleQuestHeroes.length; index++) {
-            const stam = staminaValues[index];
-            if ( stam >= minStam ) {
-                LocalBatching.push(possibleQuestHeroes[index]);
-            }
-
-            if (LocalBatching.length === maxBatch) {
-                break;
+            if (possibleHeroes.length > 0) {
+                for (let i = 0; i < possibleHeroes.length; i++) {
+                    console.log(`senting ${possibleHeroes[i].id} to ${questType.name}`);
+                    const attemp = Math.floor(possibleHeroes[i].currentStamina / 5)
+                    await questCoreV2Contract.startStatQuest([possibleHeroes[i].id], attemp, questType.contractAddress, questType.name);
+                }
             }
         }
-
-        if (LocalBatching.length > 0) {
-            while(LocalBatching.length < maxBatch) {
-                LocalBatching.push(0)
-            }
-        }
-
-        if (LocalBatching.length > 0) {
-            console.log("senting " + LocalBatching + " to" + questType.name + " quest");
-            await questCoreV2Contract.startStatQuest(LocalBatching, minStam / 5, questType.contractAddress, questType.name);
-        } else {
-            console.log(`No ${questType.name} hero sent`)
-        }
-        counter++;
     }
 }
