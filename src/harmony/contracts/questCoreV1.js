@@ -59,4 +59,35 @@ module.exports = class QuestCoreV1 {
       console.log(`Sent ${heroIds} gold mining quest failed`)
     } 
   }
+
+  async startJewelMining (heroIds) {
+    let rawTxnData = "0xc855dea3" +
+      "0000000000000000000000000000000000000000000000000000000000000060" +
+      "0000000000000000000000006ff019415ee105acf2ac52483a33f5b43eadb8d0" +
+      autils.intToInput(1) +
+      autils.intToInput(heroIds.length)
+
+    heroIds.forEach((heroId) => {
+      rawTxnData += autils.intToInput(heroId)
+    })
+
+    const txn = hmy.transactions.newTx({
+      to: config.harmony.questCoreV1,
+      value: 0,
+      gasLimit: config.harmony.gasLimit,
+      shardID: 0,
+      toShardID: 0,
+      gasPrice: config.harmony.gasPrice,
+      data: rawTxnData
+    })
+
+    const signedTxn = await hmy.wallet.signTransaction(txn);
+    const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
+
+    if (txnHash.txStatus === 'CONFIRMED') {
+      console.log(`Sent ${heroIds} jewel mining quest success`)
+    } else {
+      console.log(`Sent ${heroIds} jewel mining quest failed`)
+    } 
+  }
 }

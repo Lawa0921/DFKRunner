@@ -129,34 +129,9 @@ async function CheckAndSendJewelMiners(heroesStruct, isPro)
             LocalBatching.push(0)
         }
     }
-
-    console.log("Jewel Miner Batches" + (isPro ? " (P): " : " (N): ") + LocalBatching)
     
-    if (numHeroesToSend >= minBatch && minBatch > 0)
-    {
-        const txn = hmy.transactions.newTx({
-            to: config.harmony.questCoreV1,
-            value: 0,
-            // gas limit, you can use string
-            gasLimit: config.harmony.gasLimit,
-            // send token from shardID
-            shardID: 0,
-            // send token to toShardID
-            toShardID: 0,
-            // gas Price, you can use Unit class, and use Gwei, then remember to use toWei(), which will be transformed to BN
-            gasPrice: config.harmony.gasPrice,
-            // tx data
-            data: jewelMiningPattern(LocalBatching[0],LocalBatching[1],LocalBatching[2],LocalBatching[3],LocalBatching[4],LocalBatching[5])
-        });
-          
-        
-        // sign the transaction use wallet;
-        const signedTxn = await hmy.wallet.signTransaction(txn);
-        //  console.log(signedTxn);
-        console.log("!!! sending the message on the wire !!!");
-        const txnHash = await hmy.blockchain.createObservedTransaction(signedTxn).promise;
-        
-        console.log("Sent " + LocalBatching + " on a Jewel Mining Quest")
+    if (numHeroesToSend >= minBatch && minBatch > 0) {
+        await questCoreV1Contract.startJewelMining(LocalBatching)
     }    
 }
 
@@ -258,7 +233,7 @@ exports.runHarmonyQuest = async () => {
         await CheckAndSendForagers(heroesStruct2)
 
         await CheckAndSendGoldMiners(heroesStruct, true);
-        // await CheckAndSendJewelMiners(heroesStruct, true);
+        await CheckAndSendJewelMiners(heroesStruct, true);
         await CheckAndSendGardeners(heroesStruct, true);
 
         await CheckAndSendStatQuests(heroesStruct2);
