@@ -14,7 +14,7 @@ exports.CheckAndSendGardeners = async (heroesStruct) => {
 
   if (possibleGardeners.length > 0) {
     for (let i = 0; i < possibleGardeners.length; i++) {
-      const gardeningHeroData = questType.heroes.find(heroData => heroData.heroID === possibleGardeners.id)
+      const gardeningHeroData = questType.heroes.find(heroData => heroData.heroID === possibleGardeners[i].id)
 
       if (gardeningHeroData) {
         await questCoreV1Contract.startGardening(gardeningHeroData.heroID, gardeningHeroData.gardenID)   
