@@ -10,7 +10,6 @@ const questCoreV1ABI = require("~/abis/QuestCoreV1.json")
 const { CompleteQuests } = require('./quest_complete');
 const { CheckAndSendFishers } = require('~/src/harmony/quest_fishing');
 const { CheckAndSendForagers } = require('~/src/harmony/quest_foraging');
-const { jewelMiningPattern } = require('./quest_jewelmining');
 const { gardeningQuestPattern } = require('./quest_gardening');
 const { CheckAndSendStatQuests } = require('./quest_stats');
 const { runLevelUpLogic } = require('~/src/harmony/hero_level_up');
