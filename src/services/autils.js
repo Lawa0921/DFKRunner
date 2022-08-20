@@ -239,8 +239,7 @@ exports.getHarmonyOwningHeroIds = () => {
     heroIds = heroIds.concat(questConfig.goldMining.nonProfessionHeroes);
     heroIds = heroIds.concat(questConfig.jewelMining.professionHeroes);
     heroIds = heroIds.concat(questConfig.jewelMining.nonProfessionHeroes);
-    heroIds = heroIds.concat(questConfig.gardening.professionHeroes.map((heroData) => { return heroData.heroID }));
-    heroIds = heroIds.concat(questConfig.gardening.nonProfessionHeroes.map((heroData) => { return heroData.heroID }));
+    heroIds = heroIds.concat(questConfig.gardening.heroes.map((heroData) => { return heroData.heroID }));
   
     for (let i = 0; i < config.harmony.quest.statQuests.length; i++ ) {
       heroIds = heroIds.concat(config.harmony.quest.statQuests[i].heroes);

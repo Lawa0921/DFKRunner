@@ -59,7 +59,7 @@ const config = {
             "contractAddress": "0x6ff019415ee105acf2ac52483a33f5b43eadb8d0"
         },
         "gardening": {
-            "professionHeroes": [
+            "heroes": [
                 {"heroID": "239450", "gardenID": "0"},
                 {"heroID": "263190", "gardenID": "0"},
                 {"heroID": "273720", "gardenID": "0"},
@@ -118,9 +118,6 @@ const config = {
                 {"heroID": "238988", "gardenID": "18"},
                 {"heroID": "291333", "gardenID": "18"}
             ],
-            "nonProfessionHeroes": [],
-            "proMinStam": 25,
-            "normMinStam": 25,
             "contractAddress": "0xe4154b6e5d240507f9699c730a496790a722df19"
         },
         "statQuests": [
