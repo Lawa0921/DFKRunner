@@ -18,7 +18,7 @@ exports.CheckAndSendJewelMiners = async (heroesStruct) => {
   const batchAmount = questType.singleBatchAmount > maxBatch ? maxBatch : questType.singleBatchAmount
 
   if (possibleJewelMiners.length > 0 && possibleJewelMiners.length >= batchAmount) {
-    let sentMinerIds = [possibleJewelMiners.first().id]
+    let sentMinerIds = [possibleJewelMiners[0].id]
 
     if (batchAmount > 1) {
       sentMinerIds = sentMinerIds.concat(possibleJewelMiners.map(heroObject => heroObject.id).slice((batchAmount - 1) * -1))
