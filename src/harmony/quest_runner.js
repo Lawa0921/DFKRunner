@@ -46,24 +46,7 @@ exports.runHarmonyQuest = async () => {
 
         console.log("--- Harmony quest process completed ---");
     }
-    catch(error)
-    {
-        if (error.toString().includes('Maximum call stack size exceeded'))
-        {
-            // can't do anything about a memory leak...
-            autils.log(error.toString(), true);
-        }
-        if (error.toString().includes('The transaction is still not confirmed after 20 attempts'))
-        {
-            // failure to recover from @harmony-js/core package. restart
-            autils.log(error.toString(), true);
-        }
-        if (error.toString() === '[object Object]')
-        {
-            autils.log(JSON.stringify(error), true);
-        }
-        else {
-            autils.log(error.toString(), true);
-        }
+    catch(error){
+        autils.log(error.toString(), true);
     }
 }
