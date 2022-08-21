@@ -30,7 +30,7 @@ module.exports = class QuestCoreV2 {
   }
 
   async startFishingQuest(heroIds, attempt) {
-    const { transaction } = await this.contract.methods.startQuest(heroIds, config.harmony.quest.fishing.contractAddress, attempt, 0).send(autils.gasSettingFormater());
+    const { transaction } = await this.contract.methods.startQuest(heroIds, config.harmony.quest.fishing.contractAddress, attempt, 0).send({ gasPrice: config.harmony.gasPrice, gasLimit: config.harmony.sentQuestGasLimit });
 
     if (transaction.txStatus === "CONFIRMED") {
       console.log("Sent " + heroIds + " on a Fishing Quest completed")
@@ -42,7 +42,7 @@ module.exports = class QuestCoreV2 {
   }
 
   async startForagingQuest(heroIds, attempt) {
-    const { transaction } = await this.contract.methods.startQuest(heroIds, config.harmony.quest.foraging.contractAddress, attempt, 0).send(autils.gasSettingFormater());
+    const { transaction } = await this.contract.methods.startQuest(heroIds, config.harmony.quest.foraging.contractAddress, attempt, 0).send({ gasPrice: config.harmony.gasPrice, gasLimit: config.harmony.sentQuestGasLimit });
 
     if (transaction.txStatus === "CONFIRMED") {
       console.log("Sent " + heroIds + " on a Foraging Quest completed")
@@ -54,7 +54,7 @@ module.exports = class QuestCoreV2 {
   }
 
   async startStatQuest(heroIds, attempt, address, type) {
-    const { transaction } = await this.contract.methods.startQuest(heroIds, address, attempt, 1).send(autils.gasSettingFormater());
+    const { transaction } = await this.contract.methods.startQuest(heroIds, address, attempt, 1).send({ gasPrice: config.harmony.gasPrice, gasLimit: config.harmony.sentQuestGasLimit });
 
     if (transaction.txStatus === "CONFIRMED") {
       console.log("Sent " + heroIds + " on a " + type + " Stat Quest completed")

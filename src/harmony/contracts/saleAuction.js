@@ -22,11 +22,11 @@ module.exports = class HeroBridgeContract {
   }
 
   async cancelAuction(heroId) {
-    return await this.contract.methods.cancelAuction(heroId).send(autils.gasSettingFormater());
+    return await this.contract.methods.cancelAuction(heroId).send({ gasPrice: config.harmony.gasPrice, gasLimit: config.harmony.unlistGasLimit });
   }
 
   async createAuction(heroId, price) {
-    return await this.contract.methods.createAuction(heroId, autils.formatPrice(price), autils.formatPrice(price), 60, autils.get0xAddress()).send(autils.gasSettingFormater());
+    return await this.contract.methods.createAuction(heroId, autils.formatPrice(price), autils.formatPrice(price), 60, autils.get0xAddress()).send({ gasPrice: config.harmony.gasPrice, gasLimit: config.harmony.listGasLimit });
   }
 
   async isOnAuction(heroId) {

@@ -74,7 +74,7 @@ module.exports = class QuestCoreV1 {
     const txn = hmy.transactions.newTx({
       to: config.harmony.questCoreV1,
       value: 0,
-      gasLimit: config.harmony.gasLimit,
+      gasLimit: config.harmony.jewelMiningGasLimit,
       shardID: 0,
       toShardID: 0,
       gasPrice: config.harmony.gasPrice,
@@ -108,7 +108,7 @@ module.exports = class QuestCoreV1 {
     const txn = hmy.transactions.newTx({
       to: config.harmony.questCoreV1,
       value: 0,
-      gasLimit: config.harmony.gasLimit,
+      gasLimit: config.harmony.gardeningGasLimit,
       shardID: 0,
       toShardID: 0,
       gasPrice: config.harmony.gasPrice,

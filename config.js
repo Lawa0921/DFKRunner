@@ -254,8 +254,13 @@ const config = {
         "wss://ws.s0.t.hmny.io/"
     ],
     "bidGasPrice": 200100000000,
-    "gasPrice": 100000000000,
-    "gasLimit": 2800001,
+    "gasPrice": "0x174876E800", // 100 Gwei
+    "gasLimit": 2000001,
+    "listGasLimit": 350000,
+    "unlistGasLimit": 200000,
+    "gardeningGasLimit": 3000001,
+    "jewelMiningGasLimit": 4000001,
+    "sentQuestGasLimit": 1000000,
     "unconditionalPurchasePrice": 32,
     "g0ConditionsOfPurchase": 5000,
   },
