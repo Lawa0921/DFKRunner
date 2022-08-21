@@ -52,10 +52,10 @@ const config = {
             "contractAddress": "0x569e6a4c2e3af31b337be00657b4c040c828dd73"
         },
         "jewelMining": {
-            "professionHeroes": [],
-            "nonProfessionHeroes": [],
-            "proMinStam": 25,
-            "normMinStam": 25,
+            "singleBatchAmount": 1, // 單次送出的英雄數量
+            "heroes": [
+                "79678", "96964", "282128"
+            ],
             "contractAddress": "0x6ff019415ee105acf2ac52483a33f5b43eadb8d0"
         },
         "gardening": {
