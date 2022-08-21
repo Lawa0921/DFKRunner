@@ -12,7 +12,7 @@ exports.CheckAndSendJewelMiners = async (heroesStruct) => {
   const possibleJewelMiners = heroObjects.filter((heroObject) => {
     return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina >= minStamina && heroObject.owner === config.walletAddress
   }).sort((heroInfo, nextHeroInfo) => {
-    return (heroInfo.strength + heroInfo.endurance) - (nextHeroInfo.strength + nextHeroInfo.endurance)
+    return (nextHeroInfo.strength + nextHeroInfo.endurance) - (heroInfo.strength + heroInfo.endurance)
   })
 
   const batchAmount = questType.singleBatchAmount > maxBatch ? maxBatch : questType.singleBatchAmount
