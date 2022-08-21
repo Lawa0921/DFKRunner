@@ -225,8 +225,7 @@ exports.getHarmonyOwningHeroIds = () => {
 
     heroIds = heroIds.concat(questConfig.foraging.heroes);
     heroIds = heroIds.concat(questConfig.fishing.heroes);
-    heroIds = heroIds.concat(questConfig.goldMining.professionHeroes);
-    heroIds = heroIds.concat(questConfig.goldMining.nonProfessionHeroes);
+    heroIds = heroIds.concat(questConfig.goldMining.heroes);
     heroIds = heroIds.concat(questConfig.jewelMining.professionHeroes);
     heroIds = heroIds.concat(questConfig.jewelMining.nonProfessionHeroes);
     heroIds = heroIds.concat(questConfig.gardening.heroes.map((heroData) => { return heroData.heroID }));

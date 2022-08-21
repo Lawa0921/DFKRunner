@@ -11,6 +11,7 @@ const { CompleteQuests } = require('./quest_complete');
 const { CheckAndSendFishers } = require('~/src/harmony/quest_fishing');
 const { CheckAndSendForagers } = require('~/src/harmony/quest_foraging');
 const { CheckAndSendGardeners } = require('~/src/harmony/quest_gardening');
+const { CheckAndSendGoldMiners } = require('~/src/harmony/quest_gold_mining');
 const { CheckAndSendStatQuests } = require('./quest_stats');
 const { runLevelUpLogic } = require('~/src/harmony/hero_level_up');
 const { runVialLogic } = require('~/src/harmony/vial_consumer');
@@ -31,57 +32,6 @@ const hmy = new Harmony(
 );
 
 hmy.wallet.addByPrivateKey(config.privateKey);
-
-async function CheckAndSendGoldMiners(heroesStruct, isPro)
-{
-    const questType = config.harmony.quest.goldMining
-    let minBatch = isPro ? questType.professionHeroes.length : questType.nonProfessionHeroes.length;
-    let maxBatch = 6;
-    minBatch = minBatch > maxBatch ? maxBatch : minBatch;
-    let minStam = isPro ? questType.proMinStam : questType.normMinStam;
-
-    let activeQuesters = heroesStruct.allQuesters
-    let configGoldMiners = isPro ? questType.professionHeroes : questType.nonProfessionHeroes
-    let possibleGoldMiners = configGoldMiners.filter((e) => {
-        return (activeQuesters.indexOf(e) < 0);
-      });
-
-    let GoldMinerPromises = []
-    possibleGoldMiners.forEach(hero => {
-        GoldMinerPromises.push(questCoreV1Contract.getCurrentStamina(hero))
-    });
-
-    let staminaValues = await Promise.allSettled(GoldMinerPromises);
-    staminaValues = staminaValues.map(res => res = res.value?.toNumber() || 0);
-    
-    LocalBatching = []
-    for (let index = 0; index < possibleGoldMiners.length; index++) {
-        const stam = staminaValues[index];
-        if ( stam >= minStam )
-        {
-            LocalBatching.push(possibleGoldMiners[index]);
-        }
-
-        if (LocalBatching.length === maxBatch)
-        {
-            break;
-        }
-    }
-
-    let numHeroesToSend = LocalBatching.length;
-
-    if (LocalBatching.length > 0)
-    {
-        while(LocalBatching.length < maxBatch)
-        {
-            LocalBatching.push(0)
-        }
-    }
-    
-    if (numHeroesToSend >= minBatch && minBatch > 0) {
-        await questCoreV1Contract.startGoldMining(LocalBatching)
-    }
-}
 
 async function CheckAndSendJewelMiners(heroesStruct, isPro)
 {
@@ -156,7 +106,7 @@ exports.runHarmonyQuest = async () => {
         await CheckAndSendFishers(heroesStruct2);
         await CheckAndSendForagers(heroesStruct2)
 
-        await CheckAndSendGoldMiners(heroesStruct, true);
+        await CheckAndSendGoldMiners(heroesStruct);
         await CheckAndSendJewelMiners(heroesStruct, true);
         await CheckAndSendGardeners(heroesStruct);
 
