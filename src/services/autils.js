@@ -102,6 +102,10 @@ exports.formatPrice = (price) => {
 }
 
 exports.getHerosInfo = async (heroIds) => {
+    if (heroIds.length === 0) {
+        return []
+    }
+
     let heroObjects;
     queryStr = `{
         heroes(where: {id_in: ${JSON.stringify(heroIds)}}) {
