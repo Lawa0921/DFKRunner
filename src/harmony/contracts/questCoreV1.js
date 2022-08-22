@@ -15,7 +15,7 @@ const hmy = new Harmony(
 );
 
 hmy.wallet.addByPrivateKey(config.privateKey);
-
+const perHeroMiningGas = 1000000;
 module.exports = class QuestCoreV1 {
   constructor() {
     this.contract = hmy.contracts.createContract(questCoreV1ABI, config.harmony.questCoreV1);
@@ -43,7 +43,7 @@ module.exports = class QuestCoreV1 {
     const txn = hmy.transactions.newTx({
       to: config.harmony.questCoreV1,
       value: 0,
-      gasLimit: config.harmony.gasLimit,
+      gasLimit: config.harmony.basicMiningGasLimit + ((heroIds.length - 1) * perHeroMiningGas),
       shardID: 0,
       toShardID: 0,
       gasPrice: config.harmony.gasPrice,
@@ -74,7 +74,7 @@ module.exports = class QuestCoreV1 {
     const txn = hmy.transactions.newTx({
       to: config.harmony.questCoreV1,
       value: 0,
-      gasLimit: config.harmony.jewelMiningGasLimit,
+      gasLimit: config.harmony.basicMiningGasLimit + ((heroIds.length - 1) * perHeroMiningGas),
       shardID: 0,
       toShardID: 0,
       gasPrice: config.harmony.gasPrice,

@@ -256,10 +256,10 @@ const config = {
     "bidGasPrice": 200100000000,
     "gasPrice": "0x174876E800", // 100 Gwei
     "gasLimit": 3000001,
+    "basicMiningGasLimit": 2500000,
     "listGasLimit": 350000,
     "unlistGasLimit": 200000,
     "gardeningGasLimit": 3000001,
-    "jewelMiningGasLimit": 4000001,
     "sentQuestGasLimit": 1000000,
     "unconditionalPurchasePrice": 32,
     "g0ConditionsOfPurchase": 5000,
