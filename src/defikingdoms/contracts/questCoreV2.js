@@ -66,6 +66,19 @@ module.exports = class QuestCoreV2 {
     return res;
   }
 
+  async startCrystalMining(heroIds) {
+    const tx = await this.contract.startQuest(heroIds, config.defikingdoms.quest.crystalMining.contractAddress, 1, 0)
+    const res = await tx.wait();
+
+    if (res.status === 1) {
+      console.log(`Sent ${heroIds} crystal mining success`)
+    } else {
+      console.log(`Sent ${heroIds} crystal mining failed`)
+    }
+
+    return res;
+  }
+
   async getCurrentStamina(heroId) {
     return await this.contract.getCurrentStamina(heroId)
   }

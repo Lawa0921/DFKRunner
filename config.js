@@ -296,6 +296,13 @@ const config = {
             ],
             "contractAddress": "0x75912145f5cFEfb980616FA47B2f103210FaAb94"
         },
+        "crystalMining": {
+            "singleBatchAmount": 1, // 單次送出的英雄數量
+            "heroes": [
+                "280117"
+            ],
+            "contractAddress": "0x98b3C85ac3cC3EF36Ff25A9229857AbACE3e7410"
+        },
         "statQuests": [
             {
                 "name": "StatQuest_Str",
