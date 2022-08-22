@@ -255,7 +255,7 @@ const config = {
     ],
     "bidGasPrice": 200100000000,
     "gasPrice": "0x174876E800", // 100 Gwei
-    "gasLimit": 2000001,
+    "gasLimit": 3000001,
     "listGasLimit": 350000,
     "unlistGasLimit": 200000,
     "gardeningGasLimit": 3000001,
