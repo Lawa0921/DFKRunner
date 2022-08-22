@@ -53,6 +53,19 @@ module.exports = class QuestCoreV2 {
     return res;
   }
 
+  async startGoldMining(heroIds) {
+    const tx = await this.contract.startQuest(heroIds, config.defikingdoms.quest.goldMining.contractAddress, 1, 0)
+    const res = await tx.wait();
+
+    if (res.status === 1) {
+      console.log(`Sent ${heroIds} gold mining success`)
+    } else {
+      console.log(`Sent ${heroIds} gold mining failed`)
+    }
+
+    return res;
+  }
+
   async getCurrentStamina(heroId) {
     return await this.contract.getCurrentStamina(heroId)
   }

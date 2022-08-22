@@ -3,6 +3,7 @@ const QuestCoreV2 = require("~/src/defikingdoms/contracts/questCoreV2");
 const { CheckAndSendDFKFishers } = require("~/src/defikingdoms/quest_fishing");
 const { CheckAndSendDFKForagers } = require("~/src/defikingdoms/quest_foraging");
 const { CheckAndSendDFKStatQuests } = require("~/src/defikingdoms/quest_stats");
+const { CheckAndSendDFKGoldMiners } = require('~/src/defikingdoms/quest_gold_mining');
 const { CompleteQuests } = require('~/src/defikingdoms/quest_complete');
 const { runDFKSalesLogic } = require('~/src/defikingdoms/sales_handler');
 const { runDFKLevelUpLogic } = require('~/src/defikingdoms/hero_level_up'); 
@@ -20,6 +21,7 @@ exports.runDFKChainQuest = async () => {
     await runDFKLevelUpLogic();
     await CheckAndSendDFKFishers(heroesStruct);
     await CheckAndSendDFKForagers(heroesStruct);
+    await CheckAndSendDFKGoldMiners(heroesStruct);
     await CheckAndSendDFKStatQuests(heroesStruct);
 
     console.log("--- DFK Chain quest process completed ---");
