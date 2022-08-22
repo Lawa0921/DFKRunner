@@ -246,6 +246,7 @@ exports.getDFKOwningHeroIds = () => {
     heroIds = heroIds.concat(config.defikingdoms.quest.fishing.heroes);
     heroIds = heroIds.concat(config.defikingdoms.quest.foraging.heroes);
     heroIds = heroIds.concat(config.defikingdoms.quest.goldMining.heroes);
+    heroIds = heroIds.concat(config.defikingdoms.quest.crystalMining.heroes);
 
     for (let i = 0; i < config.harmony.quest.statQuests.length; i++ ) {
         heroIds = heroIds.concat(config.defikingdoms.quest.statQuests[i].heroes);
