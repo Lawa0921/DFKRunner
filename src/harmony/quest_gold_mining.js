@@ -11,7 +11,7 @@ exports.CheckAndSendGoldMiners = async (heroesStruct) => {
   const possibleGoldMiners = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina >= minStamina && heroObject.owner === config.walletAddress })
 
   if (possibleGoldMiners.length > 0 && possibleGoldMiners.length >= questType.singleBatchAmount) {
-    const sentMinerIds = possibleGoldMiners.slice(questType.singleBatchAmount).map(heroObject => heroObject.id)
+    const sentMinerIds = possibleGoldMiners.slice(0, questType.singleBatchAmount).map(heroObject => heroObject.id)
     console.log(`senting ${sentMinerIds} to gold mining quest`)
     await questCoreV1Contract.startGoldMining(sentMinerIds)
   } else {
