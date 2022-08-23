@@ -92,7 +92,7 @@ module.exports = class QuestCoreV1 {
   }
 
   async startGardening(heroId, poolId) {
-    let rawTxnData = "0xc855dea3" +
+    let rawTxnData = "0xf51333f5" +
       "0000000000000000000000000000000000000000000000000000000000000080" +
       "000000000000000000000000e4154b6e5d240507f9699c730a496790a722df19" +
       autils.intToInput(1) +
