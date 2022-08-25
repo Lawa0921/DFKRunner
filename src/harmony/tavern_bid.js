@@ -26,7 +26,7 @@ exports.bidHero = async (heroId, price) => {
     const unSignedTxn = harmony.transactions.newTx({
       to: config.harmony.saleAuction,
       value: 0,
-      gasLimit: config.harmony.gasLimit,
+      gasLimit: config.harmony.bidGasLimit,
       shardID: 0,
       toShardID: 0,
       gasPrice: config.harmony.bidGasPrice,
