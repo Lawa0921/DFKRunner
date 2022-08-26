@@ -10,9 +10,9 @@
 首先您需要依據作業系統安裝 git、node、npm。
 
 #### 為何我需要安裝這些？
-git 幫助您與 github 互動，並且可以更新您本地的檔案至目前最新的版本。
-node.js 是一個能執行 JavaScript 的環境，因為本專案是用 javascript 寫成，您的本地環境需要可以執行 javascript 程式碼才能夠運行。
-npm 即為 Node Package Manager 的縮寫，是一個管理 node.js 插件的工具，本專案使用此工具協助管理外部套件的相依性。
+git 幫助您與 github 互動，並且可以更新您本地的檔案至目前最新的版本。  
+node.js 是一個能執行 JavaScript 的環境，因為本專案是用 javascript 寫成，您的本地環境需要可以執行 javascript 程式碼才能夠運行。  
+npm 即為 Node Package Manager 的縮寫，是一個管理 node.js 插件的工具，本專案使用此工具協助管理外部套件的相依性。  
 
 ### Mac 篇
 
@@ -41,8 +41,8 @@ npm -v            # 檢查 npm 是否安裝成功
 
 ### Windows 篇
 
-[node、npm 安裝教學](https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac)
-[git 安裝教學](https://www.atlassian.com/git/tutorials/install-git#windows)
+[node、npm 安裝教學](https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac)  
+[git 安裝教學](https://www.atlassian.com/git/tutorials/install-git#windows)  
 
 按 Win + R 打開運行框，然後鍵入 `cmd` 並按 Enter 開啟。
 
@@ -56,31 +56,31 @@ npm install                                         # 利用 npm 安裝專案會
 
 ### 安裝編輯器
 
-[下載 VSCode](https://code.visualstudio.com/)
-或是直接使用內建的文字編輯器，只是排版會比較亂。
+[下載 VSCode](https://code.visualstudio.com/)  
+或是直接使用內建的文字編輯器，只是排版會比較亂。  
 
 ### 設定 config 檔
 
-在 DFKRunner 的目錄內新增一個 `.env` 檔案
-並輸入以下內容即可，請自行替換您的私鑰與地址進入 `.env` 檔。
+在 DFKRunner 的目錄內新增一個 `.env` 檔案  
+並輸入以下內容即可，請自行替換您的私鑰與地址進入 `.env` 檔  
 ```
 PRIVATE_KEY="your_private_key"
 WALLET_ADDRESS="your_address"
 ```
 
-開啟 VSCode 將 `config.js` 內的內容更換為您的英雄
-格式依照原先的 config 範例參考設定即可
-目前 `listStamina unlistStamina` 這兩個值請先不要更動，若是更動會出現掛售邏輯錯誤。
+開啟 VSCode 將 `config.js` 內的內容更換為您的英雄  
+格式依照原先的 config 範例參考設定即可  
+目前 `listStamina unlistStamina` 這兩個值請先不要更動，若是更動會出現掛售邏輯錯誤  
 
 ## 腳本說明
-以下所有的指令您都必須確認你當前的目錄在 `DFKRunner` 底下才能正確執行。
+以下所有的指令您都必須確認你當前的目錄在 `DFKRunner` 底下才能正確執行  
 
-`bash run.sh`：自動執行任務及掛售的邏輯，在手動停止之前他會不停執行。
-`bash run_sale_watcher.sh`：開始監聽酒館的出售，會自動購買達到指定條件的英雄，詳細估價內容可看 `/src/services/valuator.js` 這個檔案。 
-`node sold_checker.js`：檢查寫在 `heroForSale` 的英雄是否售出。
-`node work_checker.js`：檢查是否有漏寫在 config 裡的英雄。
-`node hero_bridge_sender.js`：將寫在該檔案裡的英雄跨至 dfk chain，詳細可開啟該檔案內有說明。
+`bash run.sh`：自動執行任務及掛售的邏輯，在手動停止之前他會不停執行  
+`bash run_sale_watcher.sh`：開始監聽酒館的出售，會自動購買達到指定條件的英雄，詳細估價內容可看 `/src/services/valuator.js` 這個檔案  
+`node sold_checker.js`：檢查寫在 `heroForSale` 的英雄是否售出  
+`node work_checker.js`：檢查是否有漏寫在 config 裡的英雄  
+`node hero_bridge_sender.js`：將寫在該檔案裡的英雄跨至 dfk chain，詳細可開啟該檔案內有說明  
 
-有任何問題可至 [Lawa 的 Discord](https://discord.gg/Wta7ZavFkJ) 內 tag Lawa0921 詢問
-如果你想給我點小費可以匯款至我的私人地址：0xA2FD1c90A8080142d27C49F3745602acF05a357D，感謝您！
-祝您遊玩愉快！
+有任何問題可至 [Lawa 的 Discord](https://discord.gg/Wta7ZavFkJ) 內 tag Lawa0921 詢問  
+如果你想給我點小費可以匯款至我的私人地址：0xA2FD1c90A8080142d27C49F3745602acF05a357D，感謝您  
+祝您遊玩愉快  
