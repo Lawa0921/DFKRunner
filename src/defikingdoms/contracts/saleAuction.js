@@ -48,7 +48,7 @@ module.exports = class SaleAuction {
     const tx = await this.cancelAuction(id);
     const res = await tx.wait();
     if (res.status === 1) {
-      console.log(`unlisting hero: ${id} completeed`);
+      console.log(`unlisting hero: ${id} completed`);
     } else {
       autils.txnFailLog(`unlist hero: ${id} failed`);
     }
@@ -64,9 +64,9 @@ module.exports = class SaleAuction {
     const res = await tx.wait();
 
     if (res.status === 1) {
-      console.log(`buy hero: ${id} use ${parseInt(heroesData[0].salePrice) / Math.pow(10, 18)} J completed`);
+      console.log(`buy hero: ${id} use ${parseInt(heroesData[0].salePrice) / Math.pow(10, 18)} C completed`);
     } else {
-      console.log(`buy hero: ${id} use ${parseInt(heroesData[0].salePrice) / Math.pow(10, 18)} J failed`);
+      console.log(`buy hero: ${id} use ${parseInt(heroesData[0].salePrice) / Math.pow(10, 18)} C failed`);
     }
 
     return res;
