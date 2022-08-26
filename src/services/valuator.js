@@ -84,7 +84,7 @@ module.exports = class Valuator {
       } else if (heroRarity === "Rare") {
         this.rarityPrice += 150;
       } else if (heroRarity === "Legendary") {
-        this.rarityPrice += 1000;
+        this.rarityPrice += 750;
       } else if (heroRarity === "Mythic") {
         this.rarityPrice += 2500;
       }
@@ -171,6 +171,8 @@ module.exports = class Valuator {
           this.professionPrice += 15;
         } else if (this.hero.profession === "foraging") {
           this.professionPrice += 5;
+        } else if (this.hero.profession === "gardening") {
+          this.professionPrice -= 5;
         }
         break;
       case "Shapeshifter":
@@ -1277,7 +1279,7 @@ module.exports = class Valuator {
     const network = this.hero.network;
 
     if (network === "dfk") {
-      this.valuation = this.valuation * 0.5;
+      this.valuation = this.valuation * 0.95;
     }
   }
 }
