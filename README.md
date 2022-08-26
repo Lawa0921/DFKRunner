@@ -81,6 +81,20 @@ WALLET_ADDRESS="your_address"
 `node work_checker.js`：檢查是否有漏寫在 config 裡的英雄  
 `node hero_bridge_sender.js`：將寫在該檔案裡的英雄跨至 dfk chain，詳細可開啟該檔案內有說明  
 
+## 關於更新
+確保您在 `DFKRunner` 的目錄內，並執行
+```
+git pull origin main
+```
+
+即可完成更新
+#### 更新注意事項
+更新前請先將您的 config 檔另外保存  
+否則將會觸發 git 的 conflict 機制  
+比較簡單的處理方式是直接刪除您原先的 config.js 並拉取新版本的 config.js  
+之後再填回您自己的 hero ID  
+
+## 鳴謝及其他資訊
 有任何問題可至 [Lawa 的 Discord](https://discord.gg/Wta7ZavFkJ) 內 tag Lawa0921 詢問  
-如果你想給我點小費可以匯款至我的私人地址：0xA2FD1c90A8080142d27C49F3745602acF05a357D，感謝您  
+如果你想給我點小費可以匯款至我的私人地址：0xA2FD1c90A8080142d27C49F3745602acF05a357D，Lawa 先感謝您  
 祝您遊玩愉快  
