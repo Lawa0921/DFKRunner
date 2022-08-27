@@ -11,11 +11,11 @@ module.exports = class SaleAuction {
   }
 
   async cancelAuction(heroId) {
-    return await this.contract.cancelAuction(heroId)
+    return await this.contract.cancelAuction(heroId, { gasPrice: config.defikingdoms.gasPrice })
   }
 
   async createAuction(heroId, price) {
-    return await this.contract.createAuction(heroId, autils.formatPrice(price), autils.formatPrice(price), 60, autils.get0xAddress());
+    return await this.contract.createAuction(heroId, autils.formatPrice(price), autils.formatPrice(price), 60, autils.get0xAddress(), { gasPrice: config.defikingdoms.gasPrice });
   }
 
   async isOnAuction(heroId) {
