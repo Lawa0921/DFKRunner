@@ -557,6 +557,10 @@ module.exports = class Hero {
     return this.nextSummonTime.valueOf() <= Math.floor(new Date().getTime() / 1000) && this.summonsRemaining > 0 ? true : false;
   }
 
+  rentable() {
+    return this.summonable() && !this.isOnSale ? true : false;
+  }
+
   currentStamina() {
     return this.staminaFullAt === 0 || this.staminaFullAt.valueOf() <= Math.floor(new Date().getTime() / 1000) ? this.stamina : this.stamina - Math.ceil((this.staminaFullAt.valueOf() - Math.floor(new Date().getTime() / 1000)) / recoveryOneStaminaRequireSeconds);
   }
