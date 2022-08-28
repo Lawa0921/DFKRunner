@@ -142,6 +142,7 @@ exports.getHerosInfo = async (heroIds) => {
             dexterity
             stamina
             staminaFullAt
+            nextSummonTime
             saleAuction {
                 startingPrice
                 open

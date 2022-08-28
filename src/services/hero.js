@@ -32,6 +32,7 @@ module.exports = class Hero {
     this.vitality = heroInfo.vitality;
     this.endurance = heroInfo.endurance;
     this.dexterity = heroInfo.dexterity;
+    this.nextSummonTime = heroInfo.nextSummonTime; 
     this.totalPoint = this.strength + this.intelligence + this.wisdom + this.luck + this.agility + this.vitality + this.endurance + this.dexterity;
     this.stamina = heroInfo.stamina;
     this.staminaFullAt = heroInfo.staminaFullAt;
@@ -551,6 +552,10 @@ module.exports = class Hero {
 
   levelUpable() {
     return (this.isXpFull && !this.isOnQuesting && !this.isOnSale) ? true : false;
+  }
+
+  summonable() {
+    return this.nextSummonTime.valueOf() <= Math.floor(new Date().getTime() / 1000) && this.summonsRemaining > 0 ? true : false;
   }
 
   async requireRunes() {
