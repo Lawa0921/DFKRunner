@@ -9,7 +9,7 @@ exports.CheckAndSendDFKGoldMiners = async (heroesStruct) => {
   const questType = config.defikingdoms.quest.goldMining
   const activeQuesterIds = heroesStruct.allQuesters
   const heroObjects = await autils.getHerosInfo(questType.heroes)
-  const possibleGoldMiners = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina >= minStamina && heroObject.owner === config.walletAddress })
+  const possibleGoldMiners = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress })
   const batchAmount = questType.singleBatchAmount > maxBatch ? maxBatch : questType.singleBatchAmount
 
   if (possibleGoldMiners.length > 0 && possibleGoldMiners.length >= batchAmount) {

@@ -36,7 +36,6 @@ module.exports = class Hero {
     this.totalPoint = this.strength + this.intelligence + this.wisdom + this.luck + this.agility + this.vitality + this.endurance + this.dexterity;
     this.stamina = heroInfo.stamina;
     this.staminaFullAt = heroInfo.staminaFullAt;
-    this.currentStamina = this.staminaFullAt === 0 || heroInfo.staminaFullAt.valueOf() <= Math.floor(new Date().getTime() / 1000) ? heroInfo.stamina : this.stamina - Math.ceil((heroInfo.staminaFullAt.valueOf() - Math.floor(new Date().getTime() / 1000)) / recoveryOneStaminaRequireSeconds);
     this.xp = heroInfo.xp;
     this.maxXp = this.maxXp();
     this.isXpFull = this.xp >= this.maxXp;
@@ -556,6 +555,10 @@ module.exports = class Hero {
 
   summonable() {
     return this.nextSummonTime.valueOf() <= Math.floor(new Date().getTime() / 1000) && this.summonsRemaining > 0 ? true : false;
+  }
+
+  currentStamina() {
+    return this.staminaFullAt === 0 || this.staminaFullAt.valueOf() <= Math.floor(new Date().getTime() / 1000) ? this.stamina : this.stamina - Math.ceil((this.staminaFullAt.valueOf() - Math.floor(new Date().getTime() / 1000)) / recoveryOneStaminaRequireSeconds);
   }
 
   async requireRunes() {

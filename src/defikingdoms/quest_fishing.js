@@ -12,12 +12,12 @@ exports.CheckAndSendDFKFishers = async (heroesStruct) => {
 		const questType = config.defikingdoms.quest.fishing
 		const activeQuesterIds = heroesStruct.allQuesters
 		const heroObjects = await autils.getHerosInfo(questType.heroes)
-		const possibleFishers = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina >= minStamina && heroObject.owner === config.walletAddress })
+		const possibleFishers = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress })
 	
 		if (possibleFishers.length > 0) {
 			for (let i = 0; i < maxQueue - heroesStruct.fishingQuestCount - 1 && i < possibleFishers.length; i++) {
 				console.log(`senting ${possibleFishers[i].id} to fishing quest`);
-				const attemp = possibleFishers[i].profession === "fishing" ? Math.floor(possibleFishers[i].currentStamina / 5) : Math.floor(possibleFishers[i].currentStamina / 7)
+				const attemp = possibleFishers[i].profession === "fishing" ? Math.floor(possibleFishers[i].currentStamina() / 5) : Math.floor(possibleFishers[i].currentStamina() / 7)
 				await questCoreV2Contract.startFishingQuest([possibleFishers[i].id], attemp);
 			}
 		} else {

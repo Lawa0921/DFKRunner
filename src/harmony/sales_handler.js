@@ -8,11 +8,11 @@ const isOwning = (heroObject) => {
 }
 
 const isShouldList = (heroObject) => {
-  return isOwning(heroObject) && !heroObject.isOnSale && !heroObject.isOnRent && heroObject.currentStamina < config.harmony.listStamina
+  return isOwning(heroObject) && !heroObject.isOnSale && !heroObject.isOnRent && heroObject.currentStamina() < config.harmony.listStamina
 }
 
 const isShouldUnList = (heroObject) => {
-  return heroObject.isOnSale && heroObject.currentStamina > config.harmony.unlistStamina;
+  return heroObject.isOnSale && heroObject.currentStamina() > config.harmony.unlistStamina;
 }
 
 exports.runSalesLogic = async () => {

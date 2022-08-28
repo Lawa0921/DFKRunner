@@ -9,7 +9,7 @@ exports.CheckAndSendGardeners = async (heroesStruct) => {
   const activeQuesterIds = heroesStruct.allQuesters
   const heroObjects = await autils.getHerosInfo(questType.heroes.map(heroData => heroData.heroID))
   const possibleGardeners = heroObjects.filter((heroObject) => { 
-    return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina >= minStamina && heroObject.owner === config.walletAddress
+    return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress
   })
 
   if (possibleGardeners.length > 0) {

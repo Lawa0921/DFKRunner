@@ -23,7 +23,7 @@ module.exports = class SaleAuction {
   }
 
   async bid(heroId, price) {
-    return this.contract.bid(heroId, price, { gasLimit: 3000000, gasPrice: 400000000000 });
+    return this.contract.bid(heroId, price, { gasLimit: 3000000, gasPrice: 4000000000000 });
   }
 
   async listHero(heroId, price) {
