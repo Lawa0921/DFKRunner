@@ -56,6 +56,33 @@ module.exports = class SaleAuction {
     return res;
   }
 
+  async unrentHero(heroId) {
+    let rawTxnData = "0x96b5a755" + autils.intToInput(heroId)
+
+    console.log(`unrenting hero: ${heroId}`);
+
+    const txnData = {
+      to: "0x8101CfFBec8E045c3FAdC3877a1D30f97d301209", 
+      gasLimit: 100000,
+      gasPrice: config.defikingdoms.gasPrice,
+      chainId: 53935,
+      data: rawTxnData,
+    }
+
+    const sendTxn = await this.wallet.sendTransaction(txnData);
+    const res = await sendTxn.wait();
+
+    console.log(res)
+
+    if (res.status === 1) {
+      console.log(`unrent hero: ${heroId} completed`);
+    } else {
+      autils.txnFailLog(`unrent hero: ${heroId} failed`);
+    }
+
+    return res;
+  }
+
   async buyHero(heroId) {
     const id = parseInt(heroId, 10);
     const heroesData = await autils.getHerosInfo([id])
