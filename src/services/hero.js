@@ -565,6 +565,34 @@ module.exports = class Hero {
     return this.staminaFullAt === 0 || this.staminaFullAt.valueOf() <= Math.floor(new Date().getTime() / 1000) ? this.stamina : this.stamina - Math.ceil((this.staminaFullAt.valueOf() - Math.floor(new Date().getTime() / 1000)) / recoveryOneStaminaRequireSeconds);
   }
 
+  skillInfos() {
+    let skillsInfo = {
+      skillTiers: [
+        this.attributeTier("active1"),
+        this.attributeTier("active2"),
+        this.attributeTier("passive1"),
+        this.attributeTier("passive2")
+      ],
+      skillCount: 0,
+      skillScore: 0
+    }
+
+    skillsInfo.skillTiers.forEach((data) => {
+      if (data === "Advanced") {
+        skillsInfo.skillCount ++;
+        skillsInfo.skillScore += 1;
+      } else if (data === "Elite") {
+        skillsInfo.skillCount ++;
+        skillsInfo.skillScore += 2;
+      } else if (data === "Transcendant") {
+        skillsInfo.skillCount ++;
+        skillsInfo.skillScore += 3;
+      }
+    })
+
+    return skillsInfo
+  }
+
   async requireRunes() {
     const [requireShvasRuneCount, requireMokshaRuneCount, ...unknowRunes] = await meditationCircleContract.getRequiredRunes(this.level)
 

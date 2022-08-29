@@ -378,70 +378,50 @@ module.exports = class Valuator {
   }
 
   evaluateSkillPrice() {
+    const skillInfos = this.hero.skillInfos()
     const heroRarity = this.hero.formatRarity();
-    const heroSkillsTier = [
-      this.hero.attributeTier("active1"),
-      this.hero.attributeTier("active2"),
-      this.hero.attributeTier("passive1"),
-      this.hero.attributeTier("passive2")
-    ]
-    let skillCount = 0;
-    let skillScore = 0;
 
-    heroSkillsTier.forEach((data) => {
-      if (data === "Advanced") {
-        skillCount ++;
-        skillScore += 1;
-      } else if (data === "Elite") {
-        skillCount ++;
-        skillScore += 2;
-      } else if (data === "Transcendant") {
-        skillCount ++;
-        skillScore += 3;
-      }
-    })
-
-    if (skillScore === 1) {
+    if (skillInfos.skillScore === 1) {
       this.skillPrice += 1;
-    } else if (skillScore === 2) {
-      if (skillCount === 1) {
+    } else if (skillInfos.skillScore === 2) {
+      if (skillInfos.skillCount === 1) {
         this.skillPrice += 30;
-      } else if (skillCount === 2) {
+      } else if (skillInfos.skillCount === 2) {
         this.skillPrice += 50;
       }
-    } else if (skillScore === 3) {
-      if (skillCount === 1) {
+    } else if (skillInfos.skillScore === 3) {
+      if (skillInfos.skillCount === 1) {
         this.skillPrice += 20;
-      } else if (skillCount === 2) {
+      } else if (skillInfos.skillCount === 2) {
         this.skillPrice += 80;
-      } else if (skillCount === 3) {
+      } else if (skillInfos.skillCount === 3) {
         this.skillPrice += 100;
       }
-    } else if (skillScore === 4) {
-      if (skillCount === 2) {
+    } else if (skillInfos.skillScore === 4) {
+      if (skillInfos.skillCount === 2) {
         this.skillPrice += 80;
-      } else if (skillCount === 3) {
+      } else if (skillInfos.skillCount === 3) {
         this.skillPrice += 150;
-      } else if (skillCount === 4) {
+      } else if (skillInfos.skillCount === 4) {
         this.skillPrice += 220;
       }
-    } else if (skillScore === 5) {
-      if (skillCount === 2) {
+    } else if (skillInfos.skillScore === 5) {
+      if (skillInfos.skillCount === 2) {
         this.skillPrice += 120;
-      } else if (skillCount === 3) {
+      } else if (skillInfos.skillCount === 3) {
         this.skillPrice += 200;
-      } else if (skillCount === 4) {
+      } else if (skillInfos.skillCount === 4) {
         this.skillPrice += 400;
       }
-    } else if (skillScore === 6) {
-      if (skillCount === 2) {
+    } else if (skillInfos.skillScore === 6) {
+      if (skillInfos.skillCount === 2) {
         this.skillPrice += 130;
-      } else if (skillCount === 3) {
+      } else if (skillInfos.skillCount === 3) {
         this.skillPrice += 250;
-      } else if (skillCount === 4) {
+      } else if (skillInfos.skillCount === 4) {
         this.skillPrice += 500;
       }
-    } else if (skillScore >= 7) {
+    } else if (skillInfos.skillScore >= 7) {
       this.skillPrice += 600;
     }
 
