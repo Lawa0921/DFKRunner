@@ -349,6 +349,7 @@ const config = {
             }
         ],
     },
+    "notForRentHeroIds": [],
     "heroForSale": [
         { "id": "256603", "price": 55 },
         { "id": "256980", "price": 32 },
