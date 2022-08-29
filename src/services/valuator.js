@@ -1258,8 +1258,8 @@ module.exports = class Valuator {
   networkPriceAdjustment() {
     const network = this.hero.network;
 
-    if (network === "dfk") {
-      this.valuation = this.valuation * 0.95;
+    if (network === "hmy") {
+      this.valuation = this.valuation * 0.9;
     }
   }
 }
