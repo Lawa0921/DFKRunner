@@ -1,3 +1,5 @@
+const config = require("~/config.js")
+
 module.exports = class RentValuator {
   constructor(hero) {
     this.hero = hero;
@@ -17,7 +19,8 @@ module.exports = class RentValuator {
       this.evaluateTranscendantClass()
     }
 
-    this.evaluateLevelPrice()    
+    this.evaluateLevelPrice()
+    this.priceLogicAdjustment()
   }
 
   evaluateLevelPrice() {
@@ -545,5 +548,9 @@ module.exports = class RentValuator {
         this.valuation += 500
       }
     }
+  }
+
+  priceLogicAdjustment() {
+    this.valuation = this.valuation * config.rentalEstimateAdjustment
   }
 }

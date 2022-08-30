@@ -443,7 +443,8 @@ const config = {
     "gasPrice": 400000000, // 0.4 Gwei
   },
   "queryHeroEndPoint": "https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
-  "graphqlEndPoint": "https://defi-kingdoms-community-api-gateway-co06z8vi.uc.gateway.dev/graphql"
+  "graphqlEndPoint": "https://defi-kingdoms-community-api-gateway-co06z8vi.uc.gateway.dev/graphql",
+  "rentalEstimateAdjustment": 1, // 出租估價完會在乘以這個數，如果覺得估價太低或太高可以調整這個數字
 }
 
 module.exports = config;
