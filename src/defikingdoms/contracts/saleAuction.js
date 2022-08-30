@@ -15,7 +15,7 @@ module.exports = class SaleAuction {
   }
 
   async createAuction(heroId, price) {
-    return await this.contract.createAuction(heroId, autils.formatPrice(price), autils.formatPrice(price), 60, autils.get0xAddress(), { gasPrice: config.defikingdoms.gasPrice });
+    return await this.contract.createAuction(heroId, autils.ethersFormatNumberToWei(price), autils.ethersFormatNumberToWei(price), 60, autils.get0xAddress(), { gasPrice: config.defikingdoms.gasPrice });
   }
 
   async isOnAuction(heroId) {
@@ -82,7 +82,7 @@ module.exports = class SaleAuction {
   }
 
   async rentHero(heroId, price) {
-    let rawTxnData = "0x4ee42914" + autils.intToInput(heroId) + autils.intToInput(autils.formatPrice(price)) + autils.intToInput(autils.formatPrice(price)) + autils.intToInput(60) + "0000000000000000000000000000000000000000000000000000000000000000"
+    let rawTxnData = "0x4ee42914" + autils.intToInput(heroId) + autils.intToInput(autils.ethersFormatNumberToWei(price)) + autils.intToInput(autils.ethersFormatNumberToWei(price)) + autils.intToInput(60) + "0000000000000000000000000000000000000000000000000000000000000000"
 
     console.log(`renting hero: ${heroId}`);
 
@@ -98,9 +98,9 @@ module.exports = class SaleAuction {
     const res = await sendTxn.wait();
 
     if (res.status === 1) {
-      console.log(`rent hero: ${heroId} completed`);
+      console.log(`rent hero: ${heroId} ${price} C completed`);
     } else {
-      autils.txnFailLog(`rent hero: ${heroId} failed`);
+      autils.txnFailLog(`rent hero: ${heroId} ${price} C failed`);
     }
 
     return res;

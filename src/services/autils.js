@@ -2,6 +2,7 @@ const config = require("~/config.js");
 const date = require('date-and-time');
 const fs = require('fs');
 const axios = require('axios');
+const ethers = require('ethers');
 const axiosRetry = require('axios-retry');
 const Hero = require('~/src/services/hero');
 
@@ -99,6 +100,10 @@ exports.isAPIv6Owner = async (heroId) => {
 
 exports.formatPrice = (price) => {
     return (BigInt(price) * BigInt(10 ** 18)).toString();
+}
+
+exports.ethersFormatNumberToWei = (price) => {
+    return ethers.utils.parseUnits(price.toString(), 18)
 }
 
 exports.getHerosInfo = async (heroIds) => {

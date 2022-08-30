@@ -558,7 +558,7 @@ module.exports = class Hero {
   }
 
   rentable() {
-    return this.summonable() && !this.isOnSale ? true : false;
+    return this.summonable() && !this.isOnSale && !this.isOnRent ? true : false;
   }
 
   currentStamina() {

@@ -1,20 +1,32 @@
 module.exports = class RentValuator {
   constructor(hero) {
     this.hero = hero;
-    this.valuation = 1;
+    this.valuation = 0;
   }
 
   execute() {
     const heroMainclassTier = this.hero.attributeTier("mainClass");
 
     if (heroMainclassTier === "Basic") {
-      evaluateBasicClass()
+      this.evaluateBasicClass()
     } else if (heroMainclassTier === "Advanced") {
-      evaluateAdvancedClass()
+      this.evaluateAdvancedClass()
     } else if (heroMainclassTier === "Elite") {
-      evaluateEliteClass()
+      this.evaluateEliteClass()
     } else if (heroMainclassTier === "Transcendant") {
-      evaluateTranscendantClass()
+      this.evaluateTranscendantClass()
+    }
+
+    this.evaluateLevelPrice()    
+  }
+
+  evaluateLevelPrice() {
+    if (this.hero.level >= 15) {
+      this.valuation = this.valuation * 2
+    } else if (this.hero.level >= 10) {
+      this.valuation = this.valuation * 1.25
+    } else if (this.hero.level >= 5) {
+      this.valuation = this.valuation * 1.05
     }
   }
 
@@ -37,10 +49,26 @@ module.exports = class RentValuator {
     } else if (this.hero.generation === 2) {
       if (this.hero.summonsRemaining === 6) {
         this.valuation += 5
+
+        if (this.hero.maxSummons === 6) {
+          this.valuation += 2
+        } else if (this.hero.maxSummons === 7) {
+          this.valuation += 1
+        }
       } else if (this.hero.summonsRemaining === 7) {
         this.valuation += 7
+
+        if (this.hero.maxSummons === 7) {
+          this.valuation += 3
+        } else if (this.hero.maxSummons === 8) {
+          this.valuation += 1.5
+        }
       } else if (this.hero.summonsRemaining === 8) {
         this.valuation += 9
+
+        if (this.hero.maxSummons === 8) {
+          this.valuation += 2
+        }
       } else if (this.hero.summonsRemaining === 9) {
         this.valuation += 11
       }
@@ -56,6 +84,8 @@ module.exports = class RentValuator {
       } else if (this.hero.summonsRemaining === 10) {
         this.valuation += 20
       }
+    } else if (this.hero.generation === 0) {
+      this.valuation += 30
     }
 
     if (this.hero.mainClass === "Warrior" || this.hero.mainClass === "Knight") {
