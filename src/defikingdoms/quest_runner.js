@@ -19,14 +19,21 @@ exports.runDFKChainQuest = async () => {
     const heroesStruct = dataParser.questDataParser(activeQuests);
 
     await CompleteQuests(heroesStruct);
-    await runDFKSalesLogic();
-    await runDFKRentHeroLogic();
+
+    await Promise.allSettled([
+      runDFKSalesLogic(),
+      runDFKRentHeroLogic(),
+    ])
+
     await runDFKLevelUpLogic();
-    await CheckAndSendDFKFishers(heroesStruct);
-    await CheckAndSendDFKForagers(heroesStruct);
-    await CheckAndSendDFKGoldMiners(heroesStruct);
-    await CheckAndSendDFKCrystalMiners(heroesStruct);
-    await CheckAndSendDFKStatQuests(heroesStruct);
+
+    await Promise.allSettled([
+      CheckAndSendDFKFishers(heroesStruct),
+      CheckAndSendDFKForagers(heroesStruct),
+      CheckAndSendDFKGoldMiners(heroesStruct),
+      CheckAndSendDFKCrystalMiners(heroesStruct),
+      CheckAndSendDFKStatQuests(heroesStruct)
+    ])
 
     console.log("--- DFK Chain quest process completed ---");
   } catch(error) {
