@@ -1,6 +1,7 @@
 const config = require("~/config.js");
 const ethers = require('ethers');
-const questCoreV2ABI = require('~/abis/QuestCoreV2.json')
+const questCoreV2ABI = require('~/abis/QuestCoreV2.json');
+const autils = require("~/src/services/autils");
 
 module.exports = class QuestCoreV2 {
   constructor() {
@@ -14,11 +15,11 @@ module.exports = class QuestCoreV2 {
   }
 
   async completeQuest(heroId) {
-    return await this.contract.completeQuest(heroId, { gasPrice: config.defikingdoms.gasPrice });
+    return await this.contract.completeQuest(heroId, { gasPrice: config.defikingdoms.gasPrice, nonce: autils.randomNonce() });
   }
 
   async startFishingQuest(heroIds, attempt) {
-    const txn = await this.contract.startQuest(heroIds, config.defikingdoms.quest.fishing.contractAddress, attempt, 0, { gasPrice: config.defikingdoms.gasPrice })
+    const txn = await this.contract.startQuest(heroIds, config.defikingdoms.quest.fishing.contractAddress, attempt, 0, { gasPrice: config.defikingdoms.gasPrice, nonce: autils.randomNonce() })
     const res = await txn.wait();
     if (res.status === 1) {
       console.log("Sent " + heroIds + " on a Fishing Quest completed")
@@ -30,7 +31,7 @@ module.exports = class QuestCoreV2 {
   }
 
   async startForagingQuest(heroIds, attempt) {
-    const txn = await this.contract.startQuest(heroIds, config.defikingdoms.quest.foraging.contractAddress, attempt, 0, { gasPrice: config.defikingdoms.gasPrice })
+    const txn = await this.contract.startQuest(heroIds, config.defikingdoms.quest.foraging.contractAddress, attempt, 0, { gasPrice: config.defikingdoms.gasPrice, nonce: autils.randomNonce() })
     const res = await txn.wait();
     if (res.status === 1) {
       console.log("Sent " + heroIds + " on a Foraging Quest completed")
@@ -42,7 +43,7 @@ module.exports = class QuestCoreV2 {
   }
 
   async startStatQuest(heroIds, attempt, address, type) {
-    const tx = await this.contract.startQuest(heroIds, address, attempt, 1, { gasPrice: config.defikingdoms.gasPrice })
+    const tx = await this.contract.startQuest(heroIds, address, attempt, 1, { gasPrice: config.defikingdoms.gasPrice, nonce: autils.randomNonce() })
     const res = await tx.wait();
     if (res.status === 1) {
       console.log("Sent " + heroIds + " on a " + type + " Stat Quest completed")
@@ -54,7 +55,7 @@ module.exports = class QuestCoreV2 {
   }
 
   async startGoldMining(heroIds) {
-    const tx = await this.contract.startQuest(heroIds, config.defikingdoms.quest.goldMining.contractAddress, 1, 0, { gasPrice: config.defikingdoms.gasPrice })
+    const tx = await this.contract.startQuest(heroIds, config.defikingdoms.quest.goldMining.contractAddress, 1, 0, { gasPrice: config.defikingdoms.gasPrice, nonce: autils.randomNonce() })
     const res = await tx.wait();
 
     if (res.status === 1) {
@@ -67,7 +68,7 @@ module.exports = class QuestCoreV2 {
   }
 
   async startCrystalMining(heroIds) {
-    const tx = await this.contract.startQuest(heroIds, config.defikingdoms.quest.crystalMining.contractAddress, 1, 0, { gasPrice: config.defikingdoms.gasPrice })
+    const tx = await this.contract.startQuest(heroIds, config.defikingdoms.quest.crystalMining.contractAddress, 1, 0, { gasPrice: config.defikingdoms.gasPrice, nonce: autils.randomNonce() })
     const res = await tx.wait();
 
     if (res.status === 1) {

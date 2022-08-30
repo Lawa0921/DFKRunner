@@ -106,6 +106,10 @@ exports.ethersFormatNumberToWei = (price) => {
     return ethers.utils.parseUnits(price.toString(), 18)
 }
 
+exports.randomNonce = () => {
+    Math.floor(Math.random() * (4294967295)) + 1
+}
+
 exports.getHerosInfo = async (heroIds) => {
     if (heroIds.length === 0) {
         return []

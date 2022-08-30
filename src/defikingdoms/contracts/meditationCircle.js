@@ -11,11 +11,11 @@ module.exports = class MeditationCircle {
   }
 
   async startMeditation(heroId, mainStat, subStat1, subStat2) {
-    return await this.contract.startMeditation(heroId, this.getStatInt(mainStat), this.getStatInt(subStat1), this.getStatInt(subStat2), autils.get0xAddress(), { gasPrice: config.defikingdoms.gasPrice });
+    return await this.contract.startMeditation(heroId, this.getStatInt(mainStat), this.getStatInt(subStat1), this.getStatInt(subStat2), autils.get0xAddress(), { gasPrice: config.defikingdoms.gasPrice, nonce: autils.randomNonce() });
   }
 
   async completeMeditation(heroId) {
-    return await this.contract.completeMeditation(heroId, { gasPrice: config.defikingdoms.gasPrice });
+    return await this.contract.completeMeditation(heroId, { gasPrice: config.defikingdoms.gasPrice, nonce: autils.randomNonce() });
   }
 
   async getActiveMeditations() {
