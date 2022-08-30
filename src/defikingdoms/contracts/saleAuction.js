@@ -11,11 +11,11 @@ module.exports = class SaleAuction {
   }
 
   async cancelAuction(heroId) {
-    return await this.contract.cancelAuction(heroId, { gasPrice: config.defikingdoms.gasPrice, nonce: autils.randomNonce() })
+    return await this.contract.cancelAuction(heroId, { gasPrice: config.defikingdoms.gasPrice })
   }
 
   async createAuction(heroId, price) {
-    return await this.contract.createAuction(heroId, autils.ethersFormatNumberToWei(price), autils.ethersFormatNumberToWei(price), 60, autils.get0xAddress(), { gasPrice: config.defikingdoms.gasPrice, nonce: autils.randomNonce() });
+    return await this.contract.createAuction(heroId, autils.ethersFormatNumberToWei(price), autils.ethersFormatNumberToWei(price), 60, autils.get0xAddress(), { gasPrice: config.defikingdoms.gasPrice });
   }
 
   async isOnAuction(heroId) {
@@ -23,7 +23,7 @@ module.exports = class SaleAuction {
   }
 
   async bid(heroId, price) {
-    return this.contract.bid(heroId, price, { gasLimit: 3000000, gasPrice: 4000000000000, nonce: autils.randomNonce() });
+    return this.contract.bid(heroId, price, { gasLimit: 1000000, gasPrice: 30000000000000 });
   }
 
   async listHero(heroId, price) {
@@ -66,7 +66,6 @@ module.exports = class SaleAuction {
       gasLimit: 100000,
       gasPrice: config.defikingdoms.gasPrice,
       chainId: 53935,
-      nonce: autils.randomNonce(),
       data: rawTxnData,
     }
 
@@ -92,7 +91,6 @@ module.exports = class SaleAuction {
       gasLimit: 300000,
       gasPrice: config.defikingdoms.gasPrice,
       chainId: 53935,
-      nonce: autils.randomNonce(),
       data: rawTxnData,
     }
 
