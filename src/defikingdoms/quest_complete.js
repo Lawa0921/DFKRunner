@@ -7,9 +7,7 @@ exports.CompleteQuests = async (heroesStruct) => {
       return completeQuest(completedQuesterId)
     })
 
-    await Promise.allSettled(completeQuestPromises).then((results) => {
-      console.log(`completed ${results.length} quest`)
-    })
+    await Promise.allSettled(completeQuestPromises)
   } else {
     console.log("No quest should be complete.")
   }
