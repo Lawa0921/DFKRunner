@@ -6,8 +6,10 @@ async function main() {
   try {
     console.log(autils.getCurrentDateTime().toLocaleTimeString());
 
-    await runDFKChainQuest();
-    await runHarmonyQuest();
+    await Promise.allSettled([
+      runDFKChainQuest(),
+      runHarmonyQuest(),
+    ])
 
     console.log("main process completed");
     process.exit();
