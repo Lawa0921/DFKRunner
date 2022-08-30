@@ -20,8 +20,6 @@ const questCoreV1Contract = new QuestCoreV1();
 
 exports.runHarmonyQuest = async () => {
     try {
-        console.log("--- Harmony quest ---");
-
         let activeQuests = await questCoreV1Contract.getActiveQuests();
         let activeQuests2 = await questCoreV2Contract.getAccountActiveQuests();
 
@@ -43,8 +41,6 @@ exports.runHarmonyQuest = async () => {
         await CheckAndSendGardeners(heroesStruct);
 
         await CheckAndSendStatQuests(heroesStruct2);
-
-        console.log("--- Harmony quest process completed ---");
     }
     catch(error){
         autils.log(error.toString(), true);

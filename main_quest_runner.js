@@ -11,7 +11,7 @@ async function main() {
       runHarmonyQuest(),
     ])
 
-    console.log("main process completed");
+    console.log("------------ main process completed ------------");
     process.exit();
   } catch(error) {
     autils.log(error.toString(), true);
