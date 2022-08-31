@@ -19,20 +19,17 @@ exports.runDFKChainQuest = async () => {
 
     await CompleteQuests(heroesStruct);
 
-    await Promise.allSettled([
-      runDFKSalesLogic(),
-      runDFKRentHeroLogic(),
-    ])
+    await runDFKSalesLogic();
+    await runDFKRentHeroLogic();
 
     await runDFKLevelUpLogic();
 
-    await Promise.allSettled([
-      CheckAndSendDFKFishers(heroesStruct),
-      CheckAndSendDFKForagers(heroesStruct),
-      CheckAndSendDFKGoldMiners(heroesStruct),
-      CheckAndSendDFKCrystalMiners(heroesStruct),
-      CheckAndSendDFKStatQuests(heroesStruct)
-    ])
+    
+    await CheckAndSendDFKFishers(heroesStruct),
+    await CheckAndSendDFKForagers(heroesStruct),
+    await CheckAndSendDFKGoldMiners(heroesStruct),
+    await CheckAndSendDFKCrystalMiners(heroesStruct),
+    await CheckAndSendDFKStatQuests(heroesStruct)
   } catch(error) {
     autils.log(error.toString(), true);
   }

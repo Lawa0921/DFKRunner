@@ -2,12 +2,13 @@ const config = require("~/config.js");
 const ethers = require('ethers');
 const saleAuctionABI = require('~/abis/SaleAuction.json');
 const autils = require('~/src/services/autils');
+const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class SaleAuction {
   constructor() {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     this.wallet = new ethers.Wallet(config.privateKey, this.provider)
-    this.contract = new ethers.Contract(config.defikingdoms.saleAuction, saleAuctionABI, this.wallet)
+    this.contract = new ethers.Contract(config.defikingdoms.saleAuction, saleAuctionABI, new NonceManager(this.wallet))
   }
 
   async cancelAuction(heroId) {

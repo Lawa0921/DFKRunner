@@ -1,12 +1,13 @@
 const config = require("~/config.js");
 const ethers = require('ethers');
 const questCoreV2ABI = require('~/abis/QuestCoreV2.json');
+const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class QuestCoreV2 {
   constructor() {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     this.wallet = new ethers.Wallet(config.privateKey, this.provider)
-    this.contract = new ethers.Contract(config.defikingdoms.questCoreV2, questCoreV2ABI, this.wallet)
+    this.contract = new ethers.Contract(config.defikingdoms.questCoreV2, questCoreV2ABI, new NonceManager(this.wallet))
   }
 
   async getAccountActiveQuests() {
