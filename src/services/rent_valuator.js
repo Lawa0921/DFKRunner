@@ -214,11 +214,11 @@ module.exports = class RentValuator {
     if (heroRarity === "UnCommon") {
       this.valuation = this.valuation * 1.05
     } else if (heroRarity === "Rare") {
-      this.valuation = this.valuation * 1.15
+      this.valuation = this.valuation * 1.25
     } else if (heroRarity === "Legendary") {
-      this.valuation = this.valuation * 1.3
+      this.valuation = this.valuation * 2.2
     } else if (heroRarity === "Mythic") {
-      this.valuation = this.valuation * 2
+      this.valuation = this.valuation * 3
     }
   }
 
@@ -365,7 +365,7 @@ module.exports = class RentValuator {
     } else if (heroRarity === "Rare") {
       this.valuation = this.valuation * 1.35
     } else if (heroRarity === "Legendary") {
-      this.valuation = this.valuation * 2
+      this.valuation = this.valuation * 2.5
     } else if (heroRarity === "Mythic") {
       this.valuation = this.valuation * 4
     }
@@ -454,11 +454,11 @@ module.exports = class RentValuator {
     if (heroRarity === "UnCommon") {
       this.valuation = this.valuation * 1.1
     } else if (heroRarity === "Rare") {
-      this.valuation = this.valuation * 1.35
+      this.valuation = this.valuation * 1.5
     } else if (heroRarity === "Legendary") {
-      this.valuation = this.valuation * 2
+      this.valuation = this.valuation * 3
     } else if (heroRarity === "Mythic") {
-      this.valuation = this.valuation * 4
+      this.valuation = this.valuation * 5
     }
   }
 
@@ -552,5 +552,6 @@ module.exports = class RentValuator {
 
   priceLogicAdjustment() {
     this.valuation = this.valuation * config.rentalEstimateAdjustment
+    this.valuation = Math.round(this.valuation, 2)
   }
 }
