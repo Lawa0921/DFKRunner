@@ -3,6 +3,7 @@ const autils = require('~/src/services/autils')
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const questCoreV2Contract = new QuestCoreV2();
 const minStamina = 25;
+const maxQueue = 6;
 
 exports.CheckAndSendDFKStatQuests = async (heroesStruct) => {
   for (let i = 0; i < config.defikingdoms.quest.statQuests.length; i++) {
