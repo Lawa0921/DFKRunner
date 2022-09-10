@@ -26,6 +26,8 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct) => {
 						await questCoreV2Contract.startStatQuest([possibleHeroes[i].id], attemp, questType.contractAddress, questType.name);
 					}
 				}
+			} else {
+				console.log(`No ${questType.name} hero send`)
 			}
 		}
 	}
