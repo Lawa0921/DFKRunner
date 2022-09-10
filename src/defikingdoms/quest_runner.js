@@ -27,8 +27,8 @@ exports.runDFKChainQuest = async () => {
 
     await CheckAndSendDFKFishers(heroesStruct)
     await CheckAndSendDFKForagers(heroesStruct)
-    await CheckAndSendDFKGoldMiners(heroesStruct)
     await CheckAndSendDFKCrystalMiners(heroesStruct)
+    await CheckAndSendDFKGoldMiners(heroesStruct, owningHeroObjects)
     await CheckAndSendDFKStatQuests(heroesStruct, owningHeroObjects)
   } catch(error) {
     autils.log(error.toString(), true);
