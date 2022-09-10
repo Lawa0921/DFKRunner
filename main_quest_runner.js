@@ -12,7 +12,9 @@ async function main() {
     ])
 
     console.log("------------ main process completed ------------");
-    process.exit();
+    setTimeout(() => {
+      process.exit();
+    }, 5000);
   } catch(error) {
     autils.log(error.toString(), true);
     process.exit();
