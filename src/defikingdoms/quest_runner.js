@@ -16,11 +16,12 @@ exports.runDFKChainQuest = async () => {
   try {
     const activeQuests = await questCoreV2Contract.getAccountActiveQuests();
     const heroesStruct = dataParser.questDataParser(activeQuests);
+    const owningHeroObjects = await autils.getHerosInfo(autils.getDFKOwningHeroIds());
 
     await CompleteQuests(heroesStruct);
 
     await runDFKSalesLogic();
-    await runDFKRentHeroLogic();
+    await runDFKRentHeroLogic(owningHeroObjects);
 
     await runDFKLevelUpLogic();
 

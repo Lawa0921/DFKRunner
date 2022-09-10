@@ -1,25 +1,22 @@
 const SaleAuction = require("~/src/defikingdoms/contracts/saleAuction")
 const saleAuctionContract = new SaleAuction()
-const autils = require("~/src/services/autils")
 const config = require("~/config.js")
 const RentValuator = require('~/src/services/rent_valuator')
 
-exports.runDFKRentHeroLogic = async () => {
-  const owningHeroIds = autils.getDFKOwningHeroIds().filter(heroId => 
-    config.defikingdoms.notForRentHeroIds.indexOf(heroId) === -1 && 
-    config.defikingdoms.heroForSale.map(heroData => heroData.id).indexOf(heroId) === -1
-  )
-  const heroObjects = await autils.getHerosInfo(owningHeroIds)
+exports.runDFKRentHeroLogic = async (owningHeroObjects) => {
+  const filtedHeroObjects = owningHeroObjects.filter((heroObject) => {
+    return config.defikingdoms.notForRentHeroIds.indexOf(heroObject.id) === -1 && config.defikingdoms.heroForSale.map(heroData => heroData.id).indexOf(heroObject.id) === -1
+  })
 
-  for (let i = 0; i < heroObjects.length; i++) {
-    if (heroObjects[i].rentable()) {
-      let rentValuator = new RentValuator(heroObjects[i])
+  for (let i = 0; i < filtedHeroObjects.length; i++) {
+    if (filtedHeroObjects[i].rentable()) {
+      let rentValuator = new RentValuator(filtedHeroObjects[i])
       rentValuator.execute()
 
       if (rentValuator.valuation > 0) {
-        await saleAuctionContract.rentHero(heroObjects[i].id, rentValuator.valuation)
+        await saleAuctionContract.rentHero(filtedHeroObjects[i].id, rentValuator.valuation)
       } else {
-        console.log(`${heroObjects[i].id} not has any rental value`)
+        console.log(`${filtedHeroObjects[i].id} not has any rental value`)
       }
     }
   }
