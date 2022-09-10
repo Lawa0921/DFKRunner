@@ -5,14 +5,15 @@ const questCoreV2Contract = new QuestCoreV2();
 const minStamina = 25;
 const maxQueue = 6;
 
-exports.CheckAndSendDFKStatQuests = async (heroesStruct) => {
+exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects) => {
   for (let i = 0; i < config.defikingdoms.quest.statQuests.length; i++) {
   	const questType = config.defikingdoms.quest.statQuests[i]
 
     if (questType.heroes.length !== 0) {
 			const activeQuesterIds = heroesStruct.allQuesters
-			const heroObjects = await autils.getHerosInfo(questType.heroes)
-			const possibleHeroes = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress })
+			const possibleHeroes = owningHeroObjects.filter((heroObject) => { 
+				return questType.heroes.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress 
+			})
     
 			if (possibleHeroes.length > 0) {
 				const questCount = amountOfQuest(heroesStruct, questType)
