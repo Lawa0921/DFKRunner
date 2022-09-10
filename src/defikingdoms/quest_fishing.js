@@ -5,14 +5,15 @@ const questCoreV2Contract = new QuestCoreV2();
 const minStamina = 25;
 const maxQueue = 6;
 
-exports.CheckAndSendDFKFishers = async (heroesStruct) => {
+exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects) => {
 	if (heroesStruct.fishingQuestCount >= maxQueue) {
 		console.log("fishing queue has reached its maximum value.")
 	} else {
 		const questType = config.defikingdoms.quest.fishing
 		const activeQuesterIds = heroesStruct.allQuesters
-		const heroObjects = await autils.getHerosInfo(questType.heroes)
-		const possibleFishers = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress })
+		const possibleFishers = owningHeroObjects.filter((heroObject) => { 
+			return questType.heroes.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress
+		})
 	
 		if (possibleFishers.length > 0) {
 			for (let i = 0; i < maxQueue - heroesStruct.fishingQuestCount - 1 && i < possibleFishers.length; i++) {

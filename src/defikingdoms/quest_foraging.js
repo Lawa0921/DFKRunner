@@ -5,14 +5,15 @@ const questCoreV2Contract = new QuestCoreV2();
 const minStamina = 25;
 const maxQueue = 6;
 
-exports.CheckAndSendDFKForagers = async (heroesStruct) => {
+exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects) => {
 	if (heroesStruct.foragingQuestCount >= maxQueue) {
 		console.log("foraging queue has reached its maximum value.")
 	} else {
 		const questType = config.defikingdoms.quest.foraging
 		const activeQuesterIds = heroesStruct.allQuesters
-		const heroObjects = await autils.getHerosInfo(questType.heroes)
-		const possibleForagers = heroObjects.filter((heroObject) => { return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress })
+		const possibleForagers = owningHeroObjects.filter((heroObject) => { 
+			return questType.heroes.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress
+		})
 
 		if (possibleForagers.length > 0) {
 			for (let i = 0; i < maxQueue - heroesStruct.foragingQuestCount - 1 && i < possibleForagers.length; i++) {

@@ -25,9 +25,9 @@ exports.runDFKChainQuest = async () => {
 
     await runDFKLevelUpLogic();
 
-    await CheckAndSendDFKFishers(heroesStruct)
-    await CheckAndSendDFKForagers(heroesStruct)
     await CheckAndSendDFKCrystalMiners(heroesStruct)
+    await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects)
+    await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects)
     await CheckAndSendDFKGoldMiners(heroesStruct, owningHeroObjects)
     await CheckAndSendDFKStatQuests(heroesStruct, owningHeroObjects)
   } catch(error) {
