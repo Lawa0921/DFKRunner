@@ -309,31 +309,38 @@ const config = {
                 {
                     "tokenPair": "wJEWEL-xJEWEL",
                     "pairAddress": "0xd3d8ff8e42C2eD51FabE4BA34080C6ac79395f24",
+                    "singleBatchAmount": 2,
                     "heroes": ["255984", "265843"],
                 },
                 {
                     "tokenPair": "CRYSTAL-AVAX",
                     "pairAddress": "0x8eDA0ceA7a90E794B33708Cc0768727A1A612f3d",
+                    "singleBatchAmount": 2,
                     "heroes": [],
                 },                 {
                     "tokenPair": "CRYSTAL-wJEWEL",
                     "pairAddress": "0xC4839Fb9A5466878168EaE3fD58c647B71475b61",
+                    "singleBatchAmount": 2,
                     "heroes": [],
                 },                 {
                     "tokenPair": "CRYSTAL-USDC",
                     "pairAddress": "0x6FEF23498877bC4c3940ebE121dd7D138BdA4e11",
+                    "singleBatchAmount": 2,
                     "heroes": [],
                 },                 {
                     "tokenPair": "ETH-USDC",
                     "pairAddress": "0xdeF7cBeE7d0B62037616ee26BCAc1C8364f53476",
+                    "singleBatchAmount": 2,
                     "heroes": [],
                 },                 {
                     "tokenPair": "wJEWEL-USDC",
                     "pairAddress": "0xaac3933Faa3B668304C9276d10CA88853463BD42",
+                    "singleBatchAmount": 2,
                     "heroes": [],
                 },                 {
                     "tokenPair": "CRYSTAL-ETH",
                     "pairAddress": "0x810e1fF51fDd58c474c66A31013713D1A17BF458",
+                    "singleBatchAmount": 2,
                     "heroes": [],
                 }
             ]

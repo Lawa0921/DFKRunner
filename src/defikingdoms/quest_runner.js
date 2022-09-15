@@ -5,6 +5,7 @@ const { CheckAndSendDFKForagers } = require("~/src/defikingdoms/quest_foraging")
 const { CheckAndSendDFKStatQuests } = require("~/src/defikingdoms/quest_stats");
 const { CheckAndSendDFKGoldMiners } = require('~/src/defikingdoms/quest_gold_mining');
 const { CheckAndSendDFKCrystalMiners } = require('~/src/defikingdoms/quest_crystal_mining');
+const { CheckAndSendDFKGardeners } = require("~/src/defikingdoms/quest_gardening");
 const { CompleteQuests } = require('~/src/defikingdoms/quest_complete');
 const { runDFKSalesLogic } = require('~/src/defikingdoms/sales_handler');
 const { runDFKLevelUpLogic } = require('~/src/defikingdoms/hero_level_up'); 
@@ -25,10 +26,11 @@ exports.runDFKChainQuest = async () => {
 
     await runDFKLevelUpLogic(owningHeroObjects);
 
-    await CheckAndSendDFKCrystalMiners(heroesStruct)
     await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects)
     await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects)
+    await CheckAndSendDFKGardeners(heroesStruct, owningHeroObjects)
     await CheckAndSendDFKGoldMiners(heroesStruct, owningHeroObjects)
+    // await CheckAndSendDFKCrystalMiners(heroesStruct)
     await CheckAndSendDFKStatQuests(heroesStruct, owningHeroObjects)
   } catch(error) {
     autils.log(error.toString(), true);
