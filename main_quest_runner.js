@@ -1,5 +1,4 @@
 const { runDFKChainQuest } = require('~/src/defikingdoms/quest_runner');
-const { runHarmonyQuest } = require('~/src/harmony/quest_runner');
 const autils = require("~/src/services/autils")
 
 async function main() {
@@ -10,7 +9,6 @@ async function main() {
 
     await Promise.allSettled([
       runDFKChainQuest(),
-      runHarmonyQuest(),
     ])
 
     console.log("------------ main process completed ------------");
