@@ -1,5 +1,6 @@
 const config = require("~/config.js");
 const ethers = require('ethers');
+const autils = require('~/src/services/autils');
 const questCoreV2ABI = require('~/abis/QuestCoreV2.json');
 const { NonceManager } = require("@ethersproject/experimental")
 
@@ -75,6 +76,38 @@ module.exports = class QuestCoreV2 {
       console.log(`Sent ${heroIds} crystal mining success`)
     } else {
       console.log(`Sent ${heroIds} crystal mining failed`)
+    }
+
+    return res;
+  }
+
+  async startGardeningQuest(heroIds, pairAddress) {
+    let rawTxnData = "0x8a2da17b" + 
+      "0000000000000000000000000000000000000000000000000000000000000080" + 
+      pairAddress.slice(2).toString(16).padStart(64, "0") +
+      autils.intToInput(1) +
+      "0000000000000000000000000000000000000000000000000000000000000000" +
+      autils.intToInput(heroIds.length)
+
+    heroIds.forEach((heroId) => {
+      rawTxnData += autils.intToInput(heroId)
+    })
+
+    const txnData = {
+      to: config.defikingdoms.questCoreV2, 
+      gasLimit: 2000000, // to do await this.provider.estimateGas(txnData)
+      gasPrice: config.defikingdoms.gasPrice,
+      chainId: 53935,
+      data: rawTxnData,
+    }
+      
+    const sendTxn = await this.wallet.sendTransaction(txnData);
+    const res = await sendTxn.wait();
+
+    if (res.status === 1) {
+      console.log(`Sent ${heroIds} gardening quest success`);
+    } else {
+      autils.txnFailLog(`Sent ${heroIds} gardening quest failed`);
     }
 
     return res;
