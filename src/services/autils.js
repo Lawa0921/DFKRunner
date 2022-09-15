@@ -254,15 +254,19 @@ exports.getDFKOwningHeroIds = () => {
     heroIds = heroIds.concat(config.defikingdoms.quest.goldMining.heroes);
     heroIds = heroIds.concat(config.defikingdoms.quest.crystalMining.heroes);
 
-    for (let i = 0; i < config.harmony.quest.statQuests.length; i++ ) {
+    for (let i = 0; i < config.defikingdoms.quest.statQuests.length; i++ ) {
         heroIds = heroIds.concat(config.defikingdoms.quest.statQuests[i].heroes);
+    }
+
+    for (let i = 0; i < config.defikingdoms.quest.gardening.pairAddressMappings.length; i++) {
+        heroIds = heroIds.concat(config.defikingdoms.quest.gardening.pairAddressMappings[i].heroes);
     }
   
     return heroIds;
 }
 
 exports.getAllConfigHeroIds = () => {
-    return this.getHarmonyOwningHeroIds().concat(this.getDFKOwningHeroIds());
+    return this.getDFKOwningHeroIds();
 }
 
 exports.watchHeroLog = async (hero, price, valuator, network) => {
