@@ -82,27 +82,8 @@ module.exports = class QuestCoreV2 {
   }
 
   async startGardeningQuest(heroIds, pairAddress) {
-    let rawTxnData = "0x8a2da17b" + 
-      "0000000000000000000000000000000000000000000000000000000000000080" + 
-      pairAddress.slice(2).toString(16).padStart(64, "0") +
-      autils.intToInput(1) +
-      "0000000000000000000000000000000000000000000000000000000000000000" +
-      autils.intToInput(heroIds.length)
-
-    heroIds.forEach((heroId) => {
-      rawTxnData += autils.intToInput(heroId)
-    })
-
-    const txnData = {
-      to: config.defikingdoms.questCoreV2, 
-      gasLimit: 2000000, // to do await this.provider.estimateGas(txnData)
-      gasPrice: config.defikingdoms.gasPrice,
-      chainId: 53935,
-      data: rawTxnData,
-    }
-      
-    const sendTxn = await this.wallet.sendTransaction(txnData);
-    const res = await sendTxn.wait();
+    const tx = await this.contract.startQuest(heroIds, pairAddress, 1, 0, { gasPrice: config.defikingdoms.gasPrice })
+    const res = await tx.wait();
 
     if (res.status === 1) {
       console.log(`Sent ${heroIds} gardening quest success`);
