@@ -18,7 +18,7 @@ exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects) => {
     const sendGoldMiners = possibleGoldMiners.slice(0, batchAmount)
     const sentMinerIds = sendGoldMiners.map(heroObject => heroObject.id)
 
-    for (let i = 0; i < i < sendGoldMiners.length; i++) {
+    for (let i = 0; i < sendGoldMiners.length; i++) {
       if (sendGoldMiners[i].isOnSale) {
         await saleAuctionContract.unlistHero(sendGoldMiners[i].id)
       }
