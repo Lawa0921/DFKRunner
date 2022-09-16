@@ -464,8 +464,6 @@ const config = {
         { "id": "273461", "price": 39 },
         { "id": "274360", "price": 39 }
     ],
-    "listStamina": 24,
-    "unlistStamina": 24,
     "useRpcIndex": 0,
     "rpcs": [
       "https://subnets.avax.network/defi-kingdoms/dfk-chain/rpc",

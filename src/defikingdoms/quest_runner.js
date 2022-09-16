@@ -21,7 +21,7 @@ exports.runDFKChainQuest = async () => {
 
     await CompleteQuests(heroesStruct);
 
-    await runDFKSalesLogic();
+    await runDFKSalesLogic(owningHeroObjects);
     await runDFKRentHeroLogic(owningHeroObjects);
 
     await runDFKLevelUpLogic(owningHeroObjects);
