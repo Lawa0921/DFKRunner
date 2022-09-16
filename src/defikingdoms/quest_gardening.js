@@ -18,7 +18,7 @@ exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects) => {
       const sendGardeners = possibleGardeners.slice(0, questType.pairAddressMappings[i].singleBatchAmount)
       const sentGardenerIds = sendGardeners.map(heroObject => heroObject.id)
 
-      for (let i = 0; i < i < sendGardeners.length; i++) {
+      for (let i = 0; i < sendGardeners.length; i++) {
         if (sendGardeners[i].isOnSale) {
           await saleAuctionContract.unlistHero(sendGardeners[i].id)
         }
