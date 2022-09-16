@@ -29,7 +29,7 @@ module.exports = class SaleAuction {
 
   async listHero(heroId, price) {
     const id = parseInt(heroId, 10);
-    console.log(`listing hero: ${id}: ${price}`);
+    console.log(`listing hero: ${id}: ${price} C`);
   
     const tx = await this.createAuction(id, price)
     const res = await tx.wait();
