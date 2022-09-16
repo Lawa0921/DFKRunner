@@ -2,6 +2,8 @@ const config = require("~/config.js");
 const autils = require('~/src/services/autils');
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const questCoreV2Contract = new QuestCoreV2();
+const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
+const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
 const maxBatch = 6;
 
@@ -18,6 +20,14 @@ exports.CheckAndSendDFKCrystalMiners = async (heroesStruct) => {
   const batchAmount = questType.singleBatchAmount > maxBatch ? maxBatch : questType.singleBatchAmount
 
   if (possibleCrystalMiners.length > 0 && possibleCrystalMiners.length >= batchAmount) {
+    const sendCrystalMiners = possibleCrystalMiners.slice(0, batchAmount)
+
+    for (let i = 0; i < i < sendCrystalMiners.length; i++) {
+      if (sendCrystalMiners[i].isOnSale) {
+        await saleAuctionContract.unlistHero(sendCrystalMiners[i].id)
+      }
+    }
+
     let sentMinerIds = [possibleCrystalMiners[0].id]
 
     if (batchAmount > 1) {
