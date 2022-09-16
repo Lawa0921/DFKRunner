@@ -7,7 +7,7 @@ const isOwning = (heroObject) => {
 }
 
 const isShouldList = (heroObject) => {
-  return isOwning(heroObject) && !heroObject.isOnSale && !heroObject.isOnRent && !heroObject.isOnQuesting && config.defikingdoms.heroForSale.map((heroData) => { return heroData.id }).indexOf(heroObject.id) > -1
+  return isOwning(heroObject) && !heroObject.isOnSale && !heroObject.isOnRent && !heroObject.isOnQuesting && config.defikingdoms.heroForSale.map((heroData) => { return heroData.id }).indexOf(heroObject.id) > -1 && heroObject.currentStamina() <= config.defikingdoms.listStamina
 }
 
 exports.runDFKSalesLogic = async (owningHeroObjects) => {
