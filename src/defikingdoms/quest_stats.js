@@ -2,6 +2,8 @@ const config = require("~/config.js");
 const autils = require('~/src/services/autils')
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const questCoreV2Contract = new QuestCoreV2();
+const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
+const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
 const maxQueue = 6;
 
@@ -23,6 +25,11 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects) => {
 				} else {
 					for (let i = 0; i < maxQueue - questCount - 1 && i < possibleHeroes.length; i++) {
 						console.log(`senting ${possibleHeroes[i].id} to ${questType.name}`);
+
+						if (possibleHeroes[i].isOnSale) {
+							await saleAuctionContract.unlistHero(possibleHeroes[i].id)
+						}
+
 						const attemp = Math.floor(possibleHeroes[i].currentStamina() / 5)
 						await questCoreV2Contract.startStatQuest([possibleHeroes[i].id], attemp, questType.contractAddress, questType.name);
 					}
