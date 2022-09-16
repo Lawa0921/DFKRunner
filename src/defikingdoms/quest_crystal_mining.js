@@ -22,7 +22,7 @@ exports.CheckAndSendDFKCrystalMiners = async (heroesStruct) => {
   if (possibleCrystalMiners.length > 0 && possibleCrystalMiners.length >= batchAmount) {
     const sendCrystalMiners = possibleCrystalMiners.slice(0, batchAmount)
 
-    for (let i = 0; i < i < sendCrystalMiners.length; i++) {
+    for (let i = 0; i < sendCrystalMiners.length; i++) {
       if (sendCrystalMiners[i].isOnSale) {
         await saleAuctionContract.unlistHero(sendCrystalMiners[i].id)
       }
