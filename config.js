@@ -310,36 +310,71 @@ const config = {
                     "tokenPair": "wJEWEL-xJEWEL",
                     "pairAddress": "0xd3d8ff8e42C2eD51FabE4BA34080C6ac79395f24",
                     "singleBatchAmount": 2,
-                    "heroes": ["255984", "265843"],
+                    "heroes": ["255984", "265843", "278642", "274368", "248925", "191055"],
                 },
                 {
                     "tokenPair": "CRYSTAL-AVAX",
                     "pairAddress": "0x8eDA0ceA7a90E794B33708Cc0768727A1A612f3d",
                     "singleBatchAmount": 2,
-                    "heroes": [],
+                    "heroes": ["1000000009694", "1000000013454", "304501", "1000000005579", "295023", "271693"],
                 },                 {
                     "tokenPair": "CRYSTAL-wJEWEL",
                     "pairAddress": "0xC4839Fb9A5466878168EaE3fD58c647B71475b61",
                     "singleBatchAmount": 2,
-                    "heroes": [],
+                    "heroes": ["257441", "1000000011052", "1000000014451", "181573", "264337", "1000000005132"],
                 },                 {
                     "tokenPair": "CRYSTAL-USDC",
                     "pairAddress": "0x6FEF23498877bC4c3940ebE121dd7D138BdA4e11",
                     "singleBatchAmount": 2,
-                    "heroes": [],
+                    "heroes": ["272143", "288479", "1000000009289", "238735", "231246", "1000000015231"],
                 },                 {
                     "tokenPair": "ETH-USDC",
                     "pairAddress": "0xdeF7cBeE7d0B62037616ee26BCAc1C8364f53476",
                     "singleBatchAmount": 2,
-                    "heroes": [],
+                    "heroes": ["1000000014137", "224608", "244697", "210943"],
                 },                 {
                     "tokenPair": "wJEWEL-USDC",
                     "pairAddress": "0xaac3933Faa3B668304C9276d10CA88853463BD42",
                     "singleBatchAmount": 2,
-                    "heroes": [],
+                    "heroes": ["245326", "258492", "246617", "262381"],
                 },                 {
                     "tokenPair": "CRYSTAL-ETH",
                     "pairAddress": "0x810e1fF51fDd58c474c66A31013713D1A17BF458",
+                    "singleBatchAmount": 2,
+                    "heroes": ["1000000014478", "281297", "258253", "269798"],
+                },                 {
+                    "tokenPair": "CRYSTAL-BTC.b",
+                    "pairAddress": "0x706916dbC3b66d89632708CC193080ea05E0534A",
+                    "singleBatchAmount": 2,
+                    "heroes": [],
+                },                 {
+                    "tokenPair": "CRYSTAL-KLAY",
+                    "pairAddress": "0x1fCc67a01525fd715A67bCcbF73665Fb3dBE76c7",
+                    "singleBatchAmount": 2,
+                    "heroes": [],
+                },                 {
+                    "tokenPair": "JEWEL-KLAY",
+                    "pairAddress": "0x2A70aA48f9dBF859239ae5E7f98fe95aE27A6CD4",
+                    "singleBatchAmount": 2,
+                    "heroes": [],
+                },                 {
+                    "tokenPair": "JEWEL-AVAX",
+                    "pairAddress": "0xA0d17554F09047d65E0ae0e76CD8923A9525183c",
+                    "singleBatchAmount": 2,
+                    "heroes": [],
+                },                 {
+                    "tokenPair": "JEWEL-BTC.b",
+                    "pairAddress": "0x3391B9384AC66C7Aa3BF4A75A4f441942B1dCf30",
+                    "singleBatchAmount": 2,
+                    "heroes": [],
+                },                 {
+                    "tokenPair": "JEWEL-ETH",
+                    "pairAddress": "0xbaEc39Dd81b964B57bc5fa5f5421Cd82185409E6",
+                    "singleBatchAmount": 2,
+                    "heroes": [],
+                },                 {
+                    "tokenPair": "BTC.b-USDC",
+                    "pairAddress": "0x045838dBfb8026520E872c8298F4Ed542B81Eaca",
                     "singleBatchAmount": 2,
                     "heroes": [],
                 }
