@@ -514,7 +514,7 @@ const config = {
     "uniswapV2Factory": "0x794C07912474351b3134E6D6B3B7b3b4A07cbAAa",
     "uniswapV2Router02": "0x3C351E1afdd1b1BC44e931E12D4E05D6125eaeCa",
     "staminaVial": "0x242078edFDca25ef2A497C8D9f256Fd641472E5F",
-    "gasPrice": 40000000, // 0.04 Gwei
+    "gasPrice": 1000000000, // 1 Gwei
     "listStamina": 24,
   },
   "queryHeroEndPoint": "https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
