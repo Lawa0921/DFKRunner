@@ -262,8 +262,6 @@ const config = {
     "unlistGasLimit": 200000,
     "gardeningGasLimit": 3000001,
     "sentQuestGasLimit": 1000000,
-    "unconditionalPurchasePrice": 32,
-    "g0ConditionsOfPurchase": 5000,
   },
   "defikingdoms": {
     "quest": {
@@ -519,7 +517,9 @@ const config = {
   },
   "queryHeroEndPoint": "https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes",
   "graphqlEndPoint": "https://defi-kingdoms-community-api-gateway-co06z8vi.uc.gateway.dev/graphql",
-  "rentalEstimateAdjustment": 1, // 出租估價完會在乘以這個數，如果覺得估價太低或太高可以調整這個數字
+  "rentalEstimateAdjustment": 1.2, // 出租估價完會在乘以這個數，如果覺得估價太低或太高可以調整這個數字
+  "unconditionalPurchasePrice": 30,
+  "g0ConditionsOfPurchase": 5000,
 }
 
 module.exports = config;

@@ -4,7 +4,7 @@ module.exports = class Valuator {
   constructor(price, hero) {
     this.price = parseInt(price) / Math.pow(10, 18);
     this.hero = hero;
-    this.valuation = config.harmony.unconditionalPurchasePrice;
+    this.valuation = config.unconditionalPurchasePrice;
     this.mainclassPrice = 0;
     this.rarityPrice = 0;
     this.professionPrice = 0;
@@ -225,7 +225,7 @@ module.exports = class Valuator {
           this.summonPrice += 50;
         }
       } else if (this.hero.generation === 0) {
-        this.summonPrice += config.harmony.g0ConditionsOfPurchase;
+        this.summonPrice += config.g0ConditionsOfPurchase;
       }
     } else if (heroMainclassTier === "Advanced") {
       if (this.hero.generation >= 5) {
@@ -1258,8 +1258,8 @@ module.exports = class Valuator {
   networkPriceAdjustment() {
     const network = this.hero.network;
 
-    if (network === "hmy") {
-      this.valuation = this.valuation * 0.9;
+    if (network === "dfk") {
+      this.valuation = this.valuation * 0.8;
     }
   }
 }
