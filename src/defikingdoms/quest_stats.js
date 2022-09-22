@@ -6,6 +6,7 @@ const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
 const maxQueue = 6;
+const maxHeroCount = 6;
 
 exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects) => {
   for (let i = 0; i < config.defikingdoms.quest.statQuests.length; i++) {
@@ -23,15 +24,24 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects) => {
 				if (questCount >= maxQueue) {
 					console.log(`${questType.name} queue has reached its maximum value.`)
 				} else {
-					for (let i = 0; i < maxQueue - questCount - 1 && i < possibleHeroes.length; i++) {
-						console.log(`senting ${possibleHeroes[i].id} to ${questType.name}`);
+					let sendHeroCount = 0;
 
-						if (possibleHeroes[i].isOnSale) {
-							await saleAuctionContract.unlistHero(possibleHeroes[i].id)
-						}
+					for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(possibleHeroes.length / maxHeroCount); i++) {
+						const sentHeroes = possibleHeroes.slice(sendHeroCount, maxHeroCount)
 
-						const attemp = Math.floor(possibleHeroes[i].currentStamina() / 5)
-						await questCoreV2Contract.startStatQuest([possibleHeroes[i].id], attemp, questType.contractAddress, questType.name);
+						const unlistPromise = sentHeroes.reduce((accumulator, heroObject) => {
+							if (heroObject.isOnSale) {
+								return saleAuctionContract.unlistHero(heroObject.id)
+							} else {
+								return accumulator;
+							}
+						}, [])
+
+						await Promise.allSettled(unlistPromise)
+
+						const attemp = Math.floor(minStamina / 5)
+						await questCoreV2Contract.startStatQuest(sentHeroes.map(heroObject => heroObject.id), attemp, questType.contractAddress, questType.name);
+						sendHeroCount += sentHeroes.length
 					}
 				}
 			} else {
