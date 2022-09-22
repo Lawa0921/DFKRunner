@@ -1,2 +1,3 @@
 PRIVATE_KEY=
 WALLET_ADDRESS=
+ADDRESS_AND_PRIVATE_KEY_MAPPINGS={"your_wallet_address": "your_private_key", "your_wallet_address": "your_private_key"}

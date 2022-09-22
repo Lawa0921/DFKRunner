@@ -3,6 +3,7 @@ require('dotenv').config();
 const config = {
   "privateKey": process.env.PRIVATE_KEY,
   "walletAddress": process.env.WALLET_ADDRESS,
+  "walletAddressAndPrivateKeyMappings": JSON.parse(process.env.ADDRESS_AND_PRIVATE_KEY_MAPPINGS),
   "harmony": {
     "listStamina": 24,
     "unlistStamina": 24,
