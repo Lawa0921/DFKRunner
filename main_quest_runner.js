@@ -1,5 +1,6 @@
 const { runDFKChainQuest } = require('~/src/defikingdoms/quest_runner');
 const autils = require("~/src/services/autils")
+const config = require("~/config.js")
 
 async function main() {
   try {
@@ -12,7 +13,7 @@ async function main() {
     ])
 
     console.log("------------ main process completed ------------");
-    setTimeout(() => { process.exit() }, 10000) 
+    setTimeout(() => { process.exit() }, config.setQuestScriptTimeSecond * 1000) 
   } catch(error) {
     autils.log(error.toString(), true);
     process.exit();
