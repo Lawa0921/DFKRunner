@@ -27,7 +27,7 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects) => {
 					let sendHeroCount = 0;
 
 					for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(possibleHeroes.length / maxHeroCount); i++) {
-						const sentHeroes = possibleHeroes.slice(sendHeroCount, maxHeroCount)
+						const sentHeroes = possibleHeroes.slice(sendHeroCount, maxHeroCount + sendHeroCount)
 
 						const unlistPromise = sentHeroes.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
 

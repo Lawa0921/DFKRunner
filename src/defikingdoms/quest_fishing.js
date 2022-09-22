@@ -27,13 +27,16 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects) => {
 
 			if (professionFishers.length > 0) {
 				for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(professionFishers.length / maxHeroCount); i++) {
-					const sendProfessionHeroes = professionFishers.slice(sendProfessionHeroesCount, maxHeroCount)
+					const sendProfessionHeroes = professionFishers.slice(sendProfessionHeroesCount, maxHeroCount + sendProfessionHeroesCount)
 	
 					const unlistPromise = sendProfessionHeroes.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
 	
 					await Promise.allSettled(unlistPromise)
 	
 					const attemp = Math.floor(minStamina / 5)
+
+					console.log(`senting ${sendProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
+
 					await questCoreV2Contract.startFishingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendProfessionHeroesCount += sendProfessionHeroes.length
 					questCount++
@@ -42,13 +45,16 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects) => {
 
 			if (nonProfessionFishers.length > 0) {
 				for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(nonProfessionFishers.length / maxHeroCount); i++) {
-					const sendNonProfessionHeroes = nonProfessionFishers.slice(sendProfessionHeroesCount, maxHeroCount)
+					const sendNonProfessionHeroes = nonProfessionFishers.slice(sendProfessionHeroesCount, maxHeroCount + sendNonProfessionHeroesCount)
 	
 					const unlistPromise = sendNonProfessionHeroes.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
 	
 					await Promise.allSettled(unlistPromise)
 	
 					const attemp = Math.floor(minStamina / 7)
+
+					console.log(`senting (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
+
 					await questCoreV2Contract.startFishingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendNonProfessionHeroesCount += sendNonProfessionHeroes.length
 					questCount++
