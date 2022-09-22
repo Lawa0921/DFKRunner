@@ -1,11 +1,11 @@
 const config = require("~/config.js");
-const autils = require('~/src/services/autils');
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const questCoreV2Contract = new QuestCoreV2();
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
 const maxQueue = 6;
+const maxHeroCount = 6;
 
 exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects) => {
 	if (heroesStruct.fishingQuestCount >= maxQueue) {
@@ -18,15 +18,41 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects) => {
 		})
 	
 		if (possibleFishers.length > 0) {
-			for (let i = 0; i < maxQueue - heroesStruct.fishingQuestCount - 1 && i < possibleFishers.length; i++) {
-				console.log(`senting ${possibleFishers[i].id} to fishing quest`);
+			const professionFishers = possibleFishers.filter(heroObject => heroObject.profession === "fishing")
+			const nonProfessionFishers = possibleFishers.filter(heroObject => heroObject.profession !== "fishing")
 
-				if (possibleFishers[i].isOnSale) {
-					await saleAuctionContract.unlistHero(possibleFishers[i].id)
+			let questCount = heroesStruct.fishingQuestCount
+			let sendProfessionHeroesCount = 0
+			let sendNonProfessionHeroesCount = 0;
+
+			if (professionFishers.length > 0) {
+				for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(professionFishers.length / maxHeroCount); i++) {
+					const sendProfessionHeroes = professionFishers.slice(sendProfessionHeroesCount, maxHeroCount)
+	
+					const unlistPromise = sendProfessionHeroes.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
+	
+					await Promise.allSettled(unlistPromise)
+	
+					const attemp = Math.floor(minStamina / 5)
+					await questCoreV2Contract.startFishingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
+					sendProfessionHeroesCount += sendProfessionHeroes.length
+					questCount++
 				}
+			}
 
-				const attemp = possibleFishers[i].profession === "fishing" ? Math.floor(possibleFishers[i].currentStamina() / 5) : Math.floor(possibleFishers[i].currentStamina() / 7)
-				await questCoreV2Contract.startFishingQuest([possibleFishers[i].id], attemp);
+			if (nonProfessionFishers.length > 0) {
+				for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(nonProfessionFishers.length / maxHeroCount); i++) {
+					const sendNonProfessionHeroes = nonProfessionFishers.slice(sendProfessionHeroesCount, maxHeroCount)
+	
+					const unlistPromise = sendNonProfessionHeroes.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
+	
+					await Promise.allSettled(unlistPromise)
+	
+					const attemp = Math.floor(minStamina / 7)
+					await questCoreV2Contract.startFishingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp);
+					sendNonProfessionHeroesCount += sendNonProfessionHeroes.length
+					questCount++
+				}
 			}
 		} else {
 			console.log("No fisher sent")
