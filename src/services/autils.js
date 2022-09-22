@@ -76,10 +76,6 @@ exports.txnFailLog = (txn) => {
     console.log(str);
 }
 
-exports.gasSettingFormater = () => {
-    return { gasPrice: config.harmony.gasPrice, gasLimit: config.harmony.gasLimit };
-}
-
 exports.getCurrentDateTime = () => {
     return date.addMinutes(new Date(Date.now()), 0);
 }
@@ -227,23 +223,6 @@ exports.getOnAuctionHeroInfos = async () => {
 
 exports.get0xAddress = () => {
     return "0x0000000000000000000000000000000000000000"
-}
-
-exports.getHarmonyOwningHeroIds = () => {
-    let heroIds = [];
-    const questConfig = config.harmony.quest 
-
-    heroIds = heroIds.concat(questConfig.foraging.heroes);
-    heroIds = heroIds.concat(questConfig.fishing.heroes);
-    heroIds = heroIds.concat(questConfig.goldMining.heroes);
-    heroIds = heroIds.concat(questConfig.jewelMining.heroes);
-    heroIds = heroIds.concat(questConfig.gardening.heroes.map((heroData) => { return heroData.heroID }));
-  
-    for (let i = 0; i < config.harmony.quest.statQuests.length; i++ ) {
-      heroIds = heroIds.concat(config.harmony.quest.statQuests[i].heroes);
-    }
-
-    return heroIds;
 }
 
 exports.getDFKOwningHeroIds = () => {

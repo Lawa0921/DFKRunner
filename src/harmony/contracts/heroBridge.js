@@ -26,7 +26,7 @@ module.exports = class HeroBridgeContract {
 
   async sendHero(heroId) {
     let sendValue = {};
-    Object.assign(sendValue, autils.gasSettingFormater(), { value: harmonyBridgeFee })
+    Object.assign(sendValue, { gasPrice: config.harmony.gasPrice, gasLimit: config.harmony.gasLimit }, { value: harmonyBridgeFee })
 
     return await this.contract.methods.sendHero(heroId, DFKChainId).send(sendValue);
   }

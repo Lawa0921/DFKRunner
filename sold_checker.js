@@ -2,9 +2,7 @@ const config = require("~/config.js");
 const autils = require('~/src/services/autils');
 
 async function main() {
-  const harmonyOnSaleHeroIds = config.harmony.heroForSale.map((heroData) => { return heroData.id });
-  const dfkOnSaleHeroIds = config.defikingdoms.heroForSale.map((heroData) => { return heroData.id });
-  const onSaleHeroIds = harmonyOnSaleHeroIds.concat(dfkOnSaleHeroIds);
+  const onSaleHeroIds = config.defikingdoms.heroForSale.map((heroData) => { return heroData.id });
   const heroObjects = await autils.getHerosInfo(onSaleHeroIds);
 
   for (let index = 0; heroObjects.length > index; index++) {

@@ -58,25 +58,25 @@ exports.questDataParser = (activeQuests) => {
     })
 
     if (quest.questAddress) {
-      if (quest.questAddress === config.harmony.quest.fishing.contract0xAddress || quest.questAddress === config.defikingdoms.quest.fishing.contractAddress) {
+      if (quest.questAddress === config.defikingdoms.quest.fishing.contractAddress) {
         returnValue.fishingQuestCount ++
-      } else if (quest.questAddress === config.harmony.quest.foraging.contract0xAddress || quest.questAddress === config.defikingdoms.quest.foraging.contractAddress) {
+      } else if (quest.questAddress === config.defikingdoms.quest.foraging.contractAddress) {
         returnValue.foragingQuestCount ++
-      } else if (quest.questAddress === config.harmony.quest.statQuests[0].contractAddress || quest.questAddress === config.defikingdoms.quest.statQuests[0].contractAddress) {
+      } else if (quest.questAddress === config.defikingdoms.quest.statQuests[0].contractAddress) {
         returnValue.statQuestStrCount ++
-      } else if (quest.questAddress === config.harmony.quest.statQuests[1].contractAddress || quest.questAddress === config.defikingdoms.quest.statQuests[1].contractAddress) {
+      } else if (quest.questAddress === config.defikingdoms.quest.statQuests[1].contractAddress) {
         returnValue.statQuestDexCount ++
-      } else if (quest.questAddress === config.harmony.quest.statQuests[2].contractAddress || quest.questAddress === config.defikingdoms.quest.statQuests[2].contractAddress) {
+      } else if (quest.questAddress === config.defikingdoms.quest.statQuests[2].contractAddress) {
         returnValue.statQuestAgiCount ++
-      } else if (quest.questAddress === config.harmony.quest.statQuests[3].contractAddress || quest.questAddress === config.defikingdoms.quest.statQuests[3].contractAddress) {
+      } else if (quest.questAddress === config.defikingdoms.quest.statQuests[3].contractAddress) {
         returnValue.statQuestVitCount ++
-      } else if (quest.questAddress === config.harmony.quest.statQuests[4].contractAddress || quest.questAddress === config.defikingdoms.quest.statQuests[4].contractAddress) {
+      } else if (quest.questAddress === config.defikingdoms.quest.statQuests[4].contractAddress) {
         returnValue.statQuestEndCount ++
-      } else if (quest.questAddress === config.harmony.quest.statQuests[5].contractAddress || quest.questAddress === config.defikingdoms.quest.statQuests[5].contractAddress) {
+      } else if (quest.questAddress === config.defikingdoms.quest.statQuests[5].contractAddress) {
         returnValue.statQuestIntCount ++
-      } else if (quest.questAddress === config.harmony.quest.statQuests[6].contractAddress || quest.questAddress === config.defikingdoms.quest.statQuests[6].contractAddress) {
+      } else if (quest.questAddress === config.defikingdoms.quest.statQuests[6].contractAddress) {
         returnValue.statQuestWisCount ++
-      } else if (quest.questAddress === config.harmony.quest.statQuests[7].contractAddress || quest.questAddress === config.defikingdoms.quest.statQuests[7].contractAddress) {
+      } else if (quest.questAddress === config.defikingdoms.quest.statQuests[7].contractAddress) {
         returnValue.statQuestLukCount ++
       }
     }

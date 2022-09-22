@@ -1,6 +1,6 @@
 const config = require("~/config.js");
 const autils = require("~/src/services/autils");
-const MeditationCircle = require('~/src/harmony/contracts/meditationCircle');
+const MeditationCircle = require('~/src/defikingdoms/contracts/meditationCircle');
 const meditationCircleContract = new MeditationCircle();
 const recoveryOneStaminaRequireSeconds = 1200;
 module.exports = class Hero {
