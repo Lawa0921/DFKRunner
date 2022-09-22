@@ -119,12 +119,12 @@ module.exports = class Valuator {
         break;
       case "Thief":
         if (this.hero.profession === "fishing") {
-          this.professionPrice += 15;
+          this.professionPrice += 8;
         }
         break;
       case "Archer":
         if (this.hero.profession === "foraging") {
-          this.professionPrice += 8;
+          this.professionPrice += 3;
         }
         break;
       case "Priest":
