@@ -9,8 +9,11 @@ const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 const saleAuctionContract = new SaleAuction();
 
 exports.runDFKLevelUpLogic = async (owningHeroObjects) => {
-  const levelUpableHeros = owningHeroObjects.filter(hero => hero.levelUpable());
   const activeMeditations = await meditationCircleContract.getActiveMeditations();
+  const levelUpableHeros = owningHeroObjects.filter(hero => 
+    hero.levelUpable() && 
+    activeMeditations.map(activeMeditation => parseInt(activeMeditation.heroId).toString()).indexOf(hero.id) === -1
+  );
 
   if (activeMeditations.length > 0) {
     for (let i = 0; i < activeMeditations.length; i++) {
