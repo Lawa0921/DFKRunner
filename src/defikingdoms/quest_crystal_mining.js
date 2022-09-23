@@ -33,7 +33,7 @@ exports.CheckAndSendDFKCrystalMiners = async (heroesStruct) => {
     if (batchAmount > 1) {
       sentMinerIds = sentMinerIds.concat(possibleCrystalMiners.map(heroObject => heroObject.id).slice((batchAmount - 1) * -1))
     }
-    console.log(`senting ${sentMinerIds} to crystal mining quest`)
+    console.log(`sending ${sentMinerIds} to crystal mining quest`)
     await questCoreV2Contract.startCrystalMining(sentMinerIds)
   } else {
     console.log("No crystal miner sent")

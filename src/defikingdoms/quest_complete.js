@@ -14,7 +14,7 @@ exports.CompleteQuests = async (heroesStruct) => {
 }
 
 completeQuest = async (completedQuesterId) => {
-  console.log(`send complete ${completedQuesterId} quest`)
+  console.log(`sending complete ${completedQuesterId} quest`)
   const tx = await questCoreV2Contract.completeQuest(completedQuesterId)
   const res = await tx.wait();
 

@@ -34,6 +34,9 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects) => {
 						await Promise.allSettled(unlistPromise)
 
 						const attemp = Math.floor(minStamina / 5)
+
+						console.log(`sending ${sentHeroes.map(heroObject => heroObject.id)} to ${questType.name} quest`)
+
 						await questCoreV2Contract.startStatQuest(sentHeroes.map(heroObject => heroObject.id), attemp, questType.contractAddress, questType.name);
 						sendHeroCount += sentHeroes.length
 					}

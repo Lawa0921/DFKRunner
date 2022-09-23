@@ -24,7 +24,7 @@ exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects) => {
       }
     }
 
-    console.log(`senting ${sentMinerIds} to gold mining quest`)
+    console.log(`sending ${sentMinerIds} to gold mining quest`)
     await questCoreV2Contract.startGoldMining(sentMinerIds)
   } else {
     console.log("No gold miner sent")

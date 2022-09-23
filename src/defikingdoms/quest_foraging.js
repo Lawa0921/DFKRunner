@@ -35,7 +35,7 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects) => {
 	
 					const attemp = Math.floor(minStamina / 5)
 
-					console.log(`senting ${sendProfessionHeroes.map(heroObject => heroObject.id)} to foraging quest`)
+					console.log(`sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to foraging quest`)
 
 					await questCoreV2Contract.startForagingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendProfessionHeroesCount += sendProfessionHeroes.length
@@ -53,7 +53,7 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects) => {
 	
 					const attemp = Math.floor(minStamina / 7)
 
-					console.log(`senting (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to foraging quest`)
+					console.log(`sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to foraging quest`)
 
 					await questCoreV2Contract.startForagingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendNonProfessionHeroesCount += sendNonProfessionHeroes.length

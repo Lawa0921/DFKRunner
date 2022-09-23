@@ -24,7 +24,7 @@ exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects) => {
         }
       }
 
-      console.log(`senting ${sentGardenerIds} to ${questType.pairAddressMappings[i].tokenPair} gardening quest`)
+      console.log(`sending ${sentGardenerIds} to ${questType.pairAddressMappings[i].tokenPair} gardening quest`)
       await questCoreV2Contract.startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].pairAddress)
     } else {
       console.log(`No gardener sent to ${questType.pairAddressMappings[i].tokenPair}`)

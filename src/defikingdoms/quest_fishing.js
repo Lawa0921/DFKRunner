@@ -35,7 +35,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects) => {
 	
 					const attemp = Math.floor(minStamina / 5)
 
-					console.log(`senting ${sendProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
+					console.log(`sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
 
 					await questCoreV2Contract.startFishingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendProfessionHeroesCount += sendProfessionHeroes.length
@@ -53,7 +53,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects) => {
 	
 					const attemp = Math.floor(minStamina / 7)
 
-					console.log(`senting (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
+					console.log(`sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
 
 					await questCoreV2Contract.startFishingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendNonProfessionHeroesCount += sendNonProfessionHeroes.length
