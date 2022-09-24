@@ -4,7 +4,7 @@ const questCoreV2Contract = new QuestCoreV2();
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
-const maxQueue = 6;
+const maxQueue = 10;
 const maxHeroCount = 6;
 
 exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects) => {
