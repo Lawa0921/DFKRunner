@@ -102,6 +102,13 @@ exports.ethersFormatNumberToWei = (price) => {
     return ethers.utils.parseUnits(price.toString(), 18)
 }
 
+exports.getBaseGasFee = async () => {
+    const provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
+    const gasInfo = await provider.getFeeData()
+
+    return parseInt(gasInfo.lastBaseFeePerGas) + 1000
+}
+
 exports.getHerosInfo = async (heroIds) => {
     if (heroIds.length === 0) {
         return []

@@ -11,27 +11,34 @@ const { runDFKSalesLogic } = require('~/src/defikingdoms/sales_handler');
 const { runDFKLevelUpLogic } = require('~/src/defikingdoms/hero_level_up'); 
 const { runDFKRentHeroLogic } = require('~/src/defikingdoms/hero_rent');
 const autils = require("~/src/services/autils");
+const config = require("~/config.js");
 const questCoreV2Contract = new QuestCoreV2();
 
 exports.runDFKChainQuest = async () => {
   try {
-    const activeQuests = await questCoreV2Contract.getAccountActiveQuests();
-    const heroesStruct = dataParser.questDataParser(activeQuests);
-    const owningHeroObjects = await autils.getHerosInfo(autils.getDFKOwningHeroIds());
+    const baseGasPrice = await autils.getBaseGasFee()
 
-    await CompleteQuests(heroesStruct);
-
-    await runDFKSalesLogic(owningHeroObjects);
-    await runDFKRentHeroLogic(owningHeroObjects);
-
-    await runDFKLevelUpLogic(owningHeroObjects);
-
-    await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects)
-    await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects)
-    await CheckAndSendDFKGardeners(heroesStruct, owningHeroObjects)
-    await CheckAndSendDFKGoldMiners(heroesStruct, owningHeroObjects)
-    // await CheckAndSendDFKCrystalMiners(heroesStruct)
-    await CheckAndSendDFKStatQuests(heroesStruct, owningHeroObjects)
+    if (baseGasPrice > config.defikingdoms.maxGasPrice) {
+      console.log(`Current base gasPrice: ${baseGasPrice} is over then maxGasPrice setting: ${config.defikingdoms.maxGasPrice}, will retry later.`)
+    } else {
+      const activeQuests = await questCoreV2Contract.getAccountActiveQuests();
+      const heroesStruct = dataParser.questDataParser(activeQuests);
+      const owningHeroObjects = await autils.getHerosInfo(autils.getDFKOwningHeroIds());
+  
+      await CompleteQuests(heroesStruct);
+  
+      await runDFKSalesLogic(owningHeroObjects);
+      await runDFKRentHeroLogic(owningHeroObjects);
+  
+      await runDFKLevelUpLogic(owningHeroObjects);
+  
+      await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects)
+      await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects)
+      await CheckAndSendDFKGardeners(heroesStruct, owningHeroObjects)
+      await CheckAndSendDFKGoldMiners(heroesStruct, owningHeroObjects)
+      // await CheckAndSendDFKCrystalMiners(heroesStruct)
+      await CheckAndSendDFKStatQuests(heroesStruct, owningHeroObjects)
+    }
   } catch(error) {
     autils.log(error.toString(), true);
   }
