@@ -1,4 +1,5 @@
 const config = require("~/config.js");
+const autils = require('~/src/services/autils');
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const questCoreV2Contract = new QuestCoreV2();
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
@@ -14,15 +15,17 @@ exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects) => {
   })
   const batchAmount = questType.singleBatchAmount > maxBatch ? maxBatch : questType.singleBatchAmount
 
+  const unlistPromise = possibleGoldMiners.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
+
+  if (unlistPromise.length > 0) {
+    await Promise.allSettled(unlistPromise)
+    await autils.sleep(5000)
+  }
+
+
   if (possibleGoldMiners.length > 0 && possibleGoldMiners.length >= batchAmount) {
     const sendGoldMiners = possibleGoldMiners.slice(0, batchAmount)
     const sentMinerIds = sendGoldMiners.map(heroObject => heroObject.id)
-
-    for (let i = 0; i < sendGoldMiners.length; i++) {
-      if (sendGoldMiners[i].isOnSale) {
-        await saleAuctionContract.unlistHero(sendGoldMiners[i].id)
-      }
-    }
 
     console.log(`sending ${sentMinerIds} to gold mining quest`)
     await questCoreV2Contract.startGoldMining(sentMinerIds)

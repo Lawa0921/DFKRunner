@@ -98,6 +98,10 @@ exports.formatPrice = (price) => {
     return (BigInt(price) * BigInt(10 ** 18)).toString();
 }
 
+exports.sleep = (ms) => {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 exports.ethersFormatNumberToWei = (price) => {
     return ethers.utils.parseUnits(price.toString(), 18)
 }

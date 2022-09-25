@@ -1,4 +1,5 @@
 const config = require("~/config.js");
+const autils = require('~/src/services/autils');
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const questCoreV2Contract = new QuestCoreV2();
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
@@ -31,7 +32,10 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects) => {
 	
 					const unlistPromise = sendProfessionHeroes.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
 	
-					await Promise.allSettled(unlistPromise)
+					if (unlistPromise.length > 0) {
+						await Promise.allSettled(unlistPromise)
+						await autils.sleep(5000)
+					}		
 	
 					const attemp = Math.floor(minStamina / 5)
 
@@ -49,7 +53,10 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects) => {
 	
 					const unlistPromise = sendNonProfessionHeroes.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
 	
-					await Promise.allSettled(unlistPromise)
+					if (unlistPromise.length > 0) {
+						await Promise.allSettled(unlistPromise)
+						await autils.sleep(5000)
+					}		
 	
 					const attemp = Math.floor(minStamina / 7)
 

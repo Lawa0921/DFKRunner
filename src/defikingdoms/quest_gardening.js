@@ -1,4 +1,5 @@
 const config = require("~/config.js");
+const autils = require('~/src/services/autils');
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const questCoreV2Contract = new QuestCoreV2();
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
@@ -14,15 +15,16 @@ exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects) => {
       return questType.pairAddressMappings[i].heroes.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress 
     })
 
+    const unlistPromise = possibleGardeners.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
+
+    if (unlistPromise.length > 0) {
+      await Promise.allSettled(unlistPromise)
+      await autils.sleep(5000)
+    }
+
     if (possibleGardeners.length > 0 && possibleGardeners.length >= questType.pairAddressMappings[i].singleBatchAmount) {
       const sendGardeners = possibleGardeners.slice(0, questType.pairAddressMappings[i].singleBatchAmount)
       const sentGardenerIds = sendGardeners.map(heroObject => heroObject.id)
-
-      for (let i = 0; i < sendGardeners.length; i++) {
-        if (sendGardeners[i].isOnSale) {
-          await saleAuctionContract.unlistHero(sendGardeners[i].id)
-        }
-      }
 
       console.log(`sending ${sentGardenerIds} to ${questType.pairAddressMappings[i].tokenPair} gardening quest`)
       await questCoreV2Contract.startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].pairAddress)

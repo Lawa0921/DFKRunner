@@ -31,8 +31,11 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects) => {
 
 						const unlistPromise = sentHeroes.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
 
-						await Promise.allSettled(unlistPromise)
-
+						if (unlistPromise.length > 0) {
+							await Promise.allSettled(unlistPromise)
+							await autils.sleep(5000)
+						}
+				
 						const attemp = Math.floor(minStamina / 5)
 
 						console.log(`sending ${sentHeroes.map(heroObject => heroObject.id)} to ${questType.name} quest`)
