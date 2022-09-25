@@ -106,7 +106,7 @@ exports.getBaseGasFee = async () => {
     const provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     const gasInfo = await provider.getFeeData()
 
-    return parseInt(gasInfo.lastBaseFeePerGas) + 30000
+    return parseInt(gasInfo.lastBaseFeePerGas) + config.defikingdoms.overBaseGasFeeWei
 }
 
 exports.getHerosInfo = async (heroIds) => {

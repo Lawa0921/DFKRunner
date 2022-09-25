@@ -17,6 +17,7 @@ const questCoreV2Contract = new QuestCoreV2();
 exports.runDFKChainQuest = async () => {
   try {
     const baseGasPrice = await autils.getBaseGasFee()
+    console.log(`Current base gasPrice: ${baseGasPrice}`)
 
     if (baseGasPrice > config.defikingdoms.maxGasPrice) {
       console.log(`Current base gasPrice: ${baseGasPrice} is over then maxGasPrice setting: ${config.defikingdoms.maxGasPrice}, will retry later.`)
