@@ -220,9 +220,9 @@ module.exports = class Valuator {
         } else if (this.hero.summonsRemaining === 8) {
           this.summonPrice += 10;
         } else if (this.hero.summonsRemaining === 9) {
-          this.summonPrice += 30;
+          this.summonPrice += 25;
         } else if (this.hero.summonsRemaining === 10) {
-          this.summonPrice += 50;
+          this.summonPrice += 40;
         }
       } else if (this.hero.generation === 0) {
         this.summonPrice += config.g0ConditionsOfPurchase;
@@ -235,30 +235,28 @@ module.exports = class Valuator {
           this.summonPrice += 20;
         }
       } else if (this.hero.generation === 4) {
-        if (this.hero.summonsRemaining === 3) {
-          this.summonPrice += 5;
-        } else if (this.hero.summonsRemaining === 4) {
-          this.summonPrice += 20;
+        if (this.hero.summonsRemaining === 4) {
+          this.summonPrice += 15;
         } else if (this.hero.summonsRemaining === 5) {
-          this.summonPrice += 40;
+          this.summonPrice += 25;
         }
       } else if (this.hero.generation === 3) {
         if (this.hero.summonsRemaining === 2) {
-          this.summonPrice += 8;
+          this.summonPrice += 5;
         } else if (this.hero.summonsRemaining === 3) {
-          this.summonPrice += 20;
+          this.summonPrice += 12;
         } else if (this.hero.summonsRemaining === 4) {
-          this.summonPrice += 40;
+          this.summonPrice += 30;
         } else if (this.hero.summonsRemaining === 5) {
-          this.summonPrice += 75;
+          this.summonPrice += 55;
         }
       } else if (this.hero.generation === 2) {
         if (this.hero.summonsRemaining === 2) {
-          this.summonPrice += 15;
+          this.summonPrice += 10;
         } else if (this.hero.summonsRemaining === 3) {
-          this.summonPrice += 35;
+          this.summonPrice += 20;
         } else if (this.hero.summonsRemaining === 4) {
-          this.summonPrice += 55;
+          this.summonPrice += 50;
         } else if (this.hero.summonsRemaining === 5) {
           this.summonPrice += 100;
         }
@@ -268,11 +266,11 @@ module.exports = class Valuator {
         } else if (this.hero.summonsRemaining === 2) {
           this.summonPrice += 20;
         } else if (this.hero.summonsRemaining === 3) {
-          this.summonPrice += 60;
+          this.summonPrice += 45;
         } else if (this.hero.summonsRemaining === 4) {
-          this.summonPrice += 90;
+          this.summonPrice += 75;
         } else if (this.hero.summonsRemaining === 5) {
-          this.summonPrice += 125;
+          this.summonPrice += 120;
         }
       }
 
@@ -1259,7 +1257,7 @@ module.exports = class Valuator {
     const network = this.hero.network;
 
     if (network === "dfk") {
-      this.valuation = this.valuation * 0.8;
+      this.valuation = this.valuation * 1;
     }
   }
 }
