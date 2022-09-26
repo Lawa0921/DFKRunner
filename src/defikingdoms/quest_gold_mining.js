@@ -21,7 +21,6 @@ exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects) => {
     await autils.sleep(5000)
   }
 
-
   if (possibleGoldMiners.length > 0 && possibleGoldMiners.length >= batchAmount) {
     const sendGoldMiners = possibleGoldMiners.slice(0, batchAmount)
     const sentMinerIds = sendGoldMiners.map(heroObject => heroObject.id)

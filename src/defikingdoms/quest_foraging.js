@@ -16,6 +16,12 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects) => {
 		const possibleForagers = owningHeroObjects.filter((heroObject) => { 
 			return questType.heroes.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress
 		})
+		const unsellPromise = possibleForagers.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
+
+		if (unsellPromise.length > 0) {
+			await Promise.allSettled(unsellPromise)
+			await autils.sleep(5000)
+		}
 
 		if (possibleForagers.length > 0) {
 			const professioForagers = possibleForagers.filter(heroObject => heroObject.profession === "foraging")
@@ -28,14 +34,6 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects) => {
 			if (professioForagers.length > 0) {
 				for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(professioForagers.length / maxHeroCount); i++) {
 					const sendProfessionHeroes = professioForagers.slice(sendProfessionHeroesCount, maxHeroCount + sendProfessionHeroesCount)
-	
-					const unlistPromise = sendProfessionHeroes.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
-	
-					if (unlistPromise.length > 0) {
-						await Promise.allSettled(unlistPromise)
-						await autils.sleep(5000)
-					}		
-	
 					const attemp = Math.floor(minStamina / 5)
 
 					console.log(`sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to foraging quest`)
@@ -49,14 +47,6 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects) => {
 			if (nonProfessioForagers.length > 0) {
 				for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(nonProfessioForagers.length / maxHeroCount); i++) {
 					const sendNonProfessionHeroes = nonProfessioForagers.slice(sendProfessionHeroesCount, maxHeroCount + sendNonProfessionHeroesCount)
-	
-					const unlistPromise = sendNonProfessionHeroes.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
-	
-					if (unlistPromise.length > 0) {
-						await Promise.allSettled(unlistPromise)
-						await autils.sleep(5000)
-					}		
-	
 					const attemp = Math.floor(minStamina / 7)
 
 					console.log(`sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to foraging quest`)

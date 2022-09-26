@@ -8,16 +8,25 @@ const maxQueue = 10;
 const maxHeroCount = 6;
 
 exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects) => {
+	const statHeroIds = config.defikingdoms.quest.statQuests.map(statQuestSetting => statQuestSetting.heroes).flat()
+	const activeQuesterIds = heroesStruct.allQuesters
+	const possibleStatHeroes = owningHeroObjects.filter((heroObject) => { 
+		return statHeroIds.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress 
+	})
+	const unsellPromise = possibleStatHeroes.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
+
+	if (unsellPromise.length > 0) {
+		await Promise.allSettled(unsellPromise)
+		await autils.sleep(5000)
+	}
+
   for (let i = 0; i < config.defikingdoms.quest.statQuests.length; i++) {
   	const questType = config.defikingdoms.quest.statQuests[i]
 
     if (questType.heroes.length !== 0) {
-			const activeQuesterIds = heroesStruct.allQuesters
-			const possibleHeroes = owningHeroObjects.filter((heroObject) => { 
-				return questType.heroes.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress 
-			})
+			const currentPossibleHeroes = possibleStatHeroes.filter(heroObject => questType.heroes.indexOf(heroObject.id) > -1)
     
-			if (possibleHeroes.length > 0) {
+			if (currentPossibleHeroes.length > 0) {
 				const questCount = amountOfQuest(heroesStruct, questType)
 
 				if (questCount >= maxQueue) {
@@ -25,16 +34,8 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects) => {
 				} else {
 					let sendHeroCount = 0;
 
-					for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(possibleHeroes.length / maxHeroCount); i++) {
-						const sentHeroes = possibleHeroes.slice(sendHeroCount, maxHeroCount + sendHeroCount)
-
-						const unlistPromise = sentHeroes.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
-
-						if (unlistPromise.length > 0) {
-							await Promise.allSettled(unlistPromise)
-							await autils.sleep(5000)
-						}
-				
+					for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(currentPossibleHeroes.length / maxHeroCount); i++) {
+						const sentHeroes = currentPossibleHeroes.slice(sendHeroCount, maxHeroCount + sendHeroCount)
 						const attemp = Math.floor(minStamina / 5)
 
 						console.log(`sending ${sentHeroes.map(heroObject => heroObject.id)} to ${questType.name} quest`)
