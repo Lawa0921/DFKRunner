@@ -1,7 +1,6 @@
 const config = require("~/config.js");
 const autils = require('~/src/services/autils');
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
-const questCoreV2Contract = new QuestCoreV2();
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
@@ -34,7 +33,7 @@ exports.CheckAndSendDFKCrystalMiners = async (heroesStruct) => {
       sentMinerIds = sentMinerIds.concat(possibleCrystalMiners.map(heroObject => heroObject.id).slice((batchAmount - 1) * -1))
     }
     console.log(`sending ${sentMinerIds} to crystal mining quest`)
-    await questCoreV2Contract.startCrystalMining(sentMinerIds)
+    await new QuestCoreV2().startCrystalMining(sentMinerIds)
   } else {
     console.log("No crystal miner sent")
   }

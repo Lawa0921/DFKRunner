@@ -1,7 +1,6 @@
 const config = require("~/config.js");
 const autils = require('~/src/services/autils');
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
-const questCoreV2Contract = new QuestCoreV2();
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
@@ -41,7 +40,7 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects) => {
 
 					console.log(`sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to foraging quest`)
 
-					await questCoreV2Contract.startForagingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
+					await new QuestCoreV2().startForagingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendProfessionHeroesCount += sendProfessionHeroes.length
 					questCount++
 				}
@@ -62,7 +61,7 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects) => {
 
 					console.log(`sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to foraging quest`)
 
-					await questCoreV2Contract.startForagingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp);
+					await new QuestCoreV2().startForagingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendNonProfessionHeroesCount += sendNonProfessionHeroes.length
 					questCount++
 				}

@@ -1,7 +1,6 @@
 const config = require("~/config.js");
 const autils = require('~/src/services/autils')
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
-const questCoreV2Contract = new QuestCoreV2();
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
@@ -40,7 +39,7 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects) => {
 
 						console.log(`sending ${sentHeroes.map(heroObject => heroObject.id)} to ${questType.name} quest`)
 
-						await questCoreV2Contract.startStatQuest(sentHeroes.map(heroObject => heroObject.id), attemp, questType.contractAddress, questType.name);
+						await new QuestCoreV2().startStatQuest(sentHeroes.map(heroObject => heroObject.id), attemp, questType.contractAddress, questType.name);
 						sendHeroCount += sentHeroes.length
 					}
 				}

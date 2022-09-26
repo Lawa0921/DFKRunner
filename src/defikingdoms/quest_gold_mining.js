@@ -1,7 +1,6 @@
 const config = require("~/config.js");
 const autils = require('~/src/services/autils');
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
-const questCoreV2Contract = new QuestCoreV2();
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
@@ -28,7 +27,7 @@ exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects) => {
     const sentMinerIds = sendGoldMiners.map(heroObject => heroObject.id)
 
     console.log(`sending ${sentMinerIds} to gold mining quest`)
-    await questCoreV2Contract.startGoldMining(sentMinerIds)
+    await new QuestCoreV2().startGoldMining(sentMinerIds)
   } else {
     console.log("No gold miner sent")
   }
