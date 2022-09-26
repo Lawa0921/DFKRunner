@@ -288,11 +288,11 @@ module.exports = class Valuator {
         }
       } else if (this.hero.generation <= 4) {
         if (this.hero.summonsRemaining === 1) {
-          this.summonPrice += 120;
+          this.summonPrice += 90;
         } else if (this.hero.summonsRemaining === 2) {
-          this.summonPrice += 300;
+          this.summonPrice += 250;
         } else if (this.hero.summonsRemaining === 3) {
-          this.summonPrice += 500;
+          this.summonPrice += 400;
         }
       }
     } else if (heroMainclassTier === "Transcendant") {
