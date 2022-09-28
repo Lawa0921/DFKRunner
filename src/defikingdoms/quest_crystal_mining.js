@@ -11,7 +11,7 @@ exports.CheckAndSendDFKCrystalMiners = async (heroesStruct, accountInfo) => {
   const activeQuesterIds = heroesStruct.allQuesters
   const heroObjects = await autils.getHerosInfo(questType.heroes)
   const possibleCrystalMiners = heroObjects.filter((heroObject) => {
-    return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress
+    return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === accountInfo.walletAddress
   }).sort((heroInfo, nextHeroInfo) => {
     return (nextHeroInfo.strength + nextHeroInfo.endurance) - (heroInfo.strength + heroInfo.endurance)
   })

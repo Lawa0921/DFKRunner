@@ -20,7 +20,7 @@ module.exports = class MeditationCircle {
   }
 
   async getActiveMeditations() {
-    return await this.contract.getActiveMeditations(config.walletAddress);
+    return await this.contract.getActiveMeditations(this.wallet.address);
   }
 
   async getRequiredRunes(level) {
@@ -28,7 +28,7 @@ module.exports = class MeditationCircle {
   }
 
   async getActiveMeditations() {
-    return await this.contract.getActiveMeditations(config.walletAddress);
+    return await this.contract.getActiveMeditations(this.wallet.address);
   }
 
   getStatInt(stat) {

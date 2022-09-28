@@ -10,7 +10,7 @@ exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects, acco
   const saleAuctionContract = new SaleAuction(accountInfo);
   const activeQuesterIds = heroesStruct.allQuesters
   const possibleGoldMiners = owningHeroObjects.filter((heroObject) => { 
-    return questType.heroes.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress 
+    return questType.heroes.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === accountInfo.walletAddress 
   })
   const batchAmount = questType.singleBatchAmount > maxBatch ? maxBatch : questType.singleBatchAmount
 

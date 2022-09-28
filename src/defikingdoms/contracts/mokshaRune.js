@@ -10,6 +10,6 @@ module.exports = class MokshaRune {
   }
 
   async balanceOf() {
-    return await this.contract.balanceOf(config.walletAddress);
+    return await this.contract.balanceOf(this.wallet.address);
   }
 }

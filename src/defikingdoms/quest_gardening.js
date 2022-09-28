@@ -11,7 +11,7 @@ exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects, accou
 
   const gardeningHeroIds = questType.pairAddressMappings.map(gardeningQuestSetting => gardeningQuestSetting.heroes).flat()
   const possibleGardeners = owningHeroObjects.filter((heroObject) => {
-    return gardeningHeroIds.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress 
+    return gardeningHeroIds.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === accountInfo.walletAddress 
   })
   const unsellPromise = possibleGardeners.filter(onSaleHeroObject => onSaleHeroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
 
