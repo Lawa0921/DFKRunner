@@ -1,18 +1,20 @@
 const autils = require("~/src/services/autils");
 const MeditationCircle = require('~/src/defikingdoms/contracts/meditationCircle');
-const meditationCircleContract = new MeditationCircle();
 const ShvasRune = require('~/src/defikingdoms/contracts/shvasRune');
-const shvasRuneContract = new ShvasRune();
 const MokshaRune = require('~/src/defikingdoms/contracts/mokshaRune');
-const mokshaRuneContract = new MokshaRune();
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 
 exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
   const saleAuctionContract = new SaleAuction(accountInfo);
+  const meditationCircleContract = new MeditationCircle(accountInfo);
+  const shvasRuneContract = new ShvasRune(accountInfo);
+  const mokshaRuneContract = new MokshaRune(accountInfo);
+
   const activeMeditations = await meditationCircleContract.getActiveMeditations();
   const levelUpableHeros = owningHeroObjects.filter(hero => 
     hero.levelUpable() && 
-    activeMeditations.map(activeMeditation => parseInt(activeMeditation.heroId).toString()).indexOf(hero.id) === -1
+    activeMeditations.map(activeMeditation => parseInt(activeMeditation.heroId).toString()).indexOf(hero.id) === -1 &&
+    hero.owner === accountInfo.walletAddress
   );
 
   if (activeMeditations.length > 0) {

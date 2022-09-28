@@ -1,7 +1,7 @@
 const config = require("~/config.js");
 const autils = require("~/src/services/autils");
 const MeditationCircle = require('~/src/defikingdoms/contracts/meditationCircle');
-const meditationCircleContract = new MeditationCircle();
+const meditationCircleContract = new MeditationCircle(config.walletAddressAndPrivateKeyMappings[0]) // 在這邊只需要知道某個等級需要的符文數量，任何一個地址皆可以使用
 const recoveryOneStaminaRequireSeconds = 1200;
 module.exports = class Hero {
   constructor(heroInfo) {

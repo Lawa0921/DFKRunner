@@ -5,9 +5,9 @@ const meditationCircleABI = require('~/abis/MeditationCircle.json')
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class MeditationCircle {
-  constructor() {
+  constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
-    this.wallet = new ethers.Wallet(config.privateKey, this.provider)
+    this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
     this.contract = new ethers.Contract(config.defikingdoms.meditationCircle, meditationCircleABI, new NonceManager(this.wallet))
   }
 
