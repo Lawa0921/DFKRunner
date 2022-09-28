@@ -284,7 +284,8 @@ const config = {
   "rentalEstimateAdjustment": 1.2, // 出租估價完會在乘以這個數，如果覺得估價太低或太高可以調整這個數字
   "unconditionalPurchasePrice": 30,
   "g0ConditionsOfPurchase": 5000,
-  "setQuestScriptTimeSecond": 60 // 設定你每次任務腳本執行的間隔秒數
+  "setQuestScriptTimeSecond": 120, // 設定你每次任務腳本執行的間隔秒數,
+  "saleWatcherWalletIndex": 0
 }
 
 module.exports = config;
