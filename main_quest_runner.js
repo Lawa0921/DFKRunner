@@ -11,8 +11,9 @@ async function main() {
   })
 
   await Promise.allSettled(questScriptPromise)
+  await autils.sleep(config.setQuestScriptTimeSecond * 1000)
 
-  setTimeout(() => { process.exit() }, config.setQuestScriptTimeSecond * 1000) 
+  process.exit()
 }
 
 mainQuestScript = async (accountInfo) => {
