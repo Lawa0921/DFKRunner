@@ -3,19 +3,26 @@ const autils = require("~/src/services/autils")
 const config = require("~/config.js")
 
 async function main() {
-  try {
-    console.log(autils.getCurrentDateTime().toLocaleTimeString());
-    
-    setTimeout(() => { process.exit() }, 300000) // 如果執行 script 超過 300 秒會自動中斷重啟，此為防治卡死的手段
+  console.log(autils.getCurrentDateTime().toLocaleTimeString());
+  setTimeout(() => { process.exit() }, 180000) // 如果執行 script 超過 180 秒會自動中斷重啟，此為防治卡死的手段
 
+  const questScriptPromise = config.walletAddressAndPrivateKeyMappings.map((accountInfo) => {
+    mainQuestScript(accountInfo)
+  })
+
+  await Promise.allSettled(questScriptPromise)
+
+  setTimeout(() => { process.exit() }, config.setQuestScriptTimeSecond * 1000) 
+}
+
+mainQuestScript = async (accountInfo) => {
+  try {
     await Promise.allSettled([
       runDFKChainQuest(),
     ])
-
-    console.log("------------ main process completed ------------");
-    setTimeout(() => { process.exit() }, config.setQuestScriptTimeSecond * 1000) 
+    console.log(`--- ${accountInfo.accountName} quest script process completed ---`)
   } catch(error) {
-    autils.log(error.toString(), true);
+    autils.log(error, true);
     process.exit();
   }
 }
