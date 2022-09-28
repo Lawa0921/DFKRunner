@@ -47,7 +47,7 @@ module.exports = class Hero {
   }
 
   isOwning() {
-    return this.owner.toLowerCase() === config.walletAddress.toLowerCase() ? true : false
+    return config.walletAddressAndPrivateKeyMappings.map(accountInfo => accountInfo.walletAddress).indexOf(this.owner) > -1 ? true : false
   }
 
   isAvailableQuest() {
