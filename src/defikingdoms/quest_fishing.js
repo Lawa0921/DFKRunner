@@ -7,7 +7,7 @@ const minStamina = 25;
 const maxQueue = 10;
 const maxHeroCount = 6;
 
-exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects) => {
+exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, accountInfo) => {
 	if (heroesStruct.fishingQuestCount >= maxQueue) {
 		console.log("fishing queue has reached its maximum value.")
 	} else {
@@ -38,7 +38,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects) => {
 
 					console.log(`sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
 
-					await new QuestCoreV2().startFishingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
+					await new QuestCoreV2(accountInfo).startFishingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendProfessionHeroesCount += sendProfessionHeroes.length
 					questCount++
 				}

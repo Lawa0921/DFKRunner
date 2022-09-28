@@ -1,7 +1,6 @@
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2')
-const questCoreV2Contract = new QuestCoreV2();
 
-exports.CompleteQuests = async (heroesStruct) => {
+exports.CompleteQuests = async (heroesStruct, accountInfo) => {
   if (heroesStruct.completedQuesters.length > 0) {
     let completeQuestPromises = heroesStruct.completedQuesters.map((completedQuesterId) => {
       return completeQuest(completedQuesterId)
@@ -13,7 +12,9 @@ exports.CompleteQuests = async (heroesStruct) => {
   }
 }
 
-completeQuest = async (completedQuesterId) => {
+completeQuest = async (completedQuesterId, accountInfo) => {
+  const questCoreV2Contract = new QuestCoreV2(accountInfo)
+
   console.log(`sending complete ${completedQuesterId} quest`)
   const tx = await questCoreV2Contract.completeQuest(completedQuesterId)
   const res = await tx.wait();

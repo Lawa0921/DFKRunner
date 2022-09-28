@@ -12,31 +12,32 @@ const { runDFKLevelUpLogic } = require('~/src/defikingdoms/hero_level_up');
 const { runDFKRentHeroLogic } = require('~/src/defikingdoms/hero_rent');
 const autils = require("~/src/services/autils");
 const config = require("~/config.js");
-const questCoreV2Contract = new QuestCoreV2();
 
-exports.runDFKChainQuest = async () => {
+exports.runDFKChainQuest = async (accountInfo) => {
   const baseGasPrice = await autils.getBaseGasFee()
   console.log(`DFK Current base gasPrice: ${baseGasPrice - config.defikingdoms.overBaseGasFeeWei}`)
 
   if (baseGasPrice > config.defikingdoms.maxGasPrice) {
     console.log(`DFK Current base gasPrice: ${baseGasPrice} is over then maxGasPrice setting: ${config.defikingdoms.maxGasPrice}, will retry later.`)
   } else {
+    const questCoreV2Contract = new QuestCoreV2(accountInfo);
+
     const activeQuests = await questCoreV2Contract.getAccountActiveQuests();
     const heroesStruct = dataParser.questDataParser(activeQuests);
     const owningHeroObjects = await autils.getHerosInfo(autils.getDFKOwningHeroIds());
 
-    await CompleteQuests(heroesStruct);
+    await CompleteQuests(heroesStruct, accountInfo);
 
     await runDFKSalesLogic(owningHeroObjects);
     await runDFKRentHeroLogic(owningHeroObjects);
 
     await runDFKLevelUpLogic(owningHeroObjects);
 
-    await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects)
-    await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects)
-    await CheckAndSendDFKGardeners(heroesStruct, owningHeroObjects)
-    await CheckAndSendDFKGoldMiners(heroesStruct, owningHeroObjects)
+    await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects, accountInfo)
+    await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects, accountInfo)
+    await CheckAndSendDFKGardeners(heroesStruct, owningHeroObjects, accountInfo)
+    await CheckAndSendDFKGoldMiners(heroesStruct, owningHeroObjects, accountInfo)
     // await CheckAndSendDFKCrystalMiners(heroesStruct)
-    await CheckAndSendDFKStatQuests(heroesStruct, owningHeroObjects)
+    await CheckAndSendDFKStatQuests(heroesStruct, owningHeroObjects, accountInfo)
   }
 }

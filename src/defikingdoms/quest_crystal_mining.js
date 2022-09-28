@@ -6,7 +6,7 @@ const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
 const maxBatch = 6;
 
-exports.CheckAndSendDFKCrystalMiners = async (heroesStruct) => {
+exports.CheckAndSendDFKCrystalMiners = async (heroesStruct, accountInfo) => {
   const questType = config.defikingdoms.quest.crystalMining
   const activeQuesterIds = heroesStruct.allQuesters
   const heroObjects = await autils.getHerosInfo(questType.heroes)
@@ -33,7 +33,8 @@ exports.CheckAndSendDFKCrystalMiners = async (heroesStruct) => {
       sentMinerIds = sentMinerIds.concat(possibleCrystalMiners.map(heroObject => heroObject.id).slice((batchAmount - 1) * -1))
     }
     console.log(`sending ${sentMinerIds} to crystal mining quest`)
-    await new QuestCoreV2().startCrystalMining(sentMinerIds)
+
+    await new QuestCoreV2(accountInfo).startCrystalMining(sentMinerIds)
   } else {
     console.log("No crystal miner sent")
   }

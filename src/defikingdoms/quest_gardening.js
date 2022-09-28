@@ -5,7 +5,7 @@ const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
 
-exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects) => {
+exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects, accountInfo) => {
   const questType = config.defikingdoms.quest.gardening
   const activeQuesterIds = heroesStruct.allQuesters
 
@@ -28,7 +28,7 @@ exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects) => {
       const sentGardenerIds = sendGardeners.map(heroObject => heroObject.id)
 
       console.log(`sending ${sentGardenerIds} to ${questType.pairAddressMappings[i].tokenPair} gardening quest`)
-      await new QuestCoreV2().startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].pairAddress)
+      await new QuestCoreV2(accountInfo).startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].pairAddress)
     } else {
       console.log(`No gardener sent to ${questType.pairAddressMappings[i].tokenPair}`)
     }

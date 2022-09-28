@@ -5,9 +5,9 @@ const questCoreV2ABI = require('~/abis/QuestCoreV2.json');
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class QuestCoreV2 {
-  constructor() {
+  constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
-    this.wallet = new ethers.Wallet(config.privateKey, this.provider)
+    this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
     this.contract = new ethers.Contract(config.defikingdoms.questCoreV2, questCoreV2ABI, new NonceManager(this.wallet))
   }
 

@@ -7,7 +7,7 @@ const minStamina = 25;
 const maxQueue = 10;
 const maxHeroCount = 6;
 
-exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects) => {
+exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects, accountInfo) => {
 	if (heroesStruct.foragingQuestCount >= maxQueue) {
 		console.log("foraging queue has reached its maximum value.")
 	} else {
@@ -38,7 +38,7 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects) => {
 
 					console.log(`sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to foraging quest`)
 
-					await new QuestCoreV2().startForagingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
+					await new QuestCoreV2(accountInfo).startForagingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendProfessionHeroesCount += sendProfessionHeroes.length
 					questCount++
 				}

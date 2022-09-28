@@ -3,7 +3,7 @@ require('dotenv').config();
 const config = {
   "privateKey": process.env.PRIVATE_KEY,
   "walletAddress": process.env.WALLET_ADDRESS,
-//   "walletAddressAndPrivateKeyMappings": JSON.parse(process.env.ADDRESS_AND_PRIVATE_KEY_MAPPINGS),
+  "walletAddressAndPrivateKeyMappings": process.env.ADDRESS_AND_PRIVATE_KEY_MAPPINGS.split("/").map(accountInfo => JSON.parse(accountInfo)),
   "harmony": {
     "heroBridge": "0x573e407Be90a50EAbA28748cbb62Ff9d6038A3e9",
     "useRpcIndex": 1,

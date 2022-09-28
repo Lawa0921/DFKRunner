@@ -6,7 +6,7 @@ const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
 const maxBatch = 6;
 
-exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects) => {
+exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects, accountInfo) => {
   const questType = config.defikingdoms.quest.goldMining
   const activeQuesterIds = heroesStruct.allQuesters
   const possibleGoldMiners = owningHeroObjects.filter((heroObject) => { 
@@ -26,7 +26,7 @@ exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects) => {
     const sentMinerIds = sendGoldMiners.map(heroObject => heroObject.id)
 
     console.log(`sending ${sentMinerIds} to gold mining quest`)
-    await new QuestCoreV2().startGoldMining(sentMinerIds)
+    await new QuestCoreV2(accountInfo).startGoldMining(sentMinerIds)
   } else {
     console.log("No gold miner sent")
   }

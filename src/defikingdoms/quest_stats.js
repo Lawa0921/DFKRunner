@@ -7,7 +7,7 @@ const minStamina = 25;
 const maxQueue = 10;
 const maxHeroCount = 6;
 
-exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects) => {
+exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, accountInfo) => {
 	const statHeroIds = config.defikingdoms.quest.statQuests.map(statQuestSetting => statQuestSetting.heroes).flat()
 	const activeQuesterIds = heroesStruct.allQuesters
 	const possibleStatHeroes = owningHeroObjects.filter((heroObject) => { 
@@ -40,7 +40,7 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects) => {
 
 						console.log(`sending ${sentHeroes.map(heroObject => heroObject.id)} to ${questType.name} quest`)
 
-						await new QuestCoreV2().startStatQuest(sentHeroes.map(heroObject => heroObject.id), attemp, questType.contractAddress, questType.name);
+						await new QuestCoreV2(accountInfo).startStatQuest(sentHeroes.map(heroObject => heroObject.id), attemp, questType.contractAddress, questType.name);
 						sendHeroCount += sentHeroes.length
 					}
 				}

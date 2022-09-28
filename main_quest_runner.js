@@ -18,7 +18,7 @@ async function main() {
 mainQuestScript = async (accountInfo) => {
   try {
     await Promise.allSettled([
-      runDFKChainQuest(),
+      runDFKChainQuest(accountInfo),
     ])
     console.log(`--- ${accountInfo.accountName} quest script process completed ---`)
   } catch(error) {
