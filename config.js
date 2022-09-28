@@ -1,31 +1,7 @@
 require('dotenv').config();
 
 const config = {
-  "privateKey": process.env.PRIVATE_KEY,
-  "walletAddress": process.env.WALLET_ADDRESS,
   "walletAddressAndPrivateKeyMappings": process.env.ADDRESS_AND_PRIVATE_KEY_MAPPINGS.split("/").map(accountInfo => JSON.parse(accountInfo)),
-  "harmony": {
-    "heroBridge": "0x573e407Be90a50EAbA28748cbb62Ff9d6038A3e9",
-    "useRpcIndex": 1,
-    "rpcs": [
-        "https://nd-918-448-543.p2pify.com/4b353b2b9c548ca58a7e6e01ce3bba7a",
-        "https://harmony-mainnet.chainstacklabs.com",
-        "https://api.harmony.one",
-        "https://harmony-0-rpc.gateway.pokt.network",
-        "https://api.0xvalidator.one",
-        "https://rpc.hermesdefi.io",
-        "https://api.fuzz.fi",
-        "https://api.s0.t.hmny.io",
-        "https://a.api.s0.t.hmny.io",
-        "https://rpc.foxswap.fi",
-        "https://iad.api.harmony.one",
-        "https://rpc.heavenswail.one",
-        "https://rpc.cosmicuniverse.one",
-        "https://rpc.onechain.services"
-    ],
-    "gasPrice": "0x174876E800", // 100 Gwei
-    "gasLimit": 2000001,
-  },
   "defikingdoms": {
     "quest": {
         "fishing": {

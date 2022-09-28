@@ -78,7 +78,6 @@ ADDRESS_AND_PRIVATE_KEY_MAPPINGS={"accountName": "yourAccountName", "walletAddre
 `bash run_sale_watcher.sh`：開始監聽酒館的出售，會自動購買達到指定條件的英雄，詳細估價內容可看 `/src/services/valuator.js` 這個檔案  
 `node sold_checker.js`：檢查寫在 `heroForSale` 的英雄是否售出  
 `node work_checker.js`：檢查是否有漏寫在 config 裡的英雄  
-`node hero_bridge_sender.js`：將寫在該檔案裡的英雄跨至 dfk chain，詳細可開啟該檔案內有說明  
 
 ## 關於更新
 確保您在 `DFKRunner` 的目錄內，並執行
