@@ -2,12 +2,12 @@ const config = require("~/config.js");
 const autils = require('~/src/services/autils');
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
-const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
 const maxBatch = 6;
 
 exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects, accountInfo) => {
   const questType = config.defikingdoms.quest.goldMining
+  const saleAuctionContract = new SaleAuction(accountInfo);
   const activeQuesterIds = heroesStruct.allQuesters
   const possibleGoldMiners = owningHeroObjects.filter((heroObject) => { 
     return questType.heroes.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress 

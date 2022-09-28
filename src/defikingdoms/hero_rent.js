@@ -1,9 +1,9 @@
 const SaleAuction = require("~/src/defikingdoms/contracts/saleAuction")
-const saleAuctionContract = new SaleAuction()
 const config = require("~/config.js")
 const RentValuator = require('~/src/services/rent_valuator')
 
-exports.runDFKRentHeroLogic = async (owningHeroObjects) => {
+exports.runDFKRentHeroLogic = async (owningHeroObjects, accountInfo) => {
+  const saleAuctionContract = new SaleAuction(accountInfo)
   const filtedHeroObjects = owningHeroObjects.filter((heroObject) => {
     return config.defikingdoms.notForRentHeroIds.indexOf(heroObject.id) === -1 && config.defikingdoms.heroForSale.map(heroData => heroData.id).indexOf(heroObject.id) === -1
   })

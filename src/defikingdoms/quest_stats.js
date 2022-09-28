@@ -2,7 +2,6 @@ const config = require("~/config.js");
 const autils = require('~/src/services/autils')
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
-const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
 const maxQueue = 10;
 const maxHeroCount = 6;
@@ -10,6 +9,7 @@ const maxHeroCount = 6;
 exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, accountInfo) => {
 	const statHeroIds = config.defikingdoms.quest.statQuests.map(statQuestSetting => statQuestSetting.heroes).flat()
 	const activeQuesterIds = heroesStruct.allQuesters
+	const saleAuctionContract = new SaleAuction(accountInfo);
 	const possibleStatHeroes = owningHeroObjects.filter((heroObject) => { 
 		return statHeroIds.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress 
 	})

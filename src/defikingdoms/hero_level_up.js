@@ -6,9 +6,9 @@ const shvasRuneContract = new ShvasRune();
 const MokshaRune = require('~/src/defikingdoms/contracts/mokshaRune');
 const mokshaRuneContract = new MokshaRune();
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
-const saleAuctionContract = new SaleAuction();
 
-exports.runDFKLevelUpLogic = async (owningHeroObjects) => {
+exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
+  const saleAuctionContract = new SaleAuction(accountInfo);
   const activeMeditations = await meditationCircleContract.getActiveMeditations();
   const levelUpableHeros = owningHeroObjects.filter(hero => 
     hero.levelUpable() && 
@@ -19,7 +19,7 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects) => {
     for (let i = 0; i < activeMeditations.length; i++) {
       let heroObject = owningHeroObjects.find(heroObject => heroObject.id === parseInt(activeMeditations[i].heroId).toString())
 
-      if (heroObject.isOnSale) {
+      if (heroObject.isOnSale && heroObject.owner === accountInfo.walletAddress) {
         await saleAuctionContract.unlistHero(heroObject.id)
       }
       

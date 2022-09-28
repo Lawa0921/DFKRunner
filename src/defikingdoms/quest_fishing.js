@@ -2,7 +2,6 @@ const config = require("~/config.js");
 const autils = require('~/src/services/autils');
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
-const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
 const maxQueue = 10;
 const maxHeroCount = 6;
@@ -13,6 +12,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, account
 	} else {
 		const questType = config.defikingdoms.quest.fishing
 		const activeQuesterIds = heroesStruct.allQuesters
+		const saleAuctionContract = new SaleAuction(accountInfo);
 		const possibleFishers = owningHeroObjects.filter((heroObject) => { 
 			return questType.heroes.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === config.walletAddress
 		})
@@ -51,7 +51,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, account
 
 					console.log(`sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
 
-					await new QuestCoreV2().startFishingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp);
+					await new QuestCoreV2(accountInfo).startFishingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendNonProfessionHeroesCount += sendNonProfessionHeroes.length
 					questCount++
 				}

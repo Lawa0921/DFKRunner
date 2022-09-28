@@ -14,30 +14,35 @@ const autils = require("~/src/services/autils");
 const config = require("~/config.js");
 
 exports.runDFKChainQuest = async (accountInfo) => {
-  const baseGasPrice = await autils.getBaseGasFee()
-  console.log(`DFK Current base gasPrice: ${baseGasPrice - config.defikingdoms.overBaseGasFeeWei}`)
-
-  if (baseGasPrice > config.defikingdoms.maxGasPrice) {
-    console.log(`DFK Current base gasPrice: ${baseGasPrice} is over then maxGasPrice setting: ${config.defikingdoms.maxGasPrice}, will retry later.`)
-  } else {
-    const questCoreV2Contract = new QuestCoreV2(accountInfo);
-
-    const activeQuests = await questCoreV2Contract.getAccountActiveQuests();
-    const heroesStruct = dataParser.questDataParser(activeQuests);
-    const owningHeroObjects = await autils.getHerosInfo(autils.getDFKOwningHeroIds());
-
-    await CompleteQuests(heroesStruct, accountInfo);
-
-    await runDFKSalesLogic(owningHeroObjects);
-    await runDFKRentHeroLogic(owningHeroObjects);
-
-    await runDFKLevelUpLogic(owningHeroObjects);
-
-    await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects, accountInfo)
-    await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects, accountInfo)
-    await CheckAndSendDFKGardeners(heroesStruct, owningHeroObjects, accountInfo)
-    await CheckAndSendDFKGoldMiners(heroesStruct, owningHeroObjects, accountInfo)
-    // await CheckAndSendDFKCrystalMiners(heroesStruct)
-    await CheckAndSendDFKStatQuests(heroesStruct, owningHeroObjects, accountInfo)
+  try {
+    const baseGasPrice = await autils.getBaseGasFee()
+    console.log(`DFK Current base gasPrice: ${baseGasPrice - config.defikingdoms.overBaseGasFeeWei}`)
+  
+    if (baseGasPrice > config.defikingdoms.maxGasPrice) {
+      console.log(`DFK Current base gasPrice: ${baseGasPrice} is over then maxGasPrice setting: ${config.defikingdoms.maxGasPrice}, will retry later.`)
+    } else {
+      const questCoreV2Contract = new QuestCoreV2(accountInfo);
+  
+      const activeQuests = await questCoreV2Contract.getAccountActiveQuests();
+      const heroesStruct = dataParser.questDataParser(activeQuests);
+      const owningHeroObjects = await autils.getHerosInfo(autils.getDFKOwningHeroIds());
+    
+      await CompleteQuests(heroesStruct, accountInfo);
+  
+      await runDFKSalesLogic(owningHeroObjects, accountInfo);
+      await runDFKRentHeroLogic(owningHeroObjects, accountInfo);
+  
+      await runDFKLevelUpLogic(owningHeroObjects, accountInfo);
+  
+      await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects, accountInfo)
+      await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects, accountInfo)
+      await CheckAndSendDFKGardeners(heroesStruct, owningHeroObjects, accountInfo)
+      await CheckAndSendDFKGoldMiners(heroesStruct, owningHeroObjects, accountInfo)
+      // await CheckAndSendDFKCrystalMiners(heroesStruct, accountInfo)
+      await CheckAndSendDFKStatQuests(heroesStruct, owningHeroObjects, accountInfo)
+    }
+  } catch (error) {
+    console.log(error)
+    process.exit();
   }
 }

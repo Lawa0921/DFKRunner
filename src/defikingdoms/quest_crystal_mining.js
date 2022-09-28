@@ -2,11 +2,11 @@ const config = require("~/config.js");
 const autils = require('~/src/services/autils');
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
-const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
 const maxBatch = 6;
 
 exports.CheckAndSendDFKCrystalMiners = async (heroesStruct, accountInfo) => {
+  const saleAuctionContract = new SaleAuction(accountInfo);
   const questType = config.defikingdoms.quest.crystalMining
   const activeQuesterIds = heroesStruct.allQuesters
   const heroObjects = await autils.getHerosInfo(questType.heroes)

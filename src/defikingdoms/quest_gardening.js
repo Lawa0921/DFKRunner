@@ -2,11 +2,11 @@ const config = require("~/config.js");
 const autils = require('~/src/services/autils');
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
-const saleAuctionContract = new SaleAuction();
 const minStamina = 25;
 
 exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects, accountInfo) => {
   const questType = config.defikingdoms.quest.gardening
+  const saleAuctionContract = new SaleAuction(accountInfo)
   const activeQuesterIds = heroesStruct.allQuesters
 
   const gardeningHeroIds = questType.pairAddressMappings.map(gardeningQuestSetting => gardeningQuestSetting.heroes).flat()

@@ -5,9 +5,9 @@ const autils = require('~/src/services/autils');
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class SaleAuction {
-  constructor() {
+  constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
-    this.wallet = new ethers.Wallet(config.privateKey, this.provider)
+    this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
     this.contract = new ethers.Contract(config.defikingdoms.saleAuction, saleAuctionABI, new NonceManager(this.wallet))
   }
 
@@ -33,10 +33,11 @@ module.exports = class SaleAuction {
   
     const tx = await this.createAuction(id, price)
     const res = await tx.wait();
+
     if (res.status === 1) {
       console.log(`listing hero: ${id} completed`);
     } else {
-      autils.txnFailLog(`list hero: ${id} failed`);
+      console.log(`list hero: ${id} failed`);
     }
 
     return res;
@@ -51,7 +52,7 @@ module.exports = class SaleAuction {
     if (res.status === 1) {
       console.log(`unlisting hero: ${id} completed`);
     } else {
-      autils.txnFailLog(`unlist hero: ${id} failed`);
+      console.log(`unlist hero: ${id} failed`);
     }
 
     return res;
@@ -76,7 +77,7 @@ module.exports = class SaleAuction {
     if (res.status === 1) {
       console.log(`unrent hero: ${heroId} completed`);
     } else {
-      autils.txnFailLog(`unrent hero: ${heroId} failed`);
+      console.log(`unrent hero: ${heroId} failed`);
     }
 
     return res;
@@ -101,7 +102,7 @@ module.exports = class SaleAuction {
     if (res.status === 1) {
       console.log(`rent hero: ${heroId} ${price} C completed`);
     } else {
-      autils.txnFailLog(`rent hero: ${heroId} ${price} C failed`);
+      console.log(`rent hero: ${heroId} ${price} C failed`);
     }
 
     return res;
