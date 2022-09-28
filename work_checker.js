@@ -17,7 +17,7 @@ axiosRetry(axios, {
 const getOwningHeroIds = async () => {
   let heroIds;
   const queryStr = `{
-    heroes(where: {owner: ${JSON.stringify(config.walletAddress)}}) { 
+    heroes(where: {owner_in: ${JSON.stringify(config.walletAddressAndPrivateKeyMappings.map(accountInfo => accountInfo.walletAddress))}}) { 
       id
     }
   }`
