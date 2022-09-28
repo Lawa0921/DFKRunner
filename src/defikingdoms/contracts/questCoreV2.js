@@ -9,6 +9,7 @@ module.exports = class QuestCoreV2 {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
     this.contract = new ethers.Contract(config.defikingdoms.questCoreV2, questCoreV2ABI, new NonceManager(this.wallet))
+    this.accountName = accountInfo.accountName
   }
 
   async getAccountActiveQuests() {
@@ -23,9 +24,9 @@ module.exports = class QuestCoreV2 {
     const txn = await this.contract.startQuest(heroIds, config.defikingdoms.quest.fishing.contractAddress, attempt, 0, { gasPrice: await autils.getBaseGasFee() })
     const res = await txn.wait();
     if (res.status === 1) {
-      console.log("Sent " + heroIds + " on a Fishing Quest completed")
+      console.log(`${this.accountName} send ${heroIds} on a fishing quest completed`)
     } else {
-      console.log("Sent " + heroIds + " on a Fishing Quest failed")
+      console.log(`${this.accountName} send ${heroIds} on a fishing quest failed`)
     }
 
     return res;
@@ -35,9 +36,9 @@ module.exports = class QuestCoreV2 {
     const txn = await this.contract.startQuest(heroIds, config.defikingdoms.quest.foraging.contractAddress, attempt, 0, { gasPrice: await autils.getBaseGasFee() })
     const res = await txn.wait();
     if (res.status === 1) {
-      console.log("Sent " + heroIds + " on a Foraging Quest completed")
+      console.log(`${this.accountName} send ${heroIds} on a foraging quest completed`)
     } else {
-      console.log("Sent " + heroIds + " on a Foraging Quest failed")
+      console.log(`${this.accountName} send ${heroIds} on a foraging quest failed`)
     }
 
     return res;
@@ -47,9 +48,9 @@ module.exports = class QuestCoreV2 {
     const tx = await this.contract.startQuest(heroIds, address, attempt, 1, { gasPrice: await autils.getBaseGasFee() })
     const res = await tx.wait();
     if (res.status === 1) {
-      console.log("Sent " + heroIds + " on a " + type + " Stat Quest completed")
+      console.log(`${this.accountName} send ${heroIds} on a ${type} stat quest completed`)
     } else {
-      console.log("Sent " + heroIds + " on a " + type + " Stat Quest failed")
+      console.log(`${this.accountName} send ${heroIds} on a ${type} stat quest failed`)
     }
 
     return res;
@@ -60,9 +61,9 @@ module.exports = class QuestCoreV2 {
     const res = await tx.wait();
 
     if (res.status === 1) {
-      console.log(`Sent ${heroIds} gold mining success`)
+      console.log(`${this.accountName} send ${heroIds} on a gold mining quest completed`)
     } else {
-      console.log(`Sent ${heroIds} gold mining failed`)
+      console.log(`${this.accountName} send ${heroIds} on a gold mining quest failed`)
     }
 
     return res;
@@ -73,9 +74,9 @@ module.exports = class QuestCoreV2 {
     const res = await tx.wait();
 
     if (res.status === 1) {
-      console.log(`Sent ${heroIds} crystal mining success`)
+      console.log(`${this.accountName} send ${heroIds} on a crystal mining quest completed`)
     } else {
-      console.log(`Sent ${heroIds} crystal mining failed`)
+      console.log(`${this.accountName} send ${heroIds} on a crystal mining quest failed`)
     }
 
     return res;
@@ -86,9 +87,9 @@ module.exports = class QuestCoreV2 {
     const res = await tx.wait();
 
     if (res.status === 1) {
-      console.log(`Sent ${heroIds} gardening quest success`);
+      console.log(`${this.accountName} send ${heroIds} on a gardening quest completed`)
     } else {
-      autils.txnFailLog(`Sent ${heroIds} gardening quest failed`);
+      console.log(`${this.accountName} send ${heroIds} on a gardening quest failed`)
     }
 
     return res;

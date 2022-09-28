@@ -7,6 +7,7 @@ module.exports = class ShvasRune {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
     this.contract = new ethers.Contract(config.defikingdoms.shvasRune, InventoryItemABI, this.wallet)
+    this.accountName = accountInfo.accountName
   }
 
   async balanceOf() {

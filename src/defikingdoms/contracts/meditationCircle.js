@@ -9,6 +9,7 @@ module.exports = class MeditationCircle {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
     this.contract = new ethers.Contract(config.defikingdoms.meditationCircle, meditationCircleABI, new NonceManager(this.wallet))
+    this.accountName = accountInfo.accountName
   }
 
   async startMeditation(heroId, mainStat, subStat1, subStat2) {
