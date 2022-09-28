@@ -261,7 +261,7 @@ const config = {
   "unconditionalPurchasePrice": 30,
   "g0ConditionsOfPurchase": 5000,
   "setQuestScriptTimeSecond": 120, // 設定你每次任務腳本執行的間隔秒數,
-  "saleWatcherWalletIndex": 0
+  "saleWatcherWalletIndex": 0 // 設定你用於自動購買的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
 }
 
 module.exports = config;
