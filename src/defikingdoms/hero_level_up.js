@@ -33,9 +33,9 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
       const res = await txn.wait();
 
       if (res.status === 1) {
-        console.log(`level up ${parseInt(activeMeditations[i].heroId)} success!`)
+        console.log(`${accountInfo.accountName} level up ${parseInt(activeMeditations[i].heroId)} success!`)
       } else {
-        console.log(`complete level up ${parseInt(activeMeditations[i].heroId)} failed`)
+        console.log(`${accountInfo.accountName} complete level up ${parseInt(activeMeditations[i].heroId)} failed`)
       }
     }
   }
@@ -47,9 +47,9 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
       const [shvasRuneRequireCount, mokshaRuneRequireCount] = await meditationCircleContract.getRequiredRunes(levelUpableHeros[i].level);
 
       if (parseInt(shvasRuneRequireCount) > parseInt(shvasRuneBalanceOf)) {
-        console.log(`shvasRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
+        console.log(`${accountInfo.accountName} shvasRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
       } else if (parseInt(mokshaRuneRequireCount) > parseInt(mokshaRuneBalanceOf)) {
-        console.log(`mokshaRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
+        console.log(`${accountInfo.accountName} mokshaRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
       } else {
         const [mainGrowth, subGrowth1, subGrowth2] = levelUpableHeros[i].growthStats();
 
@@ -61,16 +61,16 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
           const completeMeditationRes = await completeMeditationTxn.wait();
 
           if (completeMeditationRes.status === 1) {
-            console.log(`level up ${levelUpableHeros[i].id} success!`)
+            console.log(`${accountInfo.accountName} level up ${levelUpableHeros[i].id} success!`)
           } else {
-            console.log(`complete level up ${levelUpableHeros[i].id} failed`)
+            console.log(`${accountInfo.accountName} complete level up ${levelUpableHeros[i].id} failed`)
           }
         } else {
-          console.log(`level up ${levelUpableHeros[i].id} failed`)
+          console.log(`${accountInfo.accountName} level up ${levelUpableHeros[i].id} failed`)
         }
       }
     }
   } else {
-    console.log("No hero should level up")
+    console.log(`${accountInfo.accountName} no hero should level up`)
   }
 }

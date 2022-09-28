@@ -8,7 +8,7 @@ const maxHeroCount = 6;
 
 exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, accountInfo) => {
 	if (heroesStruct.fishingQuestCount >= maxQueue) {
-		console.log("fishing queue has reached its maximum value.")
+		console.log(`${accountInfo.accountName} fishing queue has reached its maximum value.`)
 	} else {
 		const questType = config.defikingdoms.quest.fishing
 		const activeQuesterIds = heroesStruct.allQuesters
@@ -36,7 +36,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, account
 					const sendProfessionHeroes = professionFishers.slice(sendProfessionHeroesCount, maxHeroCount + sendProfessionHeroesCount)
 					const attemp = Math.floor(minStamina / 5)
 
-					console.log(`sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
+					console.log(`${accountInfo.accountName} sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
 
 					await new QuestCoreV2(accountInfo).startFishingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendProfessionHeroesCount += sendProfessionHeroes.length
@@ -49,7 +49,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, account
 					const sendNonProfessionHeroes = nonProfessionFishers.slice(sendProfessionHeroesCount, maxHeroCount + sendNonProfessionHeroesCount)
 					const attemp = Math.floor(minStamina / 7)
 
-					console.log(`sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
+					console.log(`${accountInfo.accountName} sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
 
 					await new QuestCoreV2(accountInfo).startFishingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendNonProfessionHeroesCount += sendNonProfessionHeroes.length
@@ -57,7 +57,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, account
 				}
 			}
 		} else {
-			console.log("No fisher sent")
+			console.log(`${accountInfo.accountName} no fisher sent`)
 		}
 	}
 }

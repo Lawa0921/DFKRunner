@@ -25,9 +25,9 @@ exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects, acco
     const sendGoldMiners = possibleGoldMiners.slice(0, batchAmount)
     const sentMinerIds = sendGoldMiners.map(heroObject => heroObject.id)
 
-    console.log(`sending ${sentMinerIds} to gold mining quest`)
+    console.log(`${accountInfo.accountName} sending ${sentMinerIds} to gold mining quest`)
     await new QuestCoreV2(accountInfo).startGoldMining(sentMinerIds)
   } else {
-    console.log("No gold miner sent")
+    console.log("no gold miner sent")
   }
 }

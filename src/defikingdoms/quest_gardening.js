@@ -27,10 +27,10 @@ exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects, accou
       const sendGardeners = currentPossibleGardeners.slice(0, questType.pairAddressMappings[i].singleBatchAmount)
       const sentGardenerIds = sendGardeners.map(heroObject => heroObject.id)
 
-      console.log(`sending ${sentGardenerIds} to ${questType.pairAddressMappings[i].tokenPair} gardening quest`)
+      console.log(`${accountInfo.accountName} sending ${sentGardenerIds} to ${questType.pairAddressMappings[i].tokenPair} gardening quest`)
       await new QuestCoreV2(accountInfo).startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].pairAddress)
     } else {
-      console.log(`No gardener sent to ${questType.pairAddressMappings[i].tokenPair}`)
+      console.log(`${accountInfo.accountName} no gardener sent to ${questType.pairAddressMappings[i].tokenPair}`)
     }
   }
 }

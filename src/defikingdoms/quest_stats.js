@@ -30,7 +30,7 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, acco
 				const questCount = amountOfQuest(heroesStruct, questType)
 
 				if (questCount >= maxQueue) {
-					console.log(`${questType.name} queue has reached its maximum value.`)
+					console.log(`${accountInfo.accountName} ${questType.name} queue has reached its maximum value.`)
 				} else {
 					let sendHeroCount = 0;
 
@@ -38,14 +38,14 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, acco
 						const sentHeroes = currentPossibleHeroes.slice(sendHeroCount, maxHeroCount + sendHeroCount)
 						const attemp = Math.floor(minStamina / 5)
 
-						console.log(`sending ${sentHeroes.map(heroObject => heroObject.id)} to ${questType.name} quest`)
+						console.log(`${accountInfo.accountName} sending ${sentHeroes.map(heroObject => heroObject.id)} to ${questType.name} quest`)
 
 						await new QuestCoreV2(accountInfo).startStatQuest(sentHeroes.map(heroObject => heroObject.id), attemp, questType.contractAddress, questType.name);
 						sendHeroCount += sentHeroes.length
 					}
 				}
 			} else {
-				console.log(`No ${questType.name} hero send`)
+				console.log(`${accountInfo.accountName} no ${questType.name} hero send`)
 			}
 		}
 	}
