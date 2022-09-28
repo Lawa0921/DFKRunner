@@ -6,9 +6,9 @@ const DFKBridgeFee = "40000000000000000";
 const HarmonyChainId = 1666600000;
 
 module.exports = class HeroBridgeContract {
-  constructor() {
+  constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
-    this.wallet = new ethers.Wallet(config.privateKey, this.provider)
+    this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
     this.contract = new ethers.Contract(config.defikingdoms.heroBridge, heroBridgeABI, this.wallet)
   }
 
