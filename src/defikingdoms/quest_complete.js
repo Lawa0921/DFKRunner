@@ -5,7 +5,7 @@ exports.CompleteQuests = async (heroesStruct, accountInfo) => {
 
   if (heroesStruct.completedQuesters.length > 0) {
     let completeQuestPromises = heroesStruct.completedQuesters.map((completedQuesterId) => {
-      return completeQuest(completedQuesterId, questCoreV2Contract)
+      return completeQuest(completedQuesterId, questCoreV2Contract, accountInfo.accountName)
     })
 
     await Promise.allSettled(completeQuestPromises)
@@ -14,14 +14,14 @@ exports.CompleteQuests = async (heroesStruct, accountInfo) => {
   }
 }
 
-completeQuest = async (completedQuesterId, questCoreV2Contract) => {
-  console.log(`${accountInfo.accountName} sending complete ${completedQuesterId} quest`)
+completeQuest = async (completedQuesterId, questCoreV2Contract, accountName) => {
+  console.log(`${accountName} sending complete ${completedQuesterId} quest`)
   const tx = await questCoreV2Contract.completeQuest(completedQuesterId)
   const res = await tx.wait();
 
   if (res.status === 1) {
-    console.log(`${accountInfo.accountName} ${completedQuesterId} Quest completed`)
+    console.log(`${accountName} ${completedQuesterId} Quest completed`)
   } else {
-    console.log(`${accountInfo.accountName} ${completedQuesterId} Quest complete failed`);
+    console.log(`${accountName} ${completedQuesterId} Quest complete failed`);
   }
 }

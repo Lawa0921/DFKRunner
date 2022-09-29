@@ -2,7 +2,7 @@ const config = require("~/config.js");
 const SaleAuction = require("~/src/defikingdoms/contracts/saleAuction");
 
 const isShouldList = (heroObject) => {
-  return !heroObject.isOnSale && !heroObject.isOnRent && !heroObject.isOnQuesting && config.defikingdoms.heroForSale.map((heroData) => { return heroData.id }).indexOf(heroObject.id) > -1 && heroObject.currentStamina() <= config.defikingdoms.listStamina
+  return !heroObject.isOnSale && !heroObject.isOnRent && !heroObject.isOnQuesting && heroObject.currentStamina() <= config.defikingdoms.listStamina
 }
 
 exports.runDFKSalesLogic = async (owningHeroObjects, accountInfo) => {
