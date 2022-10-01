@@ -38,7 +38,7 @@ exports.runDFKChainQuest = async (accountInfo) => {
       await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects, accountInfo)
       await CheckAndSendDFKGardeners(heroesStruct, owningHeroObjects, accountInfo)
       await CheckAndSendDFKGoldMiners(heroesStruct, owningHeroObjects, accountInfo)
-      // await CheckAndSendDFKCrystalMiners(heroesStruct, accountInfo)
+      await CheckAndSendDFKCrystalMiners(heroesStruct, accountInfo)
       await CheckAndSendDFKStatQuests(heroesStruct, owningHeroObjects, accountInfo)
     }
   } catch (error) {
