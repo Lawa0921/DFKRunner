@@ -79,6 +79,7 @@ ADDRESS_AND_PRIVATE_KEY_MAPPINGS={"accountName": "yourAccountName", "walletAddre
 `node sold_checker.js`：檢查所有帳號寫在 `heroForSale` 的英雄是否售出  
 `node work_checker.js`：檢查所有帳號是否有漏寫在 config 裡的英雄  
 `node config_parser.js`：檢查 config 內的所有帳號持有情況  
+`node rerenter.js`：找到所有出租中的英雄，重新估價並執行上下架邏輯  
 
 ## 關於更新
 確保您在 `DFKRunner` 的目錄內，並執行

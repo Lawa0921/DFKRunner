@@ -382,11 +382,11 @@ module.exports = class RentValuator {
     const heroBlueStatBoost = this.hero.statboost2;
 
     if (this.hero.summonsRemaining === 1) {
-      this.valuation += 250
+      this.valuation += 200
     } else if (this.hero.summonsRemaining === 2) {
-      this.valuation += 330
+      this.valuation += 300
     } else if (this.hero.summonsRemaining === 3) {
-      this.valuation += 450
+      this.valuation += 390
     }
 
     if (heroGreenStatBoost === "STR" && heroBlueStatBoost === "STR") {

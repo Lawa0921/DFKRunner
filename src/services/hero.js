@@ -42,8 +42,8 @@ module.exports = class Hero {
     this.isOnQuesting = heroInfo.currentQuest !== autils.get0xAddress();
     this.isOnSale = heroInfo.saleAuction !== null ? true : false;
     this.isOnRent = heroInfo.assistingAuction !== null ? true : false;
-    this.salePrice = heroInfo.saleAuction ? heroInfo.saleAuction.startingPrice : '0';
-    this.rentPrice = heroInfo.assistingAuction ? heroInfo.assistingAuction.startingPrice : '0';
+    this.salePrice = heroInfo.saleAuction ? BigInt(heroInfo.saleAuction.startingPrice) / BigInt(10 ** 18) : 0;
+    this.rentPrice = heroInfo.assistingAuction ? BigInt(heroInfo.assistingAuction.startingPrice) / BigInt(10 ** 18) : 0;
   }
 
   isOwning() {
