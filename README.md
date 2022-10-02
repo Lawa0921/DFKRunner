@@ -69,7 +69,6 @@ ADDRESS_AND_PRIVATE_KEY_MAPPINGS={"accountName": "yourAccountName", "walletAddre
 
 開啟 VSCode 將 `config.js` 內的內容更換為您的英雄  
 格式依照原先的 config 範例參考設定即可  
-目前 `listStamina unlistStamina` 這兩個值請先不要更動，若是更動會出現掛售邏輯錯誤  
 
 ## 腳本說明
 以下所有的指令您都必須確認你當前的目錄在 `DFKRunner` 底下才能正確執行  
