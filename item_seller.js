@@ -1,4 +1,5 @@
 const config = require("~/config.js")
+const autils = require('~/src/services/autils');
 const InventoryItem = require('~/src/defikingdoms/contracts/inventoryItem')
 const ItemGoldTraderV2 = require('~/src/defikingdoms/contracts/ItemGoldTraderV2')
 const approveAmount = 1000000;
@@ -21,9 +22,11 @@ main = async() => {
   
           if (itemBalanceOf > contractAllowance) {
             await inventoryItemContract.approve(itemGoldTraderV2Contract.contract.address, approveAmount)
+            await autils.sleep(1000)
           }
   
           await itemGoldTraderV2Contract.sellItem(config.defikingdoms.availableForSaleTokens[j].contractAddress, itemBalanceOf)
+          await autils.sleep(1000)
         }
       }
     }
