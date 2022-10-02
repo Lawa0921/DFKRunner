@@ -251,6 +251,134 @@ const config = {
     "uniswapV2Factory": "0x794C07912474351b3134E6D6B3B7b3b4A07cbAAa",
     "uniswapV2Router02": "0x3C351E1afdd1b1BC44e931E12D4E05D6125eaeCa",
     "staminaVial": "0x242078edFDca25ef2A497C8D9f256Fd641472E5F",
+    "itemGoldTraderV2": "0x0f85fdf6c561C42d6b46d0E27ea6Aa9Bf9476B3f",
+    "availableForSaleTokens": [ // "sale" 是 true 表示要賣，false 的則不會賣掉
+        {
+            "name": "Ambertaffy",
+            "contractAddress": "0xB78d5580d6D897DE60E1A942A5C1dc07Bc716943",
+            "sale": true
+        },
+        {
+            "name": "Bluestem",
+            "contractAddress": "0x0776b936344DE7bd58A4738306a6c76835ce5D3F",
+            "sale": true
+        },
+        {
+            "name": "Darkweed",
+            "contractAddress": "0x848Ac8ddC199221Be3dD4e4124c462B806B6C4Fd",
+            "sale": true
+        },
+        {
+            "name": "Ironscale",
+            "contractAddress": "0x04B43D632F34ba4D4D72B0Dc2DC4B30402e5Cf88",
+            "sale": true
+        },
+        {
+            "name": "Lanterneye",
+            "contractAddress": "0xc2Ff93228441Ff4DD904c60Ecbc1CfA2886C76eB",
+            "sale": true
+        },
+        {
+            "name": "Milkweed",
+            "contractAddress": "0xA2cef1763e59198025259d76Ce8F9E60d27B17B5",
+            "sale": false
+        },
+        {
+            "name": "Rockroot",
+            "contractAddress": "0x60170664b52c035Fcb32CF5c9694b22b47882e5F",
+            "sale": true
+        },
+        {
+            "name": "Sailfish",
+            "contractAddress": "0x7f46E45f6e0361e7B9304f338404DA85CB94E33D",
+            "sale": false
+        },
+        {
+            "name": "Shimmerskin",
+            "contractAddress": "0xd44ee492889C078934662cfeEc790883DCe245f3",
+            "sale": false
+        },
+        {
+            "name": "Skunk Shade",
+            "contractAddress": "0xc6030Afa09EDec1fd8e63a1dE10fC00E0146DaF3",
+            "sale": true
+        },
+        {
+            "name": "Spiderfruit",
+            "contractAddress": "0x3E022D84D397F18743a90155934aBAC421D5FA4C",
+            "sale": true
+        },
+        {
+            "name": "Swift-Thistle",
+            "contractAddress": "0x97b25DE9F61BBBA2aD51F1b706D4D7C04257f33A",
+            "sale": false
+        },
+        {
+            "name": "Three-Eyed Eel",
+            "contractAddress": "0x6513757978E89e822772c16B60AE033781A29A4F",
+            "sale": true
+        },
+        {
+            "name": "Bloater",
+            "contractAddress": "0x268CC8248FFB72Cd5F3e73A9a20Fa2FF40EfbA61",
+            "sale": true
+        },
+        {
+            "name": "Frost Bloater",
+            "contractAddress": "0x3bcb9A3DaB194C6D8D44B424AF383E7Db51C82BD",
+            "sale": true
+        },
+        {
+            "name": "Frost Drum",
+            "contractAddress": "0xe7a1B580942148451E47b92e95aEB8d31B0acA37",
+            "sale": true
+        },
+        {
+            "name": "Goldvein",
+            "contractAddress": "0x0096ffda7A8f8E00e9F8Bbd1cF082c14FA9d642e",
+            "sale": true
+        },
+        {
+            "name": "King Pincer",
+            "contractAddress": "0x60A3810a3963f23Fa70591435bbe93BF8786E202",
+            "sale": true
+        },
+        {
+            "name": "Knaproot",
+            "contractAddress": "0xBcdD90034eB73e7Aec2598ea9082d381a285f63b",
+            "sale": true
+        },
+        {
+            "name": "Ragweed",
+            "contractAddress": "0x137995beEEec688296B0118131C1052546475fF3",
+            "sale": true
+        },
+        {
+            "name": "Redgill",
+            "contractAddress": "0x68eE50dD7F1573423EE0Ed9c66Fc1A696f937e81",
+            "sale": true
+        },
+        {
+            "name": "Redleaf",
+            "contractAddress": "0x473A41e71618dD0709Ba56518256793371427d79",
+            "sale": true
+        },
+        {
+            "name": "Shaggy Caps",
+            "contractAddress": "0x80A42Dc2909C0873294c5E359e8DF49cf21c74E4",
+            "sale": true
+        },
+        {
+            "name": "Silverfin",
+            "contractAddress": "0xA7CFd21223151700FB82684Cd9c693596267375D",
+            "sale": true
+        },
+        {
+            "name": "Speckle Tail",
+            "contractAddress": "0xE7CB27ad646C49dC1671Cb9207176D864922C431",
+            "sale": true
+        },
+    ],
     "maxGasPrice": 6000000000, // 6 Gwei
     "overBaseGasFeeWei": 510000000, // 0.51 Gwei
     "listStamina": 24,
