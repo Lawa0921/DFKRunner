@@ -175,6 +175,28 @@ exports.getHerosInfo = async (heroIds) => {
     return heroObjects;
 }
 
+exports.getPurchasedAssistingAuctions = async (accountInfo) => {
+    queryStr = `{
+        assistingAuctions (where: { seller: ${JSON.stringify(accountInfo.walletAddress)}, open: false, purchasePrice_not: null }, orderDirection: desc, orderBy: endedAt, first: 20) {
+          id
+          endedAt
+          purchasePrice
+          tokenId {
+              id
+          }
+        }
+      }`
+
+    let purchasedAssistingAuctions
+    await axios.post(config.graphqlEndPoint, { query: queryStr }).then((res) => {
+        purchasedAssistingAuctions = res.data.data.assistingAuctions
+    }).catch((err) => {
+        console.log(err);
+    })
+
+    return purchasedAssistingAuctions
+}
+
 exports.getOnAuctionHeroInfos = async () => {
     let skipCount = 0;
     let heroObjects = [];
