@@ -4,7 +4,7 @@ const config = require("~/config.js")
 
 async function main() {
   console.log(autils.getCurrentDateTime().toLocaleTimeString());
-  setTimeout(() => { process.exit() }, 180000) // 如果執行 script 超過 180 秒會自動中斷重啟，此為防治卡死的手段
+  setTimeout(() => { process.exit() }, 300000) // 如果執行 script 超過 180 秒會自動中斷重啟，此為防治卡死的手段
 
   const questScriptPromise = config.walletAddressAndPrivateKeyMappings.map((accountInfo) => {
     mainQuestScript(accountInfo)

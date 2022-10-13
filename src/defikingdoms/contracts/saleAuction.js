@@ -25,7 +25,7 @@ module.exports = class SaleAuction {
   }
 
   async bid(heroId, price) {
-    return this.contract.bid(heroId, price, { gasLimit: 1000000, gasPrice: 3000000000000 });
+    return this.contract.bid(heroId, price, { gasPrice: await autils.getBaseGasFee() });
   }
 
   async listHero(heroId, price) {
