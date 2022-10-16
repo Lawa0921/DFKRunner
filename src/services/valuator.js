@@ -38,7 +38,7 @@ module.exports = class Valuator {
     } else if (heroMainclassTier === "Advanced") {
       this.mainclassPrice += 5;
     } else if (heroMainclassTier === "Elite") {
-      this.mainclassPrice += 30;
+      this.mainclassPrice += 25;
     } else if (heroMainclassTier === "Transcendant") {
       this.mainclassPrice += 800;
     }
@@ -64,7 +64,7 @@ module.exports = class Valuator {
       if (heroRarity === "Rare") {
         this.rarityPrice += 10;
       } else if (heroRarity === "Legendary") {
-        this.rarityPrice += 80;
+        this.rarityPrice += 60;
       } else if (heroRarity === "Mythic") {
         this.rarityPrice += 300;
       }

@@ -135,7 +135,7 @@ module.exports = class RentValuator {
       }
 
       if (this.hero.profession === "foraging") {
-        this.valuation += 8
+        this.valuation += 3
       }
 
       if ((heroGreenStatBoost === "INT" || heroGreenStatBoost === "WIS") && (heroBlueStatBoost === "INT" || heroBlueStatBoost === "WIS")) {
