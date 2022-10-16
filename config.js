@@ -266,7 +266,7 @@ const config = {
     "notForRentHeroIds": [
         // 把你不想出租的英雄 ID 寫在這裡，例如： "1565", "1234" 
     ],
-    "notForLevelHeroIds": [
+    "notForLevelUpHeroIds": [
         // 把你不想自動升級的英雄 ID 寫在這裡，例如： "1716", "123456"
     ],
     "heroForSale": [ // 你想要販售的英雄與價格，price 請填整數，否則會出錯
