@@ -74,7 +74,7 @@ module.exports = class Valuator {
       } else if (heroRarity === "Rare") {
         this.rarityPrice += 25;
       } else if (heroRarity === "Legendary") {
-        this.rarityPrice += 200;
+        this.rarityPrice += 150;
       } else if (heroRarity === "Mythic") {
         this.rarityPrice += 650;
       }
@@ -256,9 +256,9 @@ module.exports = class Valuator {
         } else if (this.hero.summonsRemaining === 3) {
           this.summonPrice += 20;
         } else if (this.hero.summonsRemaining === 4) {
-          this.summonPrice += 50;
+          this.summonPrice += 45;
         } else if (this.hero.summonsRemaining === 5) {
-          this.summonPrice += 100;
+          this.summonPrice += 90;
         }
       } else if (this.hero.generation === 1) {
         if (this.hero.summonsRemaining === 1) {

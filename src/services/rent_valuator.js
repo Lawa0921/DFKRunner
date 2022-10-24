@@ -254,9 +254,9 @@ module.exports = class RentValuator {
       if (this.hero.summonsRemaining === 5) {
         this.valuation += 75
       } else if (this.hero.summonsRemaining === 4) {
-        this.valuation += 55
+        this.valuation += 50
       } else if (this.hero.summonsRemaining === 3) {
-        this.valuation += 39
+        this.valuation += 25
       } else if (this.hero.summonsRemaining === 2) {
         this.valuation += 15
       } else if (this.hero.summonsRemaining === 1) {
@@ -264,27 +264,27 @@ module.exports = class RentValuator {
       }
     } else if (this.hero.generation === 2) {
       if (this.hero.summonsRemaining === 5) {
-        this.valuation += 85
+        this.valuation += 80
       } else if (this.hero.summonsRemaining === 4) {
-        this.valuation += 69
+        this.valuation += 60
       } else if (this.hero.summonsRemaining === 3) {
-        this.valuation += 45
+        this.valuation += 30
       } else if (this.hero.summonsRemaining === 2) {
-        this.valuation += 25
+        this.valuation += 20
       } else if (this.hero.summonsRemaining === 1) {
-        this.valuation += 15
+        this.valuation += 12
       }
     } else if (this.hero.generation === 1) {
       if (this.hero.summonsRemaining === 5) {
-        this.valuation += 99
+        this.valuation += 90
       } else if (this.hero.summonsRemaining === 4) {
-        this.valuation += 79
+        this.valuation += 70
       } else if (this.hero.summonsRemaining === 3) {
-        this.valuation += 65
+        this.valuation += 55
       } else if (this.hero.summonsRemaining === 2) {
-        this.valuation += 35
+        this.valuation += 30
       } else if (this.hero.summonsRemaining === 1) {
-        this.valuation += 19
+        this.valuation += 15
       }
     }
 
