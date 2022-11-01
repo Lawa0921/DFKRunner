@@ -6,6 +6,13 @@ main = async() => {
 
   const configHeroesIds = autils.getAllConfigHeroIds()
   const configHeroes = await autils.getHerosInfo(configHeroesIds)
+  const notOwningHeroes = configHeroes.filter((heroObject) => {
+    return config.walletAddressAndPrivateKeyMappings.map(accountInfo => accountInfo.walletAddress).indexOf(heroObject.owner) === -1
+  })
+  console.log("---------------------------------")
+  console.log("not owning heroes:")
+  console.log(notOwningHeroes.map(heroObject => heroObject.id))
+  console.log("---------------------------------")
 
   config.walletAddressAndPrivateKeyMappings.forEach((accountInfo) => {
     console.log(`----- ${accountInfo.accountName} config detail -----`)
