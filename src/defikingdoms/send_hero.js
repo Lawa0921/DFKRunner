@@ -5,7 +5,7 @@ const HeroCore = require('~/src/defikingdoms/contracts/heroCore');
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 
 exports.sendHeroTo = async (heroesStruct, accountInfo) => {
-    if (config.sendHeroTo !== null && ethers.utils.isAddress(config.sendHeroTo)) {
+    if (config.sendHeroTo !== null && ethers.utils.isAddress(config.sendHeroTo) && config.sendHeroTo !== accountInfo.walletAddress) {
         const heroObjects = await autils.getHerosInfo(heroesStruct.completedQuesters)
 
         for (let i = 0; i < heroObjects.length; i++) {
