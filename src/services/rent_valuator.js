@@ -468,7 +468,7 @@ module.exports = class RentValuator {
     const heroRarity = this.hero.formatRarity();
 
     if (heroRarity === "Common") {
-      this.valuation += 999
+      this.valuation += 1500
 
       if (heroSubClassTier === "Advanced") {
         this.valuation += 200
@@ -484,7 +484,7 @@ module.exports = class RentValuator {
         this.valuation += 300
       }
     } else if (heroRarity === "UnCommon") {
-      this.valuation += 1399
+      this.valuation += 2499
 
       if (heroSubClassTier === "Advanced") {
         this.valuation += 300
@@ -500,7 +500,7 @@ module.exports = class RentValuator {
         this.valuation += 350
       }
     } else if (heroRarity === "Rare") {
-      this.valuation += 2099
+      this.valuation += 4999
 
       if (heroSubClassTier === "Advanced") {
         this.valuation += 400
@@ -516,7 +516,7 @@ module.exports = class RentValuator {
         this.valuation += 400
       }
     } else if (heroRarity === "Legendary") {
-      this.valuation += 5999
+      this.valuation += 9999
 
       if (heroSubClassTier === "Advanced") {
         this.valuation += 450
@@ -532,7 +532,7 @@ module.exports = class RentValuator {
         this.valuation += 500
       }
     } else if (heroRarity === "Mythic") {
-      this.valuation += 10999;
+      this.valuation += 29999;
 
       if (heroSubClassTier === "Advanced") {
         this.valuation += 500
@@ -543,9 +543,9 @@ module.exports = class RentValuator {
       }
 
       if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-        this.valuation += 300
+        this.valuation += 3000
       } else if (heroSubclass === "Dragoon") {
-        this.valuation += 500
+        this.valuation += 5000
       }
     }
   }

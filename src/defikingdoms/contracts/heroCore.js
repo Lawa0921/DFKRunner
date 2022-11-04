@@ -1,4 +1,5 @@
 const config = require("~/config.js");
+const autils = require('~/src/services/autils');
 const ethers = require('ethers');
 const heroCoreABI = require('~/abis/HeroCore.json')
 
@@ -12,5 +13,17 @@ module.exports = class HeroCore {
 
   async ownerOf(heroId) {
     return await this.contract.ownerOf(heroId)
+  }
+
+  async transferFrom(to, heroId) {
+    const txn = await this.contract.transferFrom(this.wallet.address, to, heroId, { gasPrice: await autils.getBaseGasFee() })
+    const res = await txn.wait();
+    if (res.status === 1) {
+      console.log(`${heroId} send to ${to} success`)
+    } else {
+      console.log(`${heroId} send to ${to} failed`)
+    }
+
+    return res;
   }
 }
