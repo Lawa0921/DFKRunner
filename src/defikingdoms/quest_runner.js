@@ -7,6 +7,7 @@ const { CheckAndSendDFKGoldMiners } = require('~/src/defikingdoms/quest_gold_min
 const { CheckAndSendDFKCrystalMiners } = require('~/src/defikingdoms/quest_crystal_mining');
 const { CheckAndSendDFKGardeners } = require("~/src/defikingdoms/quest_gardening");
 const { CompleteQuests } = require('~/src/defikingdoms/quest_complete');
+const { sendHeroTo } = require("~/src/defikingdoms/send_hero");
 const { runDFKSalesLogic } = require('~/src/defikingdoms/sales_handler');
 const { runDFKLevelUpLogic } = require('~/src/defikingdoms/hero_level_up'); 
 const { runDFKRentHeroLogic } = require('~/src/defikingdoms/hero_rent');
@@ -28,6 +29,7 @@ exports.runDFKChainQuest = async (accountInfo) => {
       const owningHeroObjects = await autils.getHerosInfo(autils.getDFKOwningHeroIds());
     
       await CompleteQuests(heroesStruct, accountInfo);
+      await sendHeroTo(heroesStruct, accountInfo);
   
       await runDFKSalesLogic(owningHeroObjects, accountInfo);
       await runDFKRentHeroLogic(owningHeroObjects, accountInfo);

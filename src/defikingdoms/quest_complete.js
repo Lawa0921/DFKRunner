@@ -3,8 +3,8 @@ const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2')
 exports.CompleteQuests = async (heroesStruct, accountInfo) => {
   const questCoreV2Contract = new QuestCoreV2(accountInfo)
 
-  if (heroesStruct.completedQuesters.length > 0) {
-    let completeQuestPromises = heroesStruct.completedQuesters.map((completedQuesterId) => {
+  if (heroesStruct.completedLeadQuesters.length > 0) {
+    let completeQuestPromises = heroesStruct.completedLeadQuesters.map((completedQuesterId) => {
       return completeQuest(completedQuesterId, questCoreV2Contract, accountInfo.accountName)
     })
 

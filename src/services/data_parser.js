@@ -32,6 +32,7 @@ questV2:
 exports.questDataParser = (activeQuests) => {
   let returnValue = {
     leadQuesters: [],
+    completedLeadQuesters: [],
     completedQuesters: [],
     allQuesters: [],
     foragingQuestCount: 0,
@@ -51,7 +52,10 @@ exports.questDataParser = (activeQuests) => {
     let questCompletedDate = new Date(quest.completeAtTime * 1000)
 
     if (questCompletedDate < autils.getCurrentDateTime()) {
-      returnValue.completedQuesters.push(quest.heroes[0].toString());
+      returnValue.completedLeadQuesters.push(quest.heroes[0].toString());
+      quest.heroes.forEach(heroId => {
+        returnValue.completedQuesters.push(heroId.toString());
+      })
     }
     quest.heroes.forEach(heroId => {
       returnValue.allQuesters.push(heroId.toString());

@@ -12,7 +12,6 @@ main = async() => {
   console.log("---------------------------------")
   console.log("not owning heroes:")
   console.log(notOwningHeroes.map(heroObject => heroObject.id))
-  console.log("---------------------------------")
 
   config.walletAddressAndPrivateKeyMappings.forEach((accountInfo) => {
     console.log(`----- ${accountInfo.accountName} config detail -----`)
