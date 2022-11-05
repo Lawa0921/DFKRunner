@@ -76,7 +76,7 @@ module.exports = class Valuator {
       } else if (heroRarity === "Legendary") {
         this.rarityPrice += 150;
       } else if (heroRarity === "Mythic") {
-        this.rarityPrice += 650;
+        this.rarityPrice += 550;
       }
     } else if (heroMainclassTier === "Elite") {
       if (heroRarity === "UnCommon") {

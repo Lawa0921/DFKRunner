@@ -14,7 +14,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, account
 		const activeQuesterIds = heroesStruct.allQuesters
 		const saleAuctionContract = new SaleAuction(accountInfo);
 		const possibleFishers = owningHeroObjects.filter((heroObject) => { 
-			return questType.heroes.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === accountInfo.walletAddress
+			return questType.heroes.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === accountInfo.walletAddress && !heroObject.isOnQuesting
 		})
 		const unsellPromise = possibleFishers.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
 
