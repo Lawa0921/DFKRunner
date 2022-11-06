@@ -384,11 +384,11 @@ module.exports = class RentValuator {
     const heroBlueStatBoost = this.hero.statboost2;
 
     if (this.hero.summonsRemaining === 1) {
-      this.valuation += 200
+      this.valuation += 150
     } else if (this.hero.summonsRemaining === 2) {
-      this.valuation += 300
+      this.valuation += 250
     } else if (this.hero.summonsRemaining === 3) {
-      this.valuation += 390
+      this.valuation += 300
     }
 
     if (heroGreenStatBoost === "STR" && heroBlueStatBoost === "STR") {
@@ -458,9 +458,9 @@ module.exports = class RentValuator {
     } else if (heroRarity === "Rare") {
       this.valuation = this.valuation * 1.5
     } else if (heroRarity === "Legendary") {
-      this.valuation = this.valuation * 3
+      this.valuation = this.valuation * 2
     } else if (heroRarity === "Mythic") {
-      this.valuation = this.valuation * 5
+      this.valuation = this.valuation * 4
     }
   }
 
