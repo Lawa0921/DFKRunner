@@ -99,7 +99,7 @@ module.exports = class RentValuator {
       } 
 
       if (this.hero.profession === "mining") {
-        this.valuation += 15
+        this.valuation += 8
       }
 
       if ((heroGreenStatBoost === "STR" || heroGreenStatBoost === "VIT") && (heroBlueStatBoost === "STR" || heroBlueStatBoost === "VIT")) {
@@ -115,9 +115,9 @@ module.exports = class RentValuator {
       }
 
       if (this.hero.profession === "mining") {
-        this.valuation += 12
+        this.valuation += 6
       } else if (this.hero.profession === "foraging") {
-        this.valuation += 5
+        this.valuation += 2
       }
 
       if (heroGreenStatBoost === "STR" && heroBlueStatBoost === "STR") {
@@ -153,7 +153,7 @@ module.exports = class RentValuator {
       }
 
       if (this.hero.profession === "fishing") {
-        this.valuation += 8
+        this.valuation += 5
       }
 
       if ((heroGreenStatBoost === "AGI" || heroGreenStatBoost === "LCK") && (heroBlueStatBoost === "AGI" || heroBlueStatBoost === "LCK")) {
@@ -201,10 +201,12 @@ module.exports = class RentValuator {
       this.valuation += 150
     }
 
-    if (skillInfos.skillScore === 2) {
+    if (skillInfos.skillScore === 1) {
+      this.valuation += 2
+    } else if (skillInfos.skillScore === 2) {
       this.valuation += 15
     } else if (skillInfos.skillScore === 3) {
-      this.valuation += 40
+      this.valuation += 55
     } else if (skillInfos.skillScore === 4) {
       this.valuation += 80
     } else if (skillInfos.skillScore >= 5) {
