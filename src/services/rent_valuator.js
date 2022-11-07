@@ -384,7 +384,7 @@ module.exports = class RentValuator {
     const heroBlueStatBoost = this.hero.statboost2;
 
     if (this.hero.summonsRemaining === 1) {
-      this.valuation += 150
+      this.valuation += 170
     } else if (this.hero.summonsRemaining === 2) {
       this.valuation += 250
     } else if (this.hero.summonsRemaining === 3) {
