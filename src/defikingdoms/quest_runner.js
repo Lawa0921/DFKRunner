@@ -29,7 +29,7 @@ exports.runDFKChainQuest = async (accountInfo) => {
       const owningHeroObjects = await autils.getHerosInfo(autils.getDFKOwningHeroIds());
     
       await CompleteQuests(heroesStruct, accountInfo);
-      await sendHeroTo(heroesStruct, accountInfo);
+      await sendHeroTo(heroesStruct, accountInfo, owningHeroObjects);
   
       await runDFKSalesLogic(owningHeroObjects, accountInfo);
       await runDFKRentHeroLogic(owningHeroObjects, accountInfo);
