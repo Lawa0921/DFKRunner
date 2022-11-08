@@ -196,9 +196,9 @@ module.exports = class RentValuator {
     if (heroSubClassTier === "Advanced") {
       this.valuation += 10
     } else if (heroSubClassTier === "Elite") {
-      this.valuation += 30
-    } else if (heroSubClassTier === "Transcendant") {
       this.valuation += 150
+    } else if (heroSubClassTier === "Transcendant") {
+      this.valuation += 750
     }
 
     if (skillInfos.skillScore === 1) {
@@ -345,11 +345,11 @@ module.exports = class RentValuator {
     }
 
     if (heroSubClassTier === "Advanced") {
-      this.valuation += 10
+      this.valuation += 20
     } else if (heroSubClassTier === "Elite") {
-      this.valuation += 50
+      this.valuation += 450
     } else if (heroSubClassTier === "Transcendant") {
-      this.valuation += 150
+      this.valuation += 1500
     }
 
     if (skillInfos.skillScore === 2) {
@@ -367,9 +367,9 @@ module.exports = class RentValuator {
     } else if (heroRarity === "Rare") {
       this.valuation = this.valuation * 1.35
     } else if (heroRarity === "Legendary") {
-      this.valuation = this.valuation * 2.5
+      this.valuation = this.valuation * 2
     } else if (heroRarity === "Mythic") {
-      this.valuation = this.valuation * 4
+      this.valuation = this.valuation * 3
     }
   }
 
@@ -472,29 +472,13 @@ module.exports = class RentValuator {
     if (heroRarity === "Common") {
       this.valuation += 1500
 
-      if (heroSubClassTier === "Advanced") {
-        this.valuation += 200
-      } else if (heroSubClassTier === "Elite") {
-        this.valuation += 1000
-      } else if (heroSubClassTier === "Transcendant") {
-        this.valuation += 3000
-      }
-
       if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
         this.valuation += 100
       } else if (heroSubclass === "Dragoon") {
-        this.valuation += 300
+        this.valuation += 500
       }
     } else if (heroRarity === "UnCommon") {
       this.valuation += 2499
-
-      if (heroSubClassTier === "Advanced") {
-        this.valuation += 300
-      } else if (heroSubClassTier === "Elite") {
-        this.valuation += 1500
-      } else if (heroSubClassTier === "Transcendant") {
-        this.valuation += 3500
-      }
 
       if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
         this.valuation += 150
@@ -504,14 +488,6 @@ module.exports = class RentValuator {
     } else if (heroRarity === "Rare") {
       this.valuation += 4999
 
-      if (heroSubClassTier === "Advanced") {
-        this.valuation += 400
-      } else if (heroSubClassTier === "Elite") {
-        this.valuation += 1800
-      } else if (heroSubClassTier === "Transcendant") {
-        this.valuation += 4000
-      }
-
       if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
         this.valuation += 200
       } else if (heroSubclass === "Dragoon") {
@@ -519,14 +495,6 @@ module.exports = class RentValuator {
       }
     } else if (heroRarity === "Legendary") {
       this.valuation += 9999
-
-      if (heroSubClassTier === "Advanced") {
-        this.valuation += 450
-      } else if (heroSubClassTier === "Elite") {
-        this.valuation += 2000
-      } else if (heroSubClassTier === "Transcendant") {
-        this.valuation += 5000
-      }
 
       if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
         this.valuation += 250
@@ -536,19 +504,19 @@ module.exports = class RentValuator {
     } else if (heroRarity === "Mythic") {
       this.valuation += 29999;
 
-      if (heroSubClassTier === "Advanced") {
-        this.valuation += 500
-      } else if (heroSubClassTier === "Elite") {
-        this.valuation += 2500
-      } else if (heroSubClassTier === "Transcendant") {
-        this.valuation += 10000
-      }
-
       if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
         this.valuation += 3000
       } else if (heroSubclass === "Dragoon") {
         this.valuation += 5000
       }
+    }
+
+    if (heroSubClassTier === "Advanced") {
+      this.valuation += 300
+    } else if (heroSubClassTier === "Elite") {
+      this.valuation += 2000
+    } else if (heroSubClassTier === "Transcendant") {
+      this.valuation += 10000
     }
   }
 
