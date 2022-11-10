@@ -4,7 +4,6 @@
 3. 自動購買 ( 可監聽 harmony 與 dfk 的上架，並針對符合條件的英雄自動下單購買 )
 4. 檢查販售的腳本 ( 檢查寫在販售列表的英雄是否已經販售掉的腳本 )
 5. 檢查持有的英雄是否都寫進 config 的腳本 ( 找到無事可做的英雄 )
-6. 群體英雄跨橋腳本 ( harmony 至 dfk )
 
 ## 環境建置
 首先您需要依據作業系統安裝 git、node、npm。
@@ -75,9 +74,8 @@ ADDRESS_AND_PRIVATE_KEY_MAPPINGS={"accountName": "yourAccountName", "walletAddre
 
 `bash run.sh`：自動執行任務及掛售的邏輯，在手動停止之前他會不停執行  
 `bash run_sale_watcher.sh`：開始監聽酒館的出售，會自動購買達到指定條件的英雄，詳細估價內容可看 `/src/services/valuator.js` 這個檔案  
-`node sold_checker.js`：檢查所有帳號寫在 `heroForSale` 的英雄是否售出  
 `node work_checker.js`：檢查所有帳號是否有漏寫在 config 裡的英雄  
-`node config_parser.js`：檢查 config 內的所有帳號持有情況  
+`node config_parser.js`：檢查 config 內的所有帳號持有情況，即可找到寫在 config 內但非自己持有的英雄  
 `node rerenter.js`：找到所有出租中的英雄，重新估價並執行上下架邏輯  
 `node item_seller.js`：自動將你的道具換成 gold  
 `node sale_auction_parser.js`：爬取所有正在販售的英雄，抓出與估價接近的英雄
