@@ -26,7 +26,7 @@ exports.runDFKChainQuest = async (accountInfo) => {
   
       const activeQuests = await questCoreV2Contract.getAccountActiveQuests();
       const heroesStruct = dataParser.questDataParser(activeQuests);
-      const owningHeroObjects = await autils.getHerosInfo(autils.getDFKOwningHeroIds());
+      const owningHeroObjects = await autils.getHeroesInfoByIds(autils.getDFKOwningHeroIds());
     
       await CompleteQuests(heroesStruct, accountInfo);
       await sendHeroTo(heroesStruct, accountInfo, owningHeroObjects);

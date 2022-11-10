@@ -111,7 +111,7 @@ module.exports = class SaleAuction {
 
   async buyHero(heroId) {
     const id = parseInt(heroId, 10);
-    const heroesData = await autils.getHerosInfo([id])
+    const heroesData = await autils.getHeroesInfoByIds([id])
 
     const tx = await this.bid(id, heroesData[0].salePrice);
     const res = await tx.wait();

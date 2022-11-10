@@ -19,7 +19,7 @@ axiosRetry(axios, {
 });
 
 const DFKSaleHandler = async (tokenId, price) => {
-  let heroObjects = await autils.getHerosInfo([parseInt(tokenId)]);
+  let heroObjects = await autils.getHeroesInfoByIds([parseInt(tokenId)]);
 
   const valuator = new Valuator(price, heroObjects[0]);
   valuator.execute();

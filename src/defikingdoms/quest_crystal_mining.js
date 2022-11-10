@@ -9,7 +9,7 @@ exports.CheckAndSendDFKCrystalMiners = async (heroesStruct, accountInfo) => {
   const saleAuctionContract = new SaleAuction(accountInfo);
   const questType = config.defikingdoms.quest.crystalMining
   const activeQuesterIds = heroesStruct.allQuesters
-  const heroObjects = await autils.getHerosInfo(questType.heroes)
+  const heroObjects = await autils.getHeroesInfoByIds(questType.heroes)
   const possibleCrystalMiners = heroObjects.filter((heroObject) => {
     return activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === accountInfo.walletAddress && !heroObject.isOnQuesting
   }).sort((heroInfo, nextHeroInfo) => {

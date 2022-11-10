@@ -5,13 +5,18 @@ main = async() => {
   console.log("start parse config heroes ...")
 
   const configHeroesIds = autils.getAllConfigHeroIds()
-  const configHeroes = await autils.getHerosInfo(configHeroesIds)
+  const configHeroes = await autils.getHeroesInfoByIds(configHeroesIds)
+  const configAddresses = config.walletAddressAndPrivateKeyMappings.map(accountInfo => accountInfo.walletAddress)
+  const owningHeroes = await autils.getHeroesInfoByAddresses(configAddresses)
   const notOwningHeroes = configHeroes.filter((heroObject) => {
     return config.walletAddressAndPrivateKeyMappings.map(accountInfo => accountInfo.walletAddress).indexOf(heroObject.owner) === -1
   })
   console.log("---------------------------------")
   console.log("not owning heroes:")
   console.log(notOwningHeroes.map(heroObject => heroObject.id))
+  console.log("---------------------------------")
+  console.log("not working heroes:")
+  console.log(owningHeroes.map(heroObject => heroObject.id).filter(heroId => configHeroesIds.indexOf(heroId) === -1))
 
   config.walletAddressAndPrivateKeyMappings.forEach((accountInfo) => {
     console.log(`----- ${accountInfo.accountName} config detail -----`)

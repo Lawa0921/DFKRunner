@@ -113,7 +113,7 @@ exports.getBaseGasFee = async () => {
     return parseInt(gasInfo.lastBaseFeePerGas) + config.defikingdoms.overBaseGasFeeWei
 }
 
-exports.getHerosInfo = async (heroIds) => {
+exports.getHeroesInfoByIds = async (heroIds) => {
     if (heroIds.length === 0) {
         return []
     }
@@ -172,6 +172,68 @@ exports.getHerosInfo = async (heroIds) => {
         console.log(err);
     })
 
+    return heroObjects;
+}
+
+exports.getHeroesInfoByAddresses = async (walletAddresses) => {
+    if (walletAddresses.length === 0) {
+        return []
+    }
+    let heroObjects;
+    
+    queryStr = `{
+        heroes(where: {owner_in: ${JSON.stringify(walletAddresses)}}) {
+            id
+            owner {
+                owner
+            }
+            rarity
+            network
+            mainClass
+            subClass
+            summonsRemaining
+            profession
+            generation
+            level
+            passive1
+            passive2
+            active1
+            active2
+            statBoost1
+            statBoost2
+            hairStyle
+            backAppendage
+            maxSummons
+            currentQuest
+            xp
+            strength
+            intelligence
+            wisdom
+            luck
+            agility
+            vitality
+            endurance
+            dexterity
+            stamina
+            staminaFullAt
+            nextSummonTime
+            saleAuction {
+                startingPrice
+                open
+            }
+            assistingAuction {
+                startingPrice
+                open
+            }
+        }
+      }`
+  
+    await axios.post(config.graphqlEndPoint, { query: queryStr }).then((res) => {
+      heroObjects = res.data.data.heroes.map((heroData) => { return new Hero(heroData) });
+    }).catch((err) => {
+      console.log(err);
+    })
+  
     return heroObjects;
 }
 

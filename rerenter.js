@@ -5,7 +5,7 @@ const RentValuator = require('~/src/services/rent_valuator')
 
 async function main() {
   try {
-    const owningHeroObjects = await autils.getHerosInfo(autils.getDFKOwningHeroIds());
+    const owningHeroObjects = await autils.getHeroesInfoByIds(autils.getDFKOwningHeroIds());
     const onRentHeroes = owningHeroObjects.filter(heroObject => heroObject.isOnRent);
   
     for (let i = 0; onRentHeroes.length > i; i++) {
