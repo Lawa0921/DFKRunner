@@ -6,7 +6,8 @@ const DFKDuelS1 = require("~/src/defikingdoms/contracts/DFKDuelS1")
 const DFKDuelS1Contract = new DFKDuelS1(config.walletAddressAndPrivateKeyMappings[0])
 
 async function test() {  
-    console.log(await DFKDuelS1Contract.enterDuelLobby("solo", ["1000000030460"], "low", "desert", "VIT"))
+    // console.log(await DFKDuelS1Contract.enterDuelLobby("solo", ["1000000030460"], "low", "desert", "VIT"))
+    console.log(await DFKDuelS1Contract.getDuelHistory())
 }
 
 test();

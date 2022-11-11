@@ -77,5 +77,47 @@ module.exports = class DFKDuelS1Contract {
     }
     return receipt
   }
+
+	async getActiveDuels() {
+		const rawData = await this.contract.getActiveDuels(this.wallet.address)
+		const duelData = rawData.map(data => {
+			return {
+				id: data.id.toString(),
+				player1: data.player1,
+				player2: data.player2,
+				player1DuelEntry: data.player1DuelEntry.toString(),
+				player2DuelEntry: data.player2DuelEntry.toString(),
+				winner: data.winner,
+				player1Heroes: data.player1Heroes.map((heroId) => { return heroId.toString() }),
+				player2Heroes: data.player2Heroes.map((heroId) => { return heroId.toString() }),
+				startBlock: data.startBlock.toString(),
+				duelType: data.duelType,
+				status: data.status,
+			}
+		})
+
+		return duelData
+	}
+
+	async getDuelHistory() {
+		const rawData = await this.contract.getDuelHistory(this.wallet.address)
+		const duelData = rawData.filter(data => data.status !== 0).map(data => {
+			return {
+				id: data.id.toString(),
+				player1: data.player1,
+				player2: data.player2,
+				player1DuelEntry: data.player1DuelEntry.toString(),
+				player2DuelEntry: data.player2DuelEntry.toString(),
+				winner: data.winner,
+				player1Heroes: data.player1Heroes.map((heroId) => { return heroId.toString() }),
+				player2Heroes: data.player2Heroes.map((heroId) => { return heroId.toString() }),
+				startBlock: data.startBlock.toString(),
+				duelType: data.duelType,
+				status: data.status,
+			}
+		})
+
+		return duelData
+	}
 }
 
