@@ -7,7 +7,7 @@ const DFKDuelS1Contract = new DFKDuelS1(config.walletAddressAndPrivateKeyMapping
 
 async function test() {  
     // console.log(await DFKDuelS1Contract.enterDuelLobby("solo", ["1000000030460"], "low", "desert", "VIT"))
-    console.log(await DFKDuelS1Contract.getDuelHistory())
+    console.log(await DFKDuelS1Contract.completeDuel("264974"))
 }
 
 test();

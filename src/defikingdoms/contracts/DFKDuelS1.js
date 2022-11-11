@@ -78,6 +78,18 @@ module.exports = class DFKDuelS1Contract {
     return receipt
   }
 
+	async completeDuel(duelId) {
+		const txn = await this.contract.completeDuel(duelId, { gasPrice: await autils.getBaseGasFee() })
+		const receipt = await txn.wait()
+
+		if (receipt.status === 1) {
+      console.log(`complete ${duelId} duel success`)
+    } else {
+      console.log(`complete ${duelId} duel failed`)
+    }
+    return receipt
+	}
+
 	async getActiveDuels() {
 		const rawData = await this.contract.getActiveDuels(this.wallet.address)
 		const duelData = rawData.map(data => {

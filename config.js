@@ -553,6 +553,10 @@ const config = {
             "sale": true
         },
     ],
+    "duelSetting": {
+      "type": "solo", // 第一版只會寫 solo 的邏輯
+      "heroes": [], // 在這邊寫你想要嘗試送去 duel 的英雄 id
+    },
     "maxGasPrice": 8000000000, // 表示你可以接受的最大 baseFee 是多少，當 baseFee 超過這個值時任務腳本就會暫停，6000000000 表示 6 Gwei，請依你的需要調整
     "overBaseGasFeeWei": 550000000, // 表示你願意出高於 baseFee 多少的 gas，理論上這個數字越高你的交易速度就會越快， 110000000 表示 0.11 Gwei，請依你的需要調整
     "listStamina": 24, // 表示當你的英雄體力低於多少時要進行掛售，體力值高於這個設定的英雄如果是下架狀態會等做完任務才會再次上架
