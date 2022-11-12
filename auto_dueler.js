@@ -35,7 +35,7 @@ autoDuelScript = async (accountInfo) => {
 						DFKDuelS1Contract.getHeroesBestStat(duelerHeroes[0])
 					)
 				} else {
-					const duelHistory = await DFKDuelS1Contract.getDuelHistory().then(res => res.filter(duelHistory => duelHistory.duelType === DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type]))
+					const duelHistory = await DFKDuelS1Contract.getDuelHistory().then(res => res.filter(duelHistory => duelHistory.player1Heroes.length === DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type]))
 					// to do
 				}				
 			}
