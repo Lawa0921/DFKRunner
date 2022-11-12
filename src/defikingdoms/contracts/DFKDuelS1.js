@@ -131,5 +131,37 @@ module.exports = class DFKDuelS1Contract {
 
 		return duelData
 	}
+
+	async getPlayerDuelEntries() {
+		const rawData = await this.contract.getPlayerDuelEntries(this.wallet.address)
+
+		const entryData = rawData.map(data => {
+			return {
+				id: data.id.toString(),
+				heroes: data.heroes.map((heroId) => { return heroId.toString() }),
+				startBlock: data.startBlock.toString(),
+				heroPower: data.heroPower.toString(),
+				score: data.score.toString(),
+				scoreAfter: data.scoreAfter.toString(),
+				tokenFee: ethers.utils.formatEther(data.tokenFee.toString()),
+				duelType: data.duelType,
+				status: data.status,
+			}
+		})
+		
+		return entryData
+	}
+
+	async matchMake(type) {
+		const txn = await this.contract.matchMake(type)
+		const receipt = await txn.wait()
+
+		if (receipt.status === 1) {
+      console.log(`match ${type} duel success`)
+    } else {
+      console.log(`match ${type} duel failed`)
+    }
+    return receipt
+	}
 }
 
