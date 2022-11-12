@@ -155,6 +155,7 @@ exports.getHeroesInfoByIds = async (heroIds) => {
             stamina
             staminaFullAt
             nextSummonTime
+            background
             saleAuction {
                 startingPrice
                 open
@@ -217,6 +218,7 @@ exports.getHeroesInfoByAddresses = async (walletAddresses) => {
             stamina
             staminaFullAt
             nextSummonTime
+            background
             saleAuction {
                 startingPrice
                 open

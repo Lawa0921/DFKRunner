@@ -21,6 +21,7 @@ module.exports = class Hero {
     this.statboost1 = heroInfo.statBoost1;
     this.statboost2 = heroInfo.statBoost2;
     this.hairStyle = heroInfo.hairStyle;
+    this.background = heroInfo.background;
     this.backAppendage = heroInfo.backAppendage;
     this.maxSummons = heroInfo.maxSummons;
     this.network = heroInfo.network;
@@ -591,6 +592,23 @@ module.exports = class Hero {
     })
 
     return skillsInfo
+  }
+
+  sortedStat() {
+    const heroStat = {
+      STR: this.strength,
+      INT: this.intelligence,
+      WIS: this.wisdom,
+      LCK: this.luck,
+      AGI: this.agility,
+      VIT: this.vitality,
+      END: this.endurance,
+      DEX: this.dexterity,
+    }
+
+    const sortedStat = Object.fromEntries(Object.entries(heroStat).sort(([,a],[,b]) => b - a))
+
+    return sortedStat
   }
 
   async requireRunes() {
