@@ -119,11 +119,40 @@ module.exports = class DFKDuelS1Contract {
 	}
 
 	getHeroesBestStat(heroObjects) {
-		// to do
+		if (heroObjects.length === 1) {
+			return Object.keys(heroObjects[0].sortedStat())[0]
+		} else {
+			const heroesBestStat = heroObjects.map(heroObject => Object.keys(heroObject.sortedStat())[0])
+			const bestStatCount = heroesBestStat.reduce(
+				(result, stat) => { 
+					result[stat] += 1
+					return result 
+				},
+				{ STR: 0, INT: 0, WIS: 0, LCK: 0, AGI: 0, VIT: 0, END: 0, DEX: 0 }
+			)
+
+			const sortedStat = Object.fromEntries(Object.entries(bestStatCount).sort(([,a],[,b]) => b - a))
+			return Object.keys(sortedStat)[0]
+		}
 	}
 
 	getHeroesBestBackground(heroObjects) {
-		// to do
+		if (heroObjects.length === 1) {
+			return heroObjects[0].background
+		} else {
+			const heroesBackground = heroObjects.map(heroObject => heroObject.background)
+			const heroesBackgroundCount = heroesBackground.reduce(
+				(result, background) => {
+					result[background] += 1 
+					return result
+				},
+				{ desert: 0, forest: 0, plains: 0, island: 0, swamp: 0, mountains: 0, city: 0, arctic: 0 }
+			)
+
+			const sortedBackground = Object.fromEntries(Object.entries(heroesBackgroundCount).sort(([,a],[,b]) => b - a))
+
+			return Object.keys(sortedBackground)[0]
+		}
 	}
 
 	duelType() {

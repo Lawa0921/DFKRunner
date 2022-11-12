@@ -4,11 +4,7 @@ const DFKDuelS1 = require('~/src/defikingdoms/contracts/DFKDuelS1')
 
 main = async() => {
 	console.log(autils.getCurrentDateTime().toLocaleTimeString());
-	const autoDuelPromise = config.walletAddressAndPrivateKeyMappings.map((accountInfo) => {
-		autoDuelScript(accountInfo)
-	})
-	
-	await Promise.allSettled(autoDuelPromise)
+	await autoDuelScript(config.walletAddressAndPrivateKeyMappings[config.autoDuelerWalletIndex])
   await autils.sleep(config.setDuelScriptTimeSecond * 1000)
 
   process.exit()
@@ -20,18 +16,28 @@ autoDuelScript = async (accountInfo) => {
 		
 		for (let i = 0; i < DFKDuelSetting.length; i++) {
 			const DFKDuelS1Contract = new DFKDuelS1(accountInfo)
-			const activeDuels = await DFKDuelS1Contract.getActiveDuels().then(res => res.filter(duel => duel.duelType === DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type]))
-			const activeEntries = await DFKDuelS1Contract.getPlayerDuelEntries().then(res => res.filter(entry => entry.duelType === DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type]))
-			
+			const activeDuels = await DFKDuelS1Contract.getActiveDuels().then(res => res.filter(duel => duel.player1Heroes.length === DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type]))
+			const activeEntries = await DFKDuelS1Contract.getPlayerDuelEntries().then(res => res.filter(entry => entry.heroes.length === DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type]))
+
 			if (activeDuels.length > 0) {
 				await Promise.allSettled(activeDuels.map(duel => DFKDuelS1Contract.completeDuel((duel.id))))
 			} else if (activeEntries.length > 0) {
 				await DFKDuelS1Contract.matchMake(DFKDuelSetting[i].type)
 			} else {
 				const duelerHeroes = await Promise.allSettled(DFKDuelSetting[i].heroes.map(heroIds => autils.getHeroesInfoByIds(heroIds))).then((res) => res.map(promiseResult => promiseResult.value))
-				const duelHistory = await DFKDuelS1Contract.getDuelHistory().then(res => res.filter(duelHistory => duelHistory.duelType === DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type]))
 				
-				// to do
+				if (duelerHeroes.length === 1) {
+					await DFKDuelS1Contract.enterDuelLobby(
+						DFKDuelSetting[i].type,
+						duelerHeroes[0],
+						DFKDuelSetting[i].fee,
+						DFKDuelS1Contract.getHeroesBestBackground(duelerHeroes[0]),
+						DFKDuelS1Contract.getHeroesBestStat(duelerHeroes[0])
+					)
+				} else {
+					const duelHistory = await DFKDuelS1Contract.getDuelHistory().then(res => res.filter(duelHistory => duelHistory.duelType === DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type]))
+					// to do
+				}				
 			}
 		}
 		
