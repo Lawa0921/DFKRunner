@@ -545,11 +545,11 @@ const config = {
             "sale": true
         },
     ],
-    "duelSetting": [ // 注意: 同隻英雄無法同時放入多個不同 type
+    "duelSetting": [ // 注意: 同一時間只能有一個進行中的 duel，這表示你只能將一種類型開啟為 true
 			{
 				"type": "solo", // duel 的類型，你不會更改這個值
 				"fee": "low", // 花費幣的數量 low = 0.1 medium = 0.5 large = 1
-				"isActive": true, // 表示是否要執行該 type 的 duel，true 的情形就會自動執行
+				"isActive": false, // 表示是否要執行該 type 的 duel，true 的情形就會自動執行
 				"heroes": [
 					["1716"],
 					["233167"],
