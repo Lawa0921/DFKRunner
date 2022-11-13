@@ -11,9 +11,9 @@ main = async() => {
 	if (baseGasPrice - config.defikingdoms.overBaseGasFeeWei > config.defikingdoms.maxGasPrice) {
 		console.log(`DFK Current base gasPrice: ${baseGasPrice - config.defikingdoms.overBaseGasFeeWei} is over then maxGasPrice setting: ${config.defikingdoms.maxGasPrice}, will retry later.`)
 	} else {
-			await autoDuelScript(config.walletAddressAndPrivateKeyMappings[config.autoDuelerWalletIndex])
-			await autils.sleep(config.setDuelScriptTimeSecond * 1000)
+		await autoDuelScript(config.walletAddressAndPrivateKeyMappings[config.autoDuelerWalletIndex])
 	}
+	await autils.sleep(config.setDuelScriptTimeSecond * 1000)
 
   process.exit()
 }
