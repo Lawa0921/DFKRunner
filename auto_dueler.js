@@ -5,9 +5,15 @@ const DFKDuelS1 = require('~/src/defikingdoms/contracts/DFKDuelS1')
 main = async() => {
 	console.log(autils.getCurrentDateTime().toLocaleTimeString());
 	setTimeout(() => { process.exit() }, 300000) // 如果執行 script 超過 300 秒會自動中斷重啟，此為防治卡死的手段
+	const baseGasPrice = await autils.getBaseGasFee()
+	console.log(`DFK Current base gasPrice: ${baseGasPrice - config.defikingdoms.overBaseGasFeeWei}`)
 
-	await autoDuelScript(config.walletAddressAndPrivateKeyMappings[config.autoDuelerWalletIndex])
-  await autils.sleep(config.setDuelScriptTimeSecond * 1000)
+	if (baseGasPrice - config.defikingdoms.overBaseGasFeeWei > config.defikingdoms.maxGasPrice) {
+		console.log(`DFK Current base gasPrice: ${baseGasPrice - config.defikingdoms.overBaseGasFeeWei} is over then maxGasPrice setting: ${config.defikingdoms.maxGasPrice}, will retry later.`)
+	} else {
+			await autoDuelScript(config.walletAddressAndPrivateKeyMappings[config.autoDuelerWalletIndex])
+			await autils.sleep(config.setDuelScriptTimeSecond * 1000)
+	}
 
   process.exit()
 }
@@ -36,7 +42,7 @@ autoDuelScript = async (accountInfo) => {
 						res.filter(duelHistory => duelHistory.player1Heroes.length === DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type])
 					)
 					if (DuelRecords.length === 0) {
-						duelHeroes = duelerHeroes[Math.floor(Math.random() * duelerHeroes.heroes.length)]
+						duelHeroes = duelerHeroes[Math.floor(Math.random() * duelerHeroes.length)]
 					} else {
 						const lastDuelRecord = DuelRecords[0]
 						const lastDuelTeam = duelerHeroes.find(heroObjects => 
