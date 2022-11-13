@@ -4,6 +4,8 @@ const DFKDuelS1 = require('~/src/defikingdoms/contracts/DFKDuelS1')
 
 main = async() => {
 	console.log(autils.getCurrentDateTime().toLocaleTimeString());
+	setTimeout(() => { process.exit() }, 300000) // 如果執行 script 超過 300 秒會自動中斷重啟，此為防治卡死的手段
+
 	await autoDuelScript(config.walletAddressAndPrivateKeyMappings[config.autoDuelerWalletIndex])
   await autils.sleep(config.setDuelScriptTimeSecond * 1000)
 
