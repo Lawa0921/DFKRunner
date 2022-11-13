@@ -25,19 +25,42 @@ autoDuelScript = async (accountInfo) => {
 				await DFKDuelS1Contract.matchMake(DFKDuelSetting[i].type)
 			} else {
 				const duelerHeroes = await Promise.allSettled(DFKDuelSetting[i].heroes.map(heroIds => autils.getHeroesInfoByIds(heroIds))).then((res) => res.map(promiseResult => promiseResult.value))
-				
+				let duelHeroes
+
 				if (duelerHeroes.length === 1) {
-					await DFKDuelS1Contract.enterDuelLobby(
-						DFKDuelSetting[i].type,
-						duelerHeroes[0],
-						DFKDuelSetting[i].fee,
-						DFKDuelS1Contract.getHeroesBestBackground(duelerHeroes[0]),
-						DFKDuelS1Contract.getHeroesBestStat(duelerHeroes[0])
-					)
+					duelHeroes = duelerHeroes[0]
 				} else {
-					const duelHistory = await DFKDuelS1Contract.getDuelHistory().then(res => res.filter(duelHistory => duelHistory.player1Heroes.length === DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type]))
-					// to do
-				}				
+					const DuelRecords = await DFKDuelS1Contract.getDuelHistory().then(res => 
+						res.filter(duelHistory => duelHistory.player1Heroes.length === DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type])
+					)
+					if (DuelRecords.length === 0) {
+						duelHeroes = DFKDuelSetting[i].heroes[Math.floor(Math.random() * duelerHeroes.heroes.length)]
+					} else {
+						const lastDuelRecord = DuelRecords[0]
+						const lastDuelTeam = duelerHeroes.find(heroObjects => 
+							heroObjects.filter(heroObject => lastDuelRecord.player1Heroes.indexOf(heroObject.id) > -1).length === DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type]
+						)
+
+						if (typeof(lastDuelTeam) === undefined) {
+							duelHeroes = duelerHeroes[Math.floor(Math.random() * duelerHeroes.heroes.length)]
+						} else if(lastDuelRecord.winner === accountInfo.walletAddress) {
+							duelHeroes = lastDuelTeam
+						} else {
+							const duelerHeroesObjects = duelerHeroes.filter(heroObjects => 
+								heroObjects.filter(heroObject => lastDuelTeam.indexOf(heroObject) > -1).length !== DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type]
+							)
+							duelHeroes = duelerHeroesObjects[Math.floor(Math.random() * duelerHeroesObjects.length)]
+						}
+					}
+				}
+				
+				await DFKDuelS1Contract.enterDuelLobby(
+					DFKDuelSetting[i].type,
+					duelHeroes.map(heroObject => heroObject.id),
+					DFKDuelSetting[i].fee,
+					DFKDuelS1Contract.getHeroesBestBackground(duelHeroes),
+					DFKDuelS1Contract.getHeroesBestStat(duelHeroes)
+				)
 			}
 		}
 		
