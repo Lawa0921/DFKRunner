@@ -34,15 +34,15 @@ autoDuelScript = async (accountInfo) => {
 						res.filter(duelHistory => duelHistory.player1Heroes.length === DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type])
 					)
 					if (DuelRecords.length === 0) {
-						duelHeroes = DFKDuelSetting[i].heroes[Math.floor(Math.random() * duelerHeroes.heroes.length)]
+						duelHeroes = duelerHeroes[Math.floor(Math.random() * duelerHeroes.heroes.length)]
 					} else {
 						const lastDuelRecord = DuelRecords[0]
 						const lastDuelTeam = duelerHeroes.find(heroObjects => 
 							heroObjects.filter(heroObject => lastDuelRecord.player1Heroes.indexOf(heroObject.id) > -1).length === DFKDuelS1Contract.duelType()[DFKDuelSetting[i].type]
 						)
 
-						if (typeof(lastDuelTeam) === undefined) {
-							duelHeroes = duelerHeroes[Math.floor(Math.random() * duelerHeroes.heroes.length)]
+						if (typeof(lastDuelTeam) === "undefined") {
+							duelHeroes = duelerHeroes[Math.floor(Math.random() * duelerHeroes.length)]
 						} else if(lastDuelRecord.winner === accountInfo.walletAddress) {
 							duelHeroes = lastDuelTeam
 						} else {
