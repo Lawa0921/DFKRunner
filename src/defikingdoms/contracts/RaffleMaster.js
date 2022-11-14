@@ -46,7 +46,7 @@ module.exports = class DFKDuelS1Contract {
         })
       } else if (index === 2) {
         currentValue.forEach((playerEntryAmount, j) => {
-          accumulator[j].playerEntryAmount = playerEntryAmount.toString()
+          accumulator[j].playerEntryAmount = parseInt(playerEntryAmount)
         })
       } else if (index === 3) {
         currentValue.forEach((raffleDuration, j) => {

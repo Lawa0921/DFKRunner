@@ -30,7 +30,7 @@ module.exports = class DuelRaffleTicket {
   }
 
   async balanceOf() {
-    return await this.contract.balanceOf(this.wallet.address)
+    return await this.contract.balanceOf(this.wallet.address).then(res => parseInt(res))
   }
 
   async name() {
