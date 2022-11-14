@@ -27,36 +27,35 @@ module.exports = class DFKDuelS1Contract {
 
     const raffleData = rawData.reduce((accumulator, currentValue, index) => {
       if (index === 0) {
-        accumulator.raffles = currentValue.map((raffle => {
-          return {
-            id: raffle.id.toString(),
-            raffleType: raffle.raffleType.toString(),
-            startTime: raffle.startTime.toString(),
-            totalEntries: raffle.totalEntries.toString(),
-            endTime: raffle.endTime.toString(),
-            closedBlock: raffle.closedBlock.toString(),
-            winners: raffle.winners,
-            status: raffle.status
-          }
-        }))
+        currentValue.forEach((raffle, j) => {
+          accumulator[j].raffleId = raffle.id.toString()
+          accumulator[j].startTime = raffle.startTime.toString()
+          accumulator[j].totalEntries = raffle.totalEntries.toString()
+          accumulator[j].endTime = raffle.endTime.toString()
+          accumulator[j].closedBlock = raffle.closedBlock.toString()
+          accumulator[j].winners = raffle.winners
+          accumulator[j].status = raffle.status
+        })
       } else if (index === 1) {
-        accumulator.raffleTypes = currentValue.map((raffleType) => {
-          return {
-            id: raffleType.id.toString(),
-            rewards: raffleType.rewards,
-            rewardAmounts: raffleType.rewardAmounts,
-            maxWinners: raffleType.maxWinners.toString(),
-            duration: raffleType.duration.toString()
-          }
+        currentValue.forEach((raffleType, j) => {
+          accumulator[j].raffleTypeId = raffleType.id.toString(),
+          accumulator[j].rewards = raffleType.rewards,
+          accumulator[j].rewardAmounts = raffleType.rewardAmounts,
+          accumulator[j].maxWinners = raffleType.maxWinners.toString(),
+          accumulator[j].duration = raffleType.duration.toString()
         })
       } else if (index === 2) {
-        accumulator.playerEntryAmounts = currentValue.map(playerEntryAmount => playerEntryAmount.toString())
+        currentValue.forEach((playerEntryAmount, j) => {
+          accumulator[j].playerEntryAmount = playerEntryAmount.toString()
+        })
       } else if (index === 3) {
-        accumulator.raffleDurations = currentValue.map(raffleDuration => raffleDuration.toString())
+        currentValue.forEach((raffleDuration, j) => {
+          accumulator[j].raffleDuration = raffleDuration.toString()
+        })
       }
 
       return accumulator
-    }, { raffles: [], raffleTypes: [], playerEntryAmounts: [], raffleDurations: [] })
+    }, rawData[0].map((_element) => { return {}}))
 
     return raffleData
   }

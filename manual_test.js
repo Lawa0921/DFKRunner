@@ -1,13 +1,15 @@
 // 測試用
 const config = require("~/config.js");
+const autils = require('~/src/services/autils');
 const ethers = require('ethers');
 const HeroCore = require("~/src/defikingdoms/contracts/heroCore");
 const DFKDuelS1 = require("~/src/defikingdoms/contracts/DFKDuelS1")
+const RaffleMaster = require("~/src/defikingdoms/contracts/RaffleMaster")
 const DFKDuelS1Contract = new DFKDuelS1(config.walletAddressAndPrivateKeyMappings[0])
+const RaffleMasterContract = new RaffleMaster(config.walletAddressAndPrivateKeyMappings[0])
 
 async function test() {  
-    // console.log(await DFKDuelS1Contract.enterDuelLobby("solo", ["1000000030460"], "low", "desert", "VIT"))
-    console.log(await DFKDuelS1Contract.completeDuel("264974"))
+  console.log(await RaffleMasterContract.getCurrentRaffleData())
 }
 
 test();
