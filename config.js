@@ -379,7 +379,8 @@ const config = {
     "itemGoldTraderV2": "0x0f85fdf6c561C42d6b46d0E27ea6Aa9Bf9476B3f", // 合約的地址，你不會更改這個值
     "DFKDuelS1": "0xf724FE22b45D519D149477aA2eC5348Cee08Cae3", // 合約的地址，你不會更改這個值
 		"raffleMaster": "0xd8D7CE8921490b75EC489bd076AD0f27DC765675", // 合約的地址，你不會更改這個值
-		"duelRaffleTicket": "0xBbd7c4Be2e54fF5e013471162e1ABAD7AB74c3C3",
+		"duelRaffleTicket": "0xBbd7c4Be2e54fF5e013471162e1ABAD7AB74c3C3", // 合約的地址，你不會更改這個值
+		"airdropClaim": "0x947873092dc57C1A70704033c41cB110f4462a8B", // 合約的地址，你不會更改這個值
     "availableForSaleTokens": [ // 可自由更改下方 "sale" 裡面的值成 true 或是 false，true 表示要賣，false 的則不會賣掉
         {
             "name": "Ambertaffy",
