@@ -8,7 +8,8 @@ const { CheckAndSendDFKCrystalMiners } = require('~/src/defikingdoms/quest_cryst
 const { CheckAndSendDFKGardeners } = require("~/src/defikingdoms/quest_gardening");
 const { CompleteQuests } = require('~/src/defikingdoms/quest_complete');
 const { sendHeroTo } = require("~/src/defikingdoms/send_hero");
-const { enterRaffle } = require("~/src/defikingdoms/enter_raffle")
+const { enterRaffle } = require("~/src/defikingdoms/enter_raffle");
+const { airdropClaim } = require("~/src/defikingdoms/airdrop_claim");
 const { runDFKSalesLogic } = require('~/src/defikingdoms/sales_handler');
 const { runDFKLevelUpLogic } = require('~/src/defikingdoms/hero_level_up'); 
 const { runDFKRentHeroLogic } = require('~/src/defikingdoms/hero_rent');
@@ -32,6 +33,7 @@ exports.runDFKChainQuest = async (accountInfo) => {
       await CompleteQuests(heroesStruct, accountInfo);
       await sendHeroTo(heroesStruct, accountInfo, owningHeroObjects);
       await enterRaffle(accountInfo);
+      await airdropClaim(accountInfo);
   
       await runDFKSalesLogic(owningHeroObjects, accountInfo);
       await runDFKRentHeroLogic(owningHeroObjects, accountInfo);

@@ -13,10 +13,11 @@ const duelRaffleTicketContract = new DuelRaffleTicket(config.walletAddressAndPri
 const airdropClaimContract = new AirdropClaim(config.walletAddressAndPrivateKeyMappings[0])
 
 const { enterRaffle } = require("~/src/defikingdoms/enter_raffle")
+const { airdropClaim } = require("~/src/defikingdoms/airdrop_claim")
 
 
 async function test() {  
-  console.log(await airdropClaimContract.viewAirdrops())
+ await airdropClaim(config.walletAddressAndPrivateKeyMappings[0])
 }
 
 test();

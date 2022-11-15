@@ -3,7 +3,7 @@ const autils = require('~/src/services/autils');
 const ethers = require('ethers');
 const airdropClaimABI = require('~/abis/AirdropClaim.json')
 
-module.exports = class HeroCore {
+module.exports = class AirdropClaim {
   constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
