@@ -119,7 +119,7 @@ module.exports = class Valuator {
         break;
       case "Thief":
         if (this.hero.profession === "fishing") {
-          this.professionPrice += 8;
+          this.professionPrice += 5;
         }
         break;
       case "Archer":
@@ -129,12 +129,12 @@ module.exports = class Valuator {
         break;
       case "Priest":
         if (this.hero.profession === "foraging") {
-          this.professionPrice += 5;
+          this.professionPrice += 3;
         }
         break;
       case "Wizard":
         if (this.hero.profession === "foraging") {
-          this.professionPrice += 5;
+          this.professionPrice += 3;
         }
         break;
       case "Monk":
@@ -143,22 +143,22 @@ module.exports = class Valuator {
         break;
       case "Berserker":
         if (this.hero.profession === "mining") {
-          this.professionPrice += 5;
+          this.professionPrice += 3;
         }
         break;
       case "Seer":
         if (this.hero.profession === "foraging") {
-          this.professionPrice += 5;
+          this.professionPrice += 2;
         }
         break;
       case "Paladin":
         if (this.hero.profession === "mining") {
-          this.professionPrice += 15;
+          this.professionPrice += 10;
         }
         break;
       case "DarkKnight":
         if (this.hero.profession === "mining") {
-          this.professionPrice += 15;
+          this.professionPrice += 10;
         }
         break;
       case "Summoner":
@@ -168,7 +168,7 @@ module.exports = class Valuator {
         break;
       case "Ninja":
         if (this.hero.profession === "fishing") {
-          this.professionPrice += 15;
+          this.professionPrice += 10;
         } else if (this.hero.profession === "foraging") {
           this.professionPrice += 5;
         } else if (this.hero.profession === "gardening") {
@@ -177,9 +177,9 @@ module.exports = class Valuator {
         break;
       case "Shapeshifter":
         if (this.hero.profession === "fishing") {
-          this.professionPrice += 15;
+          this.professionPrice += 10;
         } else if (this.hero.profession === "foraging") {
-          this.professionPrice += 5;
+          this.professionPrice += 3;
         }
         break;
       case "Dragoon":
@@ -211,8 +211,12 @@ module.exports = class Valuator {
       if (this.hero.generation >= 3) {
         return;
       } else if (this.hero.generation === 2) {
-        if (this.hero.summonsRemaining >= 7) {
+        if (this.hero.summonsRemaining === 7) {
           this.summonPrice += 2;
+        } else if (this.hero.summonsRemaining === 8) {
+          this.summonPrice += 5;
+        } else if (this.hero.summonsRemaining === 9) {
+          this.summonPrice += 8;
         }
       } else if (this.hero.generation === 1) {
         if (this.hero.summonsRemaining === 7) {
