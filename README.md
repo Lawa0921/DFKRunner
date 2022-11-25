@@ -62,12 +62,17 @@ npm install                                         # 利用 npm 安裝專案會
 
 在 DFKRunner 的目錄內新增一個 `.env` 檔案  
 並輸入以下內容即可，請自行替換您的私鑰與地址進入 `.env` 檔  
+如果你的帳號只有一個，那請刪除後方的 /{...} 部分
 ```
 ADDRESS_AND_PRIVATE_KEY_MAPPINGS={"accountName": "yourAccountName", "walletAddress": "yourWalletAddress", "privateKey": "yourPrivateKey"}/{"accountName": ..., "walletAddress": ..., "privateKey": ...}
 ```
 
+### 設定 .env 檔
+
 開啟 VSCode 將 `config.js` 內的內容更換為您的英雄  
 格式依照原先的 config 範例參考設定即可  
+所有的 key 都必須保留下來，你只會更改值的部分  
+使用前請移除所有不屬於你的英雄 ID 
 
 ## 腳本說明
 以下所有的指令您都必須確認你當前的目錄在 `DFKRunner` 底下才能正確執行  
