@@ -95,5 +95,5 @@ git pull origin main
 
 ## 鳴謝及其他資訊
 有任何問題可至 [Lawa 的 Discord](https://discord.gg/Wta7ZavFkJ) 內 tag Lawa0921 詢問  
-如果你想給我點小費可以匯款至我的私人地址：0xA2FD1c90A8080142d27C49F3745602acF05a357D，Lawa 先感謝您  
+如果你想給我點小費可以匯款至我的私人地址：0x499FD90959AEfDaaE82268A79e23cD83dAA8B396，Lawa 先感謝您  
 祝您遊玩愉快  
