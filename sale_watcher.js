@@ -23,8 +23,9 @@ const DFKSaleHandler = async (tokenId, price) => {
 
   const valuator = new Valuator(price, heroObjects[0]);
   valuator.execute();
+  autils.watchHeroLog(valuator.hero, price, valuator.valuation, "dfk");
 
-  if (!valuator.hero.isOwning() && valuator.price <= valuator.valuation) {
+  if (config.autoBuyerSwitch && !valuator.hero.isOwning() && valuator.price <= valuator.valuation) {
     console.log(`!!! bid hero ${tokenId} txn created !!!`)
     const txn = await DFKSaleAuctionContract.bid(tokenId, price);
     const res = await txn.wait();
@@ -37,8 +38,6 @@ const DFKSaleHandler = async (tokenId, price) => {
       autils.bidHeroLog(`${new Date().toLocaleTimeString()} !!! bid hero ${tokenId} failed !!! txn: ${JSON.stringify(res)}`)
     }
   }
-
-  autils.watchHeroLog(valuator.hero, price, valuator.valuation, "dfk");
 }
 
 async function main() {

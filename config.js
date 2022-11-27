@@ -546,7 +546,8 @@ const config = {
   "setQuestScriptTimeSecond": 360, // 設定你每次任務腳本執行的間隔秒數
   "setDuelScriptTimeSecond": 1, // 設定你每次執行 duel 腳本的間隔秒數
   "saleWatcherWalletIndex": 0, // 設定你用於自動購買的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
-	"autoDuelerWalletIndex": 0 // 設定你用於自動 duel 的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
+  "autoBuyerSwitch": true, // 自動購買的開關，設定為 false 時將不會自動購買，只會列出上架的英雄
+  "autoDuelerWalletIndex": 0 // 設定你用於自動 duel 的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
 }
 
 module.exports = config;
