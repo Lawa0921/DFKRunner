@@ -47,6 +47,8 @@ npm -v            # 檢查 npm 是否安裝成功
 
 ## 第一次使用前
 
+[設定 github 驗證](https://andy6804tw.github.io/2021/08/14/token-authentication-requirements-for-git-operations)  
+
 ```
 git clone https://github.com/Lawa0921/DFKRunner.git # 複製專案至您的本地
 cd DFKRunner                                        # 切換目錄至 DFKQuestRunner
