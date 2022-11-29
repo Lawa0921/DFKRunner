@@ -11,6 +11,7 @@ module.exports = class ConsumableItem {
     this.contract = new ethers.Contract(contractAddress, consumableItemABI, new NonceManager(this.wallet))
     this.accountName = accountInfo.accountName
   }
+
   async balanceOf() {
     return await this.contract.balanceOf(this.wallet.address);
   }

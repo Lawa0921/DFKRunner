@@ -13,6 +13,7 @@ const { airdropClaim } = require("~/src/defikingdoms/airdrop_claim");
 const { runDFKSalesLogic } = require('~/src/defikingdoms/sales_handler');
 const { runDFKLevelUpLogic } = require('~/src/defikingdoms/hero_level_up'); 
 const { runDFKRentHeroLogic } = require('~/src/defikingdoms/hero_rent');
+const { runVialLogic } = require('~/src/defikingdoms/vial_consumer');
 const autils = require("~/src/services/autils");
 const config = require("~/config.js");
 
@@ -38,6 +39,7 @@ exports.runDFKChainQuest = async (accountInfo) => {
       await runDFKSalesLogic(owningHeroObjects, accountInfo);
       await runDFKRentHeroLogic(owningHeroObjects, accountInfo);
   
+      await runVialLogic(owningHeroObjects, accountInfo);
       await runDFKLevelUpLogic(owningHeroObjects, accountInfo);
   
       await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects, accountInfo)
