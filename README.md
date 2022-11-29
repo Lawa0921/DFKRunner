@@ -48,17 +48,13 @@ npm -v            # 檢查 npm 是否安裝成功
 ## 第一次使用前
 
 [設定 github 驗證](https://andy6804tw.github.io/2021/08/14/token-authentication-requirements-for-git-operations)  
+[下載 VSCode 程式碼編輯器](https://code.visualstudio.com/)  
 
 ```
 git clone https://github.com/Lawa0921/DFKRunner.git # 複製專案至您的本地
 cd DFKRunner                                        # 切換目錄至 DFKQuestRunner
 npm install                                         # 利用 npm 安裝專案會使用到的套件
 ```
-
-### 安裝編輯器
-
-[下載 VSCode](https://code.visualstudio.com/)  
-或是直接使用內建的文字編輯器，只是排版會比較亂。  
 
 ### 設定 config 檔
 
