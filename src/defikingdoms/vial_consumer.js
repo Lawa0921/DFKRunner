@@ -1,6 +1,7 @@
 const config = require("~/config.js");
 const ConsumableItem = require('~/src/defikingdoms/contracts/consumableItem');
 const ItemConsumer = require('~/src/defikingdoms/contracts/itemConsumer');
+const SaleAuction = require("~/src/defikingdoms/contracts/saleAuction")
 const staminaVialRegenerateAmount = 25;
 
 exports.runVialLogic = async (owningHeroObjects, accountInfo) => {
@@ -15,7 +16,17 @@ exports.runVialLogic = async (owningHeroObjects, accountInfo) => {
       })
   
       for (let i = 0; i < consumers.length; i++) {
+        const saleAuctionContract = new SaleAuction(accountInfo)
         const itemConsumerContract = new ItemConsumer(accountInfo)
+
+        if (consumers[i].isOnRent) {
+          await saleAuctionContract.unrentHero(consumers[i].id)
+        } else if (consumers[i].isOnSale) {
+          await saleAuctionContract.unlistHero(consumers[i].id)
+        } else if (consumers[i].isOnQuesting) {
+          continue
+        }
+
         await itemConsumerContract.consumeItem(config.defikingdoms.staminaVial ,consumers[i].id)
       }
     }

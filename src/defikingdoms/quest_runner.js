@@ -50,7 +50,7 @@ exports.runDFKChainQuest = async (accountInfo) => {
       await CheckAndSendDFKStatQuests(heroesStruct, owningHeroObjects, accountInfo)
     }
   } catch (error) {
-    console.log(error)
+    console.log(`reason: ${error.reason}, message: ${error.message}`)
     process.exit();
   }
 }

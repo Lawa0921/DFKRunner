@@ -5,7 +5,10 @@ const RentValuator = require('~/src/services/rent_valuator')
 exports.runDFKRentHeroLogic = async (owningHeroObjects, accountInfo) => {
   const saleAuctionContract = new SaleAuction(accountInfo)
   const filtedHeroObjects = owningHeroObjects.filter((heroObject) => {
-    return config.defikingdoms.notForRentHeroIds.indexOf(heroObject.id) === -1 && config.defikingdoms.heroForSale.map(heroData => heroData.id).indexOf(heroObject.id) === -1 && heroObject.owner === accountInfo.walletAddress
+    return config.defikingdoms.notForRentHeroIds.indexOf(heroObject.id) === -1 && 
+      config.defikingdoms.heroForSale.map(heroData => heroData.id).indexOf(heroObject.id) === -1 &&
+      heroObject.owner === accountInfo.walletAddress &&
+      config.defikingdoms.useStaminaVialHeroIds.indexOf(heroObject.id) === -1
   })
 
   for (let i = 0; i < filtedHeroObjects.length; i++) {

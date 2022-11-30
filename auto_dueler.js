@@ -74,6 +74,7 @@ autoDuelScript = async (accountInfo) => {
 		
     console.log(`--- ${accountInfo.accountName} auto dueler process completed ---`)
   } catch(error) {
+    console.log(`reason: ${error.reason}, message: ${error.message}`)
     process.exit();
   }
 }
