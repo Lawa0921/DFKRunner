@@ -7,6 +7,7 @@ const DFKDuelS1 = require("~/src/defikingdoms/contracts/DFKDuelS1")
 const RaffleMaster = require("~/src/defikingdoms/contracts/raffleMaster")
 const DuelRaffleTicket = require("~/src/defikingdoms/contracts/duelRaffeTicket")
 const AirdropClaim = require("~/src/defikingdoms/contracts/airdropClaim")
+const { BigNumber } = require("@ethersproject/bignumber")
 const DFKDuelS1Contract = new DFKDuelS1(config.walletAddressAndPrivateKeyMappings[0])
 const raffleMasterContract = new RaffleMaster(config.walletAddressAndPrivateKeyMappings[0])
 const duelRaffleTicketContract = new DuelRaffleTicket(config.walletAddressAndPrivateKeyMappings[0])
@@ -17,7 +18,7 @@ const { airdropClaim } = require("~/src/defikingdoms/airdrop_claim")
 
 
 async function test() {  
- await airdropClaim(config.walletAddressAndPrivateKeyMappings[0])
+  console.log(ethers.constants.MaxUint256)
 }
 
 test();

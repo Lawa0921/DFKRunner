@@ -1,14 +1,13 @@
 const MeditationCircle = require('~/src/defikingdoms/contracts/meditationCircle');
-const ShvasRune = require('~/src/defikingdoms/contracts/shvasRune');
-const MokshaRune = require('~/src/defikingdoms/contracts/mokshaRune');
+const InventoryItem = require('~/src/defikingdoms/contracts/inventoryItem');
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 const config = require("~/config.js")
 
 exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
   const saleAuctionContract = new SaleAuction(accountInfo);
   const meditationCircleContract = new MeditationCircle(accountInfo);
-  const shvasRuneContract = new ShvasRune(accountInfo);
-  const mokshaRuneContract = new MokshaRune(accountInfo);
+  const shvasRuneContract = new InventoryItem(accountInfo, config.defikingdoms.shvasRune);
+  const mokshaRuneContract = new InventoryItem(accountInfo, config.defikingdoms.mokshaRune);
 
   const activeMeditations = await meditationCircleContract.getActiveMeditations();
   const levelUpableHeros = owningHeroObjects.filter(hero => 
