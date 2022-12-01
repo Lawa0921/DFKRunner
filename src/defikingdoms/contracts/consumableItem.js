@@ -15,4 +15,21 @@ module.exports = class ConsumableItem {
   async balanceOf() {
     return await this.contract.balanceOf(this.wallet.address);
   }
+
+  async allowance(spenderAddress) {
+    return await this.contract.allowance(this.wallet.address, spenderAddress)
+  }
+
+  async approve(spenderAddress, amount) {
+    const txn = await this.contract.approve(spenderAddress, amount, { gasPrice: await autils.getBaseGasFee() })
+    const receipt = await txn.wait()
+
+    if (receipt.status === 1) {
+      console.log(`approve ${spenderAddress} ${amount} success`)
+    } else {
+      console.log(`approve ${spenderAddress} ${amount} failed`)
+    }
+
+    return receipt
+  }
 }

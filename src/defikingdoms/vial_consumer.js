@@ -1,4 +1,5 @@
 const config = require("~/config.js");
+const ethers = require('ethers');
 const ConsumableItem = require('~/src/defikingdoms/contracts/consumableItem');
 const ItemConsumer = require('~/src/defikingdoms/contracts/itemConsumer');
 const SaleAuction = require("~/src/defikingdoms/contracts/saleAuction")
@@ -18,6 +19,7 @@ exports.runVialLogic = async (owningHeroObjects, accountInfo) => {
       for (let i = 0; i < consumers.length; i++) {
         const saleAuctionContract = new SaleAuction(accountInfo)
         const itemConsumerContract = new ItemConsumer(accountInfo)
+        const staminaVialAllowance = await staminaVialContract.allowance(config.defikingdoms.staminaVial)
 
         if (consumers[i].isOnRent) {
           await saleAuctionContract.unrentHero(consumers[i].id)
@@ -25,6 +27,10 @@ exports.runVialLogic = async (owningHeroObjects, accountInfo) => {
           await saleAuctionContract.unlistHero(consumers[i].id)
         } else if (consumers[i].isOnQuesting) {
           continue
+        }
+
+        if (staminaVialAllowance === 0) {
+          await staminaVialContract.approve(config.defikingdoms.itemConsumer ,ethers.constants.MaxUint256)
         }
 
         await itemConsumerContract.consumeItem(config.defikingdoms.staminaVial ,consumers[i].id)
