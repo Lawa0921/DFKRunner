@@ -76,7 +76,7 @@ autoDuelScript = async (accountInfo) => {
   } catch(error) {
     console.log(`fail reason: ${error.reason}`)
     console.log(`error code: ${error.code}`)
-    console.log(`error message: ${error.error.message.split(" ]")[1].split(",")[0].split("=")[1]}`)
+    console.log(`error message: ${error.error.message}`)
     process.exit();
   }
 }
