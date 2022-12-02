@@ -375,6 +375,7 @@ const config = {
     "duelRaffleTicket": "0xBbd7c4Be2e54fF5e013471162e1ABAD7AB74c3C3", // 合約的地址，你不會更改這個值
     "airdropClaim": "0x947873092dc57C1A70704033c41cB110f4462a8B", // 合約的地址，你不會更改這個值
     "itemConsumer": "0xc9A9F352Aa188f422A8f8902B547FB3E59D37210", // 合約的地址，你不會更改這個值
+    "crystal": "0x04b9dA42306B023f3572e106B11D82aAd9D32EBb", // 合約的地址，你不會更改這個值
     "availableForSaleTokens": [ // 可自由更改下方 "sale" 裡面的值成 true 或是 false，true 表示要賣，false 的則不會賣掉
         {
             "name": "Ambertaffy",
