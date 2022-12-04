@@ -1,13 +1,16 @@
 const MeditationCircle = require('~/src/defikingdoms/contracts/meditationCircle');
 const InventoryItem = require('~/src/defikingdoms/contracts/inventoryItem');
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
+const Crystal = require('~/src/defikingdoms/contracts/crystal');
 const config = require("~/config.js")
+const ethers = require('ethers');
 
 exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
   const saleAuctionContract = new SaleAuction(accountInfo);
   const meditationCircleContract = new MeditationCircle(accountInfo);
   const shvasRuneContract = new InventoryItem(accountInfo, config.defikingdoms.shvasRune);
   const mokshaRuneContract = new InventoryItem(accountInfo, config.defikingdoms.mokshaRune);
+  const crystalContract = new Crystal(accountInfo);
 
   const activeMeditations = await meditationCircleContract.getActiveMeditations();
   const levelUpableHeros = owningHeroObjects.filter(hero => 
@@ -43,8 +46,21 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
   if (levelUpableHeros.length > 0) {
     for (let i = 0; i < levelUpableHeros.length; i++ ) {
       const shvasRuneBalanceOf = await shvasRuneContract.balanceOf();
+      const shvasRuneAllowance = await shvasRuneContract.allowance(config.defikingdoms.meditationCircle);
       const mokshaRuneBalanceOf = await mokshaRuneContract.balanceOf();
+      const mokshaRuneAllowance = await mokshaRuneContract.allowance(config.defikingdoms.meditationCircle)
+      const crystalAllowance = await crystalContract.allowance(config.defikingdoms.meditationCircle)
       const [shvasRuneRequireCount, mokshaRuneRequireCount] = await meditationCircleContract.getRequiredRunes(levelUpableHeros[i].level);
+
+      if (shvasRuneAllowance < shvasRuneRequireCount) {
+        await shvasRuneContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
+      }
+      if (mokshaRuneAllowance < mokshaRuneRequireCount) {
+        await mokshaRuneContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
+      }
+      if (crystalAllowance === 0) {
+        await crystalContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
+      }
 
       if (parseInt(shvasRuneRequireCount) > parseInt(shvasRuneBalanceOf)) {
         console.log(`${accountInfo.accountName} shvasRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
