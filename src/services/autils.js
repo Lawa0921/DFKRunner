@@ -5,6 +5,7 @@ const axios = require('axios');
 const ethers = require('ethers');
 const axiosRetry = require('axios-retry');
 const Hero = require('~/src/services/hero');
+const graphqlEndPoint = "https://defi-kingdoms-community-api-gateway-co06z8vi.uc.gateway.dev/graphql"
 
 axiosRetry(axios, {
     retries: 5, // number of retries
@@ -80,20 +81,6 @@ exports.getCurrentDateTime = () => {
     return date.addMinutes(new Date(Date.now()), 0);
 }
 
-exports.isAPIv6Owner = async (heroId) => {
-    let returnValue = false;
-    await axios.post(config.queryHeroEndPoint,
-        {"limit":1,"params":[{"field":"id","operator":"=","value":heroId.toString()}],"offset":0}
-    ).then((reply) => {
-        if (reply.data[0].owner_address.toLowerCase() === config.walletAddress.toLowerCase()) {
-            returnValue = true;
-        }
-    }).catch((_err) => {
-        returnValue = false;
-    })
-    return returnValue;
-}
-
 exports.formatPrice = (price) => {
     return (BigInt(price) * BigInt(10 ** 18)).toString();
 }
@@ -167,7 +154,7 @@ exports.getHeroesInfoByIds = async (heroIds) => {
         }
       }`
 
-    await axios.post(config.graphqlEndPoint, { query: queryStr }).then((res) => {
+    await axios.post(graphqlEndPoint, { query: queryStr }).then((res) => {
         heroObjects = res.data.data.heroes.map((heroData) => { return new Hero(heroData) });
     }).catch((err) => {
         console.log(err);
@@ -230,7 +217,7 @@ exports.getHeroesInfoByAddresses = async (walletAddresses) => {
         }
       }`
   
-    await axios.post(config.graphqlEndPoint, { query: queryStr }).then((res) => {
+    await axios.post(graphqlEndPoint, { query: queryStr }).then((res) => {
       heroObjects = res.data.data.heroes.map((heroData) => { return new Hero(heroData) });
     }).catch((err) => {
       console.log(err);
@@ -252,7 +239,7 @@ exports.getPurchasedAssistingAuctions = async (accountInfo) => {
       }`
 
     let purchasedAssistingAuctions
-    await axios.post(config.graphqlEndPoint, { query: queryStr }).then((res) => {
+    await axios.post(graphqlEndPoint, { query: queryStr }).then((res) => {
         purchasedAssistingAuctions = res.data.data.assistingAuctions
     }).catch((err) => {
         console.log(err);
@@ -307,7 +294,7 @@ exports.getOnAuctionHeroInfos = async () => {
           }
         }`
 
-        await axios.post(config.graphqlEndPoint, { query: queryStr }).then((res) => {
+        await axios.post(graphqlEndPoint, { query: queryStr }).then((res) => {
             heroObjects = heroObjects.concat(res.data.data.saleAuctions.map((onAuctionHeroInfo) => { return { price: onAuctionHeroInfo.startingPrice, hero: new Hero(onAuctionHeroInfo.tokenId) }}))
             skipCount += res.data.data.saleAuctions.length;
         }).catch((err) => {
