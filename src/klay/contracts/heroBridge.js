@@ -19,6 +19,8 @@ module.exports = class HeroBridgeContract {
   }
 
   async bridgeHero(heroId) {
+    console.log(`${this.accountName} KLAY bridage hero: ${heroId}`)
+
     const tx = await this.sendHero(heroId)
     const res = await tx.wait();
     if (res.status === 1) {

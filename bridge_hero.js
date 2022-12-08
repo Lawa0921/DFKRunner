@@ -23,33 +23,47 @@ main = async() => {
           heroObject.owner === config.walletAddressAndPrivateKeyMappings[i].walletAddress
       })
 
+      const rentingHeroes = filteredHeroObjects.filter((heroObject) => { return heroObject.isOnRent })
+      const onSaleHeroes = filteredHeroObjects.filter((heroObject) => { return heroObject.isOnSale })
+
       let saleAuctionContract;
       let assistingAuctionUpgradeableContract;
       let bridgeHeroContract;
+      let unrentPromise = []
+      let unsalePromise = []
+
+      if (rentingHeroes.length > 0) {
+        if (toNetwork === "kla") {
+          assistingAuctionUpgradeableContract = new DFKAssistingAuctionUpgradeable(config.walletAddressAndPrivateKeyMappings[i])
+        } else if (toNetwork === "dfk") {
+          assistingAuctionUpgradeableContract = new KLAYAssistingAuctionUpgradeable(config.walletAddressAndPrivateKeyMappings[i])
+        }
+
+        rentingHeroes.forEach((rentingHero) => {
+          unrentPromise.push(assistingAuctionUpgradeableContract.unlistHero(rentingHero.id))
+        })
+
+        await Promise.allSettled(unrentPromise)
+      }
+
+      if (onSaleHeroes.length > 0) {
+        if (toNetwork === "kla") {
+          saleAuctionContract = new DFKSaleAuction(config.walletAddressAndPrivateKeyMappings[i])
+        } else if (toNetwork === "dfk") {
+          saleAuctionContract = new KLAYSaleAuction(config.walletAddressAndPrivateKeyMappings[i])
+        }
+
+        onSaleHeroes.forEach((onSaleHero) => {
+          unsalePromise.push(saleAuctionContract.unlistHero(onSaleHero.id))
+        })
+
+        await Promise.allSettled(unsalePromise)
+      }
 
       for (let j = 0; j < filteredHeroObjects.length; j++) {
         if (filteredHeroObjects[j].isOnQuesting) {
           console.log(`${filteredHeroObjects[j].id} is onQuesting, please rety later`)
           continue
-        }
-
-        if (filteredHeroObjects[j].isOnRent) {
-          if (toNetwork === "kla") {
-            assistingAuctionUpgradeableContract = new DFKAssistingAuctionUpgradeable(config.walletAddressAndPrivateKeyMappings[i])
-          } else if (toNetwork === "dfk") {
-            assistingAuctionUpgradeableContract = new KLAYAssistingAuctionUpgradeable(config.walletAddressAndPrivateKeyMappings[i])
-          }
-
-          await assistingAuctionUpgradeableContract.unlistHero(filteredHeroObjects[j].id)
-        } else if (filteredHeroObjects[j].isOnSale) {
-
-          if (toNetwork === "kla") {
-            saleAuctionContract = new DFKSaleAuction(config.walletAddressAndPrivateKeyMappings[i])
-          } else if (toNetwork === "dfk") {
-            saleAuctionContract = new KLAYSaleAuction(config.walletAddressAndPrivateKeyMappings[i])
-          }
-
-          await saleAuctionContract.unlistHero(filteredHeroObjects[j].id)
         }
 
         if (toNetwork === "kla") {
