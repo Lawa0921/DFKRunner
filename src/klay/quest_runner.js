@@ -5,6 +5,7 @@ const { CheckAndSendDFKFishers } = require("~/src/klay/quest_fishing");
 const { CheckAndSendDFKForagers } = require("~/src/klay/quest_foraging");
 const { CheckAndSendDFKStatQuests } = require("~/src/klay/quest_stats");
 const { CheckAndSendDFKGardeners } = require("~/src/klay/quest_gardening");
+const { CheckAndSendDFKGoldMiners } = require('~/src/klay/quest_gold_mining');
 const autils = require("~/src/services/autils");
 const config = require("~/config.js");
 
@@ -26,6 +27,7 @@ exports.runKLAYChainQuest = async (accountInfo) => {
       await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects, accountInfo)
       await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects, accountInfo)
       await CheckAndSendDFKGardeners(heroesStruct, owningHeroObjects, accountInfo)
+      await CheckAndSendDFKGoldMiners(heroesStruct, owningHeroObjects, accountInfo)
       await CheckAndSendDFKStatQuests(heroesStruct, owningHeroObjects, accountInfo)
 
       // to do

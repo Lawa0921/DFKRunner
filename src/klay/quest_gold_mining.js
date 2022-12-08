@@ -1,12 +1,12 @@
 const config = require("~/config.js");
 const autils = require('~/src/services/autils');
-const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
-const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
+const QuestCoreV2 = require('~/src/klay/contracts/questCoreV2');
+const SaleAuction = require('~/src/klay/contracts/saleAuction');
 const minStamina = 25;
 const maxBatch = 6;
 
 exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects, accountInfo) => {
-  const questType = config.defikingdoms.quest.goldMining
+  const questType = config.klay.quest.goldMining
   const activeQuesterIds = heroesStruct.allQuesters
   const possibleGoldMiners = owningHeroObjects.filter((heroObject) => { 
     return questType.heroes.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === accountInfo.walletAddress && !heroObject.isOnQuesting
@@ -25,9 +25,9 @@ exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects, acco
       await autils.sleep(5000)
     }
 
-    console.log(`${accountInfo.accountName} DFK sending ${sentMinerIds} to gold mining quest`)
+    console.log(`${accountInfo.accountName} KLAY sending ${sentMinerIds} to gold mining quest`)
     await new QuestCoreV2(accountInfo).startGoldMining(sentMinerIds)
   } else {
-    console.log(`${accountInfo.accountName} DFK no gold miner sent`)
+    console.log(`${accountInfo.accountName} KLAY no gold miner sent`)
   }
 }
