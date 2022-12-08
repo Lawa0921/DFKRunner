@@ -522,6 +522,13 @@ module.exports = class RentValuator {
 
   priceLogicAdjustment() {
     this.valuation = this.valuation * config.rentalEstimateAdjustment
+
+    if (this.hero.network === "dfk") {
+      this.valuation = this.valuation * config.defikingdoms.newworkRentalEstimateAdjustment
+    } else if (this.hero.network === "kla") {
+      this.valuation = this.valuation * config.klay.newworkRentalEstimateAdjustment
+    }
+
     this.valuation = Math.round(this.valuation, 2)
   }
 }
