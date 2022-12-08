@@ -82,6 +82,7 @@ ADDRESS_AND_PRIVATE_KEY_MAPPINGS={"accountName": "yourAccountName", "walletAddre
 `node rerenter.js`：找到所有出租中的英雄，重新估價並執行上下架邏輯  
 `node item_seller.js`：自動將你的道具換成 gold  
 `node sale_auction_parser.js`：爬取所有正在販售的英雄，抓出與估價接近的英雄
+`node bridge_hero.js`：大量跨英雄的腳本，目前支援 DFK 到 KLAY  
 
 ## 關於更新
 確保您在 `DFKRunner` 的目錄內，並執行
