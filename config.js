@@ -560,7 +560,7 @@ const config = {
       },
       "foraging": {
         "heroes": [ // 這裡面只會寫你自己擁有的 hero id
-
+          "2000000000171"
         ],
         "contractAddress": "0x54DaD24dDc2cC6E7616438816DE0EeFCad79B625" //  合約的地址，你不會更改這個值
       },

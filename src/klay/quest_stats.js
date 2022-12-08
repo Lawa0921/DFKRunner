@@ -1,13 +1,13 @@
 const config = require("~/config.js");
 const autils = require('~/src/services/autils')
-const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
-const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
+const QuestCoreV2 = require('~/src/klay/contracts/questCoreV2');
+const SaleAuction = require('~/src/klay/contracts/saleAuction');
 const minStamina = 25;
 const maxQueue = 10;
 const maxHeroCount = 6;
 
 exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, accountInfo) => {
-	const statHeroIds = config.defikingdoms.quest.statQuests.map(statQuestSetting => statQuestSetting.heroes).flat()
+	const statHeroIds = config.klay.quest.statQuests.map(statQuestSetting => statQuestSetting.heroes).flat()
 	const activeQuesterIds = heroesStruct.allQuesters
 	const saleAuctionContract = new SaleAuction(accountInfo);
 	const possibleStatHeroes = owningHeroObjects.filter((heroObject) => { 
@@ -20,8 +20,8 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, acco
 		await autils.sleep(5000)
 	}
 
-  for (let i = 0; i < config.defikingdoms.quest.statQuests.length; i++) {
-  	const questType = config.defikingdoms.quest.statQuests[i]
+  for (let i = 0; i < config.klay.quest.statQuests.length; i++) {
+  	const questType = config.klay.quest.statQuests[i]
 
     if (questType.heroes.length !== 0) {
 			const currentPossibleHeroes = possibleStatHeroes.filter(heroObject => questType.heroes.indexOf(heroObject.id) > -1)
@@ -30,7 +30,7 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, acco
 				const questCount = amountOfQuest(heroesStruct, questType)
 
 				if (questCount >= maxQueue) {
-					console.log(`${accountInfo.accountName} ${questType.name} DFK queue has reached its maximum value.`)
+					console.log(`${accountInfo.accountName} KLAY ${questType.name} queue has reached its maximum value.`)
 				} else {
 					let sendHeroCount = 0;
 
@@ -38,14 +38,14 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, acco
 						const sentHeroes = currentPossibleHeroes.slice(sendHeroCount, maxHeroCount + sendHeroCount)
 						const attemp = Math.floor(minStamina / 5)
 
-						console.log(`${accountInfo.accountName} DFK sending ${sentHeroes.map(heroObject => heroObject.id)} to ${questType.name} quest`)
+						console.log(`${accountInfo.accountName} KLAY sending ${sentHeroes.map(heroObject => heroObject.id)} to ${questType.name} quest`)
 
 						await new QuestCoreV2(accountInfo).startStatQuest(sentHeroes.map(heroObject => heroObject.id), attemp, questType.contractAddress, questType.name);
 						sendHeroCount += sentHeroes.length
 					}
 				}
 			} else {
-				console.log(`${accountInfo.accountName} DFK no ${questType.name} hero send`)
+				console.log(`${accountInfo.accountName} KLAY no ${questType.name} hero send`)
 			}
 		}
 	}
