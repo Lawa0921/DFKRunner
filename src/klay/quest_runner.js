@@ -1,6 +1,7 @@
 const dataParser = require('~/src/services/data_parser') 
 const QuestCoreV2 = require("~/src/klay/contracts/questCoreV2");
 const { CompleteQuests } = require('~/src/klay/quest_complete');
+const { CheckAndSendDFKFishers } = require("~/src/klay/quest_fishing");
 const autils = require("~/src/services/autils");
 const config = require("~/config.js");
 
@@ -19,6 +20,7 @@ exports.runKLAYChainQuest = async (accountInfo) => {
       const owningHeroObjects = await autils.getHeroesInfoByIds(autils.getKLAYOwningHeroIds());
 
       await CompleteQuests(heroesStruct, accountInfo);
+      await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects, accountInfo)
       // to do
     }
   } catch (error) {

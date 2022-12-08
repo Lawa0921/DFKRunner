@@ -1,16 +1,16 @@
 const config = require("~/config.js");
 const autils = require('~/src/services/autils');
-const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
-const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
+const QuestCoreV2 = require('~/src/klay/contracts/questCoreV2');
+const SaleAuction = require('~/src/klay/contracts/saleAuction');
 const minStamina = 25;
 const maxQueue = 10;
 const maxHeroCount = 6;
 
 exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, accountInfo) => {
 	if (heroesStruct.fishingQuestCount >= maxQueue) {
-		console.log(`${accountInfo.accountName} DFK fishing queue has reached its maximum value.`)
+		console.log(`${accountInfo.accountName} KLAY fishing queue has reached its maximum value.`)
 	} else {
-		const questType = config.defikingdoms.quest.fishing
+		const questType = config.klay.quest.fishing
 		const activeQuesterIds = heroesStruct.allQuesters
 		const saleAuctionContract = new SaleAuction(accountInfo);
 		const possibleFishers = owningHeroObjects.filter((heroObject) => { 
@@ -36,7 +36,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, account
 					const sendProfessionHeroes = professionFishers.slice(sendProfessionHeroesCount, maxHeroCount + sendProfessionHeroesCount)
 					const attemp = Math.floor(minStamina / 5)
 
-					console.log(`${accountInfo.accountName} DFK sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
+					console.log(`${accountInfo.accountName} KLAY sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
 
 					await new QuestCoreV2(accountInfo).startFishingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendProfessionHeroesCount += sendProfessionHeroes.length
@@ -49,7 +49,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, account
 					const sendNonProfessionHeroes = nonProfessionFishers.slice(sendProfessionHeroesCount, maxHeroCount + sendNonProfessionHeroesCount)
 					const attemp = Math.floor(minStamina / 7)
 
-					console.log(`${accountInfo.accountName} DFK sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
+					console.log(`${accountInfo.accountName} KLAY sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
 
 					await new QuestCoreV2(accountInfo).startFishingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendNonProfessionHeroesCount += sendNonProfessionHeroes.length
@@ -57,7 +57,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, account
 				}
 			}
 		} else {
-			console.log(`${accountInfo.accountName} DFK no fisher sent`)
+			console.log(`${accountInfo.accountName} KLAY no fisher sent`)
 		}
 	}
 }
