@@ -736,6 +736,7 @@ const config = {
     "useRpcIndex": 0, // 表示你想要使用的 rpc ，0 是 下方 rpcs 的第一個，1 是第二個以次類推，網路卡頓的時候可以嘗試換個 rpc
     "rpcs": [
       "https://klaytn.rpc.defikingdoms.com",
+      "https://klaytn-rpc.gateway.pokt.network"
     ],
     "questCoreV2": "0x8dc58d6327E1f65b18B82EDFb01A361f3AAEf624", // 合約的地址，你不會更改這個值
     "heroCore": "0x268CC8248FFB72Cd5F3e73A9a20Fa2FF40EfbA61", // 合約的地址，你不會更改這個值
