@@ -22,15 +22,15 @@ module.exports = class AssistingAuctionUpgradeable {
 
   async listHero(heroId, price) {
     const id = parseInt(heroId, 10);
-    console.log(`${this.accountName} DFK renting hero: ${id}: ${price} Jade`);
+    console.log(`${this.accountName} KLAY renting hero: ${id}: ${price} Jade`);
   
     const tx = await this.createAuction(id, price)
     const res = await tx.wait();
 
     if (res.status === 1) {
-      console.log(`${this.accountName} DFK rented hero: ${id} completed`);
+      console.log(`${this.accountName} KLAY rented hero: ${id} completed`);
     } else {
-      console.log(`${this.accountName} DFK rented hero: ${id} failed`);
+      console.log(`${this.accountName} KLAY rented hero: ${id} failed`);
     }
 
     return res;
