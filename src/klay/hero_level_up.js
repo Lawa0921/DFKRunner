@@ -1,20 +1,20 @@
-const MeditationCircle = require('~/src/defikingdoms/contracts/meditationCircle');
-const InventoryItem = require('~/src/defikingdoms/contracts/inventoryItem');
-const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
-const Crystal = require('~/src/defikingdoms/contracts/crystal');
+const MeditationCircle = require('~/src/klay/contracts/meditationCircle');
+const InventoryItem = require('~/src/klay/contracts/inventoryItem');
+const SaleAuction = require('~/src/klay/contracts/saleAuction');
+const Jade = require('~/src/klay/contracts/jade');
 const config = require("~/config.js")
 const ethers = require('ethers');
 
-exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
+exports.runKLAYLevelUpLogic = async (owningHeroObjects, accountInfo) => {
   const saleAuctionContract = new SaleAuction(accountInfo);
   const meditationCircleContract = new MeditationCircle(accountInfo);
-  const shvasRuneContract = new InventoryItem(accountInfo, config.defikingdoms.shvasRune);
-  const mokshaRuneContract = new InventoryItem(accountInfo, config.defikingdoms.mokshaRune);
-  const crystalContract = new Crystal(accountInfo);
+  const shvasRuneContract = new InventoryItem(accountInfo, config.klay.shvasRune);
+  const mokshaRuneContract = new InventoryItem(accountInfo, config.klay.mokshaRune);
+  const jadeContract = new Jade(accountInfo);
 
   const activeMeditations = await meditationCircleContract.getActiveMeditations();
   const levelUpableHeros = owningHeroObjects.filter(hero => 
-    config.defikingdoms.notForLevelUpHeroIds.indexOf(hero.id) === -1 &&
+    config.klay.notForLevelUpHeroIds.indexOf(hero.id) === -1 &&
     hero.levelUpable() && 
     activeMeditations.map(activeMeditation => parseInt(activeMeditation.heroId).toString()).indexOf(hero.id) === -1 &&
     hero.owner === accountInfo.walletAddress
@@ -36,9 +36,9 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
       const res = await txn.wait();
 
       if (res.status === 1) {
-        console.log(`${accountInfo.accountName} DFK level up ${parseInt(activeMeditations[i].heroId)} success!`)
+        console.log(`${accountInfo.accountName} KLAY level up ${parseInt(activeMeditations[i].heroId)} success!`)
       } else {
-        console.log(`${accountInfo.accountName} DFK complete level up ${parseInt(activeMeditations[i].heroId)} failed`)
+        console.log(`${accountInfo.accountName} KLAY complete level up ${parseInt(activeMeditations[i].heroId)} failed`)
       }
     }
   }
@@ -46,26 +46,26 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
   if (levelUpableHeros.length > 0) {
     for (let i = 0; i < levelUpableHeros.length; i++ ) {
       const shvasRuneBalanceOf = await shvasRuneContract.balanceOf();
-      const shvasRuneAllowance = await shvasRuneContract.allowance(config.defikingdoms.meditationCircle);
+      const shvasRuneAllowance = await shvasRuneContract.allowance(config.klay.meditationCircle);
       const mokshaRuneBalanceOf = await mokshaRuneContract.balanceOf();
-      const mokshaRuneAllowance = await mokshaRuneContract.allowance(config.defikingdoms.meditationCircle)
-      const crystalAllowance = await crystalContract.allowance(config.defikingdoms.meditationCircle)
+      const mokshaRuneAllowance = await mokshaRuneContract.allowance(config.klay.meditationCircle)
+      const jadeAllowance = await jadeContract.allowance(config.klay.meditationCircle)
       const [shvasRuneRequireCount, mokshaRuneRequireCount] = await meditationCircleContract.getRequiredRunes(levelUpableHeros[i].level);
 
       if (shvasRuneAllowance < shvasRuneRequireCount) {
-        await shvasRuneContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
+        await shvasRuneContract.approve(config.klay.meditationCircle, ethers.constants.MaxUint256)
       }
       if (mokshaRuneAllowance < mokshaRuneRequireCount) {
-        await mokshaRuneContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
+        await mokshaRuneContract.approve(config.klay.meditationCircle, ethers.constants.MaxUint256)
       }
-      if (crystalAllowance === 0) {
-        await crystalContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
+      if (jadeAllowance === 0) {
+        await jadeContract.approve(config.klay.meditationCircle, ethers.constants.MaxUint256)
       }
 
       if (parseInt(shvasRuneRequireCount) > parseInt(shvasRuneBalanceOf)) {
-        console.log(`${accountInfo.accountName} DFK shvasRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
+        console.log(`${accountInfo.accountName} KLAY shvasRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
       } else if (parseInt(mokshaRuneRequireCount) > parseInt(mokshaRuneBalanceOf)) {
-        console.log(`${accountInfo.accountName} DFK mokshaRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
+        console.log(`${accountInfo.accountName} KLAY mokshaRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
       } else {
         const [mainGrowth, subGrowth1, subGrowth2] = levelUpableHeros[i].growthStats();
 
@@ -77,16 +77,16 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
           const completeMeditationRes = await completeMeditationTxn.wait();
 
           if (completeMeditationRes.status === 1) {
-            console.log(`${accountInfo.accountName} DFK level up ${levelUpableHeros[i].id} success!`)
+            console.log(`${accountInfo.accountName} KLAY level up ${levelUpableHeros[i].id} success!`)
           } else {
-            console.log(`${accountInfo.accountName} DFK complete level up ${levelUpableHeros[i].id} failed`)
+            console.log(`${accountInfo.accountName} KLAY complete level up ${levelUpableHeros[i].id} failed`)
           }
         } else {
-          console.log(`${accountInfo.accountName} DFK level up ${levelUpableHeros[i].id} failed`)
+          console.log(`${accountInfo.accountName} KLAY level up ${levelUpableHeros[i].id} failed`)
         }
       }
     }
   } else {
-    console.log(`${accountInfo.accountName} DFK no hero should level up`)
+    console.log(`${accountInfo.accountName} KLAY no hero should level up`)
   }
 }
