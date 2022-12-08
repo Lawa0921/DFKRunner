@@ -101,10 +101,7 @@ exports.getDFKBaseGasFee = async () => {
 }
 
 exports.getDFKGasFee = async () => {
-  const provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
-  const gasInfo = await provider.getFeeData()
-
-  return parseInt(gasInfo.lastBaseFeePerGas) + config.defikingdoms.overBaseGasFeeWei
+  return await this.getDFKBaseGasFee() + config.defikingdoms.overBaseGasFeeWei
 }
 
 exports.getKLAYBaseGasFee = async () => {
@@ -115,10 +112,7 @@ exports.getKLAYBaseGasFee = async () => {
 }
 
 exports.getKLAYGasFee = async () => {
-  const provider = new ethers.providers.JsonRpcProvider(config.klay.rpcs[config.klay.useRpcIndex])
-  const gasInfo = await provider.getFeeData()
-
-  return parseInt(gasInfo.lastBaseFeePerGas) + config.defikingdoms.overBaseGasFeeWei
+  return await this.getKLAYBaseGasFee() + config.defikingdoms.overBaseGasFeeWei
 }
 
 exports.getHeroesInfoByIds = async (heroIds) => {
