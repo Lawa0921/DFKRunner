@@ -343,8 +343,27 @@ exports.getDFKOwningHeroIds = () => {
     return heroIds;
 }
 
+exports.getKLAYOwningHeroIds = () => {
+  let heroIds = [];
+
+  heroIds = heroIds.concat(config.klay.quest.fishing.heroes);
+  heroIds = heroIds.concat(config.klay.quest.foraging.heroes);
+  heroIds = heroIds.concat(config.klay.quest.goldMining.heroes);
+  heroIds = heroIds.concat(config.klay.quest.crystalMining.heroes);
+
+  for (let i = 0; i < config.klay.quest.statQuests.length; i++ ) {
+      heroIds = heroIds.concat(config.klay.quest.statQuests[i].heroes);
+  }
+
+  for (let i = 0; i < config.klay.quest.gardening.pairAddressMappings.length; i++) {
+      heroIds = heroIds.concat(config.klay.quest.gardening.pairAddressMappings[i].heroes);
+  }
+
+  return heroIds;
+}
+
 exports.getAllConfigHeroIds = () => {
-    return this.getDFKOwningHeroIds();
+    return this.getDFKOwningHeroIds().concat(this.getKLAYOwningHeroIds());
 }
 
 exports.watchHeroLog = async (hero, price, valuator, network) => {
