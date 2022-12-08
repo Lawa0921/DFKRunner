@@ -7,6 +7,7 @@ const { CheckAndSendDFKStatQuests } = require("~/src/klay/quest_stats");
 const { CheckAndSendDFKGardeners } = require("~/src/klay/quest_gardening");
 const { CheckAndSendDFKGoldMiners } = require('~/src/klay/quest_gold_mining');
 const { CheckAndSendDFKJadeMiners } = require('~/src/klay/quest_jade_mining');
+const { runKLAYSalesLogic } = require('~/src/klay/sales_handler');
 const autils = require("~/src/services/autils");
 const config = require("~/config.js");
 
@@ -25,6 +26,9 @@ exports.runKLAYChainQuest = async (accountInfo) => {
       const owningHeroObjects = await autils.getHeroesInfoByIds(autils.getKLAYOwningHeroIds());
 
       await CompleteQuests(heroesStruct, accountInfo);
+
+      await runKLAYSalesLogic(owningHeroObjects, accountInfo);
+
       await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects, accountInfo)
       await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects, accountInfo)
       await CheckAndSendDFKGardeners(heroesStruct, owningHeroObjects, accountInfo)
