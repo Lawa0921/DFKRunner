@@ -349,7 +349,7 @@ exports.getKLAYOwningHeroIds = () => {
   heroIds = heroIds.concat(config.klay.quest.fishing.heroes);
   heroIds = heroIds.concat(config.klay.quest.foraging.heroes);
   heroIds = heroIds.concat(config.klay.quest.goldMining.heroes);
-  heroIds = heroIds.concat(config.klay.quest.crystalMining.heroes);
+  heroIds = heroIds.concat(config.klay.quest.jadeMining.heroes);
 
   for (let i = 0; i < config.klay.quest.statQuests.length; i++ ) {
       heroIds = heroIds.concat(config.klay.quest.statQuests[i].heroes);
