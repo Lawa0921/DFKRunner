@@ -574,7 +574,7 @@ const config = {
       "jadeMining": {
         "singleBatchAmount": 1, // 單次送出的英雄數量
         "heroes": [ // 這裡面只會寫你自己擁有的 hero id
-
+          "2000000000175"
         ],
         "contractAddress": "0x20B274262FA6da57B5Ff90498EC373c0266eF901" // 合約的地址，你不會更改這個值
       },

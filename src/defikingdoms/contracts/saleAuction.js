@@ -30,15 +30,15 @@ module.exports = class SaleAuction {
 
   async listHero(heroId, price) {
     const id = parseInt(heroId, 10);
-    console.log(`${this.accountName} listing hero: ${id}: ${price} C`);
+    console.log(`${this.accountName} DFK listing hero: ${id}: ${price} C`);
   
     const tx = await this.createAuction(id, price)
     const res = await tx.wait();
 
     if (res.status === 1) {
-      console.log(`${this.accountName} listing hero: ${id} completed`);
+      console.log(`${this.accountName} DFK listing hero: ${id} completed`);
     } else {
-      console.log(`${this.accountName} list hero: ${id} failed`);
+      console.log(`${this.accountName} DFK list hero: ${id} failed`);
     }
 
     return res;
@@ -46,14 +46,14 @@ module.exports = class SaleAuction {
 
   async unlistHero(heroId) {
     const id = parseInt(heroId, 10);
-    console.log(`${this.accountName} unlisting hero: ${id}`);
+    console.log(`${this.accountName} DFK unlisting hero: ${id}`);
 
     const tx = await this.cancelAuction(id);
     const res = await tx.wait();
     if (res.status === 1) {
-      console.log(`${this.accountName} unlisting hero: ${id} completed`);
+      console.log(`${this.accountName} DFK unlisting hero: ${id} completed`);
     } else {
-      console.log(`${this.accountName} unlist hero: ${id} failed`);
+      console.log(`${this.accountName} DFK unlist hero: ${id} failed`);
     }
 
     return res;

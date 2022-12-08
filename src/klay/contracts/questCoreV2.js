@@ -74,9 +74,9 @@ module.exports = class QuestCoreV2 {
     const res = await tx.wait();
 
     if (res.status === 1) {
-      console.log(`${this.accountName} KLAY send ${heroIds} on a crystal mining quest completed`)
+      console.log(`${this.accountName} KLAY send ${heroIds} on a jade mining quest completed`)
     } else {
-      console.log(`${this.accountName} KLAY send ${heroIds} on a crystal mining quest failed`)
+      console.log(`${this.accountName} KLAY send ${heroIds} on a jade mining quest failed`)
     }
 
     return res;

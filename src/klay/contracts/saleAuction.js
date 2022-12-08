@@ -30,15 +30,15 @@ module.exports = class SaleAuction {
 
   async listHero(heroId, price) {
     const id = parseInt(heroId, 10);
-    console.log(`KLAY ${this.accountName} listing hero: ${id}: ${price} C`);
+    console.log(`${this.accountName} KLAY listing hero: ${id}: ${price} Jade`);
   
     const tx = await this.createAuction(id, price)
     const res = await tx.wait();
 
     if (res.status === 1) {
-      console.log(`KLAY ${this.accountName} listing hero: ${id} completed`);
+      console.log(`${this.accountName} KLAY listing hero: ${id} completed`);
     } else {
-      console.log(`KLAY ${this.accountName} list hero: ${id} failed`);
+      console.log(`${this.accountName} KLAY list hero: ${id} failed`);
     }
 
     return res;
@@ -46,14 +46,14 @@ module.exports = class SaleAuction {
 
   async unlistHero(heroId) {
     const id = parseInt(heroId, 10);
-    console.log(`KLAY ${this.accountName} unlisting hero: ${id}`);
+    console.log(`${this.accountName} KLAY unlisting hero: ${id}`);
 
     const tx = await this.cancelAuction(id);
     const res = await tx.wait();
     if (res.status === 1) {
-      console.log(`KLAY ${this.accountName} unlisting hero: ${id} completed`);
+      console.log(`${this.accountName} KLAY unlisting hero: ${id} completed`);
     } else {
-      console.log(`KLAY ${this.accountName} unlist hero: ${id} failed`);
+      console.log(`${this.accountName} KLAY unlist hero: ${id} failed`);
     }
 
     return res;
