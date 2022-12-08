@@ -1,11 +1,11 @@
 const config = require("~/config.js");
 const autils = require('~/src/services/autils');
-const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
-const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
+const QuestCoreV2 = require('~/src/klay/contracts/questCoreV2');
+const SaleAuction = require('~/src/klay/contracts/saleAuction');
 const minStamina = 25;
 
 exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects, accountInfo) => {
-  const questType = config.defikingdoms.quest.gardening
+  const questType = config.klay.quest.gardening
   const activeQuesterIds = heroesStruct.allQuesters
 
   const gardeningHeroIds = questType.pairAddressMappings.map(gardeningQuestSetting => gardeningQuestSetting.heroes).flat()
@@ -28,10 +28,10 @@ exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects, accou
         await autils.sleep(5000)
       }
 
-      console.log(`${accountInfo.accountName} DFK sending ${sentGardenerIds} to ${questType.pairAddressMappings[i].tokenPair} gardening quest`)
+      console.log(`${accountInfo.accountName} KLAY sending ${sentGardenerIds} to ${questType.pairAddressMappings[i].tokenPair} gardening quest`)
       await new QuestCoreV2(accountInfo).startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].pairAddress)
     } else {
-      console.log(`${accountInfo.accountName} DFK no gardener sent to ${questType.pairAddressMappings[i].tokenPair}`)
+      console.log(`${accountInfo.accountName} KLAY no gardener sent to ${questType.pairAddressMappings[i].tokenPair}`)
     }
   }
 }

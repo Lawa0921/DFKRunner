@@ -57,7 +57,7 @@ module.exports = class QuestCoreV2 {
   }
 
   async startGoldMining(heroIds) {
-    const tx = await this.contract.startQuest(heroIds, config.klay.quest.goldMining.contractAddress, 1, 0, { gasPrice: await autils.getKLAYGasFee() })
+    const tx = await this.contract.startQuest(heroIds, config.klay.quest.goldMining.contractAddress, 25, 0, { gasPrice: await autils.getKLAYGasFee() })
     const res = await tx.wait();
 
     if (res.status === 1) {
@@ -69,8 +69,8 @@ module.exports = class QuestCoreV2 {
     return res;
   }
 
-  async startCrystalMining(heroIds) {
-    const tx = await this.contract.startQuest(heroIds, config.klay.quest.crystalMining.contractAddress, 1, 0, { gasPrice: await autils.getKLAYGasFee() })
+  async startJadeMining(heroIds) {
+    const tx = await this.contract.startQuest(heroIds, config.klay.quest.jadeMining.contractAddress, 25, 0, { gasPrice: await autils.getKLAYGasFee() })
     const res = await tx.wait();
 
     if (res.status === 1) {
@@ -83,7 +83,7 @@ module.exports = class QuestCoreV2 {
   }
 
   async startGardeningQuest(heroIds, pairAddress) {
-    const tx = await this.contract.startQuest(heroIds, pairAddress, 1, 0, { gasPrice: await autils.getKLAYGasFee() })
+    const tx = await this.contract.startQuest(heroIds, pairAddress, 25, 0, { gasPrice: await autils.getKLAYGasFee() })
     const res = await tx.wait();
 
     if (res.status === 1) {
