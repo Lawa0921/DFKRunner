@@ -24,9 +24,9 @@ module.exports = class QuestCoreV2 {
     const txn = await this.contract.startQuest(heroIds, config.klay.quest.fishing.contractAddress, attempt, 0, { gasPrice: await autils.getKLAYGasFee() })
     const res = await txn.wait();
     if (res.status === 1) {
-      console.log(`KLAY ${this.accountName} send ${heroIds} on a fishing quest completed`)
+      console.log(`${this.accountName} KLAY send ${heroIds} on a fishing quest completed`)
     } else {
-      console.log(`KLAY ${this.accountName} send ${heroIds} on a fishing quest failed`)
+      console.log(`${this.accountName} KLAY send ${heroIds} on a fishing quest failed`)
     }
 
     return res;
@@ -36,9 +36,9 @@ module.exports = class QuestCoreV2 {
     const txn = await this.contract.startQuest(heroIds, config.klay.quest.foraging.contractAddress, attempt, 0, { gasPrice: await autils.getKLAYGasFee() })
     const res = await txn.wait();
     if (res.status === 1) {
-      console.log(`KLAY ${this.accountName} send ${heroIds} on a foraging quest completed`)
+      console.log(`${this.accountName} KLAY send ${heroIds} on a foraging quest completed`)
     } else {
-      console.log(`KLAY ${this.accountName} send ${heroIds} on a foraging quest failed`)
+      console.log(`${this.accountName} KLAY send ${heroIds} on a foraging quest failed`)
     }
 
     return res;
@@ -48,9 +48,9 @@ module.exports = class QuestCoreV2 {
     const tx = await this.contract.startQuest(heroIds, address, attempt, 1, { gasPrice: await autils.getKLAYGasFee() })
     const res = await tx.wait();
     if (res.status === 1) {
-      console.log(`KLAY ${this.accountName} send ${heroIds} on a ${type} stat quest completed`)
+      console.log(`${this.accountName} KLAY send ${heroIds} on a ${type} stat quest completed`)
     } else {
-      console.log(`KLAY ${this.accountName} send ${heroIds} on a ${type} stat quest failed`)
+      console.log(`${this.accountName} KLAY send ${heroIds} on a ${type} stat quest failed`)
     }
 
     return res;
@@ -61,9 +61,9 @@ module.exports = class QuestCoreV2 {
     const res = await tx.wait();
 
     if (res.status === 1) {
-      console.log(`KLAY ${this.accountName} send ${heroIds} on a gold mining quest completed`)
+      console.log(`${this.accountName} KLAY send ${heroIds} on a gold mining quest completed`)
     } else {
-      console.log(`KLAY ${this.accountName} send ${heroIds} on a gold mining quest failed`)
+      console.log(`${this.accountName} KLAY send ${heroIds} on a gold mining quest failed`)
     }
 
     return res;
@@ -74,9 +74,9 @@ module.exports = class QuestCoreV2 {
     const res = await tx.wait();
 
     if (res.status === 1) {
-      console.log(`KLAY ${this.accountName} send ${heroIds} on a crystal mining quest completed`)
+      console.log(`${this.accountName} KLAY send ${heroIds} on a crystal mining quest completed`)
     } else {
-      console.log(`KLAY ${this.accountName} send ${heroIds} on a crystal mining quest failed`)
+      console.log(`${this.accountName} KLAY send ${heroIds} on a crystal mining quest failed`)
     }
 
     return res;
@@ -87,9 +87,9 @@ module.exports = class QuestCoreV2 {
     const res = await tx.wait();
 
     if (res.status === 1) {
-      console.log(`KLAY ${this.accountName} send ${heroIds} on a gardening quest completed`)
+      console.log(`${this.accountName} KLAY send ${heroIds} on a gardening quest completed`)
     } else {
-      console.log(`KLAY ${this.accountName} send ${heroIds} on a gardening quest failed`)
+      console.log(`${this.accountName} KLAY send ${heroIds} on a gardening quest failed`)
     }
 
     return res;

@@ -2,6 +2,7 @@ const dataParser = require('~/src/services/data_parser')
 const QuestCoreV2 = require("~/src/klay/contracts/questCoreV2");
 const { CompleteQuests } = require('~/src/klay/quest_complete');
 const { CheckAndSendDFKFishers } = require("~/src/klay/quest_fishing");
+const { CheckAndSendDFKForagers } = require("~/src/klay/quest_foraging");
 const autils = require("~/src/services/autils");
 const config = require("~/config.js");
 
@@ -11,7 +12,7 @@ exports.runKLAYChainQuest = async (accountInfo) => {
     console.log(`KLAY Current base gasPrice: ${baseGasPrice}`)
   
     if (baseGasPrice > config.klay.maxGasPrice) {
-      console.log(`KLAY Current base gasPrice: ${baseGasPrice} is over then maxGasPrice setting: ${config.defikingdoms.maxGasPrice}, will retry later.`)
+      console.log(`KLAY Current base gasPrice: ${baseGasPrice} is over then maxGasPrice setting: ${config.klay.maxGasPrice}, will retry later.`)
     } else {
       const questCoreV2Contract = new QuestCoreV2(accountInfo);
   
@@ -21,6 +22,8 @@ exports.runKLAYChainQuest = async (accountInfo) => {
 
       await CompleteQuests(heroesStruct, accountInfo);
       await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects, accountInfo)
+      await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects, accountInfo)
+
       // to do
     }
   } catch (error) {
