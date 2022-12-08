@@ -13,7 +13,7 @@ module.exports = class ItemConsumer {
   }
 
   async consumeItem(itemAddress ,heroId) {
-    const txn = await this.contract.consumeItem(itemAddress, heroId, { gasPrice: await autils.getBaseGasFee() })
+    const txn = await this.contract.consumeItem(itemAddress, heroId, { gasPrice: await autils.getKLAYGasFee() })
     const receipt = await txn.wait()
 
     if (receipt.status === 1) {

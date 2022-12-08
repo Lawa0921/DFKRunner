@@ -19,11 +19,11 @@ const config = require("~/config.js");
 
 exports.runDFKChainQuest = async (accountInfo) => {
   try {
-    const baseGasPrice = await autils.getBaseGasFee()
-    console.log(`DFK Current base gasPrice: ${baseGasPrice - config.defikingdoms.overBaseGasFeeWei}`)
+    const baseGasPrice = await autils.getDFKBaseGasFee()
+    console.log(`DFK Current base gasPrice: ${baseGasPrice}`)
   
-    if (baseGasPrice - config.defikingdoms.overBaseGasFeeWei > config.defikingdoms.maxGasPrice) {
-      console.log(`DFK Current base gasPrice: ${baseGasPrice - config.defikingdoms.overBaseGasFeeWei} is over then maxGasPrice setting: ${config.defikingdoms.maxGasPrice}, will retry later.`)
+    if (baseGasPrice > config.defikingdoms.maxGasPrice) {
+      console.log(`DFK Current base gasPrice: ${baseGasPrice} is over then maxGasPrice setting: ${config.defikingdoms.maxGasPrice}, will retry later.`)
     } else {
       const questCoreV2Contract = new QuestCoreV2(accountInfo);
   
@@ -44,9 +44,9 @@ exports.runDFKChainQuest = async (accountInfo) => {
   
       await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects, accountInfo)
       await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects, accountInfo)
-      // await CheckAndSendDFKGardeners(heroesStruct, owningHeroObjects, accountInfo)
+      await CheckAndSendDFKGardeners(heroesStruct, owningHeroObjects, accountInfo)
       await CheckAndSendDFKGoldMiners(heroesStruct, owningHeroObjects, accountInfo)
-      // await CheckAndSendDFKCrystalMiners(heroesStruct, accountInfo)
+      await CheckAndSendDFKCrystalMiners(heroesStruct, accountInfo)
       await CheckAndSendDFKStatQuests(heroesStruct, owningHeroObjects, accountInfo)
     }
   } catch (error) {

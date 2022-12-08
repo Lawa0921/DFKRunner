@@ -16,7 +16,7 @@ module.exports = class HeroCore {
   }
 
   async transferFrom(to, heroId) {
-    const txn = await this.contract.transferFrom(this.wallet.address, to, heroId, { gasPrice: await autils.getBaseGasFee() })
+    const txn = await this.contract.transferFrom(this.wallet.address, to, heroId, { gasPrice: await autils.getDFKGasFee() })
     const res = await txn.wait();
     if (res.status === 1) {
       console.log(`${heroId} send to ${to} success`)

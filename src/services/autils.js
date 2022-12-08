@@ -93,11 +93,32 @@ exports.ethersFormatNumberToWei = (price) => {
     return ethers.utils.parseUnits(price.toString(), 18)
 }
 
-exports.getBaseGasFee = async () => {
-    const provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
-    const gasInfo = await provider.getFeeData()
+exports.getDFKBaseGasFee = async () => {
+  const provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
+  const gasInfo = await provider.getFeeData()
 
-    return parseInt(gasInfo.lastBaseFeePerGas) + config.defikingdoms.overBaseGasFeeWei
+  return parseInt(gasInfo.lastBaseFeePerGas)
+}
+
+exports.getDFKGasFee = async () => {
+  const provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
+  const gasInfo = await provider.getFeeData()
+
+  return parseInt(gasInfo.lastBaseFeePerGas) + config.defikingdoms.overBaseGasFeeWei
+}
+
+exports.getKLAYBaseGasFee = async () => {
+  const provider = new ethers.providers.JsonRpcProvider(config.klay.rpcs[config.klay.useRpcIndex])
+  const gasInfo = await provider.getFeeData()
+
+  return parseInt(gasInfo.lastBaseFeePerGas)
+}
+
+exports.getKLAYGasFee = async () => {
+  const provider = new ethers.providers.JsonRpcProvider(config.klay.rpcs[config.klay.useRpcIndex])
+  const gasInfo = await provider.getFeeData()
+
+  return parseInt(gasInfo.lastBaseFeePerGas) + config.defikingdoms.overBaseGasFeeWei
 }
 
 exports.getHeroesInfoByIds = async (heroIds) => {

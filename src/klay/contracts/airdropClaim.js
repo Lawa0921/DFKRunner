@@ -27,7 +27,7 @@ module.exports = class AirdropClaim {
   }
 
   async claimAirdrop(dropId) {
-    const txn = await this.contract.claimAirdrop(dropId, { gasPrice: await autils.getBaseGasFee() })
+    const txn = await this.contract.claimAirdrop(dropId, { gasPrice: await autils.getKLAYGasFee() })
     const res = await txn.wait();
 
     if (res.status === 1) {

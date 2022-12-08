@@ -19,7 +19,7 @@ module.exports = class DFKDuelS1Contract {
 			ethers.utils.parseEther(this.duelFee()[duelType][fee], "ether"),
 			this.duelBackground()[duelBackground],
 			this.duelStat()[duelStat],
-			{ gasPrice: await autils.getBaseGasFee() }
+			{ gasPrice: await autils.getDFKGasFee() }
 		)
 
     const receipt = await txn.wait()
@@ -33,7 +33,7 @@ module.exports = class DFKDuelS1Contract {
   }
 
 	async completeDuel(duelId) {
-		const txn = await this.contract.completeDuel(duelId, { gasPrice: await autils.getBaseGasFee() })
+		const txn = await this.contract.completeDuel(duelId, { gasPrice: await autils.getDFKGasFee() })
 		const receipt = await txn.wait()
 
 		if (receipt.status === 1) {

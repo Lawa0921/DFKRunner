@@ -71,7 +71,7 @@ module.exports = class DFKDuelS1Contract {
   }
 
   async enterRaffle(raffleId, ticketAmount) {
-    const txn = await this.contract.enterRaffle(raffleId, ticketAmount, { gasPrice: await autils.getBaseGasFee() })
+    const txn = await this.contract.enterRaffle(raffleId, ticketAmount, { gasPrice: await autils.getDFKGasFee() })
 		const receipt = await txn.wait()
 
 		if (receipt.status === 1) {

@@ -17,7 +17,7 @@ module.exports = class InventoryItem {
   }
 
   async approve(spenderAddress, amount) {
-    const txn = await this.contract.approve(spenderAddress, amount, { gasPrice: await autils.getBaseGasFee() })
+    const txn = await this.contract.approve(spenderAddress, amount, { gasPrice: await autils.getKLAYGasFee() })
     const receipt = await txn.wait()
 
     if (receipt.status === 1) {

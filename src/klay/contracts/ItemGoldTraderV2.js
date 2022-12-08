@@ -13,7 +13,7 @@ module.exports = class ItemGoldTraderV2 {
   }
 
   async sellItem(contractAddress, amount) {
-    const txn = await this.contract.sellItem(contractAddress, amount, { gasPrice: await autils.getBaseGasFee() })
+    const txn = await this.contract.sellItem(contractAddress, amount, { gasPrice: await autils.getKLAYGasFee() })
     const receipt = await txn.wait()
 
     if (receipt.status === 1) {

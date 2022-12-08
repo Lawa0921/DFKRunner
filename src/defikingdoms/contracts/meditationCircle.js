@@ -13,11 +13,11 @@ module.exports = class MeditationCircle {
   }
 
   async startMeditation(heroId, mainStat, subStat1, subStat2) {
-    return await this.contract.startMeditation(heroId, this.getStatInt(mainStat), this.getStatInt(subStat1), this.getStatInt(subStat2), autils.get0xAddress(), { gasPrice: await autils.getBaseGasFee() });
+    return await this.contract.startMeditation(heroId, this.getStatInt(mainStat), this.getStatInt(subStat1), this.getStatInt(subStat2), autils.get0xAddress(), { gasPrice: await autils.getDFKGasFee() });
   }
 
   async completeMeditation(heroId) {
-    return await this.contract.completeMeditation(heroId, { gasPrice: await autils.getBaseGasFee() });
+    return await this.contract.completeMeditation(heroId, { gasPrice: await autils.getDFKGasFee() });
   }
 
   async getActiveMeditations() {

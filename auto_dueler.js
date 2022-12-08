@@ -5,11 +5,11 @@ const DFKDuelS1 = require('~/src/defikingdoms/contracts/DFKDuelS1')
 main = async() => {
 	console.log(autils.getCurrentDateTime().toLocaleTimeString());
 	setTimeout(() => { process.exit() }, 300000) // 如果執行 script 超過 300 秒會自動中斷重啟，此為防治卡死的手段
-	const baseGasPrice = await autils.getBaseGasFee()
-	console.log(`DFK Current base gasPrice: ${baseGasPrice - config.defikingdoms.overBaseGasFeeWei}`)
+	const baseGasPrice = await autils.getDFKBaseGasFee()
+	console.log(`DFK Current base gasPrice: ${baseGasPrice}`)
 
-	if (baseGasPrice - config.defikingdoms.overBaseGasFeeWei > config.defikingdoms.maxGasPrice) {
-		console.log(`DFK Current base gasPrice: ${baseGasPrice - config.defikingdoms.overBaseGasFeeWei} is over then maxGasPrice setting: ${config.defikingdoms.maxGasPrice}, will retry later.`)
+	if (baseGasPrice > config.defikingdoms.maxGasPrice) {
+		console.log(`DFK Current base gasPrice: ${baseGasPrice} is over then maxGasPrice setting: ${config.defikingdoms.maxGasPrice}, will retry later.`)
 	} else {
 		await autoDuelScript(config.walletAddressAndPrivateKeyMappings[config.autoDuelerWalletIndex])
 	}

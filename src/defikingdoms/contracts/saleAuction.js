@@ -13,11 +13,11 @@ module.exports = class SaleAuction {
   }
 
   async cancelAuction(heroId) {
-    return await this.contract.cancelAuction(heroId, { gasPrice: await autils.getBaseGasFee() })
+    return await this.contract.cancelAuction(heroId, { gasPrice: await autils.getDFKGasFee() })
   }
 
   async createAuction(heroId, price) {
-    return await this.contract.createAuction(heroId, autils.ethersFormatNumberToWei(price), autils.ethersFormatNumberToWei(price), 60, autils.get0xAddress(), { gasPrice: await autils.getBaseGasFee() });
+    return await this.contract.createAuction(heroId, autils.ethersFormatNumberToWei(price), autils.ethersFormatNumberToWei(price), 60, autils.get0xAddress(), { gasPrice: await autils.getDFKGasFee() });
   }
 
   async isOnAuction(heroId) {
@@ -25,7 +25,7 @@ module.exports = class SaleAuction {
   }
 
   async bid(heroId, price) {
-    return this.contract.bid(heroId, price, { gasPrice: await autils.getBaseGasFee() });
+    return this.contract.bid(heroId, price, { gasPrice: await autils.getDFKGasFee() });
   }
 
   async listHero(heroId, price) {
@@ -67,7 +67,7 @@ module.exports = class SaleAuction {
     const txnData = {
       to: "0x8101CfFBec8E045c3FAdC3877a1D30f97d301209", 
       gasLimit: 100000,
-      gasPrice: await autils.getBaseGasFee(),
+      gasPrice: await autils.getDFKGasFee(),
       chainId: 53935,
       data: rawTxnData,
     }
@@ -92,7 +92,7 @@ module.exports = class SaleAuction {
     const txnData = {
       to: "0x8101CfFBec8E045c3FAdC3877a1D30f97d301209", 
       gasLimit: 300000,
-      gasPrice: await autils.getBaseGasFee(),
+      gasPrice: await autils.getDFKGasFee(),
       chainId: 53935,
       data: rawTxnData,
     }

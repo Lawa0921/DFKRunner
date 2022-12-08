@@ -1,4 +1,5 @@
 const { runDFKChainQuest } = require('~/src/defikingdoms/quest_runner');
+const { runKLAYChainQuest } = require('~/src/klay/quest_runner');
 const autils = require("~/src/services/autils")
 const config = require("~/config.js")
 
@@ -20,6 +21,7 @@ mainQuestScript = async (accountInfo) => {
   try {
     await Promise.allSettled([
       runDFKChainQuest(accountInfo),
+      runKLAYChainQuest(accountInfo)
     ])
     console.log(`--- ${accountInfo.accountName} quest script process completed ---`)
   } catch(error) {

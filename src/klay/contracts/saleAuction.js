@@ -13,11 +13,11 @@ module.exports = class SaleAuction {
   }
 
   async cancelAuction(heroId) {
-    return await this.contract.cancelAuction(heroId, { gasPrice: await autils.getBaseGasFee() })
+    return await this.contract.cancelAuction(heroId, { gasPrice: await autils.getKLAYGasFee() })
   }
 
   async createAuction(heroId, price) {
-    return await this.contract.createAuction(heroId, autils.ethersFormatNumberToWei(price), autils.ethersFormatNumberToWei(price), 60, autils.get0xAddress(), { gasPrice: await autils.getBaseGasFee() });
+    return await this.contract.createAuction(heroId, autils.ethersFormatNumberToWei(price), autils.ethersFormatNumberToWei(price), 60, autils.get0xAddress(), { gasPrice: await autils.getKLAYGasFee() });
   }
 
   async isOnAuction(heroId) {
@@ -25,7 +25,7 @@ module.exports = class SaleAuction {
   }
 
   async bid(heroId, price) {
-    return this.contract.bid(heroId, price, { gasPrice: await autils.getBaseGasFee() });
+    return this.contract.bid(heroId, price, { gasPrice: await autils.getKLAYGasFee() });
   }
 
   async listHero(heroId, price) {
