@@ -1,9 +1,9 @@
-const SaleAuction = require("~/src/defikingdoms/contracts/saleAuction")
+const AssistingAuctionUpgradeable = require("~/src/defikingdoms/contracts/assistingAuctionUpgradeable")
 const config = require("~/config.js")
 const RentValuator = require('~/src/services/rent_valuator')
 
 exports.runDFKRentHeroLogic = async (owningHeroObjects, accountInfo) => {
-  const saleAuctionContract = new SaleAuction(accountInfo)
+  const assistingAuctionUpgradeableContract = new AssistingAuctionUpgradeable(accountInfo)
   const filtedHeroObjects = owningHeroObjects.filter((heroObject) => {
     return config.defikingdoms.notForRentHeroIds.indexOf(heroObject.id) === -1 && 
       config.defikingdoms.heroForSale.map(heroData => heroData.id).indexOf(heroObject.id) === -1 &&
@@ -17,7 +17,7 @@ exports.runDFKRentHeroLogic = async (owningHeroObjects, accountInfo) => {
       rentValuator.execute()
 
       if (rentValuator.valuation > 0) {
-        await saleAuctionContract.rentHero(filtedHeroObjects[i].id, rentValuator.valuation)
+        await assistingAuctionUpgradeableContract.listHero(filtedHeroObjects[i].id, rentValuator.valuation)
       } else {
         console.log(`${filtedHeroObjects[i].id} not has any rental value`)
       }

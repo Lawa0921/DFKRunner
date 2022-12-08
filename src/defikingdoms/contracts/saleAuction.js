@@ -59,56 +59,6 @@ module.exports = class SaleAuction {
     return res;
   }
 
-  async unrentHero(heroId) {
-    let rawTxnData = "0x96b5a755" + autils.intToInput(heroId)
-
-    console.log(`${this.accountName} unrenting hero: ${heroId}`);
-
-    const txnData = {
-      to: "0x8101CfFBec8E045c3FAdC3877a1D30f97d301209", 
-      gasLimit: 100000,
-      gasPrice: await autils.getDFKGasFee(),
-      chainId: 53935,
-      data: rawTxnData,
-    }
-
-    const sendTxn = await this.wallet.sendTransaction(txnData);
-    const res = await sendTxn.wait();
-
-    if (res.status === 1) {
-      console.log(`${this.accountName} unrent hero: ${heroId} completed`);
-    } else {
-      console.log(`${this.accountName} unrent hero: ${heroId} failed`);
-    }
-
-    return res;
-  }
-
-  async rentHero(heroId, price) {
-    let rawTxnData = "0x4ee42914" + autils.intToInput(heroId) + autils.intToInput(autils.ethersFormatNumberToWei(price)) + autils.intToInput(autils.ethersFormatNumberToWei(price)) + autils.intToInput(60) + "0000000000000000000000000000000000000000000000000000000000000000"
-
-    console.log(`${this.accountName} renting hero: ${heroId}`);
-
-    const txnData = {
-      to: "0x8101CfFBec8E045c3FAdC3877a1D30f97d301209", 
-      gasLimit: 300000,
-      gasPrice: await autils.getDFKGasFee(),
-      chainId: 53935,
-      data: rawTxnData,
-    }
-
-    const sendTxn = await this.wallet.sendTransaction(txnData);
-    const res = await sendTxn.wait();
-
-    if (res.status === 1) {
-      console.log(`${this.accountName} rent hero: ${heroId} ${price} C completed`);
-    } else {
-      console.log(`${this.accountName} rent hero: ${heroId} ${price} C failed`);
-    }
-
-    return res;
-  }
-
   async buyHero(heroId) {
     const id = parseInt(heroId, 10);
     const heroesData = await autils.getHeroesInfoByIds([id])

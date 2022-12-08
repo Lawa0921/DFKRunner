@@ -2,28 +2,28 @@ const config = require("~/config.js");
 const autils = require('~/src/services/autils');
 const ethers = require('ethers');
 const HeroCore = require('~/src/defikingdoms/contracts/heroCore');
-const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
+const DFKAssistingAuctionUpgradeable = require("~/src/defikingdoms/contracts/assistingAuctionUpgradeable")
 
 exports.sendHeroTo = async (heroesStruct, accountInfo, owningHeroObjects) => {
-    if (config.sendHeroTo !== null && ethers.utils.isAddress(config.sendHeroTo) && config.sendHeroTo !== accountInfo.walletAddress) {
-        const heroObjects = await autils.getHeroesInfoByIds(heroesStruct.completedQuesters)
+  if (config.sendHeroTo !== null && ethers.utils.isAddress(config.sendHeroTo) && config.sendHeroTo !== accountInfo.walletAddress) {
+    const heroObjects = await autils.getHeroesInfoByIds(heroesStruct.completedQuesters)
 
-        for (let i = 0; i < heroObjects.length; i++) {
-            const heroCoreContract = new HeroCore(accountInfo)
-            const saleAuctionContract = new SaleAuction(accountInfo)
+    for (let i = 0; i < heroObjects.length; i++) {
+      const heroCoreContract = new HeroCore(accountInfo)
+      const DFKAssistingAuctionUpgradeableContract = new DFKAssistingAuctionUpgradeable(accountInfo)
 
-            if (heroObjects[i].isOnRent) {
-                await saleAuctionContract.unrentHero(heroObjects[i].id)
-            }
+      if (heroObjects[i].isOnRent) {
+        await DFKAssistingAuctionUpgradeableContract.unlistHero(heroObjects[i].id)
+      }
 
-            await heroCoreContract.transferFrom(config.sendHeroTo, heroObjects[i].id)
-        }
-
-        for (let i = 0; i < owningHeroObjects.length; i++) {
-            if (!owningHeroObjects[i].isOnRent && !owningHeroObjects[i].isOnSale && !owningHeroObjects[i].isOnQuesting) {
-                const heroCoreContract = new HeroCore(accountInfo)
-                await heroCoreContract.transferFrom(config.sendHeroTo, owningHeroObjects[i].id)
-            }
-        }
+      await heroCoreContract.transferFrom(config.sendHeroTo, heroObjects[i].id)
     }
+
+    for (let i = 0; i < owningHeroObjects.length; i++) {
+      if (!owningHeroObjects[i].isOnRent && !owningHeroObjects[i].isOnSale && !owningHeroObjects[i].isOnQuesting) {
+        const heroCoreContract = new HeroCore(accountInfo)
+        await heroCoreContract.transferFrom(config.sendHeroTo, owningHeroObjects[i].id)
+      }
+    }
+  }
 }
