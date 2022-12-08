@@ -8,7 +8,7 @@ const maxHeroCount = 6;
 
 exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects, accountInfo) => {
 	if (heroesStruct.foragingQuestCount >= maxQueue) {
-		console.log(`${accountInfo.accountName} foraging queue has reached its maximum value.`)
+		console.log(`${accountInfo.accountName} DFK foraging queue has reached its maximum value.`)
 	} else {
 		const questType = config.defikingdoms.quest.foraging
 		const saleAuctionContract = new SaleAuction(accountInfo);
@@ -36,7 +36,7 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects, accoun
 					const sendProfessionHeroes = professioForagers.slice(sendProfessionHeroesCount, maxHeroCount + sendProfessionHeroesCount)
 					const attemp = Math.floor(minStamina / 5)
 
-					console.log(`${accountInfo.accountName} sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to foraging quest`)
+					console.log(`${accountInfo.accountName} DFK sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to foraging quest`)
 
 					await new QuestCoreV2(accountInfo).startForagingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendProfessionHeroesCount += sendProfessionHeroes.length
@@ -49,7 +49,7 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects, accoun
 					const sendNonProfessionHeroes = nonProfessioForagers.slice(sendProfessionHeroesCount, maxHeroCount + sendNonProfessionHeroesCount)
 					const attemp = Math.floor(minStamina / 7)
 
-					console.log(`${accountInfo.accountName} sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to foraging quest`)
+					console.log(`${accountInfo.accountName} DFK sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to foraging quest`)
 
 					await new QuestCoreV2(accountInfo).startForagingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendNonProfessionHeroesCount += sendNonProfessionHeroes.length
@@ -57,7 +57,7 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects, accoun
 				}
 			}
 		} else {
-			console.log(`${accountInfo.accountName} no forager Sent`)
+			console.log(`${accountInfo.accountName} DFK no forager Sent`)
 		}
 	}
 }
