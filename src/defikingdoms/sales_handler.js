@@ -10,7 +10,8 @@ exports.runDFKSalesLogic = async (owningHeroObjects, accountInfo) => {
   const heroList = config.defikingdoms.heroForSale.map((heroData) => {
     return {...heroData, instance: owningHeroObjects.find(heroObject => heroObject.id === heroData.id)}
   }).filter((heroObject) => {
-    return heroObject.instance.owner === accountInfo.walletAddress
+    return typeof(heroObject) !== "undefined" &&
+      heroObject.instance.owner === accountInfo.walletAddress
   })
 
   const saleHandlerPromises = heroList.filter(heroObject => isShouldList(heroObject.instance)).map(shouldListHero => sellHero(shouldListHero.id, shouldListHero.price, saleAuctionContract))
