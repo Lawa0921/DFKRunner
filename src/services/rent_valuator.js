@@ -529,6 +529,6 @@ module.exports = class RentValuator {
       this.valuation = this.valuation * config.klay.newworkRentalEstimateAdjustment
     }
 
-    this.valuation = Math.round(this.valuation, 2)
+    this.valuation = Math.round(this.valuation * 100) / 100
   }
 }

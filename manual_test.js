@@ -20,8 +20,9 @@ const { airdropClaim } = require("~/src/defikingdoms/airdrop_claim")
 
 
 async function test() {  
+  console.log(Math.round(8.5 * 100) / 100)
   // console.log(await crystalContract.allowance(config.defikingdoms.meditationCircle))
-  await crystalContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
+  // await crystalContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
   // console.log(ethers.constants.MaxUint256)
 }
 
