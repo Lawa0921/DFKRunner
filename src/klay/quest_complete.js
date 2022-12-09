@@ -10,18 +10,18 @@ exports.CompleteQuests = async (heroesStruct, accountInfo) => {
 
     await Promise.allSettled(completeQuestPromises)
   } else {
-    console.log(`${accountInfo.accountName} KLAY No quest should be complete.`)
+    console.log(`${accountInfo.accountName} No quest should be complete.`)
   }
 }
 
 completeQuest = async (completedQuesterId, questCoreV2Contract, accountName) => {
-  console.log(`${accountName} KLAY sending complete ${completedQuesterId} quest`)
+  console.log(`${accountName} sending complete ${completedQuesterId} quest`)
   const tx = await questCoreV2Contract.completeQuest(completedQuesterId)
   const res = await tx.wait();
 
   if (res.status === 1) {
-    console.log(`${accountName} KLAY ${completedQuesterId} Quest completed`)
+    console.log(`${accountName} ${completedQuesterId} Quest completed`)
   } else {
-    console.log(`${accountName} KLAY ${completedQuesterId} Quest complete failed`);
+    console.log(`${accountName} ${completedQuesterId} Quest complete failed`);
   }
 }
