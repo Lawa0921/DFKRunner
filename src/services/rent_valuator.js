@@ -170,7 +170,7 @@ module.exports = class RentValuator {
         this.valuation *= 1.03
       }
     } else if (this.hero.mainClass === "Seer" || this.hero.mainClass === "Berserker") {
-      if (heroSubclass === "Shapeshifter") {
+      if (heroSubclass === "Shapeshifter" || heroSubclass === "Bard") {
         this.valuation *= 2
       } else if (heroSubclass === "Seer" || heroSubclass === "Berserker") {
         this.valuation *= 1.2
@@ -185,7 +185,23 @@ module.exports = class RentValuator {
       } else if ((heroGreenStatBoost === "AGI" || heroGreenStatBoost === "LCK") || (heroBlueStatBoost === "AGI" || heroBlueStatBoost === "LCK")) {
         this.valuation *= 1.02
       }
-    } 
+    } else if (this.hero.mainClass === "Scholar" || this.hero.mainClass === "Legionnaire") {
+      if (heroSubclass === "Shapeshifter" || heroSubclass === "Bard") {
+        this.valuation *= 2
+      } else if (heroSubclass === "Scholar" || heroSubclass === "Legionnaire") {
+        this.valuation *= 1.2
+      }
+
+      if (this.hero.profession === "fishing") {
+        this.valuation *= 1.05
+      }
+
+      if ((heroGreenStatBoost === "AGI" || heroGreenStatBoost === "LCK") && (heroBlueStatBoost === "AGI" || heroBlueStatBoost === "LCK")) {
+        this.valuation *= 1.05
+      } else if ((heroGreenStatBoost === "AGI" || heroGreenStatBoost === "LCK") || (heroBlueStatBoost === "AGI" || heroBlueStatBoost === "LCK")) {
+        this.valuation *= 1.02
+      }
+    }
 
     if (heroHairTier === "Advanced") {
       this.valuation *= 1.15
@@ -332,9 +348,21 @@ module.exports = class RentValuator {
       } else if ((heroGreenStatBoost === "INT" || heroGreenStatBoost === "WIS") || (heroBlueStatBoost === "STR" || heroBlueStatBoost === "WIS")) {
         this.valuation *= 1.02
       }
-    } else if (this.hero.mainClass === "Shapeshifter") {
-      if (heroSubclass === "Shapeshifter") {
+    } else if (this.hero.mainClass === "Shapeshifter" || this.hero.mainClass === "Bard") {
+      if (heroSubclass === "Shapeshifter" || this.hero.mainClass === "Bard") {
         this.valuation *= 2
+      } else if (heroSubclass === "Spellbow") {
+        this.valuation *= 8
+      }
+
+      if (this.hero.profession === "foraging") {
+        this.valuation *= 1.05
+      }
+
+      if ((heroGreenStatBoost === "INT" || heroGreenStatBoost === "DEX") && (heroBlueStatBoost === "STR" || heroBlueStatBoost === "DEX")) {
+        this.valuation *= 1.15
+      } else if ((heroGreenStatBoost === "INT" || heroGreenStatBoost === "DEX") || (heroBlueStatBoost === "STR" || heroBlueStatBoost === "DEX")) {
+        this.valuation *= 1.02
       }
     }
 
@@ -464,6 +492,12 @@ module.exports = class RentValuator {
 
       if (this.hero.profession === "mining") {
         this.valuation *= 1.05
+      }
+    } else if (this.hero.mainClass === "Spellbow") {
+      if (heroSubclass === "Summoner" || heroSubclass === "Ninja") {
+        this.valuation *= 1.7
+      } else if (heroSubclass === "Sage" || heroSubclass === "Spellbow") {
+        this.valuation *= 3
       }
     }
 
