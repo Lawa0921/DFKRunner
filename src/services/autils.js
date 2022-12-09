@@ -248,7 +248,8 @@ exports.getPurchasedAssistingAuctions = async (accountInfo) => {
           endedAt
           purchasePrice
           tokenId {
-              id
+            id
+            network
           }
         }
       }`

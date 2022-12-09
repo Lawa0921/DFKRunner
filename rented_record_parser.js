@@ -6,7 +6,7 @@ async function main() {
     const rentedRecords = await autils.getPurchasedAssistingAuctions(config.walletAddressAndPrivateKeyMappings[i])
 
     rentedRecords.forEach((rentedRecord) => {
-      console.log(`${config.walletAddressAndPrivateKeyMappings[i].accountName} ${new Date(rentedRecord.endedAt * 1000).toLocaleString()} rented ${rentedRecord.tokenId.id} ${BigInt(rentedRecord.purchasePrice) / BigInt(10 ** 18)} C`)
+      console.log(`${config.walletAddressAndPrivateKeyMappings[i].accountName} ${new Date(rentedRecord.endedAt * 1000).toLocaleString()} rented ${rentedRecord.tokenId.id} ${BigInt(rentedRecord.purchasePrice) / BigInt(10 ** 18)}`)
     })
   }  
 }
