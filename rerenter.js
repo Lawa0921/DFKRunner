@@ -1,29 +1,51 @@
 const config = require("~/config.js");
 const autils = require('~/src/services/autils');
-const AssistingAuctionUpgradeable = require("~/src/defikingdoms/contracts/assistingAuctionUpgradeable")
+const DFKAssistingAuctionUpgradeable = require("~/src/defikingdoms/contracts/assistingAuctionUpgradeable")
+const KLAYAssistingAuctionUpgradeable = require("~/src/klay/contracts/assistingAuctionUpgradeable")
 const RentValuator = require('~/src/services/rent_valuator')
 
 async function main() {
   try {
     const DFKOwningHeroObjects = await autils.getHeroesInfoByIds(autils.getDFKOwningHeroIds());
-    const onRentHeroes = DFKOwningHeroObjects.filter(heroObject => heroObject.isOnRent);
+    const DFKOnRentHeroes = DFKOwningHeroObjects.filter(heroObject => heroObject.isOnRent);
   
-    for (let i = 0; onRentHeroes.length > i; i++) {
-      let rentValuator = new RentValuator(onRentHeroes[i])
+    for (let i = 0; DFKOnRentHeroes.length > i; i++) {
+      let rentValuator = new RentValuator(DFKOnRentHeroes[i])
       rentValuator.execute()
   
       if (rentValuator.valuation === 0) {
         continue
-      } else if (onRentHeroes[i].rentPrice < rentValuator.valuation * 0.9 || onRentHeroes[i].rentPrice > rentValuator.valuation * 1.1) { // 可自訂多餘或少於估價幾成需要重新出租，更改數字即可
-        const accountInfo = config.walletAddressAndPrivateKeyMappings.find(accountInfo => accountInfo.walletAddress === onRentHeroes[i].owner)
-        const AssistingAuctionUpgradeableContract = new AssistingAuctionUpgradeable(accountInfo)
+      } else if (DFKOnRentHeroes[i].rentPrice < rentValuator.valuation * 0.9 || DFKOnRentHeroes[i].rentPrice > rentValuator.valuation * 1.1) { // 可自訂多餘或少於估價幾成需要重新出租，更改數字即可
+        const accountInfo = config.walletAddressAndPrivateKeyMappings.find(accountInfo => accountInfo.walletAddress === DFKOnRentHeroes[i].owner)
+        const DFKAssistingAuctionUpgradeableContract = new DFKAssistingAuctionUpgradeable(accountInfo)
   
-        console.log(`${onRentHeroes[i].id} current rent price ${onRentHeroes[i].rentPrice} C, re-rent ${rentValuator.valuation} C`)
+        console.log(`${DFKOnRentHeroes[i].id} current rent price ${DFKOnRentHeroes[i].rentPrice} C, re-rent ${rentValuator.valuation} C`)
   
-        await AssistingAuctionUpgradeableContract.unlistHero(onRentHeroes[i].id)
-        await AssistingAuctionUpgradeableContract.listHero(onRentHeroes[i].id, rentValuator.valuation)
+        await DFKAssistingAuctionUpgradeableContract.unlistHero(DFKOnRentHeroes[i].id)
+        await DFKAssistingAuctionUpgradeableContract.listHero(DFKOnRentHeroes[i].id, rentValuator.valuation)
       } 
     }
+
+    const KLAYOwningHeroObjects = await autils.getHeroesInfoByIds(autils.getKLAYOwningHeroIds())
+    const KLAYOnRentHeroes = KLAYOwningHeroObjects.filter(heroObject => heroObject.isOnRent);
+
+    for (let i = 0; KLAYOnRentHeroes.length > i; i++) {
+      let rentValuator = new RentValuator(KLAYOnRentHeroes[i])
+      rentValuator.execute()
+  
+      if (rentValuator.valuation === 0) {
+        continue
+      } else if (KLAYOnRentHeroes[i].rentPrice < rentValuator.valuation * 0.9 || KLAYOnRentHeroes[i].rentPrice > rentValuator.valuation * 1.1) { // 可自訂多餘或少於估價幾成需要重新出租，更改數字即可
+        const accountInfo = config.walletAddressAndPrivateKeyMappings.find(accountInfo => accountInfo.walletAddress === KLAYOnRentHeroes[i].owner)
+        const KLAYAssistingAuctionUpgradeableContract = new KLAYAssistingAuctionUpgradeable(accountInfo)
+  
+        console.log(`${KLAYOnRentHeroes[i].id} current rent price ${KLAYOnRentHeroes[i].rentPrice} Jade, re-rent ${rentValuator.valuation} Jade`)
+  
+        await KLAYAssistingAuctionUpgradeableContract.unlistHero(KLAYOnRentHeroes[i].id)
+        await KLAYAssistingAuctionUpgradeableContract.listHero(KLAYOnRentHeroes[i].id, rentValuator.valuation)
+      } 
+    }
+
     console.log("process completed")
   } catch(_error) {
     main()

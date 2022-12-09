@@ -62,7 +62,7 @@ main = async() => {
 
       for (let j = 0; j < filteredHeroObjects.length; j++) {
         if (filteredHeroObjects[j].isOnQuesting) {
-          console.log(`${filteredHeroObjects[j].id} is onQuesting, please rety later`)
+          console.log(`${filteredHeroObjects[j].id} is onQuesting, please retry later`)
           continue
         }
 
