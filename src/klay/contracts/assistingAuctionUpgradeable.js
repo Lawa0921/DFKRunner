@@ -38,14 +38,14 @@ module.exports = class AssistingAuctionUpgradeable {
 
   async unlistHero(heroId) {
     const id = parseInt(heroId, 10);
-    console.log(`${this.accountName} DFK unrenting hero: ${id}`);
+    console.log(`${this.accountName} KLAY unrenting hero: ${id}`);
 
     const tx = await this.cancelAuction(id);
     const res = await tx.wait();
     if (res.status === 1) {
-      console.log(`${this.accountName} DFK unrented hero: ${id} completed`);
+      console.log(`${this.accountName} KLAY unrented hero: ${id} completed`);
     } else {
-      console.log(`${this.accountName} DFK unrented hero: ${id} failed`);
+      console.log(`${this.accountName} KLAY unrented hero: ${id} failed`);
     }
 
     return res;
