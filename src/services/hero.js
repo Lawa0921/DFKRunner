@@ -109,11 +109,11 @@ module.exports = class Hero {
         return "Transcendant"
       }
     } else if (classList.includes(attributeName)) {
-      if (["Archer", "Berserker", "Knight", "Monk", "Pirate", "Priest", "Seer", "Thief", "Warrior", "Wizard"].includes(attribute)) {
+      if (["Archer", "Berserker", "Knight", "Monk", "Pirate", "Priest", "Seer", "Thief", "Warrior", "Wizard", "Scholar", "Legionnaire"].includes(attribute)) {
         return "Basic"
-      } else if (["DarkKnight", "Paladin", "Ninja", "Summoner", "Shapeshifter"].includes(attribute)) {
+      } else if (["DarkKnight", "Paladin", "Ninja", "Summoner", "Shapeshifter", "Bard"].includes(attribute)) {
         return "Advanced"
-      } else if (["Dragoon", "Sage"].includes(attribute)) {
+      } else if (["Dragoon", "Sage", "Spellbow"].includes(attribute)) {
         return "Elite"
       } else if (attribute === "DreadKnight") {
         return "Transcendant"
@@ -147,6 +147,10 @@ module.exports = class Hero {
         return profession === "mining" ? true : false;
       case "Seer":
         return profession === "foraging" ? true : false;
+      case "Scholar":
+        return profession === "foraging" ? true : false;
+      case "Legionnaire":
+        return profession === "mining" ? true : false;
       case "Paladin":
         return profession === "mining" || profession === "gardening" ? true : false;
       case "DarkKnight":
@@ -157,10 +161,14 @@ module.exports = class Hero {
         return profession === "fishing" || profession === "foraging" ? true : false;
       case "Shapeshifter":
         return profession === "fishing" ? true : false;
+      case "Bard":
+        return profession === "fishing" ? true : false;
       case "Dragoon":
         return profession === "mining" ? true : false;
       case "Sage":
         return profession === "foraging" || profession === "gardening" ? true : false;
+      case "Spellbow":
+        return profession === "foraging" ? true : false;
       case "DreadKnight":
         return profession === "mining" ? true : false;
     }
@@ -190,6 +198,10 @@ module.exports = class Hero {
         return profession === "fishing" ? true : false;
       case "Seer":
         return profession === "fishing" ? true : false;
+      case "Scholar":
+        return profession === "fishing" ? true : false;
+      case "Legionnaire":
+        return profession === "fishing" ? true : false;
       case "Paladin":
         return profession === "mining" ? true : false;
       case "DarkKnight":
@@ -199,11 +211,15 @@ module.exports = class Hero {
       case "Ninja":
         return profession === "foraging" || profession === "gardening" ? true : false;
       case "Shapeshifter":
-        return false;
+        return profession === "foraging" ? true : false;
+      case "Bard":
+        return profession === "foraging" ? true : false;
       case "Dragoon":
         return profession === "mining" ? true : false;
       case "Sage":
         return profession === "mining" ? true : false;
+      case "Spellbow":
+        return false;
       case "DreadKnight":
         return false;
     }
@@ -393,6 +409,35 @@ module.exports = class Hero {
           subGrowth2 = "AGI";
         }
         break;
+      case "Scholar":
+        if (profession === "foraging") {
+          mainGrowth = "INT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "VIT";
+        } else if (profession === "gardening") {
+          mainGrowth = "WIS";
+          subGrowth1 = "INT";
+          subGrowth2 = "VIT";
+        } else if (profession === "mining") {
+          mainGrowth = "INT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "END";
+        } else if (profession === "fishing") {
+          mainGrowth = "INT";
+          subGrowth1 = "WIS";
+          subGrowth2 = "AGI";
+        }
+        break;
+      case "Legionnaire":
+        mainGrowth = "STR";
+        subGrowth1 = "VIT";
+
+        if (profession === "mining" || profession === "fishing" || profession === "gardening") {
+          subGrowth2 = "END";
+        } else if (profession === "foraging") {
+          subGrowth2 = "DEX";
+        } 
+        break;
       case "Paladin":
         if (profession === "foraging") {
           mainGrowth = "VIT";
@@ -488,6 +533,25 @@ module.exports = class Hero {
           subGrowth2 = "DEX";
         }
         break;
+      case "Bard":
+        if (profession === "foraging") {
+          mainGrowth = "DEX";
+          subGrowth1 = "AGI";
+          subGrowth2 = "INT";
+        } else if (profession === "gardening") {
+          mainGrowth = "DEX";
+          subGrowth1 = "AGI";
+          subGrowth2 = "LCK";
+        } else if (profession === "mining") {
+          mainGrowth = "STR";
+          subGrowth1 = "DEX";
+          subGrowth2 = "AGI";
+        } else if (profession === "fishing") {
+          mainGrowth = "AGI";
+          subGrowth1 = "LCK";
+          subGrowth2 = "DEX";
+        }
+        break;
       case "Dragoon":
         if (profession === "foraging") {
           mainGrowth = "DEX";
@@ -523,6 +587,25 @@ module.exports = class Hero {
         } else if (profession === "fishing") {
           mainGrowth = "INT";
           subGrowth1 = "WIS";
+          subGrowth2 = "AGI";
+        }
+        break;
+      case "Spellbow":
+        if (profession === "foraging") {
+          mainGrowth = "DEX";
+          subGrowth1 = "INT";
+          subGrowth2 = "AGI";
+        } else if (profession === "gardening") {
+          mainGrowth = "DEX";
+          subGrowth1 = "INT";
+          subGrowth2 = "VIT";
+        } else if (profession === "mining") {
+          mainGrowth = "DEX";
+          subGrowth1 = "INT";
+          subGrowth2 = "AGI";
+        } else if (profession === "fishing") {
+          mainGrowth = "DEX";
+          subGrowth1 = "INT";
           subGrowth2 = "AGI";
         }
         break;
