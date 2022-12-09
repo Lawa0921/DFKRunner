@@ -3,7 +3,7 @@ const ethers = require('ethers');
 const heroBridgeABI = require('~/abis/HeroBridge.json');
 const { NonceManager } = require("@ethersproject/experimental")
 
-const DFKBridgeFee = "40000000000000000";
+const DFKToKLAYBridgeFee = "24000000000000000";
 const KlayChainId = 8217;
 
 module.exports = class HeroBridgeContract {
@@ -15,7 +15,7 @@ module.exports = class HeroBridgeContract {
   }
 
   async sendHero(heroId) {
-    return await this.contract.sendHero(heroId, KlayChainId, { value: DFKBridgeFee });
+    return await this.contract.sendHero(heroId, KlayChainId, { value: DFKToKLAYBridgeFee });
   }
 
   async bridgeHero(heroId) {
