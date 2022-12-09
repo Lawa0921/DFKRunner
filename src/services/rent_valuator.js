@@ -93,124 +93,134 @@ module.exports = class RentValuator {
 
     if (this.hero.mainClass === "Warrior" || this.hero.mainClass === "Knight") {
       if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-        this.valuation += 10
+        this.valuation *= 2
+      } else if (heroSubclass === "Warrior" || heroSubclass === "Knight") {
+        this.valuation *= 1.2
       } else if (heroSubclass === "Dragoon") {
-        this.valuation += 50
+        this.valuation *= 3
       } 
 
       if (this.hero.profession === "mining") {
-        this.valuation += 8
+        this.valuation *= 1.2 
       }
 
       if ((heroGreenStatBoost === "STR" || heroGreenStatBoost === "VIT") && (heroBlueStatBoost === "STR" || heroBlueStatBoost === "VIT")) {
-        this.valuation += 15
+        this.valuation *= 1.2
       } else if ((heroGreenStatBoost === "STR" || heroGreenStatBoost === "VIT") || (heroBlueStatBoost === "STR" || heroBlueStatBoost === "VIT")) {
-        this.valuation += 3
+        this.valuation *= 1.03
       }
     } else if (this.hero.mainClass === "Archer" || this.hero.mainClass === "Thief") {
       if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-        this.valuation += 10
+        this.valuation *= 2
+      } else if (heroSubclass === "Archer" || heroSubclass === "Thief") {
+        this.valuation *= 1.2
       } else if (heroSubclass === "Dragoon") {
-        this.valuation += 50
+        this.valuation *= 3
       }
 
       if (this.hero.profession === "mining") {
-        this.valuation += 6
+        this.valuation *= 1.1
       } else if (this.hero.profession === "foraging") {
-        this.valuation += 2
+        this.valuation *= 1.03
       }
 
       if (heroGreenStatBoost === "STR" && heroBlueStatBoost === "STR") {
-        this.valuation += 15
+        this.valuation *= 1.2
       } else if (heroGreenStatBoost === "STR" || heroBlueStatBoost === "STR") {
-        this.valuation += 3
+        this.valuation *= 1.03
       }
     } else if (this.hero.mainClass === "Wizard" || this.hero.mainClass === "Priest") {
       if (heroSubclass === "Summoner") {
-        this.valuation += 15
+        this.valuation *= 2
+      } else if (heroSubclass === "Wizard" || heroSubclass === "Priest") {
+        this.valuation *= 1.2
       } else if (heroSubclass === "Ninja") {
-        this.valuation += 5
-      }else if (heroSubclass === "Sage") {
-        this.valuation += 50
+        this.valuation *= 1.5
+      } else if (heroSubclass === "Sage") {
+        this.valuation *= 3
       }
 
       if (this.hero.profession === "foraging") {
-        this.valuation += 3
+        this.valuation *= 1.03
       }
 
       if ((heroGreenStatBoost === "INT" || heroGreenStatBoost === "WIS") && (heroBlueStatBoost === "INT" || heroBlueStatBoost === "WIS")) {
-        this.valuation += 10
+        this.valuation *= 1.2
       } else if ((heroGreenStatBoost === "INT" || heroGreenStatBoost === "WIS") || (heroBlueStatBoost === "INT" || heroBlueStatBoost === "WIS")) {
-        this.valuation += 3
+        this.valuation *= 1.03
       }
     } else if (this.hero.mainClass === "Monk" || this.hero.mainClass === "Pirate") {
       if (heroSubclass === "Ninja") {
-        this.valuation += 10
+        this.valuation *= 2
       } else if (heroSubclass === "Summoner") {
-        this.valuation += 5
+        this.valuation *= 1.5
+      } else if (heroSubclass === "Monk" || heroSubclass === "Pirate") {
+        this.valuation *= 1.2
       } else if (heroSubclass === "Sage") {
-        this.valuation += 50
+        this.valuation *= 3
       }
 
       if (this.hero.profession === "fishing") {
-        this.valuation += 5
+        this.valuation *= 1.1
       }
 
       if ((heroGreenStatBoost === "AGI" || heroGreenStatBoost === "LCK") && (heroBlueStatBoost === "AGI" || heroBlueStatBoost === "LCK")) {
-        this.valuation += 8
+        this.valuation *= 1.2
       } else if ((heroGreenStatBoost === "AGI" || heroGreenStatBoost === "LCK") || (heroBlueStatBoost === "AGI" || heroBlueStatBoost === "LCK")) {
-        this.valuation += 3
+        this.valuation *= 1.03
       }
     } else if (this.hero.mainClass === "Seer" || this.hero.mainClass === "Berserker") {
-      if (heroSubclass === "Shapeshifter" || heroSubclass === "Ninja") {
-        this.valuation += 8
+      if (heroSubclass === "Shapeshifter") {
+        this.valuation *= 2
+      } else if (heroSubclass === "Seer" || heroSubclass === "Berserker") {
+        this.valuation *= 1.2
       }
 
       if (this.hero.profession === "fishing") {
-        this.valuation += 3
+        this.valuation *= 1.1
       }
 
       if ((heroGreenStatBoost === "AGI" || heroGreenStatBoost === "LCK") && (heroBlueStatBoost === "AGI" || heroBlueStatBoost === "LCK")) {
-        this.valuation += 5
+        this.valuation *= 1.05
       } else if ((heroGreenStatBoost === "AGI" || heroGreenStatBoost === "LCK") || (heroBlueStatBoost === "AGI" || heroBlueStatBoost === "LCK")) {
-        this.valuation += 2
+        this.valuation *= 1.02
       }
     } 
 
     if (heroHairTier === "Advanced") {
-      this.valuation += 3
+      this.valuation *= 1.15
     } else if (heroHairTier === "Elite") {
-      this.valuation += 15
+      this.valuation *= 1.75
     } else if (heroHairTier === "Transcendant") {
-      this.valuation += 25
+      this.valuation *= 3.5
     }
 
     if (heroBackappendageTier === "Advanced") {
-      this.valuation += 3
+      this.valuation *= 1.15
     } else if (heroBackappendageTier === "Elite") {
-      this.valuation += 15
+      this.valuation *= 1.75
     } else if (heroBackappendageTier === "Transcendant") {
-      this.valuation += 25
+      this.valuation *= 3.5
     }
 
     if (heroSubClassTier === "Advanced") {
-      this.valuation += 10
+      this.valuation *= 1.5
     } else if (heroSubClassTier === "Elite") {
-      this.valuation += 150
+      this.valuation *= 3
     } else if (heroSubClassTier === "Transcendant") {
-      this.valuation += 750
+      this.valuation *= 15
     }
 
     if (skillInfos.skillScore === 1) {
-      this.valuation += 2
+      this.valuation *= 1.05
     } else if (skillInfos.skillScore === 2) {
-      this.valuation += 15
+      this.valuation *= 1.4
     } else if (skillInfos.skillScore === 3) {
-      this.valuation += 55
+      this.valuation *= 2.5
     } else if (skillInfos.skillScore === 4) {
-      this.valuation += 80
+      this.valuation *= 5
     } else if (skillInfos.skillScore >= 5) {
-      this.valuation += 150
+      this.valuation *= (5 + skillInfos.skillScore)
     }
 
     if (heroRarity === "UnCommon") {
@@ -236,130 +246,132 @@ module.exports = class RentValuator {
 
     if (this.hero.generation >= 5) {
       if (this.hero.summonsRemaining === 5) {
-        this.valuation += 30
+        this.valuation += 40
       } else if (this.hero.summonsRemaining === 4) {
-        this.valuation += 20
+        this.valuation += 25
       } else if (this.hero.summonsRemaining === 3) {
-        this.valuation += 8
+        this.valuation += 12
       }
     } else if (this.hero.generation === 4) {
       if (this.hero.summonsRemaining === 5) {
-        this.valuation += 50
+        this.valuation += 60
       } else if (this.hero.summonsRemaining === 4) {
-        this.valuation += 35
+        this.valuation += 45
       } else if (this.hero.summonsRemaining === 3) {
-        this.valuation += 15
+        this.valuation += 25
       } else if (this.hero.summonsRemaining === 2) {
-        this.valuation += 8
+        this.valuation += 10
       }
     } else if (this.hero.generation === 3) {
       if (this.hero.summonsRemaining === 5) {
         this.valuation += 75
       } else if (this.hero.summonsRemaining === 4) {
-        this.valuation += 50
+        this.valuation += 55
       } else if (this.hero.summonsRemaining === 3) {
-        this.valuation += 25
+        this.valuation += 35
       } else if (this.hero.summonsRemaining === 2) {
-        this.valuation += 15
+        this.valuation += 25
       } else if (this.hero.summonsRemaining === 1) {
-        this.valuation += 8
+        this.valuation += 15
       }
     } else if (this.hero.generation === 2) {
       if (this.hero.summonsRemaining === 5) {
-        this.valuation += 80
+        this.valuation += 90
       } else if (this.hero.summonsRemaining === 4) {
-        this.valuation += 60
+        this.valuation += 75
       } else if (this.hero.summonsRemaining === 3) {
-        this.valuation += 30
+        this.valuation += 45
       } else if (this.hero.summonsRemaining === 2) {
-        this.valuation += 20
+        this.valuation += 35
       } else if (this.hero.summonsRemaining === 1) {
-        this.valuation += 12
+        this.valuation += 20
       }
     } else if (this.hero.generation === 1) {
       if (this.hero.summonsRemaining === 5) {
-        this.valuation += 90
+        this.valuation += 100
       } else if (this.hero.summonsRemaining === 4) {
-        this.valuation += 70
+        this.valuation += 85
       } else if (this.hero.summonsRemaining === 3) {
-        this.valuation += 55
+        this.valuation += 60
       } else if (this.hero.summonsRemaining === 2) {
-        this.valuation += 30
+        this.valuation += 40
       } else if (this.hero.summonsRemaining === 1) {
-        this.valuation += 15
+        this.valuation += 25
       }
     }
 
     if (this.hero.mainClass === "Paladin" || this.hero.mainClass === "DarkKnight") {
       if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-        this.valuation += 15
+        this.valuation *= 2.5
       } else if (heroSubclass === "Dragoon") {
-        this.valuation += 30
+        this.valuation *= 8
       }
 
       if (this.hero.profession === "mining") {
-        this.valuation += 20
+        this.valuation *= 1.25
       }
 
       if (heroGreenStatBoost === "STR" && heroBlueStatBoost === "STR") {
-        this.valuation += 20
+        this.valuation *= 1.25
       } else if (heroGreenStatBoost === "STR" || heroBlueStatBoost === "STR") {
-        this.valuation += 5
+        this.valuation *= 1.05
       }
     } else if (this.hero.mainClass === "Ninja" || this.hero.mainClass === "Summoner") {
-      if (heroSubclass === "Summoner") {
-        this.valuation += 15
+      if (heroSubclass === "Summoner" || heroSubclass === "Ninja") {
+        this.valuation *= 2.5
       } else if (heroSubclass === "Sage") {
-        this.valuation += 30
+        this.valuation *= 8
       }
 
       if (this.hero.profession === "foraging") {
-        this.valuation += 10
+        this.valuation *= 1.05
       }
 
       if ((heroGreenStatBoost === "INT" || heroGreenStatBoost === "WIS") && (heroBlueStatBoost === "STR" || heroBlueStatBoost === "WIS")) {
-        this.valuation += 20
+        this.valuation *= 1.15
       } else if ((heroGreenStatBoost === "INT" || heroGreenStatBoost === "WIS") || (heroBlueStatBoost === "STR" || heroBlueStatBoost === "WIS")) {
-        this.valuation += 5
+        this.valuation *= 1.02
       }
     } else if (this.hero.mainClass === "Shapeshifter") {
-      if (heroSubclass === "Shapeshifter" || heroSubclass === "Ninja") {
-        this.valuation += 10
+      if (heroSubclass === "Shapeshifter") {
+        this.valuation *= 2
       }
     }
 
     if (heroHairTier === "Advanced") {
-      this.valuation += 5
+      this.valuation *= 1.15
     } else if (heroHairTier === "Elite") {
-      this.valuation += 20
+      this.valuation *= 2
     } else if (heroHairTier === "Transcendant") {
-      this.valuation += 50
+      this.valuation *= 4
     }
 
     if (heroBackappendageTier === "Advanced") {
-      this.valuation += 5
+      this.valuation *= 1.15
     } else if (heroBackappendageTier === "Elite") {
-      this.valuation += 20
+      this.valuation *= 2
     } else if (heroBackappendageTier === "Transcendant") {
-      this.valuation += 50
+      this.valuation *= 4
     }
 
     if (heroSubClassTier === "Advanced") {
-      this.valuation += 20
+      this.valuation *= 1.15
     } else if (heroSubClassTier === "Elite") {
-      this.valuation += 450
+      this.valuation *= 3.5
     } else if (heroSubClassTier === "Transcendant") {
-      this.valuation += 1500
+      this.valuation *= 15
     }
 
-    if (skillInfos.skillScore === 2) {
-      this.valuation += 39
+    if (skillInfos.skillScore === 1) {
+      this.valuation *= 1.05
+    } else if (skillInfos.skillScore === 2) {
+      this.valuation *= 1.4
     } else if (skillInfos.skillScore === 3) {
-      this.valuation += 89
+      this.valuation *= 2.5
     } else if (skillInfos.skillScore === 4) {
-      this.valuation += 199
+      this.valuation *= 5
     } else if (skillInfos.skillScore >= 5) {
-      this.valuation += 450
+      this.valuation *= (5 + skillInfos.skillScore)
     }
 
     if (heroRarity === "UnCommon") {
@@ -392,64 +404,66 @@ module.exports = class RentValuator {
     }
 
     if (heroGreenStatBoost === "STR" && heroBlueStatBoost === "STR") {
-      this.valuation += 50
+      this.valuation *= 1.5
     } else if (heroGreenStatBoost === "STR" || heroBlueStatBoost === "STR") {
-      this.valuation += 10
+      this.valuation *= 1.05
     }
 
     if (heroHairTier === "Advanced") {
-      this.valuation += 10
+      this.valuation *= 1.15
     } else if (heroHairTier === "Elite") {
-      this.valuation += 30
+      this.valuation *= 1.75
     } else if (heroHairTier === "Transcendant") {
-      this.valuation += 100
+      this.valuation *= 3.5
     }
 
     if (heroBackappendageTier === "Advanced") {
-      this.valuation += 10
+      this.valuation *= 1.15
     } else if (heroBackappendageTier === "Elite") {
-      this.valuation += 30
+      this.valuation *= 1.75
     } else if (heroBackappendageTier === "Transcendant") {
-      this.valuation += 100
-    }
-
-    if (skillInfos.skillScore === 2) {
-      this.valuation += 80
-    } else if (skillInfos.skillScore === 3) {
-      this.valuation += 200
-    } else if (skillInfos.skillScore === 4) {
-      this.valuation += 500
-    } else if (skillInfos.skillScore >= 5) {
-      this.valuation += 1000
+      this.valuation *= 3.5
     }
 
     if (heroSubClassTier === "Advanced") {
-      this.valuation += 30
+      this.valuation *= 1.5
     } else if (heroSubClassTier === "Elite") {
-      this.valuation += 150
+      this.valuation *= 5
     } else if (heroSubClassTier === "Transcendant") {
-      this.valuation += 500
+      this.valuation *= 20
+    }
+
+    if (skillInfos.skillScore === 1) {
+      this.valuation *= 1.05
+    } else if (skillInfos.skillScore === 2) {
+      this.valuation *= 1.5
+    } else if (skillInfos.skillScore === 3) {
+      this.valuation *= 2.5
+    } else if (skillInfos.skillScore === 4) {
+      this.valuation *= 5
+    } else if (skillInfos.skillScore >= 5) {
+      this.valuation *= (5 + skillInfos.skillScore)
     }
 
     if (this.hero.mainClass === "Dragoon") {
       if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-        this.valuation += 30
+        this.valuation *= 1.7
       } else if (heroSubclass === "Dragoon") {
-        this.valuation += 100
+        this.valuation *= 3
       }
 
       if (this.hero.profession === "mining") {
-        this.valuation += 20
+        this.valuation *= 1.2
       }
     } else if (this.hero.mainClass === "Sage") {
       if (heroSubclass === "Summoner") {
-        this.valuation += 30
+        this.valuation *= 1.7
       } else if (heroSubclass === "Sage") {
-        this.valuation += 100
+        this.valuation *= 3
       }
 
       if (this.hero.profession === "mining") {
-        this.valuation += 15
+        this.valuation *= 1.05
       }
     }
 
@@ -465,58 +479,73 @@ module.exports = class RentValuator {
   }
 
   evaluateTranscendantClass() {
-    const heroSubclass = this.hero.subClass;
+    const heroSubclass = this.hero.subClass
     const heroSubClassTier = this.hero.attributeTier("subClass")
-    const heroRarity = this.hero.formatRarity();
+    const heroRarity = this.hero.formatRarity()
+    const skillInfos = this.hero.skillInfos()
+    const heroHairTier = this.hero.attributeTier("hairStyle");
+    const heroBackappendageTier = this.hero.attributeTier("backAppendage");
+    const heroGreenStatBoost = this.hero.statboost1;
+    const heroBlueStatBoost = this.hero.statboost2;
 
     if (heroRarity === "Common") {
       this.valuation += 1500
-
-      if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-        this.valuation += 100
-      } else if (heroSubclass === "Dragoon") {
-        this.valuation += 500
-      }
     } else if (heroRarity === "UnCommon") {
       this.valuation += 2499
-
-      if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-        this.valuation += 150
-      } else if (heroSubclass === "Dragoon") {
-        this.valuation += 350
-      }
     } else if (heroRarity === "Rare") {
       this.valuation += 4999
-
-      if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-        this.valuation += 200
-      } else if (heroSubclass === "Dragoon") {
-        this.valuation += 400
-      }
     } else if (heroRarity === "Legendary") {
       this.valuation += 9999
-
-      if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-        this.valuation += 250
-      } else if (heroSubclass === "Dragoon") {
-        this.valuation += 500
-      }
     } else if (heroRarity === "Mythic") {
-      this.valuation += 29999;
+      this.valuation += 29999
+    }
 
-      if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-        this.valuation += 3000
-      } else if (heroSubclass === "Dragoon") {
-        this.valuation += 5000
-      }
+    if (heroGreenStatBoost === "STR" && heroBlueStatBoost === "STR") {
+      this.valuation *= 1.5
+    } else if (heroGreenStatBoost === "STR" || heroBlueStatBoost === "STR") {
+      this.valuation *= 1.05
+    }
+
+    if (heroHairTier === "Advanced") {
+      this.valuation *= 1.1
+    } else if (heroHairTier === "Elite") {
+      this.valuation *= 1.75
+    } else if (heroHairTier === "Transcendant") {
+      this.valuation *= 3.5
+    }
+
+    if (heroBackappendageTier === "Advanced") {
+      this.valuation *= 1.1
+    } else if (heroBackappendageTier === "Elite") {
+      this.valuation *= 1.75
+    } else if (heroBackappendageTier === "Transcendant") {
+      this.valuation *= 3.5
     }
 
     if (heroSubClassTier === "Advanced") {
-      this.valuation += 300
+      this.valuation *= 1.5
     } else if (heroSubClassTier === "Elite") {
-      this.valuation += 2000
+      this.valuation *= 5
     } else if (heroSubClassTier === "Transcendant") {
-      this.valuation += 10000
+      this.valuation *= 20
+    }
+
+    if (skillInfos.skillScore === 1) {
+      this.valuation *= 1.05
+    } else if (skillInfos.skillScore === 2) {
+      this.valuation *= 1.5
+    } else if (skillInfos.skillScore === 3) {
+      this.valuation *= 2.5
+    } else if (skillInfos.skillScore === 4) {
+      this.valuation *= 5
+    } else if (skillInfos.skillScore >= 5) {
+      this.valuation *= (5 + skillInfos.skillScore)
+    }
+
+    if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
+      this.valuation *= 1.2
+    } else if (heroSubclass === "Dragoon") {
+      this.valuation *= 3
     }
   }
 
