@@ -26,7 +26,7 @@ exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects, acco
     }
 
     console.log(`${accountInfo.accountName} KLAY sending ${sentMinerIds} to gold mining quest`)
-    await new QuestCoreV2(accountInfo).startGoldMining(sentMinerIds)
+    await new QuestCoreV2(accountInfo).startGoldMining(sentMinerIds, minStamina)
   } else {
     console.log(`${accountInfo.accountName} KLAY no gold miner sent`)
   }

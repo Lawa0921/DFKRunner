@@ -34,7 +34,7 @@ exports.CheckAndSendDFKJadeMiners = async (heroesStruct, accountInfo) => {
     }
     console.log(`${accountInfo.accountName} KLAY sending ${sentMinerIds} to jade mining quest`)
 
-    await new QuestCoreV2(accountInfo).startJadeMining(sentMinerIds)
+    await new QuestCoreV2(accountInfo).startJadeMining(sentMinerIds, minStamina)
   } else {
     console.log(`${accountInfo.accountName} KLAY no jade miner sent`)
   }

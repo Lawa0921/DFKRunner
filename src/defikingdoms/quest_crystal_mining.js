@@ -34,7 +34,7 @@ exports.CheckAndSendDFKCrystalMiners = async (heroesStruct, accountInfo) => {
     }
     console.log(`${accountInfo.accountName} DFK sending ${sentMinerIds} to crystal mining quest`)
 
-    await new QuestCoreV2(accountInfo).startCrystalMining(sentMinerIds)
+    await new QuestCoreV2(accountInfo).startCrystalMining(sentMinerIds, minStamina)
   } else {
     console.log(`${accountInfo.accountName} DFK no crystal miner sent`)
   }

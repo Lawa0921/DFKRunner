@@ -29,7 +29,7 @@ exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects, accou
       }
 
       console.log(`${accountInfo.accountName} KLAY sending ${sentGardenerIds} to ${questType.pairAddressMappings[i].tokenPair} gardening quest`)
-      await new QuestCoreV2(accountInfo).startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].pairAddress)
+      await new QuestCoreV2(accountInfo).startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].pairAddress, minStamina)
     } else {
       console.log(`${accountInfo.accountName} KLAY no gardener sent to ${questType.pairAddressMappings[i].tokenPair}`)
     }
