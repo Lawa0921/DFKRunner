@@ -57,6 +57,7 @@ async function main() {
     console.log(`fail reason: ${error.reason}`)
     console.log(`error code: ${error.code}`)
     console.log(`error message: ${error.message}`)
+    console.log(`raw error: ${error}`)
     main()
   }
 }
