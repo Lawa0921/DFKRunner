@@ -11,6 +11,7 @@ const { runKLAYSalesLogic } = require('~/src/klay/sales_handler');
 const { runKLAYLevelUpLogic } = require('~/src/klay/hero_level_up');
 const { runKLAYRentHeroLogic } = require('~/src/klay/hero_rent');
 const { sendHeroTo } = require("~/src/klay/send_hero");
+const { runVialLogic } = require('~/src/klay/vial_consumer');
 const autils = require("~/src/services/autils");
 const config = require("~/config.js");
 
@@ -33,6 +34,7 @@ exports.runKLAYChainQuest = async (accountInfo) => {
 
       await runKLAYSalesLogic(owningHeroObjects, accountInfo);
       await runKLAYRentHeroLogic(owningHeroObjects, accountInfo);
+      await runVialLogic(owningHeroObjects, accountInfo);
       // await runKLAYLevelUpLogic(owningHeroObjects, accountInfo);
 
       await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects, accountInfo)
