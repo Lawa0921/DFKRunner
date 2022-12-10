@@ -2,12 +2,12 @@ const config = require("~/config.js");
 const autils = require('~/src/services/autils')
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
-const minStamina = 25;
+const minStamina = config.defikingdoms.quest.statQuest.minStamina;
 const maxQueue = 10;
 const maxHeroCount = 6;
 
 exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, accountInfo) => {
-	const statHeroIds = config.defikingdoms.quest.statQuests.map(statQuestSetting => statQuestSetting.heroes).flat()
+	const statHeroIds = config.defikingdoms.quest.statQuest.quests.map(statQuestSetting => statQuestSetting.heroes).flat()
 	const activeQuesterIds = heroesStruct.allQuesters
 	const saleAuctionContract = new SaleAuction(accountInfo);
 	const possibleStatHeroes = owningHeroObjects.filter((heroObject) => { 
@@ -20,8 +20,8 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, acco
 		await autils.sleep(5000)
 	}
 
-  for (let i = 0; i < config.defikingdoms.quest.statQuests.length; i++) {
-  	const questType = config.defikingdoms.quest.statQuests[i]
+  for (let i = 0; i < config.defikingdoms.quest.statQuest.quests.length; i++) {
+  	const questType = config.defikingdoms.quest.statQuest.quests[i]
 
     if (questType.heroes.length !== 0) {
 			const currentPossibleHeroes = possibleStatHeroes.filter(heroObject => questType.heroes.indexOf(heroObject.id) > -1)

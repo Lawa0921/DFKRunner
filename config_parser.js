@@ -42,7 +42,7 @@ main = async() => {
       console.log(`DFK ${gardeningHeroes.length} ${gardeningQuest.tokenPair} gardening heroes`)
     })
 
-    config.defikingdoms.quest.statQuests.forEach((statQuest) => {
+    config.defikingdoms.quest.statQuest.quests.forEach((statQuest) => {
       const statHeroes = owningHeroes.filter(heroObject => statQuest.heroes.indexOf(heroObject.id) > -1)
       console.log(`DFK ${statHeroes.length} ${statQuest.name} heroes`)
     })
@@ -66,7 +66,7 @@ main = async() => {
       console.log(`KLAY ${gardeningHeroes.length} ${gardeningQuest.tokenPair} gardening heroes`)
     })
 
-    config.klay.quest.statQuests.forEach((statQuest) => {
+    config.klay.quest.statQuest.quests.forEach((statQuest) => {
       const statHeroes = owningHeroes.filter(heroObject => statQuest.heroes.indexOf(heroObject.id) > -1)
       console.log(`KLAY ${statHeroes.length} ${statQuest.name} heroes`)
     })

@@ -333,8 +333,8 @@ exports.getDFKOwningHeroIds = () => {
     heroIds = heroIds.concat(config.defikingdoms.quest.goldMining.heroes);
     heroIds = heroIds.concat(config.defikingdoms.quest.crystalMining.heroes);
 
-    for (let i = 0; i < config.defikingdoms.quest.statQuests.length; i++ ) {
-        heroIds = heroIds.concat(config.defikingdoms.quest.statQuests[i].heroes);
+    for (let i = 0; i < config.defikingdoms.quest.statQuest.quests.length; i++ ) {
+        heroIds = heroIds.concat(config.defikingdoms.quest.statQuest.quests[i].heroes);
     }
 
     for (let i = 0; i < config.defikingdoms.quest.gardening.pairAddressMappings.length; i++) {
@@ -352,8 +352,8 @@ exports.getKLAYOwningHeroIds = () => {
   heroIds = heroIds.concat(config.klay.quest.goldMining.heroes);
   heroIds = heroIds.concat(config.klay.quest.jadeMining.heroes);
 
-  for (let i = 0; i < config.klay.quest.statQuests.length; i++ ) {
-      heroIds = heroIds.concat(config.klay.quest.statQuests[i].heroes);
+  for (let i = 0; i < config.klay.quest.statQuest.quests.length; i++ ) {
+      heroIds = heroIds.concat(config.klay.quest.statQuest.quests[i].heroes);
   }
 
   for (let i = 0; i < config.klay.quest.gardening.pairAddressMappings.length; i++) {

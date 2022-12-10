@@ -7,7 +7,7 @@ const maxQueue = 10;
 const maxHeroCount = 6;
 
 exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, accountInfo) => {
-	const statHeroIds = config.klay.quest.statQuests.map(statQuestSetting => statQuestSetting.heroes).flat()
+	const statHeroIds = config.klay.quest.statQuest.quests.map(statQuestSetting => statQuestSetting.heroes).flat()
 	const activeQuesterIds = heroesStruct.allQuesters
 	const saleAuctionContract = new SaleAuction(accountInfo);
 	const possibleStatHeroes = owningHeroObjects.filter((heroObject) => { 
@@ -20,8 +20,8 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, acco
 		await autils.sleep(5000)
 	}
 
-  for (let i = 0; i < config.klay.quest.statQuests.length; i++) {
-  	const questType = config.klay.quest.statQuests[i]
+  for (let i = 0; i < config.klay.quest.statQuest.quests.length; i++) {
+  	const questType = config.klay.quest.statQuest.quests[i]
 
     if (questType.heroes.length !== 0) {
 			const currentPossibleHeroes = possibleStatHeroes.filter(heroObject => questType.heroes.indexOf(heroObject.id) > -1)
