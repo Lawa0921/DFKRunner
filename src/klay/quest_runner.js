@@ -10,6 +10,7 @@ const { CheckAndSendDFKJadeMiners } = require('~/src/klay/quest_jade_mining');
 const { runKLAYSalesLogic } = require('~/src/klay/sales_handler');
 const { runKLAYLevelUpLogic } = require('~/src/klay/hero_level_up');
 const { runKLAYRentHeroLogic } = require('~/src/klay/hero_rent');
+const { sendHeroTo } = require("~/src/klay/send_hero");
 const autils = require("~/src/services/autils");
 const config = require("~/config.js");
 
@@ -28,6 +29,7 @@ exports.runKLAYChainQuest = async (accountInfo) => {
       const owningHeroObjects = await autils.getHeroesInfoByIds(autils.getKLAYOwningHeroIds());
 
       await CompleteQuests(heroesStruct, accountInfo);
+      await sendHeroTo(heroesStruct, accountInfo, owningHeroObjects);
 
       await runKLAYSalesLogic(owningHeroObjects, accountInfo);
       await runKLAYRentHeroLogic(owningHeroObjects, accountInfo);

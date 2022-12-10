@@ -318,9 +318,9 @@ module.exports = class RentValuator {
 
     if (this.hero.mainClass === "Paladin" || this.hero.mainClass === "DarkKnight") {
       if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-        this.valuation *= 2.5
+        this.valuation *= 1.5
       } else if (heroSubclass === "Dragoon") {
-        this.valuation *= 8
+        this.valuation *= 4
       }
 
       if (this.hero.profession === "mining") {
@@ -334,9 +334,9 @@ module.exports = class RentValuator {
       }
     } else if (this.hero.mainClass === "Ninja" || this.hero.mainClass === "Summoner") {
       if (heroSubclass === "Summoner" || heroSubclass === "Ninja") {
-        this.valuation *= 2.5
+        this.valuation *= 1.5
       } else if (heroSubclass === "Sage") {
-        this.valuation *= 8
+        this.valuation *= 4
       }
 
       if (this.hero.profession === "foraging") {
@@ -350,9 +350,9 @@ module.exports = class RentValuator {
       }
     } else if (this.hero.mainClass === "Shapeshifter" || this.hero.mainClass === "Bard") {
       if (heroSubclass === "Shapeshifter" || this.hero.mainClass === "Bard") {
-        this.valuation *= 2
+        this.valuation *= 1.5
       } else if (heroSubclass === "Spellbow") {
-        this.valuation *= 8
+        this.valuation *= 4
       }
 
       if (this.hero.profession === "foraging") {
@@ -475,7 +475,7 @@ module.exports = class RentValuator {
 
     if (this.hero.mainClass === "Dragoon") {
       if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-        this.valuation *= 1.7
+        this.valuation *= 1.5
       } else if (heroSubclass === "Dragoon") {
         this.valuation *= 3
       }
@@ -485,7 +485,7 @@ module.exports = class RentValuator {
       }
     } else if (this.hero.mainClass === "Sage") {
       if (heroSubclass === "Summoner") {
-        this.valuation *= 1.7
+        this.valuation *= 1.5
       } else if (heroSubclass === "Sage") {
         this.valuation *= 3
       }
@@ -495,7 +495,7 @@ module.exports = class RentValuator {
       }
     } else if (this.hero.mainClass === "Spellbow") {
       if (heroSubclass === "Summoner" || heroSubclass === "Ninja") {
-        this.valuation *= 1.7
+        this.valuation *= 1.5
       } else if (heroSubclass === "Sage" || heroSubclass === "Spellbow") {
         this.valuation *= 3
       }
