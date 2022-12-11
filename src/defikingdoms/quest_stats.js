@@ -11,7 +11,12 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, acco
 	const activeQuesterIds = heroesStruct.allQuesters
 	const saleAuctionContract = new SaleAuction(accountInfo);
 	const possibleStatHeroes = owningHeroObjects.filter((heroObject) => { 
-		return statHeroIds.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === accountInfo.walletAddress && !heroObject.isOnQuesting
+		return statHeroIds.indexOf(heroObject.id) > -1 && 
+      activeQuesterIds.indexOf(heroObject.id) === -1 && 
+      heroObject.currentStamina() >= minStamina && 
+      heroObject.owner === accountInfo.walletAddress && 
+      !heroObject.isOnQuesting &&
+      heroObject.network === "dfk"
 	})
 	const unsellPromise = possibleStatHeroes.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
 

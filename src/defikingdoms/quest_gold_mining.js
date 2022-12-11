@@ -9,7 +9,12 @@ exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects, acco
   const questType = config.defikingdoms.quest.goldMining
   const activeQuesterIds = heroesStruct.allQuesters
   const possibleGoldMiners = owningHeroObjects.filter((heroObject) => { 
-    return questType.heroes.indexOf(heroObject.id) > -1 && activeQuesterIds.indexOf(heroObject.id) === -1 && heroObject.currentStamina() >= minStamina && heroObject.owner === accountInfo.walletAddress && !heroObject.isOnQuesting
+    return questType.heroes.indexOf(heroObject.id) > -1 && 
+      activeQuesterIds.indexOf(heroObject.id) === -1 && 
+      heroObject.currentStamina() >= minStamina &&
+      heroObject.owner === accountInfo.walletAddress &&
+      !heroObject.isOnQuesting &&
+      heroObject.network === "dfk"
   })
   const batchAmount = questType.singleBatchAmount > maxBatch ? maxBatch : questType.singleBatchAmount
 

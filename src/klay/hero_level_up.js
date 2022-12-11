@@ -17,7 +17,8 @@ exports.runKLAYLevelUpLogic = async (owningHeroObjects, accountInfo) => {
     config.klay.notForLevelUpHeroIds.indexOf(hero.id) === -1 &&
     hero.levelUpable() && 
     activeMeditations.map(activeMeditation => parseInt(activeMeditation.heroId).toString()).indexOf(hero.id) === -1 &&
-    hero.owner === accountInfo.walletAddress
+    hero.owner === accountInfo.walletAddress &&
+    hero.network === "kla"
   );
 
   if (activeMeditations.length > 0) {

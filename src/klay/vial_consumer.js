@@ -14,7 +14,11 @@ exports.runVialLogic = async (owningHeroObjects, accountInfo) => {
       console.log("not have stamina vial")
     } else {
       const consumers = owningHeroObjects.filter((heroObject) => { 
-        return config.klay.useStaminaVialHeroIds.indexOf(heroObject.id) > -1 && heroObject.stamina - heroObject.currentStamina() >= staminaVialRegenerateAmount && heroObject.owner === accountInfo.walletAddress && !heroObject.isOnQuesting
+        return config.klay.useStaminaVialHeroIds.indexOf(heroObject.id) > -1 && 
+        heroObject.stamina - heroObject.currentStamina() >= staminaVialRegenerateAmount && 
+        heroObject.owner === accountInfo.walletAddress && 
+        !heroObject.isOnQuesting &&
+        heroObject.network === "kla"
       })
   
       for (let i = 0; i < consumers.length; i++) {

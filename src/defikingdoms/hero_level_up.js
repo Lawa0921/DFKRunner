@@ -17,7 +17,8 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
     config.defikingdoms.notForLevelUpHeroIds.indexOf(hero.id) === -1 &&
     hero.levelUpable() && 
     activeMeditations.map(activeMeditation => parseInt(activeMeditation.heroId).toString()).indexOf(hero.id) === -1 &&
-    hero.owner === accountInfo.walletAddress
+    hero.owner === accountInfo.walletAddress &&
+    hero.network === "dfk"
   );
 
   if (activeMeditations.length > 0) {

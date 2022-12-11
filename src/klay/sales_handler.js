@@ -15,7 +15,8 @@ exports.runKLAYSalesLogic = async (owningHeroObjects, accountInfo) => {
     }
 
     return typeof(heroObject.instance) !== "undefined" &&
-      heroObject.instance.owner === accountInfo.walletAddress
+      heroObject.instance.owner === accountInfo.walletAddress &&
+      heroObject.instance.network === "kla"
   })
 
   const saleHandlerPromises = heroList.filter(heroObject => isShouldList(heroObject.instance)).map(shouldListHero => sellHero(shouldListHero.id, shouldListHero.price, saleAuctionContract))

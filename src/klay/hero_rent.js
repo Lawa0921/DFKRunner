@@ -8,7 +8,8 @@ exports.runKLAYRentHeroLogic = async (owningHeroObjects, accountInfo) => {
     return config.klay.notForRentHeroIds.indexOf(heroObject.id) === -1 && 
       config.klay.heroForSale.map(heroData => heroData.id).indexOf(heroObject.id) === -1 &&
       heroObject.owner === accountInfo.walletAddress &&
-      config.klay.useStaminaVialHeroIds.indexOf(heroObject.id) === -1
+      config.klay.useStaminaVialHeroIds.indexOf(heroObject.id) === -1 &&
+      heroObject.network === "kla"
   })
 
   for (let i = 0; i < filtedHeroObjects.length; i++) {

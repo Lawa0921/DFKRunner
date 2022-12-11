@@ -8,7 +8,8 @@ exports.runDFKRentHeroLogic = async (owningHeroObjects, accountInfo) => {
     return config.defikingdoms.notForRentHeroIds.indexOf(heroObject.id) === -1 && 
       config.defikingdoms.heroForSale.map(heroData => heroData.id).indexOf(heroObject.id) === -1 &&
       heroObject.owner === accountInfo.walletAddress &&
-      config.defikingdoms.useStaminaVialHeroIds.indexOf(heroObject.id) === -1
+      config.defikingdoms.useStaminaVialHeroIds.indexOf(heroObject.id) === -1 &&
+      heroObject.network === "dfk"
   })
 
   for (let i = 0; i < filtedHeroObjects.length; i++) {
