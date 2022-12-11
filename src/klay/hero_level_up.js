@@ -24,6 +24,11 @@ exports.runKLAYLevelUpLogic = async (owningHeroObjects, accountInfo) => {
     for (let i = 0; i < activeMeditations.length; i++) {
       let heroObject = owningHeroObjects.find(heroObject => heroObject.id === parseInt(activeMeditations[i].heroId).toString())
 
+      if (typeof(heroObject) === "undefined") {
+        console.log(`KLAY ${ parseInt(activeMeditations[i].heroId).toString()} is no longer in the KLAY area of the config, please check the config file`)
+        continue
+      }
+
       if (heroObject.isOnSale && heroObject.owner === accountInfo.walletAddress) {
         await saleAuctionContract.unlistHero(heroObject.id)
       }
