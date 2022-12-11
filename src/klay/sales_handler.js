@@ -10,6 +10,10 @@ exports.runKLAYSalesLogic = async (owningHeroObjects, accountInfo) => {
   const heroList = config.klay.heroForSale.map((heroData) => {
     return {...heroData, instance: owningHeroObjects.find(heroObject => heroObject.id === heroData.id)}
   }).filter((heroObject) => {
+    if (typeof(heroObject) === "undefined") {
+      console.log(`KLAY ${heroObject.id} is sold`)
+    }
+
     return typeof(heroObject.instance) !== "undefined" &&
       heroObject.instance.owner === accountInfo.walletAddress
   })
