@@ -1258,10 +1258,14 @@ module.exports = class Valuator {
   }
 
   networkPriceAdjustment() {
-    const network = this.hero.network;
+    this.valuation = this.valuation * config.buyerEstimateAdjustment
 
-    if (network === "dfk") {
-      this.valuation = this.valuation * 1;
+    if (this.hero.network === "dfk") {
+      this.valuation = this.valuation * config.defikingdoms.networkBuyerEstimateAdjustment
+    } else if (this.hero.network === "kla") {
+      this.valuation = this.valuation * config.klay.networkBuyerEstimateAdjustment
     }
+
+    this.valuation = Math.round(this.valuation * 100) / 100
   }
 }

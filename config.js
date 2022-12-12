@@ -403,7 +403,8 @@ const config = {
     "maxGasPrice": 10000000000, // 表示你可以接受的最大 baseFee 是多少，當 baseFee 超過這個值時任務腳本就會暫停，6000000000 表示 6 Gwei，請依你的需要調整
     "overBaseGasFeeWei": 550000000, // 表示你願意出高於 baseFee 多少的 gas，理論上這個數字越高你的交易速度就會越快， 110000000 表示 0.11 Gwei，請依你的需要調整
     "listStamina": 24, // 表示當你的英雄體力低於多少時要進行掛售，體力值高於這個設定的英雄如果是下架狀態會等做完任務才會再次上架
-    "networkRentalEstimateAdjustment": 1.1 // DFK 鏈的出租估價完會在乘以這個數，如果覺得 DFK 鏈估價太低或太高可以調整這個數字
+    "networkRentalEstimateAdjustment": 1.1, // DFK 鏈的出租估價完會在乘以這個數，如果覺得 DFK 鏈估價太低或太高可以調整這個數字
+    "networkBuyerEstimateAdjustment": 1 // DFK 鏈的購買估價會再乘以這個數，如果覺得 DFK 鏈估價太低或太高可以調整這個數字
   },
   "klay": {
     "quest": {
@@ -879,43 +880,15 @@ const config = {
         "sale": true
       },
     ],
-    "duelSetting": [ // 注意: 同一時間只能有一個進行中的 duel，這表示你只能將一種類型開啟為 true
-			{
-				"type": "solo", // duel 的類型，你不會更改這個值
-				"fee": "low", // 花費幣的數量 low = 0.1 medium = 0.5 large = 1
-				"isActive": true, // 表示是否要執行該 type 的 duel，true 的情形就會自動執行
-				"heroes": [
-
-        ], // 在這邊寫你想要嘗試送去 duel 的英雄 id solo 範例: [["1234"], ["5678"], ["91011"]]
-			},
-			{
-				"type": "squad", // duel 的類型，你不會更改這個值
-				"fee": "low", // 花費幣的數量 low = 0.3 medium = 1.5 large = 3
-				"isActive": false, // 表示是否要執行該 type 的 duel，true 的情形就會自動執行
-				"heroes": [
-
-				], // 在這邊寫你想要嘗試送去 duel 的英雄 id squad 範例: [["1234", "5678", "91011"], ["121314", "151617", "181920"]]
-			},
-			{
-				"type": "war", // duel 的類型，你不會更改這個值
-				"fee": "low", // 花費幣的數量 low = 1 medium = 5 large = 10
-				"isActive": false, // 表示是否要執行該 type 的 duel，true 的情形就會自動執行
-				"heroes": [
-
-        ], // 在這邊寫你想要嘗試送去 duel 的英雄 id war 範例: [["1234", "5678", "91011", "121314", "151617", "181920", "444", "555", "6666"]]
-			}
-    ],
-    "raffleSetting": { // 會在每個獎池放入 enterAmount 輸入的值，如果抽獎券不夠會直接跳過
-      "isActive": true, // 表示是否要執行自動抽獎，true 的情形就會自動執行
-      "enterAmount": 50, // 每個獎池放入的券數量
-    },
     "maxGasPrice": 30000000000, // 表示你可以接受的最大 baseFee 是多少，當 baseFee 超過這個值時任務腳本就會暫停，6000000000 表示 6 Gwei，請依你的需要調整
     "overBaseGasFeeWei": 550000000, // 表示你願意出高於 baseFee 多少的 gas，理論上這個數字越高你的交易速度就會越快， 110000000 表示 0.11 Gwei，請依你的需要調整
     "listStamina": 24, // 表示當你的英雄體力低於多少時要進行掛售，體力值高於這個設定的英雄如果是下架狀態會等做完任務才會再次上架
-    "networkRentalEstimateAdjustment": 0.9 // KLAY 鏈的出租估價完會在乘以這個數，如果覺得 KLAY 鏈估價太低或太高可以調整這個數字
+    "networkRentalEstimateAdjustment": 0.9, // KLAY 鏈的出租估價完會在乘以這個數，如果覺得 KLAY 鏈估價太低或太高可以調整這個數字
+    "networkBuyerEstimateAdjustment": 0.7 // KLAY 鏈的購買估價會再乘以這個數，如果覺得 KLAY 鏈估價太低或太高可以調整這個數字
   },
   "sendHeroTo": null, // 可以填入一個地址，當完成任務時會把所有完成任務的英雄傳入這個地址，當你要換錢包的時候可以使用這個功能
   "rentalEstimateAdjustment": 1, // 出租估價完會在乘以這個數，如果覺得估價太低或太高可以調整這個數字
+  "buyerEstimateAdjustment": 1, // 購買估價會再乘以這個數，如果覺得估價太低或太高可以調整這個數字
   "unconditionalPurchasePrice": 22, // 當上架的英雄價格低於這個值時會直接購買，不會進入估價邏輯
   "g0ConditionsOfPurchase": 5000, // 當上架的 Gen0 英雄價格低於這個值時會直接嘗試購買，不會進入估價邏輯
   "setQuestScriptTimeSecond": 360, // 設定你每次任務腳本執行的間隔秒數
