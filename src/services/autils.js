@@ -178,59 +178,59 @@ exports.getHeroesInfoByIds = async (heroIds) => {
     return heroObjects;
 }
 
-exports.getHeroesInfoByAddresses = async (walletAddresses) => {
+exports.getHeroesInfoByAddressesAndNetworks = async (walletAddresses, networks) => {
     if (walletAddresses.length === 0) {
         return []
     }
     let heroObjects;
     
     queryStr = `{
-        heroes(where: {owner_in: ${JSON.stringify(walletAddresses)}}) {
-            id
-            owner {
-                owner
-            }
-            rarity
-            network
-            mainClass
-            subClass
-            summonsRemaining
-            profession
-            generation
-            level
-            passive1
-            passive2
-            active1
-            active2
-            statBoost1
-            statBoost2
-            hairStyle
-            backAppendage
-            maxSummons
-            currentQuest
-            xp
-            strength
-            intelligence
-            wisdom
-            luck
-            agility
-            vitality
-            endurance
-            dexterity
-            stamina
-            staminaFullAt
-            nextSummonTime
-            background
-            saleAuction {
-                startingPrice
-                open
-            }
-            assistingAuction {
-                startingPrice
-                open
-            }
+      heroes(where: {owner_in: ${JSON.stringify(walletAddresses)}, network_in: ${JSON.stringify(networks)}}) {
+        id
+        owner {
+          owner
         }
-      }`
+        rarity
+        network
+        mainClass
+        subClass
+        summonsRemaining
+        profession
+        generation
+        level
+        passive1
+        passive2
+        active1
+        active2
+        statBoost1
+        statBoost2
+        hairStyle
+        backAppendage
+        maxSummons
+        currentQuest
+        xp
+        strength
+        intelligence
+        wisdom
+        luck
+        agility
+        vitality
+        endurance
+        dexterity
+        stamina
+        staminaFullAt
+        nextSummonTime
+        background
+        saleAuction {
+          startingPrice
+          open
+        }
+        assistingAuction {
+          startingPrice
+          open
+        }
+      }
+    }`
   
     await axios.post(graphqlEndPoint, { query: queryStr }).then((res) => {
       heroObjects = res.data.data.heroes.map((heroData) => { return new Hero(heroData) });
