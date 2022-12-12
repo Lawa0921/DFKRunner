@@ -17,7 +17,7 @@ module.exports = class MeditationCircle {
   }
 
   async completeMeditation(heroId) {
-    return await this.contract.completeMeditation(heroId, { gasPrice: await autils.getDFKGasFee() });
+    return await this.contract.completeMeditation(heroId, { gasPrice: await autils.getKLAYGasFee() });
   }
 
   async getActiveMeditations() {
