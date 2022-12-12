@@ -587,9 +587,9 @@ module.exports = class RentValuator {
     this.valuation = this.valuation * config.rentalEstimateAdjustment
 
     if (this.hero.network === "dfk") {
-      this.valuation = this.valuation * config.defikingdoms.newworkRentalEstimateAdjustment
+      this.valuation = this.valuation * config.defikingdoms.networkRentalEstimateAdjustment
     } else if (this.hero.network === "kla") {
-      this.valuation = this.valuation * config.klay.newworkRentalEstimateAdjustment
+      this.valuation = this.valuation * config.klay.networkRentalEstimateAdjustment
     }
 
     this.valuation = Math.round(this.valuation * 100) / 100
