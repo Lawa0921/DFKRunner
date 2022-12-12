@@ -63,7 +63,7 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
         await mokshaRuneContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
       }
       if (ethers.utils.formatEther(crystalAllowance) < levelUpFee) {
-        await crystalContract.approve(config.klay.meditationCircle, ethers.constants.MaxUint256)
+        await crystalContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
       }
 
       if (parseInt(shvasRuneRequireCount) > parseInt(shvasRuneBalanceOf)) {
