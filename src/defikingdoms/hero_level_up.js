@@ -52,6 +52,8 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
       const mokshaRuneBalanceOf = await mokshaRuneContract.balanceOf();
       const mokshaRuneAllowance = await mokshaRuneContract.allowance(config.defikingdoms.meditationCircle)
       const crystalAllowance = await crystalContract.allowance(config.defikingdoms.meditationCircle)
+      const crystalBalanceOf = await crystalContract.balanceOf()
+      const levelUpFee = levelUpableHeros[i].level * 0.1
       const [shvasRuneRequireCount, mokshaRuneRequireCount] = await meditationCircleContract.getRequiredRunes(levelUpableHeros[i].level);
 
       if (shvasRuneAllowance < shvasRuneRequireCount) {
@@ -60,14 +62,16 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
       if (mokshaRuneAllowance < mokshaRuneRequireCount) {
         await mokshaRuneContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
       }
-      if (crystalAllowance === 0) {
-        await crystalContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
+      if (ethers.utils.formatEther(crystalAllowance) < levelUpFee) {
+        await jadeContract.approve(config.klay.meditationCircle, ethers.constants.MaxUint256)
       }
 
       if (parseInt(shvasRuneRequireCount) > parseInt(shvasRuneBalanceOf)) {
         console.log(`${accountInfo.accountName} DFK shvasRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
       } else if (parseInt(mokshaRuneRequireCount) > parseInt(mokshaRuneBalanceOf)) {
         console.log(`${accountInfo.accountName} DFK mokshaRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
+      } else if (ethers.utils.formatEther(crystalBalanceOf) < levelUpFee) {
+        console.log(`${accountInfo.accountName} DFK crystal is not enough to level up the hero ${levelUpableHeros[i].id}`)
       } else {
         const [mainGrowth, subGrowth1, subGrowth2] = levelUpableHeros[i].growthStats();
 

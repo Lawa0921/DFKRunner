@@ -52,6 +52,8 @@ exports.runKLAYLevelUpLogic = async (owningHeroObjects, accountInfo) => {
       const mokshaRuneBalanceOf = await mokshaRuneContract.balanceOf();
       const mokshaRuneAllowance = await mokshaRuneContract.allowance(config.klay.meditationCircle)
       const jadeAllowance = await jadeContract.allowance(config.klay.meditationCircle)
+      const jadeBalanceOf = await jadeContract.balanceOf()
+      const levelUpFee = levelUpableHeros[i].level * 0.1
       const [shvasRuneRequireCount, mokshaRuneRequireCount] = await meditationCircleContract.getRequiredRunes(levelUpableHeros[i].level);
 
       if (shvasRuneAllowance < shvasRuneRequireCount) {
@@ -60,7 +62,7 @@ exports.runKLAYLevelUpLogic = async (owningHeroObjects, accountInfo) => {
       if (mokshaRuneAllowance < mokshaRuneRequireCount) {
         await mokshaRuneContract.approve(config.klay.meditationCircle, ethers.constants.MaxUint256)
       }
-      if (jadeAllowance === 0) {
+      if (ethers.utils.formatEther(jadeAllowance) < levelUpFee) {
         await jadeContract.approve(config.klay.meditationCircle, ethers.constants.MaxUint256)
       }
 
@@ -68,6 +70,8 @@ exports.runKLAYLevelUpLogic = async (owningHeroObjects, accountInfo) => {
         console.log(`${accountInfo.accountName} KLAY shvasRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
       } else if (parseInt(mokshaRuneRequireCount) > parseInt(mokshaRuneBalanceOf)) {
         console.log(`${accountInfo.accountName} KLAY mokshaRune is not enough to level up the hero ${levelUpableHeros[i].id}`)
+      } else if (ethers.utils.formatEther(jadeBalanceOf) < levelUpFee) {
+        console.log(`${accountInfo.accountName} KLAY jade is not enough to level up the hero ${levelUpableHeros[i].id}`)
       } else {
         const [mainGrowth, subGrowth1, subGrowth2] = levelUpableHeros[i].growthStats();
 
