@@ -3,6 +3,7 @@ const InventoryItem = require('~/src/defikingdoms/contracts/inventoryItem');
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 const Crystal = require('~/src/defikingdoms/contracts/crystal');
 const config = require("~/config.js")
+const autils = require('~/src/services/autils');
 const ethers = require('ethers');
 
 exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
@@ -22,29 +23,24 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
   );
 
   if (activeMeditations.length > 0) {
-    for (let i = 0; i < activeMeditations.length; i++) {
-      let heroObject = owningHeroObjects.find(heroObject => heroObject.id === parseInt(activeMeditations[i].heroId).toString())
+    const activeLevelUpHeroes = await autils.getHeroesInfoByIds(activeMeditations.map(activeMeditation => parseInt(activeMeditation.heroId).toString()))
 
-      if (typeof(heroObject) === "undefined") {
-        console.log(`DFK ${ parseInt(activeMeditations[i].heroId).toString()} is no longer in the DFK area of the config, please check the config file`)
+    for (let i = 0; i < activeLevelUpHeroes.length; i++) {
+      if (activeLevelUpHeroes[i].isOnSale && activeLevelUpHeroes[i].owner === accountInfo.walletAddress && activeLevelUpHeroes[i].network === "dfk") {
+        await saleAuctionContract.unlistHero(activeLevelUpHeroes[i].id)
+      }
+
+      if (activeLevelUpHeroes[i].isOnQuesting) {
         continue
       }
 
-      if (heroObject.isOnSale && heroObject.owner === accountInfo.walletAddress) {
-        await saleAuctionContract.unlistHero(heroObject.id)
-      }
-      
-      if (heroObject.isOnQuesting) {
-        continue
-      }
-
-      const txn = await meditationCircleContract.completeMeditation(parseInt(activeMeditations[i].heroId))
+      const txn = await meditationCircleContract.completeMeditation(activeLevelUpHeroes[i].id)
       const res = await txn.wait();
 
       if (res.status === 1) {
-        console.log(`${accountInfo.accountName} DFK level up ${parseInt(activeMeditations[i].heroId)} success!`)
+        console.log(`${accountInfo.accountName} DFK level up ${activeLevelUpHeroes[i].id} success!`)
       } else {
-        console.log(`${accountInfo.accountName} DFK complete level up ${parseInt(activeMeditations[i].heroId)} failed`)
+        console.log(`${accountInfo.accountName} DFK complete level up ${activeLevelUpHeroes[i].id} failed`)
       }
     }
   }

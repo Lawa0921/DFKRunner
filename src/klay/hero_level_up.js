@@ -3,6 +3,7 @@ const InventoryItem = require('~/src/klay/contracts/inventoryItem');
 const SaleAuction = require('~/src/klay/contracts/saleAuction');
 const Jade = require('~/src/klay/contracts/jade');
 const config = require("~/config.js")
+const autils = require('~/src/services/autils');
 const ethers = require('ethers');
 
 exports.runKLAYLevelUpLogic = async (owningHeroObjects, accountInfo) => {
@@ -22,29 +23,24 @@ exports.runKLAYLevelUpLogic = async (owningHeroObjects, accountInfo) => {
   );
 
   if (activeMeditations.length > 0) {
-    for (let i = 0; i < activeMeditations.length; i++) {
-      let heroObject = owningHeroObjects.find(heroObject => heroObject.id === parseInt(activeMeditations[i].heroId).toString())
+    const activeLevelUpHeroes = await autils.getHeroesInfoByIds(activeMeditations.map(activeMeditation => parseInt(activeMeditation.heroId).toString()))
 
-      if (typeof(heroObject) === "undefined") {
-        console.log(`KLAY ${ parseInt(activeMeditations[i].heroId).toString()} is no longer in the KLAY area of the config, please check the config file`)
+    for (let i = 0; i < activeLevelUpHeroes.length; i++) {
+      if (activeLevelUpHeroes[i].isOnSale && activeLevelUpHeroes[i].owner === accountInfo.walletAddress && activeLevelUpHeroes[i].network === "kla") {
+        await saleAuctionContract.unlistHero(activeLevelUpHeroes[i].id)
+      }
+
+      if (activeLevelUpHeroes[i].isOnQuesting) {
         continue
       }
 
-      if (heroObject.isOnSale && heroObject.owner === accountInfo.walletAddress) {
-        await saleAuctionContract.unlistHero(heroObject.id)
-      }
-      
-      if (heroObject.isOnQuesting) {
-        continue
-      }
-
-      const txn = await meditationCircleContract.completeMeditation(parseInt(activeMeditations[i].heroId))
+      const txn = await meditationCircleContract.completeMeditation(activeLevelUpHeroes[i].id)
       const res = await txn.wait();
 
       if (res.status === 1) {
-        console.log(`${accountInfo.accountName} KLAY level up ${parseInt(activeMeditations[i].heroId)} success!`)
+        console.log(`${accountInfo.accountName} KLAY level up ${activeLevelUpHeroes[i].id} success!`)
       } else {
-        console.log(`${accountInfo.accountName} KLAY complete level up ${parseInt(activeMeditations[i].heroId)} failed`)
+        console.log(`${accountInfo.accountName} KLAY complete level up ${activeLevelUpHeroes[i].id} failed`)
       }
     }
   }
