@@ -105,6 +105,13 @@ git pull origin main
 比較簡單的處理方式是直接刪除您原先的 config.js 並拉取新版本的 config.js  
 之後再填回您自己的 hero ID  
 
+#### 為什麼會無法更新
+執行 `git pull origin main` 時有可能會出現 `Already up to date.` 的提示  
+原因是你的本地 git 已經把所有節點都抓過了  
+但因為我遠端很難判斷你本地檔案的狀態  
+因此當發生這個情況時請使用 `git clone https://github.com/Lawa0921/DFKRunner.git` 指令重新安裝  
+以保證你的專案檔案完整  
+
 ## 鳴謝及其他資訊
 有任何問題可至 [Lawa 的 Discord](https://discord.gg/Wta7ZavFkJ) 內 tag Lawa0921 詢問  
 如果你想給我點小費可以匯款至我的私人地址：0x499FD90959AEfDaaE82268A79e23cD83dAA8B396，Lawa 先感謝您  
