@@ -51,7 +51,7 @@ npm -v            # 檢查 npm 是否安裝成功
 [node、npm 安裝教學](https://radixweb.com/blog/installing-npm-and-nodejs-on-windows-and-mac)  
 [git 安裝教學](https://www.atlassian.com/git/tutorials/install-git#windows)  
 
-按 Win + R 打開運行框，然後鍵入 `cmd` 並按 Enter 開啟。
+按 Win 並開啟與 git 一同下載下來的 gitBash 開始準備安裝，並且後續之後的操作也基本上都可以用 gitBash 完成。  
 
 ## 第一次使用前
 
