@@ -30,10 +30,6 @@ exports.runKLAYLevelUpLogic = async (owningHeroObjects, accountInfo) => {
         await saleAuctionContract.unlistHero(activeLevelUpHeroes[i].id)
       }
 
-      if (activeLevelUpHeroes[i].isOnQuesting) {
-        continue
-      }
-
       const txn = await meditationCircleContract.completeMeditation(activeLevelUpHeroes[i].id)
       const res = await txn.wait();
 
