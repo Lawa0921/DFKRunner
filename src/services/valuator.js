@@ -15,7 +15,7 @@ module.exports = class Valuator {
     this.evaluateHairPrice()
     this.evaluateBackAppendagePrice()
     this.evaluateSubclassPrice();
-    // this.evaluateSkillPrice();
+    this.evaluateSkillPrice();
     // this.evaluateStatPrice();
     this.networkPriceAdjustment();
   }
