@@ -4,7 +4,7 @@ module.exports = class Valuator {
   constructor(price, hero) {
     this.price = parseInt(price) / Math.pow(10, 18);
     this.hero = hero;
-    this.valuation = config.unconditionalPurchasePrice;
+    this.valuation = config.autoBuyerSetting.autoBuyerFloorPrice;
   }
 
   execute() {
@@ -128,7 +128,7 @@ module.exports = class Valuator {
   }
 
   networkPriceAdjustment() {
-    this.valuation = this.valuation * config.buyerEstimateAdjustment
+    this.valuation = this.valuation * config.autoBuyerSetting.buyerEstimateAdjustment
 
     if (this.hero.network === "dfk") {
       this.valuation = this.valuation * config.autoBuyerSetting.DFKnetworkBuyerEstimateAdjustment

@@ -876,6 +876,7 @@ const config = {
     "autoBuyerFloorPrice": 25, // 所有你沒有寫的組合都是用這個價格當作最低價
     "KLAYnetworkBuyerEstimateAdjustment": 0.5, // KLAY 鏈的購買估價會再乘以這個數，如果覺得 KLAY 鏈估價太低或太高可以調整這個數字
     "DFKnetworkBuyerEstimateAdjustment": 1, // DFK 鏈的購買估價會再乘以這個數，如果覺得 DFK 鏈估價太低或太高可以調整這個數字
+    "buyerEstimateAdjustment": 1, // 任何鏈的購買估價會再乘以這個數，如果覺得估價太低或太高可以調整這個數字
     "autoBuyerSwitch": true, // 自動購買的開關，設定為 false 時將不會自動購買，只會列出上架的英雄
     "saleWatcherWalletIndex": 0, // 設定你用於自動購買的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
     "priceSetting": { 
@@ -1238,9 +1239,6 @@ const config = {
   },
   "sendHeroTo": null, // 可以填入一個地址，當完成任務時會把所有完成任務的英雄傳入這個地址，當你要換錢包的時候可以使用這個功能
   "rentalEstimateAdjustment": 1, // 出租估價完會在乘以這個數，如果覺得估價太低或太高可以調整這個數字
-  "buyerEstimateAdjustment": 1, // 購買估價會再乘以這個數，如果覺得估價太低或太高可以調整這個數字
-  "unconditionalPurchasePrice": 22, // 當上架的英雄價格低於這個值時會直接購買，不會進入估價邏輯
-  "g0ConditionsOfPurchase": 5000, // 當上架的 Gen0 英雄價格低於這個值時會直接嘗試購買，不會進入估價邏輯
   "setQuestScriptTimeSecond": 360, // 設定你每次任務腳本執行的間隔秒數
   "setDuelScriptTimeSecond": 1, // 設定你每次執行 duel 腳本的間隔秒數
   "autoDuelerWalletIndex": 0 // 設定你用於自動 duel 的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
