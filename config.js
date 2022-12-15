@@ -626,7 +626,7 @@ const config = {
           {
             "name": "StatQuest_End", // 有地方會用到這個值，不要更改它
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
-
+              "1000000100179"
             ],
             "contractAddress": "0x058282847F1C8E893edcdfea5df6eb203ECA7832" // 合約的地址，你不會更改這個值
           },
@@ -1195,6 +1195,47 @@ const config = {
       "TranscendantAdvanced": 1.05,
       "TranscendantElite": 1.6,
       "TranscendantTranscendant": 3,
+    },
+    "skillSetting": {
+      /*
+        你可以自訂你想要的職業階級與技能的乘數
+        格式為: "<職業階級>Total<技能分數>" 或是 <主職業><active1>/<active2>/<passive1>/<passive2>
+        技能分數計算方式: Advanced 的技能是 1 分，Elite 是 2 分，Transcendant 是 3 分
+        範例: BaiscTotal3, AdvancedTotal4 或是 WarriorB5/B6/B8/A1, WizardA3/A1/B5/B7
+        沒有設定時就不會乘
+      */
+      "BasicTotal1": 1.01,
+      "BasicTotal2": 1.15,
+      "BasicTotal3": 1.5,
+      "BasicTotal4": 2,
+      "BasicTotal5": 2.5,
+      "BasicTotal6": 2.5,
+      "BasicTotal7": 2.5,
+      "BasicTotal8": 2.5,
+      "AdvancedTotal1": 1.02,
+      "AdvancedTotal2": 1.25,
+      "AdvancedTotal3": 1.7,
+      "AdvancedTotal4": 2.2,
+      "AdvancedTotal5": 2.7,
+      "AdvancedTotal6": 2.7,
+      "AdvancedTotal7": 2.7,
+      "AdvancedTotal8": 2.7,
+      "EliteTotal1": 1.02,
+      "EliteTotal2": 1.2,
+      "EliteTotal3": 1.6,
+      "EliteTotal4": 2,
+      "EliteTotal5": 2.5,
+      "EliteTotal6": 2.5,
+      "EliteTotal7": 2.5,
+      "EliteTotal8": 2.5,
+      "TranscendantTotal1": 1.02,
+      "TranscendantTotal2": 1.2,
+      "TranscendantTotal3": 1.6,
+      "TranscendantTotal4": 2,
+      "TranscendantTotal5": 2.5,
+      "TranscendantTotal6": 2.5,
+      "TranscendantTotal7": 2.5,
+      "TranscendantTotal8": 2.5,
     }
   },
   "sendHeroTo": null, // 可以填入一個地址，當完成任務時會把所有完成任務的英雄傳入這個地址，當你要換錢包的時候可以使用這個功能

@@ -657,6 +657,7 @@ module.exports = class Hero {
         this.attributeTier("passive1"),
         this.attributeTier("passive2")
       ],
+      skillsString: this.active1[0] + this.active1[this.active1.length - 1] + "/" + this.active2[0] + this.active2[this.active2.length - 1] + "/"  + this.passive1[0] + this.passive1[this.passive1.length - 1] + "/" + this.passive2[0] + this.passive2[this.passive2.length - 1],
       skillCount: 0,
       skillScore: 0
     }

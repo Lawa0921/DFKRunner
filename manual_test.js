@@ -28,6 +28,7 @@ async function test() {
   const valuator = new Valuator("100000000000000000", heroes[0])
   valuator.execute()
   console.log(valuator.valuation)
+  console.log(heroes[0].skillInfos())
   // await assistingAuctionUpgradeableContract.unlistHero("")
 
   // console.log(Math.round(8.5 * 100) / 100)

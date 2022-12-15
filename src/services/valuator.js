@@ -115,70 +115,17 @@ module.exports = class Valuator {
   }
 
   evaluateSkillPrice() {
+    const heroMainclass = this.hero.mainClass
+    const heroMainclassTier = this.hero.attributeTier("mainClass")
     const skillInfos = this.hero.skillInfos()
-    const heroRarity = this.hero.formatRarity();
+    const skillSetTargetPrice = config.autoBuyerSetting.skillSetting[heroMainclass + skillInfos.skillsString]
+    const skillPrice = config.autoBuyerSetting.skillSetting[heroMainclassTier + skillInfos.skillScore.toString()]
 
-    if (skillInfos.skillScore === 1) {
-      this.skillPrice += 1;
-    } else if (skillInfos.skillScore === 2) {
-      if (skillInfos.skillCount === 1) {
-        this.skillPrice += 30;
-      } else if (skillInfos.skillCount === 2) {
-        this.skillPrice += 50;
-      }
-    } else if (skillInfos.skillScore === 3) {
-      if (skillInfos.skillCount === 1) {
-        this.skillPrice += 20;
-      } else if (skillInfos.skillCount === 2) {
-        this.skillPrice += 80;
-      } else if (skillInfos.skillCount === 3) {
-        this.skillPrice += 100;
-      }
-    } else if (skillInfos.skillScore === 4) {
-      if (skillInfos.skillCount === 2) {
-        this.skillPrice += 80;
-      } else if (skillInfos.skillCount === 3) {
-        this.skillPrice += 150;
-      } else if (skillInfos.skillCount === 4) {
-        this.skillPrice += 220;
-      }
-    } else if (skillInfos.skillScore === 5) {
-      if (skillInfos.skillCount === 2) {
-        this.skillPrice += 120;
-      } else if (skillInfos.skillCount === 3) {
-        this.skillPrice += 200;
-      } else if (skillInfos.skillCount === 4) {
-        this.skillPrice += 400;
-      }
-    } else if (skillInfos.skillScore === 6) {
-      if (skillInfos.skillCount === 2) {
-        this.skillPrice += 130;
-      } else if (skillInfos.skillCount === 3) {
-        this.skillPrice += 250;
-      } else if (skillInfos.skillCount === 4) {
-        this.skillPrice += 500;
-      }
-    } else if (skillInfos.skillScore >= 7) {
-      this.skillPrice += 600;
+    if (typeof(skillSetTargetPrice) !== "undefined") {
+      this.valuation *= skillSetTargetPrice
+    } else if (typeof(skillPrice) !== "undefined") {
+      this.valuation *= skillPrice
     }
-
-    if (this.summonPrice === 0) {
-      this.skillPrice = this.skillPrice * 0.1;
-    } else if (this.summonPrice <= 10) {
-      this.skillPrice = this.skillPrice * 0.5;
-    }
-
-    if (heroRarity === "UnCommon") {
-      this.skillPrice = this.skillPrice * 1.05;
-    } else if (heroRarity === "Rare") {
-      this.skillPrice = this.skillPrice * 1.1;
-    } else if (heroRarity === "Legendary") {
-      this.skillPrice = this.skillPrice * 1.15;
-    } else if (heroRarity === "Mythic") {
-      this.skillPrice = this.skillPrice * 1.2;
-    }
-
-    this.valuation += this.skillPrice;
   }
 
   evaluateStatPrice() {

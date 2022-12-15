@@ -368,72 +368,72 @@ exports.getAllConfigHeroIds = () => {
 }
 
 exports.watchHeroLog = async (hero, price, valuator, network) => {
-    const networkCurrencies = {
-        kla: "Jade",
-        dfk: "C"
-    }
-    let idAndRarity = `${hero.id} ${hero.formatRarity()}`;
-    let profession = `${hero.profession}`
-    let info = `\x1b[3m LV${hero.level} G${hero.generation} ${hero.summonsRemaining}/${hero.maxSummons} \x1b[0m`;
-    let mainClass = hero.mainClass;
-    let subClass =  hero.subClass;
-    let skillInfo = `${heroSkillDyer(hero, "active1")}/${heroSkillDyer(hero, "active2")}/${heroSkillDyer(hero, "passive1")}/${heroSkillDyer(hero, "passive2")}`
-    let hair = "hair";
-    let backappendage = "back";
-    let listInfo = `${strToAnsiRed(parseInt(price) / Math.pow(10, 18))} ${networkCurrencies[network]}, valuate: ${strToAnsiRed(valuator)} ${networkCurrencies[network]}`
+  const networkCurrencies = {
+    kla: "Jade",
+    dfk: "C"
+  }
+  let idAndRarity = `${hero.id} ${hero.formatRarity()}`;
+  let profession = `${hero.profession}`
+  let info = `\x1b[3m LV${hero.level} G${hero.generation} ${hero.summonsRemaining}/${hero.maxSummons} \x1b[0m`;
+  let mainClass = hero.mainClass;
+  let subClass =  hero.subClass;
+  let skillInfo = `${heroSkillDyer(hero, "active1")}/${heroSkillDyer(hero, "active2")}/${heroSkillDyer(hero, "passive1")}/${heroSkillDyer(hero, "passive2")}`
+  let hair = "hair";
+  let backappendage = "back";
+  let listInfo = `${strToAnsiRed(parseInt(price) / Math.pow(10, 18))} ${networkCurrencies[network]}, valuate: ${strToAnsiRed(valuator)} ${networkCurrencies[network]}`
 
-    if (hero.formatRarity()=== "UnCommon") {
-        idAndRarity = strToAnsiGreen(idAndRarity);
-    } else if (hero.formatRarity() === "Rare") {
-        idAndRarity = strToAnsiBlue(idAndRarity);
-    } else if (hero.formatRarity() === "Legendary") {
-        idAndRarity = strToAnsiOrange(idAndRarity);
-    } else if (hero.formatRarity() === "Mythic") {
-        idAndRarity = strToAnsiPurple(idAndRarity);
-    }
+  if (hero.formatRarity()=== "UnCommon") {
+    idAndRarity = strToAnsiGreen(idAndRarity);
+  } else if (hero.formatRarity() === "Rare") {
+    idAndRarity = strToAnsiBlue(idAndRarity);
+  } else if (hero.formatRarity() === "Legendary") {
+    idAndRarity = strToAnsiOrange(idAndRarity);
+  } else if (hero.formatRarity() === "Mythic") {
+    idAndRarity = strToAnsiPurple(idAndRarity);
+  }
 
-    if (hero.attributeTier("mainClass") === "Advanced") {
-        mainClass = strToAnsiGreen(mainClass);
-    } else if (hero.attributeTier("mainClass") === "Elite") {
-        mainClass = strToAnsiCyan(mainClass);
-    } else if (hero.attributeTier("mainClass") === "Transcendant") {
-        mainClass = strToAnsiRed(mainClass);
-    }
+  if (hero.attributeTier("mainClass") === "Advanced") {
+    mainClass = strToAnsiGreen(mainClass);
+  } else if (hero.attributeTier("mainClass") === "Elite") {
+    mainClass = strToAnsiCyan(mainClass);
+  } else if (hero.attributeTier("mainClass") === "Transcendant") {
+    mainClass = strToAnsiRed(mainClass);
+  }
 
-    if (hero.attributeTier("subClass") === "Advanced") {
-        subClass = strToAnsiGreen(subClass);
-    } else if (hero.attributeTier("subClass") === "Elite") {
-        subClass = strToAnsiCyan(subClass);
-    } else if (hero.attributeTier("subClass") === "Transcendant") {
-        subClass = strToAnsiRed(subClass);
-    }
+  if (hero.attributeTier("subClass") === "Advanced") {
+    subClass = strToAnsiGreen(subClass);
+  } else if (hero.attributeTier("subClass") === "Elite") {
+    subClass = strToAnsiCyan(subClass);
+  } else if (hero.attributeTier("subClass") === "Transcendant") {
+    subClass = strToAnsiRed(subClass);
+  }
 
-    if (hero.attributeTier("hairStyle") === "Advanced") {
-        hair = strToAnsiGreen(hair);
-    } else if (hero.attributeTier("hairStyle") === "Elite") {
-        hair = strToAnsiCyan(hair);
-    } else if (hero.attributeTier("hairStyle") === "Transcendant") {
-        hair = strToAnsiRed(hair);
-    }
+  if (hero.attributeTier("hairStyle") === "Advanced") {
+    hair = strToAnsiGreen(hair);
+  } else if (hero.attributeTier("hairStyle") === "Elite") {
+    hair = strToAnsiCyan(hair);
+  } else if (hero.attributeTier("hairStyle") === "Transcendant") {
+    hair = strToAnsiRed(hair);
+  }
 
-    if (hero.attributeTier("backAppendage") === "Advanced") {
-        backappendage = strToAnsiGreen(backappendage);
-    } else if (hero.attributeTier("backAppendage") === "Elite") {
-        backappendage = strToAnsiCyan(backappendage);
-    } else if (hero.attributeTier("backAppendage") === "Transcendant") {
-        backappendage = strToAnsiRed(backappendage);
-    }
+  if (hero.attributeTier("backAppendage") === "Advanced") {
+    backappendage = strToAnsiGreen(backappendage);
+  } else if (hero.attributeTier("backAppendage") === "Elite") {
+    backappendage = strToAnsiCyan(backappendage);
+  } else if (hero.attributeTier("backAppendage") === "Transcendant") {
+    backappendage = strToAnsiRed(backappendage);
+  }
 
-    if (hero.selfProfessionMatch() && hero.summonProfessionMatch()) {
-        profession = strToAnsiRed(profession);
-    } else if (hero.selfProfessionMatch()) {
-        profession = strToAnsiCyan(profession);
-    } else if (hero.summonProfessionMatch()) {
-        profession = strToAnsiGreen(profession);
-    }
+  if (hero.selfProfessionMatch() && hero.summonProfessionMatch()) {
+    profession = strToAnsiRed(profession);
+  } else if (hero.selfProfessionMatch()) {
+    profession = strToAnsiCyan(profession);
+  } else if (hero.summonProfessionMatch()) {
+    profession = strToAnsiGreen(profession);
+  }
 
-    str = hero.network.toUpperCase() + " " + idAndRarity + ", " + mainClass + "/" + subClass + " " + profession + " " + info + " +" + strToAnsiGreen(hero.statboost1) + "/" + strToAnsiBlue(hero.statboost2) + " " + skillInfo + " " + hair + "/" + backappendage + " " + listInfo
-    console.log(str);
+  str = hero.network.toUpperCase() + " " + idAndRarity + ", " + mainClass + "/" + subClass + " " + profession + " " + info + " +" + strToAnsiGreen(hero.statboost1) + "/" + strToAnsiBlue(hero.statboost2) + " " + skillInfo + " " + hair + "/" + backappendage + " " + listInfo
+  console.log(str);
 }
 
 const strToAnsiRed = (str) => {
