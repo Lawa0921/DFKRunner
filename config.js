@@ -394,7 +394,6 @@ const config = {
     "overBaseGasFeeWei": 550000000, // 表示你願意出高於 baseFee 多少的 gas，理論上這個數字越高你的交易速度就會越快， 110000000 表示 0.11 Gwei，請依你的需要調整
     "listStamina": 24, // 表示當你的英雄體力低於多少時要進行掛售，體力值高於這個設定的英雄如果是下架狀態會等做完任務才會再次上架
     "networkRentalEstimateAdjustment": 1.1, // DFK 鏈的出租估價完會在乘以這個數，如果覺得 DFK 鏈估價太低或太高可以調整這個數字
-    "networkBuyerEstimateAdjustment": 1 // DFK 鏈的購買估價會再乘以這個數，如果覺得 DFK 鏈估價太低或太高可以調整這個數字
   },
   "klay": {
     "quest": {
@@ -590,11 +589,11 @@ const config = {
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
               "2000000000175",
               "1000000041503", "1000000041547", "1000000026736", "1000000085774",
-              "1000000013079", "1000000021351", "248925",
+              "1000000021351", "248925",
               "1000000045142", "1000000041965", "1000000029772", "1000000082849",
               "1000000047075", "162779", "162538",
               "1000000051353", "1000000052246", "1000000024773", "1000000087935", "1000000088622",
-              "1000000058157", "1000000059688", "1000000062264", "1000000086998", "1000000087038",
+              "1000000058157", "1000000062264", "1000000086998", "1000000087038",
               "1000000091083", "1000000091343"
             ],
             "contractAddress": "0xF2143c7c8Dfca976415bDf7d37dfa63aed8Ef741" // 合約的地址，你不會更改這個值
@@ -708,7 +707,6 @@ const config = {
       { "id": "1000000086884", "price": 49 },
       { "id": "1000000026736", "price": 59 },
       { "id": "1000000047075", "price": 79 },
-      { "id": "1000000059688", "price": 59 },
       { "id": "1000000064305", "price": 55 },
       { "id": "1000000091343", "price": 69 },
       { "id": "1000000091078", "price": 199 },
@@ -718,7 +716,6 @@ const config = {
       { "id": "263373", "price": 65 },
       { "id": "1000000010037", "price": 65 },
       { "id": "254994", "price": 69 },
-      { "id": "1000000013079", "price": 79 },
       { "id": "1000000092705", "price": 85 },
       { "id": "1000000017108", "price": 45 }
     ],
@@ -876,37 +873,328 @@ const config = {
     "overBaseGasFeeWei": 550000000, // 表示你願意出高於 baseFee 多少的 gas，理論上這個數字越高你的交易速度就會越快， 110000000 表示 0.11 Gwei，請依你的需要調整
     "listStamina": 24, // 表示當你的英雄體力低於多少時要進行掛售，體力值高於這個設定的英雄如果是下架狀態會等做完任務才會再次上架
     "networkRentalEstimateAdjustment": 0.9, // KLAY 鏈的出租估價完會在乘以這個數，如果覺得 KLAY 鏈估價太低或太高可以調整這個數字
-    "networkBuyerEstimateAdjustment": 0.7 // KLAY 鏈的購買估價會再乘以這個數，如果覺得 KLAY 鏈估價太低或太高可以調整這個數字
   },
   "autoBuyerSetting": {
     "autoBuyerFloorPrice": 25, // 所有你沒有寫的組合都是用這個價格當作最低價
-    "priceSetting": {
-      "basic10/10G1": 65,
-      "basic9/10G1": 55,
-      "basic8/10G1": 45,
-      "basic7/10G1": 35,
-      "basic6/10G1": 27,
-      "basic9/9G2": 35,
-      "basic8/9G2": 34,
-      "basic7/9G2": 30,
-      "basic8/8G2": 33,
-      "basic7/8G2": 30,
-      "basic7/7G2": 32,
-      "advance5/5G1": 105,
-      "advance4/5G1": 85,
-      "advance3/5G1": 60,
-      "advance2/5G1": 45,
-      "advance1/5G1": 35,
-      "advance5/5G2": 95,
-      "advance4/5G2": 75,
-      "advance3/5G2": 50,
-      "advance2/5G2": 40,
-      "advance1/5G2": 30,
-      "advance5/5G3": 85,
-      "advance4/5G3": 65,
-      "advance3/5G3": 40,
-      "advance2/5G3": 35,
-      "advance1/5G3": 28,
+    "KLAYnetworkBuyerEstimateAdjustment": 0.5, // KLAY 鏈的購買估價會再乘以這個數，如果覺得 KLAY 鏈估價太低或太高可以調整這個數字
+    "DFKnetworkBuyerEstimateAdjustment": 1, // DFK 鏈的購買估價會再乘以這個數，如果覺得 DFK 鏈估價太低或太高可以調整這個數字
+    "autoBuyerSwitch": false, // 自動購買的開關，設定為 false 時將不會自動購買，只會列出上架的英雄
+    "saleWatcherWalletIndex": 0, // 設定你用於自動購買的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
+    "priceSetting": { 
+      /*
+        你可以自訂你想要的購買條件，
+        格式為 "<主職業階級><召喚數>/<召喚最大值>G<代數>"
+        數字的部分不管幾都可以的話可以輸入 "?" 但是請謹慎使用
+        寧可多寫幾條，避免買到你不想買的英雄
+      */
+      "Basic?/?G0": 5000,
+      "Basic10/10G1": 75,
+      "Basic9/10G1": 60,
+      "Basic8/10G1": 45,
+      "Basic7/10G1": 35,
+      "Basic6/10G1": 27,
+      "Basic9/9G2": 35,
+      "Basic8/?G2": 34,
+      "Basic7/?G2": 30,
+      "Advanced5/5G1": 105,
+      "Advanced4/5G1": 85,
+      "Advanced3/5G1": 60,
+      "Advanced2/5G1": 45,
+      "Advanced1/5G1": 35,
+      "Advanced5/5G2": 95,
+      "Advanced4/?G2": 75,
+      "Advanced3/?G2": 50,
+      "Advanced2/?G2": 40,
+      "Advanced1/?G2": 30,
+      "Advanced5/5G3": 85,
+      "Advanced4/?G3": 65,
+      "Advanced3/?G3": 40,
+      "Advanced2/?G3": 35,
+      "Advanced1/?G3": 28,
+      "Advanced5/5G4": 65,
+      "Advanced4/?G4": 50,
+      "Advanced3/?G4": 35,
+      "Elite3/3G?": 300,
+      "Elite2/?G?": 200,
+      "Elite1/?G?": 120,
+      "Transcendant1/1G?": 1000,
+      "Transcendant0/?G?": 650
+    },
+    "raritySetting": {
+      "BasicUnCommon": 1.03, // 基礎職業綠卡乘數
+      "BasicRare": 1.1, // 基礎職業藍卡乘數
+      "BasicLegendary": 1.6, // 基礎職業橘卡乘數
+      "BasicMythic": 2.5, // 基礎職業紫卡乘數
+      "AdvancedUnCommon": 1.05, // 進階職業綠卡乘數
+      "AdvancedRare": 1.2, // 進階職業藍卡乘數
+      "AdvancedLegendary": 2, // 進階職業橘卡乘數
+      "AdvancedMythic": 3, // 進階職業紫卡乘數
+      "EliteUnCommon": 1.1, // 菁英職業綠卡乘數
+      "EliteRare": 1.8, // 菁英職業藍卡乘數
+      "EliteLegendary": 3, // 菁英職業橘卡乘數
+      "EliteMythic": 5, // 菁英職業紫卡乘數
+      "TranscendantUnCommon": 1.3, // 菁英職業綠卡乘數
+      "TranscendantRare": 2.3, // 菁英職業藍卡乘數
+      "TranscendantLegendary": 5, // 菁英職業橘卡乘數
+      "TranscendantMythic": 10, // 菁英職業紫卡乘數
+    },
+    "subclassSetting": {
+      /*
+        你可以自訂你想要的職業與專業對的乘數
+        格式為: "<職業名><副職業名>" 或是 "<職業名><副職業階級>"
+        具體的設定會優先被取得
+        沒有設定時就不會乘
+      */
+      "WarriorWarrior": 1.1,
+      "WarriorKnight": 1.1,
+      "WarriorPaladin": 1.3,
+      "WarriorDarkKnight": 1.3,
+      "WarriorAdvanced": 1.1,
+      "WarriorDragoon": 2,
+      "WarriorElite": 1.5,
+      "WarriorDreadKnight": 5,
+      "KnightWarrior": 1.1,
+      "KnightKnight": 1.1,
+      "KnightPaladin": 1.3,
+      "KnightDarkKnight": 1.3,
+      "KnightAdvanced": 1.1,
+      "KnightDragoon": 2,
+      "KnightElite": 1.5,
+      "KnightDreadKnight": 5,
+      "ArcherThief": 1.1,
+      "ArcherArcher": 1.1,
+      "ArcherPaladin": 1.3,
+      "ArcherDarkKnight": 1.3,
+      "ArcherAdvanced": 1.1,
+      "ArcherDragoon": 2,
+      "ArcherElite": 1.5,
+      "ArcherDreadKnight": 5,
+      "ThiefArcher": 1.1,
+      "ThiefThief": 1.1,
+      "ThiefPaladin": 1.3,
+      "ThiefDarkKnight": 1.3,
+      "ThiefAdvanced": 1.1,
+      "ThiefDragoon": 2,
+      "ThiefElite": 1.5,
+      "ThiefDreadKnight": 5,
+      "PriestPriest": 1.1,
+      "PriestWizard": 1.1,
+      "PriestAdvanced": 1.1,
+      "PriestSummoner": 1.3,
+      "PriestNinja": 1.2,
+      "PriestElite": 1.5,
+      "PriestSage": 2,
+      "PriestDreadKnight": 5,
+      "WizardWizard": 1.1,
+      "WizardPriest": 1.1,
+      "WizardAdvanced": 1.1,
+      "WizardSummoner": 1.3,
+      "WizardNinja": 1.2,
+      "WizardElite": 1.5,
+      "WizardSage": 2,
+      "WizardDreadKnight": 5,
+      "MonkMonk": 1.1,
+      "MonkPirate": 1.1,
+      "MonkAdvanced": 1.1,
+      "MonkSummoner": 1.2,
+      "MonkNinja": 1.3,
+      "MonkElite": 1.5,
+      "MonkSage": 2,
+      "MonkDreadKnight": 5,
+      "PiratePirate": 1.1,
+      "PirateMonk": 1.1,
+      "PirateAdvanced": 1.1,
+      "PirateSummoner": 1.2,
+      "PirateNinja": 1.3,
+      "PirateElite": 1.5,
+      "PirateSage": 2,
+      "PirateDreadKnight": 5,
+      "BerserkerBerserker": 1.1,
+      "BerserkerSeer": 1.1,
+      "BerserkerAdvanced": 1.1,
+      "BerserkerShapeshifter": 1.2,
+      "BerserkerBard": 1.2,
+      "BerserkerElite": 1.5,
+      "BerserkerSpellBow": 2,
+      "BerserkerDreadKnight": 5,
+      "BerserkerBerserker": 1.1,
+      "SeerSeer": 1.1,
+      "SeerBerserker": 1.05,
+      "SeerAdvanced": 1.1,
+      "SeerShapeshifter": 1.2,
+      "SeerBard": 1.2,
+      "SeerElite": 1.5,
+      "SeerSpellBow": 2,
+      "SeerDreadKnight": 5,
+      "LegionnaireLegionnaire": 1.1,
+      "LegionnaireScholar": 1.05,
+      "LegionnaireAdvanced": 1.1,
+      "LegionnaireShapeshifter": 1.2,
+      "LegionnaireBard": 1.2,
+      "LegionnaireElite": 1.5,
+      "LegionnaireSpellBow": 2,
+      "LegionnaireDreadKnight": 5,
+      "ScholarScholar": 1.1,
+      "ScholarLegionnaire": 1.05,
+      "ScholarAdvanced": 1.1,
+      "ScholarShapeshifter": 1.2,
+      "ScholarBard": 1.2,
+      "ScholarElite": 1.5,
+      "ScholarSpellBow": 2,
+      "ScholarDreadKnight": 5,
+      "PaladinPaladin": 2,
+      "PaladinDarkKnight": 1.8,
+      "PaladinAdvanced": 1.3,
+      "PaladinDragoon": 3,
+      "PaladinElite": 2,
+      "PaladinDreadKnight": 8,
+      "DarkKnightDarkKnight": 2,
+      "DarkKnightPaladin": 1.8,
+      "DarkKnightAdvanced": 1.3,
+      "DarkKnightDragoon": 3,
+      "DarkKnightElite": 2,
+      "DarkKnightDreadKnight": 8,
+      "SummonerSummoner": 2,
+      "SummonerNinja": 1.5,
+      "SummonerAdvanced": 1.3,
+      "SummonerSage": 3,
+      "SummonerElite": 2,
+      "SummonerDreadKnight": 8,
+      "NinjaNinja": 2,
+      "NinjaSummoner": 1.5,
+      "NinjaAdvanced": 1.3,
+      "NinjaSage": 3,
+      "NinjaElite": 2,
+      "NinjaDreadKnight": 8,
+      "ShapeshifterShapeshifter": 2,
+      "ShapeshifterBard": 1.5,
+      "ShapeshifterAdvanced": 1.3,
+      "ShapeshifterSpellbow": 3,
+      "ShapeshifterElite": 2,
+      "ShapeshifterDreadKnight": 8,
+      "BardBard": 2,
+      "BardShapeshifter": 1.5,
+      "BardAdvanced": 1.3,
+      "BardSpellbow": 3,
+      "BardElite": 2,
+      "BardDreadKnight": 8,
+      "DragoonPaladin": 1.5,
+      "DragoonDarkKnight": 1.5,
+      "DragoonAdvanced": 1.3,
+      "DragoonDragoon": 4,
+      "DragoonElite": 2.5,
+      "DragoonDreadKnight": 8,
+      "SageSummoner": 1.5,
+      "SageAdvanced": 1.3,
+      "SageSage": 4,
+      "SageElite": 2.5,
+      "SageDreadKnight": 8,
+      "SpellbowSummoner": 1.5,
+      "SpellbowAdvanced": 1.3,
+      "SpellbowSpellbow": 4,
+      "SpellbowElite": 2.5,
+      "SpellbowDreadKnight": 8,
+      "DreadKnightPaladin": 1.5,
+      "DreadKnightDarkKnight": 1.5,
+      "DreadKnightAdvanced": 1.3,
+      "DreadKnightElite": 3,
+      "DreadKnightDreadKnight": 10,
+    },
+    "professionSetting": {
+      /*
+        你可以自訂你想要的職業與專業對的乘數
+        格式為: "<職業名><專業>"
+        沒有設定時就不會乘
+      */
+      "WarriorMining": 1.3,
+      "KnightMining": 1.3,
+      "ArcherMining": 1.2,
+      "ArcherForaging": 1.05,
+      "ThiefFishing": 1.1,
+      "ThiefMining": 1.2,
+      "PriestForaging": 1.1,
+      "WizardForaging": 1.1,
+      "PirateFishing": 1.1,
+      "MonkFishing": 1.1,
+      "BerserkerMining": 1.15,
+      "LegionnaireMining": 1.15,
+      "PaladinMining": 1.3,
+      "PaladinGardening": 1.1,
+      "DarkKnightMining": 1.3,
+      "DarkKnightForaging": 1.1,
+      "SummonerForaging": 1.1,
+      "NinjaFishing": 1.2,
+      "NinjaForaging": 1.05,
+      "ShapeshifterFishing": 1.1,
+      "BardFishing": 1.2,
+      "BardForaging": 1.1,
+      "DragoonMining": 1.2,
+      "SageForaging": 1.05,
+      "SpellBowForaging": 1.2,
+      "SpellBowFishing": 1.05,
+      "DreadKnightMining": 1.1
+    },
+    "levelSetting": {
+      /*
+        你可以自訂你想要的職業階級與等級的乘數
+        格式為: "<職業階級>LV<等級>"
+        其中等級必須為 5 的倍數
+        沒有設定時就不會乘
+      */
+      "BasicLV5": 1.1,
+      "BasicLV10": 1.3,
+      "BasicLV15": 1.8,
+      "BasicLV20": 3,
+      "AdvancedLV5": 1.1,
+      "AdvancedLV10": 1.3,
+      "AdvancedLV15": 1.8,
+      "AdvancedLV20": 3,
+      "EliteLV5": 1.1,
+      "EliteLV10": 1.3,
+      "EliteLV15": 1.8,
+      "EliteLV20": 3,
+      "TranscendantLV5": 1.1,
+      "TranscendantLV10": 1.3,
+      "TranscendantLV15": 1.8,
+      "TranscendantLV20": 3,
+    },
+    "hairSetting": {
+      /*
+        你可以自訂你想要的職業階級與髮型造型的乘數
+        格式為: "<職業階級><髮型階級>"
+        沒有設定時就不會乘
+      */
+      "BasicAdvanced": 1.05,
+      "BasicElite": 1.3,
+      "BasicTranscendant": 2.5,
+      "AdvancedAdvanced": 1.05,
+      "AdvancedElite": 1.5,
+      "AdvancedTranscendant": 3,
+      "EliteAdvanced": 1.05,
+      "EliteElite": 1.6,
+      "EliteTranscendant": 3,
+      "TranscendantAdvanced": 1.05,
+      "TranscendantElite": 1.6,
+      "TranscendantTranscendant": 3,
+    },
+    "backAppendageSetting": {
+      /*
+        你可以自訂你想要的職業階級與髮型造型的乘數
+        格式為: "<職業階級><髮型階級>"
+        沒有設定時就不會乘
+      */
+      "BasicAdvanced": 1.05,
+      "BasicElite": 1.3,
+      "BasicTranscendant": 2.5,
+      "AdvancedAdvanced": 1.05,
+      "AdvancedElite": 1.5,
+      "AdvancedTranscendant": 3,
+      "EliteAdvanced": 1.05,
+      "EliteElite": 1.6,
+      "EliteTranscendant": 3,
+      "TranscendantAdvanced": 1.05,
+      "TranscendantElite": 1.6,
+      "TranscendantTranscendant": 3,
     }
   },
   "sendHeroTo": null, // 可以填入一個地址，當完成任務時會把所有完成任務的英雄傳入這個地址，當你要換錢包的時候可以使用這個功能
@@ -916,8 +1204,6 @@ const config = {
   "g0ConditionsOfPurchase": 5000, // 當上架的 Gen0 英雄價格低於這個值時會直接嘗試購買，不會進入估價邏輯
   "setQuestScriptTimeSecond": 360, // 設定你每次任務腳本執行的間隔秒數
   "setDuelScriptTimeSecond": 1, // 設定你每次執行 duel 腳本的間隔秒數
-  "saleWatcherWalletIndex": 0, // 設定你用於自動購買的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
-  "autoBuyerSwitch": true, // 自動購買的開關，設定為 false 時將不會自動購買，只會列出上架的英雄
   "autoDuelerWalletIndex": 0 // 設定你用於自動 duel 的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
 }
 

@@ -5,378 +5,113 @@ module.exports = class Valuator {
     this.price = parseInt(price) / Math.pow(10, 18);
     this.hero = hero;
     this.valuation = config.unconditionalPurchasePrice;
-    this.mainclassPrice = 0;
-    this.rarityPrice = 0;
-    this.professionPrice = 0;
-    this.summonPrice = 0;
-    this.levelPrice = 0;
-    this.stylePrice = 0;
-    this.skillPrice = 0;
-    this.statPrice = 0;
-    this.subclassPrice = 0;
   }
 
   execute() {
-    this.evaluateMainclassPrice();
-    this.evaluateRarityPrice();
-    this.evaluateProfessionPrice();
-    this.evaluateSummonPrice();
-    this.evaluateLevelPrice();
-    this.evaluateStylePrice();
-    this.evaluateSkillPrice();
-    // this.evaluateStatPrice();
+    this.getConfigPrice();
+    this.evaluateRarityPrice()
+    this.evaluateProfessionPrice()
+    this.evaluateLevelPrice()
+    this.evaluateHairPrice()
+    this.evaluateBackAppendagePrice()
     this.evaluateSubclassPrice();
+    // this.evaluateSkillPrice();
+    // this.evaluateStatPrice();
     this.networkPriceAdjustment();
   }
 
-  evaluateMainclassPrice() {
+  getConfigPrice() {
     const heroMainclassTier = this.hero.attributeTier("mainClass");
-    const heroRarity = this.hero.formatRarity();
+    const heroGens = [this.hero.generation.toString(), "?"]
+    const heroSummonsRemainings = [this.hero.summonsRemaining.toString(), "?"]
+    const heroSummons = [this.hero.maxSummons.toString(), "?"]
 
-    if (heroMainclassTier === "Basic") {
-      this.mainclassPrice += 0;
-    } else if (heroMainclassTier === "Advanced") {
-      this.mainclassPrice += 5;
-    } else if (heroMainclassTier === "Elite") {
-      this.mainclassPrice += 25;
-    } else if (heroMainclassTier === "Transcendant") {
-      this.mainclassPrice += 800;
+    heroGens.forEach((gen) => {
+      heroSummonsRemainings.forEach((summonsRemaining) => {
+        heroSummons.forEach((summon) => {
+          const configString = heroMainclassTier + summonsRemaining + "/" + summon + "G" + gen
+
+          if (typeof(config.autoBuyerSetting.priceSetting[configString]) !== "undefined") {
+            this.valuation = config.autoBuyerSetting.priceSetting[configString]
+          }
+        })
+      })
+    })
+
+    if (this.valuation === 0) {
+      this.valuation = config.autoBuyerSetting.autoBuyerFloorPrice
     }
-
-    if (heroRarity === "UnCommon") {
-      this.mainclassPrice = this.mainclassPrice * 1.05;
-    } else if (heroRarity === "Rare") {
-      this.mainclassPrice = this.mainclassPrice * 1.1;
-    } else if (heroRarity === "Legendary") {
-      this.mainclassPrice = this.mainclassPrice * 1.2;
-    } else if (heroRarity === "Mythic") {
-      this.mainclassPrice = this.mainclassPrice * 1.3;
-    }
-
-    this.valuation += this.mainclassPrice;
   }
 
   evaluateRarityPrice() {
     const heroMainclassTier = this.hero.attributeTier("mainClass");
     const heroRarity = this.hero.formatRarity();
+    const rarityString = heroMainclassTier + heroRarity
+    const rarityPrice = config.autoBuyerSetting.raritySetting[rarityString]
 
-    if (heroMainclassTier === "Basic") {
-      if (heroRarity === "Rare") {
-        this.rarityPrice += 10;
-      } else if (heroRarity === "Legendary") {
-        this.rarityPrice += 60;
-      } else if (heroRarity === "Mythic") {
-        this.rarityPrice += 300;
-      }
-    } else if (heroMainclassTier === "Advanced") {
-      if (heroRarity === "UnCommon") {
-        this.rarityPrice += 5;
-      } else if (heroRarity === "Rare") {
-        this.rarityPrice += 25;
-      } else if (heroRarity === "Legendary") {
-        this.rarityPrice += 150;
-      } else if (heroRarity === "Mythic") {
-        this.rarityPrice += 550;
-      }
-    } else if (heroMainclassTier === "Elite") {
-      if (heroRarity === "UnCommon") {
-        this.rarityPrice += 20;
-      } else if (heroRarity === "Rare") {
-        this.rarityPrice += 150;
-      } else if (heroRarity === "Legendary") {
-        this.rarityPrice += 750;
-      } else if (heroRarity === "Mythic") {
-        this.rarityPrice += 2500;
-      }
-    } else if (heroMainclassTier === "Transcendant") {
-      if (heroRarity === "UnCommon") {
-        this.rarityPrice += 100;
-      } else if (heroRarity === "Rare") {
-        this.rarityPrice += 300;
-      } else if (heroRarity === "Legendary") {
-        this.rarityPrice += 1500;
-      } else if (heroRarity === "Mythic") {
-        this.rarityPrice += 5000;
-      }
+    if (typeof(rarityPrice) !== "undefined") {
+      this.valuation *= rarityPrice;
     }
-
-    this.valuation += this.rarityPrice;
   }
 
   evaluateProfessionPrice() {
-    const heroMainclass = this.hero.mainClass;
-    
-    switch(heroMainclass) {
-      case "Warrior":
-        if (this.hero.profession === "mining") {
-          this.professionPrice += 5;
-        }
-        break;
-      case "Knight":
-        if (this.hero.profession === "mining") {
-          this.professionPrice += 5;
-        }
-        break;
-      case "Thief":
-        if (this.hero.profession === "fishing") {
-          this.professionPrice += 5;
-        }
-        break;
-      case "Archer":
-        if (this.hero.profession === "foraging") {
-          this.professionPrice += 3;
-        }
-        break;
-      case "Priest":
-        if (this.hero.profession === "foraging") {
-          this.professionPrice += 3;
-        }
-        break;
-      case "Wizard":
-        if (this.hero.profession === "foraging") {
-          this.professionPrice += 3;
-        }
-        break;
-      case "Monk":
-        break;
-      case "Pirate":
-        break;
-      case "Berserker":
-        if (this.hero.profession === "mining") {
-          this.professionPrice += 3;
-        }
-        break;
-      case "Seer":
-        if (this.hero.profession === "foraging") {
-          this.professionPrice += 2;
-        }
-        break;
-      case "Paladin":
-        if (this.hero.profession === "mining") {
-          this.professionPrice += 10;
-        }
-        break;
-      case "DarkKnight":
-        if (this.hero.profession === "mining") {
-          this.professionPrice += 10;
-        }
-        break;
-      case "Summoner":
-        if (this.hero.profession === "foraging") {
-          this.professionPrice += 5;
-        }
-        break;
-      case "Ninja":
-        if (this.hero.profession === "fishing") {
-          this.professionPrice += 10;
-        } else if (this.hero.profession === "foraging") {
-          this.professionPrice += 5;
-        } else if (this.hero.profession === "gardening") {
-          this.professionPrice -= 5;
-        }
-        break;
-      case "Shapeshifter":
-        if (this.hero.profession === "fishing") {
-          this.professionPrice += 10;
-        } else if (this.hero.profession === "foraging") {
-          this.professionPrice += 3;
-        }
-        break;
-      case "Dragoon":
-        if (this.hero.profession === "mining") {
-          this.professionPrice += 10;
-        }
-        break;
-      case "Sage":
-        if (this.hero.profession === "foraging") {
-          this.professionPrice += 10;
-        }
-        break;
-      case "DreadKnight":
-        if (this.hero.profession === "mining") {
-          this.professionPrice += 100;
-        }
-        break;
+    const heroMainclass = this.hero.mainClass
+    const heroProfession = this.hero.profession[0].toUpperCase() + this.hero.profession.slice(1)
+    const professionString = heroMainclass + heroProfession
+    const professionPrice = config.autoBuyerSetting.professionSetting[professionString]
+
+    if (typeof(professionPrice) !== "undefined") {
+      this.valuation *= professionPrice;
     }
-
-    this.valuation += this.professionPrice;
-  }
-
-  evaluateSummonPrice() {
-    const heroMainclass = this.hero.mainClass;
-    const heroMainclassTier = this.hero.attributeTier("mainClass");
-    const heroRarity = this.hero.formatRarity();
-
-    if (heroMainclassTier === "Basic") {
-      if (this.hero.generation >= 3) {
-        return;
-      } else if (this.hero.generation === 2) {
-        if (this.hero.summonsRemaining === 7) {
-          this.summonPrice += 2;
-        } else if (this.hero.summonsRemaining === 8) {
-          this.summonPrice += 4;
-        } else if (this.hero.summonsRemaining === 9) {
-          this.summonPrice += 6;
-        }
-      } else if (this.hero.generation === 1) {
-        if (this.hero.summonsRemaining === 7) {
-          this.summonPrice += 5;
-        } else if (this.hero.summonsRemaining === 8) {
-          this.summonPrice += 10;
-        } else if (this.hero.summonsRemaining === 9) {
-          this.summonPrice += 25;
-        } else if (this.hero.summonsRemaining === 10) {
-          this.summonPrice += 35;
-        }
-      } else if (this.hero.generation === 0) {
-        this.summonPrice += config.g0ConditionsOfPurchase;
-      }
-    } else if (heroMainclassTier === "Advanced") {
-      if (this.hero.generation >= 5) {
-        if (this.hero.summonsRemaining === 4) {
-          this.summonPrice += 5;
-        } else if (this.hero.summonsRemaining === 5) {
-          this.summonPrice += 20;
-        }
-      } else if (this.hero.generation === 4) {
-        if (this.hero.summonsRemaining === 4) {
-          this.summonPrice += 20;
-        } else if (this.hero.summonsRemaining === 5) {
-          this.summonPrice += 35;
-        }
-      } else if (this.hero.generation === 3) {
-        if (this.hero.summonsRemaining === 2) {
-          this.summonPrice += 3;
-        } else if (this.hero.summonsRemaining === 3) {
-          this.summonPrice += 8;
-        } else if (this.hero.summonsRemaining === 4) {
-          this.summonPrice += 35;
-        } else if (this.hero.summonsRemaining === 5) {
-          this.summonPrice += 60;
-        }
-      } else if (this.hero.generation === 2) {
-        if (this.hero.summonsRemaining === 2) {
-          this.summonPrice += 5;
-        } else if (this.hero.summonsRemaining === 3) {
-          this.summonPrice += 10;
-        } else if (this.hero.summonsRemaining === 4) {
-          this.summonPrice += 40;
-        } else if (this.hero.summonsRemaining === 5) {
-          this.summonPrice += 70;
-        }
-      } else if (this.hero.generation === 1) {
-        if (this.hero.summonsRemaining === 1) {
-          this.summonPrice += 5;
-        } else if (this.hero.summonsRemaining === 2) {
-          this.summonPrice += 15;
-        } else if (this.hero.summonsRemaining === 3) {
-          this.summonPrice += 30;
-        } else if (this.hero.summonsRemaining === 4) {
-          this.summonPrice += 60;
-        } else if (this.hero.summonsRemaining === 5) {
-          this.summonPrice += 90;
-        }
-      }
-
-      if (heroMainclass === "Shapeshifter") {
-        this.summonPrice = this.summonPrice * 0.55;
-      }
-    } else if (heroMainclassTier === "Elite") {
-      if (this.hero.generation >= 5) {
-        if (this.hero.summonsRemaining === 1) {
-          this.summonPrice += 80;
-        } else if (this.hero.summonsRemaining === 2) {
-          this.summonPrice += 160;
-        } else if (this.hero.summonsRemaining === 3) {
-          this.summonPrice += 250;
-        }
-      } else if (this.hero.generation <= 4) {
-        if (this.hero.summonsRemaining === 1) {
-          this.summonPrice += 90;
-        } else if (this.hero.summonsRemaining === 2) {
-          this.summonPrice += 170;
-        } else if (this.hero.summonsRemaining === 3) {
-          this.summonPrice += 300;
-        }
-      }
-    } else if (heroMainclassTier === "Transcendant") {
-      if (this.hero.summonsRemaining === 1) {
-        this.summonPrice += 500;
-      }
-    }
-
-    if (heroRarity === "UnCommon") {
-      this.summonPrice = this.summonPrice * 1.1;
-    } else if (heroRarity === "Rare") {
-      this.summonPrice = this.summonPrice * 1.2;
-    } else if (heroRarity === "Legendary") {
-      this.summonPrice = this.summonPrice * 1.5;
-    } else if (heroRarity === "Mythic") {
-      this.summonPrice = this.summonPrice * 2.25;
-    }
-
-    this.valuation += this.summonPrice;
   }
 
   evaluateLevelPrice() {
-    const heroMainclassTier = this.hero.attributeTier("mainClass");
-    const heroRarity = this.hero.formatRarity();
+    const heroMainclassTier = this.hero.attributeTier("mainClass")
+    const heroLevel = this.hero.level
+    const levelString = heroMainclassTier + "LV" + Math.floor(heroLevel / 5).toString()
+    const levelPrice = config.autoBuyerSetting.levelSetting[levelString]
 
-    if (heroMainclassTier === "Basic") {
-      this.levelPrice += (this.hero.level - 1)
-    } else if (heroMainclassTier === "Advanced") {
-      this.levelPrice += ((this.hero.level - 1) * 1.5)
-    } else if (heroMainclassTier === "Elite") {
-      this.levelPrice += ((this.hero.level - 1) * 3)
-    } else if (heroMainclassTier === "Transcendant") {
-      this.levelPrice += ((this.hero.level - 1) * 10)
+    if (typeof(levelPrice) !== "undefined") {
+      this.valuation *= professionPrice;
     }
-
-    if (heroRarity === "UnCommon") {
-      this.levelPrice = this.levelPrice * 1.2;
-    } else if (heroRarity === "Rare") {
-      this.levelPrice = this.levelPrice * 1.5;
-    } else if (heroRarity === "Legendary") {
-      this.levelPrice = this.levelPrice * 3;
-    } else if (heroRarity === "Mythic") {
-      this.levelPrice = this.levelPrice * 5;
-    }
-
-    this.valuation += this.levelPrice;
   }
 
-  evaluateStylePrice() {
+  evaluateHairPrice() {
+    const heroMainclassTier = this.hero.attributeTier("mainClass")
     const heroHairTier = this.hero.attributeTier("hairStyle");
-    const heroBackappendageTier = this.hero.attributeTier("backAppendage");
-    const heroRarity = this.hero.formatRarity();
+    const hairString = heroMainclassTier + heroHairTier
+    const hairPrice = config.autoBuyerSetting.hairSetting[hairString]
 
-    if (heroHairTier === "Elite") {
-      this.stylePrice += 20;
-    } else if (heroHairTier === "Transcendant") {
-      this.stylePrice += 50;
+    if (typeof(hairPrice) !== "undefined") {
+      this.valuation *= hairPrice;
     }
+  }
 
-    if (heroBackappendageTier === "Elite") {
-      this.stylePrice += 20;
-    } else if (heroBackappendageTier === "Transcendant") {
-      this.stylePrice += 50;
+  evaluateBackAppendagePrice() {
+    const heroMainclassTier = this.hero.attributeTier("mainClass")
+    const herobackAppendage = this.hero.attributeTier("backAppendage");
+    const backAppendageString = heroMainclassTier + herobackAppendage
+    const backAppendagePrice = config.autoBuyerSetting.backAppendageSetting[backAppendageString]
+
+    if (typeof(backAppendagePrice) !== "undefined") {
+      this.valuation *= backAppendagePrice;
     }
+  }
 
-    if (heroRarity === "UnCommon") {
-      this.stylePrice = this.stylePrice * 1.05;
-    } else if (heroRarity === "Rare") {
-      this.stylePrice = this.stylePrice * 1.1;
-    } else if (heroRarity === "Legendary") {
-      this.stylePrice = this.stylePrice * 1.2;
-    } else if (heroRarity === "Mythic") {
-      this.stylePrice = this.stylePrice * 1.3;
-    }
+  evaluateSubclassPrice() {
+    const heroMainclass = this.hero.mainClass
+    const heroSubclasses = [this.hero.subClass, this.hero.attributeTier("subClass")]
 
-    if (this.summonPrice === 0) {
-      this.stylePrice = this.stylePrice * 0.3;
-    }
+    heroSubclasses.forEach((subclass) => {
+      const subclassConfigString = heroMainclass + subclass
 
-    this.valuation += this.stylePrice;
+      if (typeof(config.autoBuyerSetting.subclassSetting[subclassConfigString]) !== "undefined") {
+        this.valuation *= config.autoBuyerSetting.subclassSetting[subclassConfigString]
+
+        return
+      }
+    })
+
   }
 
   evaluateSkillPrice() {
@@ -1014,256 +749,13 @@ module.exports = class Valuator {
     this.valuation += this.statPrice;
   }
 
-  evaluateSubclassPrice() {
-    const heroMainclass = this.hero.mainClass;
-    const heroSubclass = this.hero.subClass;
-    const heroRarity = this.hero.formatRarity();
-
-    switch(heroMainclass) {
-      case "Warrior":
-        if (heroSubclass === "Warrior" || heroSubclass === "Knight" || heroSubclass === "Summoner" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 30;
-        }
-        break;
-      case "Knight":
-        if (heroSubclass === "Warrior" || heroSubclass === "Knight" || heroSubclass === "Summoner" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 30;
-        }
-        break;
-      case "Thief":
-        if (heroSubclass === "Thief" || heroSubclass === "Summoner" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 30;
-        }
-        break;
-      case "Archer":
-        if (heroSubclass === "Archer" || heroSubclass === "Summoner" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 30;
-        }
-        break;
-      case "Priest":
-        if (heroSubclass === "Priest" || heroSubclass === "Wizard" || heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Summoner" || heroSubclass === "Ninja") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 30;
-        }
-        break;
-      case "Wizard":
-        if (heroSubclass === "Priest" || heroSubclass === "Wizard" || heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Summoner" || heroSubclass === "Ninja") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 30;
-        }
-        break;
-      case "Monk":
-        if (heroSubclass === "Monk" || heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Summoner" || heroSubclass === "Ninja") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 30;
-        }
-        break;
-      case "Pirate":
-        if (heroSubclass === "Pirate" || heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Summoner" || heroSubclass === "Ninja") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 30;
-        }
-        break;
-      case "Berserker":
-        if (heroSubclass === "Berserker" || heroSubclass === "Summoner" || heroSubclass === "Ninja") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 30;
-        }
-        break;
-      case "Seer":
-        if (heroSubclass === "Seer" || heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Ninja") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Summoner" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 30;
-        }
-        break;
-      case "Paladin":
-        if (heroSubclass === "Warrior" || heroSubclass === "Knight" || heroSubclass === "Berserker") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Summoner" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 30;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 80;
-        }
-        break;
-      case "DarkKnight":
-        if (heroSubclass === "Warrior" || heroSubclass === "Knight" || heroSubclass === "Berserker") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Summoner" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 30;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 80;
-        }
-        break;
-      case "Summoner":
-        if (heroSubclass === "Wizard" || heroSubclass === "Priest" || heroSubclass === "Seer") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Shapeshifter" || heroSubclass === "Ninja") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Summoner") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 30;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 80;
-        }
-        break;
-      case "Ninja":
-        if (heroSubclass === "Thief") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Summoner") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Shapeshifter" || heroSubclass === "Ninja") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 30;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 80;
-        }
-        break;
-      case "Shapeshifter":
-        if (heroSubclass === "Thief" || heroSubclass === "Pirate") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Summoner") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Shapeshifter" || heroSubclass === "Ninja") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 30;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 80;
-        }
-        break;
-      case "Dragoon":
-        if (heroSubclass === "Warrior" || heroSubclass === "Knight" || heroSubclass === "Berserker") {
-          this.subclassPrice += 1;
-        } else if (heroSubclass === "Summoner") {
-          this.subclassPrice += 5;
-        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 15;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 50;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 100;
-        }
-        break;
-      case "Sage":
-        if (heroSubclass === "Wizard" || heroSubclass === "Priest" || heroSubclass === "Seer") {
-          this.subclassPrice += 3;
-        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight") {
-          this.subclassPrice += 5;
-        } else if (heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "Summoner") {
-          this.subclassPrice += 25;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 50;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 100;
-        }
-        break;
-      case "DreadKnight":
-        if (heroSubclass === "Warrior" || heroSubclass === "Knight" || heroSubclass === "Berserker") {
-          this.subclassPrice += 10;
-        } else if (heroSubclass === "Paladin" || heroSubclass === "DarkKnight" || heroSubclass === "Ninja" || heroSubclass === "Shapeshifter") {
-          this.subclassPrice += 50;
-        } else if (heroSubclass === "Summoner") {
-          this.subclassPrice += 25;
-        } else if (heroSubclass === "Dragoon" || heroSubclass === "Sage") {
-          this.subclassPrice += 100;
-        } else if (heroSubclass === "DreadKnight") {
-          this.subclassPrice += 500;
-        }
-        break;
-    }
-
-    if (heroRarity === "UnCommon") {
-      this.subclassPrice = this.subclassPrice * 1.1;
-    } else if (heroRarity === "Rare") {
-      this.subclassPrice = this.subclassPrice * 1.2;
-    } else if (heroRarity === "Legendary") {
-      this.subclassPrice = this.subclassPrice * 1.3;
-    } else if (heroRarity === "Mythic") {
-      this.subclassPrice = this.subclassPrice * 1.4;
-    }
-
-    if (this.summonPrice === 0) {
-      this.subclassPrice = this.subclassPrice * 0.2;
-    } else if (this.summonPrice <= 10) {
-      this.subclassPrice = this.subclassPrice * 0.5;
-    }
-
-    this.valuation += this.subclassPrice;
-  }
-
   networkPriceAdjustment() {
     this.valuation = this.valuation * config.buyerEstimateAdjustment
 
     if (this.hero.network === "dfk") {
-      this.valuation = this.valuation * config.defikingdoms.networkBuyerEstimateAdjustment
+      this.valuation = this.valuation * config.autoBuyerSetting.DFKnetworkBuyerEstimateAdjustment
     } else if (this.hero.network === "kla") {
-      this.valuation = this.valuation * config.klay.networkBuyerEstimateAdjustment
+      this.valuation = this.valuation * config.autoBuyerSetting.KLAYnetworkBuyerEstimateAdjustment
     }
 
     this.valuation = Math.round(this.valuation * 100) / 100

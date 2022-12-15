@@ -16,12 +16,18 @@ const duelRaffleTicketContract = new DuelRaffleTicket(config.walletAddressAndPri
 const airdropClaimContract = new AirdropClaim(config.walletAddressAndPrivateKeyMappings[0])
 const crystalContract = new Crystal(config.walletAddressAndPrivateKeyMappings[0])
 const assistingAuctionUpgradeableContract = new AssistingAuctionUpgradeable(config.walletAddressAndPrivateKeyMappings[0])
+const Valuator = require('~/src/services/valuator');
+
 
 const { enterRaffle } = require("~/src/defikingdoms/enter_raffle")
 const { airdropClaim } = require("~/src/defikingdoms/airdrop_claim")
 
 
 async function test() {  
+  const heroes = await autils.getHeroesInfoByIds(["2000000000175"])
+  const valuator = new Valuator("100000000000000000", heroes[0])
+  valuator.execute()
+  console.log(valuator.valuation)
   // await assistingAuctionUpgradeableContract.unlistHero("")
 
   // console.log(Math.round(8.5 * 100) / 100)

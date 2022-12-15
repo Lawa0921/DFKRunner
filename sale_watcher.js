@@ -5,7 +5,7 @@ const axiosRetry = require('axios-retry');
 const date = require('date-and-time');
 const Valuator = require('~/src/services/valuator');
 const DFKSaleAuction = require("~/src/defikingdoms/contracts/saleAuction");
-const DFKSaleAuctionContract = new DFKSaleAuction(config.walletAddressAndPrivateKeyMappings[config.saleWatcherWalletIndex]);
+const DFKSaleAuctionContract = new DFKSaleAuction(config.walletAddressAndPrivateKeyMappings[config.autoBuyerSetting.saleWatcherWalletIndex]);
 
 axiosRetry(axios, {
   retries: 5,
@@ -25,7 +25,7 @@ const DFKSaleHandler = async (tokenId, price) => {
   valuator.execute();
   autils.watchHeroLog(valuator.hero, price, valuator.valuation, "dfk");
 
-  if (config.autoBuyerSwitch && !valuator.hero.isOwning() && valuator.price <= valuator.valuation) {
+  if (config.autoBuyerSetting.autoBuyerSwitch && !valuator.hero.isOwning() && valuator.price <= valuator.valuation) {
     console.log(`!!! bid hero ${tokenId} txn created !!!`)
     const txn = await DFKSaleAuctionContract.bid(tokenId, price);
     const res = await txn.wait();
