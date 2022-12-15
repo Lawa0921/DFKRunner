@@ -30,7 +30,7 @@ main = async() => {
 
     console.log(`----- DFK Chain -----`)
 
-    const notInDFKHeroes = DFKConfigHeroes.filter(heroObject => DFKOwningHeroes.map(heroObject => heroObject.id).indexOf(heroObject.id) === -1)
+    const notInDFKHeroes = DFKConfigHeroes.filter(heroObject => DFKOwningHeroes.map(heroObject => heroObject.id).indexOf(heroObject.id) === -1 && heroObject.owner === accountInfo.walletAddress)
     console.log("not in DFK heroes:")
     console.log(notInDFKHeroes.map(heroObject => { return { id: heroObject.id, currentNetwork: heroObject.network } }))
 
@@ -58,7 +58,7 @@ main = async() => {
 
     console.log(`----- KLAY Chain -----`)
 
-    const notInKLAYHeroes = KLAYConfigHeroes.filter(heroObject => KLAYOwningHeroes.map(heroObject => heroObject.id).indexOf(heroObject.id) === -1)
+    const notInKLAYHeroes = KLAYConfigHeroes.filter(heroObject => KLAYOwningHeroes.map(heroObject => heroObject.id).indexOf(heroObject.id) === -1 && heroObject.owner === accountInfo.walletAddress)
     console.log("not in KLAY heroes:")
     console.log(notInKLAYHeroes.map(heroObject => { return { id: heroObject.id, currentNetwork: heroObject.network } }))
 

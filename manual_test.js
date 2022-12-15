@@ -24,7 +24,7 @@ const { airdropClaim } = require("~/src/defikingdoms/airdrop_claim")
 
 
 async function test() {  
-  const heroes = await autils.getHeroesInfoByIds(["2000000000175"])
+  const heroes = await autils.getHeroesInfoByIds(["1000000091833"])
   const valuator = new Valuator("100000000000000000", heroes[0])
   valuator.execute()
   console.log(valuator.valuation)
