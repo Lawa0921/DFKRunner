@@ -118,7 +118,7 @@ module.exports = class Valuator {
     const heroMainclassTier = this.hero.attributeTier("mainClass")
     const skillInfos = this.hero.skillInfos()
     const skillSetTargetPrice = config.autoBuyerSetting.skillSetting[heroMainclass + skillInfos.skillsString]
-    const skillPrice = config.autoBuyerSetting.skillSetting[heroMainclassTier + skillInfos.skillScore.toString()]
+    const skillPrice = config.autoBuyerSetting.skillSetting[heroMainclassTier + "Total" +skillInfos.skillScore.toString()]
 
     if (typeof(skillSetTargetPrice) !== "undefined") {
       this.valuation *= skillSetTargetPrice
