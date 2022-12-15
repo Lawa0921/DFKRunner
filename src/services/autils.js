@@ -369,7 +369,7 @@ exports.getAllConfigHeroIds = () => {
 
 exports.watchHeroLog = async (hero, price, valuator, network) => {
     const networkCurrencies = {
-        hmy: "J",
+        kla: "Jade",
         dfk: "C"
     }
     let idAndRarity = `${hero.id} ${hero.formatRarity()}`;
@@ -432,7 +432,7 @@ exports.watchHeroLog = async (hero, price, valuator, network) => {
         profession = strToAnsiGreen(profession);
     }
 
-    str = idAndRarity + ", " + mainClass + "/" + subClass + " " + profession + " " + info + " +" + strToAnsiGreen(hero.statboost1) + "/" + strToAnsiBlue(hero.statboost2) + " " + skillInfo + " " + hair + "/" + backappendage + " " + listInfo
+    str = hero.network.toUpperCase() + " " + idAndRarity + ", " + mainClass + "/" + subClass + " " + profession + " " + info + " +" + strToAnsiGreen(hero.statboost1) + "/" + strToAnsiBlue(hero.statboost2) + " " + skillInfo + " " + hair + "/" + backappendage + " " + listInfo
     console.log(str);
 }
 
