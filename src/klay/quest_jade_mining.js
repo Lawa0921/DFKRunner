@@ -31,10 +31,10 @@ exports.CheckAndSendDFKJadeMiners = async (heroesStruct, accountInfo) => {
       }
     }
 
-    let sentMinerIds = [possibleJadeMiners[0].id]
+    let sentMinerIds = [sendJadeMiners[0].id]
 
     if (batchAmount > 1) {
-      sentMinerIds = sentMinerIds.concat(possibleJadeMiners.map(heroObject => heroObject.id).slice((batchAmount - 1) * -1))
+      sentMinerIds = sentMinerIds.concat(sendJadeMiners.map(heroObject => heroObject.id).slice((batchAmount - 1) * -1))
     }
     console.log(`${accountInfo.accountName} KLAY sending ${sentMinerIds} to jade mining quest`)
 

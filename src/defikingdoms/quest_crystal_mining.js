@@ -31,10 +31,10 @@ exports.CheckAndSendDFKCrystalMiners = async (heroesStruct, accountInfo) => {
       }
     }
 
-    let sentMinerIds = [possibleCrystalMiners[0].id]
+    let sentMinerIds = [sendCrystalMiners[0].id]
 
     if (batchAmount > 1) {
-      sentMinerIds = sentMinerIds.concat(possibleCrystalMiners.map(heroObject => heroObject.id).slice((batchAmount - 1) * -1))
+      sentMinerIds = sentMinerIds.concat(sendCrystalMiners.map(heroObject => heroObject.id).slice((batchAmount - 1) * -1))
     }
     console.log(`${accountInfo.accountName} DFK sending ${sentMinerIds} to crystal mining quest`)
 
