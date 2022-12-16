@@ -12,6 +12,15 @@ module.exports = class DFKDuelS2Contract {
 		this.accountName = accountInfo.accountName
 	}
 
+  async getCurrentClassBonuses() {
+    let [bounsMainclassesInt, bounsSubclassesInt] = await this.contract.getCurrentClassBonuses()
+
+    return {
+      bounsMainclasses: bounsMainclassesInt.map(classInt => this.heroClasses()[classInt]).filter(mainclass => typeof(mainclass) !== "undefined"),
+      bounsSubclasses: bounsSubclassesInt.map(classInt => this.heroClasses()[classInt]).filter(subclass => typeof(subclass) !== "undefined"),
+    }
+  }
+
   async enterDuelLobby(duelType, heroIds, fee, duelBackground, duelStat) {
     const txn = await this.contract.enterDuelLobby(
 			this.duelType()[duelType],
@@ -208,5 +217,40 @@ module.exports = class DFKDuelS2Contract {
 			}
 		}
 	}
+
+  heroClasses() {
+    return {
+      0: "Warrior",
+      1: "Knight",
+      2: "Thief",
+      3: "Archer",
+      4: "Priest",
+      5: "Wizard",
+      6: "Monk",
+      7: "Pirate",
+      8: "Berserker",
+      9: "Seer",
+      10: "Legionnaire",
+      11: "Scholar",
+      16: "Paladin",
+      17: "DarkKnight",
+      18: "Summoner",
+      19: "Ninja",
+      20: "Shapeshifter",
+      21: "Bard",
+      24: "Dragoon",
+      25: "Sage",
+      26: "SpellBow",
+      28: "DreadKnight"
+    }
+  }
+
+  duelTypeDailyLimit() {
+    return {
+      "solo": 10,
+      "squad": 30,
+      "war": 90,
+    }
+  }
 }
 
