@@ -100,17 +100,15 @@ module.exports = class Valuator {
   evaluateSubclassPrice() {
     const heroMainclass = this.hero.mainClass
     const heroSubclasses = [this.hero.subClass, this.hero.attributeTier("subClass")]
+    let subclassPrice
 
-    heroSubclasses.forEach((subclass) => {
-      const subclassConfigString = heroMainclass + subclass
+    for (let i = 0; i < heroSubclasses.length && typeof(subclassPrice) === "undefined"; i++) {
+      subclassPrice = config.autoBuyerSetting.subclassSetting[heroMainclass + heroSubclasses[i]]
+    }
 
-      if (typeof(config.autoBuyerSetting.subclassSetting[subclassConfigString]) !== "undefined") {
-        this.valuation *= config.autoBuyerSetting.subclassSetting[subclassConfigString]
-
-        return
-      }
-    })
-
+    if (typeof(subclassPrice) !== "undefined") {
+      this.valuation *= subclassPrice
+    }
   }
 
   evaluateSkillPrice() {
@@ -118,7 +116,7 @@ module.exports = class Valuator {
     const heroMainclassTier = this.hero.attributeTier("mainClass")
     const skillInfos = this.hero.skillInfos()
     const skillSetTargetPrice = config.autoBuyerSetting.skillSetting[heroMainclass + skillInfos.skillsString]
-    const skillPrice = config.autoBuyerSetting.skillSetting[heroMainclassTier + "Total" +skillInfos.skillScore.toString()]
+    const skillPrice = config.autoBuyerSetting.skillSetting[heroMainclassTier + "Total" + skillInfos.skillScore.toString()]
 
     if (typeof(skillSetTargetPrice) !== "undefined") {
       this.valuation *= skillSetTargetPrice
