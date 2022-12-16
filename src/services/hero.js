@@ -113,7 +113,7 @@ module.exports = class Hero {
         return "Basic"
       } else if (["DarkKnight", "Paladin", "Ninja", "Summoner", "Shapeshifter", "Bard"].includes(attribute)) {
         return "Advanced"
-      } else if (["Dragoon", "Sage", "Spellbow"].includes(attribute)) {
+      } else if (["Dragoon", "Sage", "SpellBow"].includes(attribute)) {
         return "Elite"
       } else if (attribute === "DreadKnight") {
         return "Transcendant"
@@ -167,7 +167,7 @@ module.exports = class Hero {
         return profession === "mining" ? true : false;
       case "Sage":
         return profession === "foraging" || profession === "gardening" ? true : false;
-      case "Spellbow":
+      case "SpellBow":
         return profession === "foraging" ? true : false;
       case "DreadKnight":
         return profession === "mining" ? true : false;
@@ -218,7 +218,7 @@ module.exports = class Hero {
         return profession === "mining" ? true : false;
       case "Sage":
         return profession === "mining" ? true : false;
-      case "Spellbow":
+      case "SpellBow":
         return false;
       case "DreadKnight":
         return false;
@@ -590,7 +590,7 @@ module.exports = class Hero {
           subGrowth2 = "AGI";
         }
         break;
-      case "Spellbow":
+      case "SpellBow":
         if (profession === "foraging") {
           mainGrowth = "DEX";
           subGrowth1 = "INT";
