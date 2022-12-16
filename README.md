@@ -2,7 +2,7 @@
 1. 自動做任務 ( 包含 profession 及 training quest ， DFK 及 KLAY 都可使用 )
 2. 自動掛售上下架 ( DFK 及 KLAY 都可使用 )
 3. 自動升級 ( DFK 及 KLAY 都可使用 )
-4. 自動購買 ( 可監聽 DFK 的上架 ) ▲ 邏輯已經舊了，需要更新 
+4. 自動購買 ( 可監聽 DFK 及 KLAY 的上架 )
 5. 檢查自己各帳號的持有情況 (  DFK 及 KLAY 都可使用 )
 6. 自動估價出租 ( DFK 及 KLAY 都可使用 )
 7. 自動 duel ( DFK 可使用 )
