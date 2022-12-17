@@ -25,7 +25,7 @@ const { airdropClaim } = require("~/src/defikingdoms/airdrop_claim")
 
 
 async function test() {  
-  console.log(await DFKDuelS2Contract.getDuelHistory())
+  console.log(await DFKDuelS2Contract.getCurrentClassBonuses())
 
   // const heroes = await autils.getHeroesInfoByIds(["1000000100455"])
   // const valuator = new Valuator("100000000000000000", heroes[0])

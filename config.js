@@ -358,42 +358,15 @@ const config = {
         "sale": true
       },
     ],
-    "duelSetting": [ // 注意: 同一時間只能有一個進行中的 duel，這表示你只能將一種類型開啟為 true
-			{
-				"type": "solo", // duel 的類型，你不會更改這個值
-				"fee": "low", // 花費幣的數量 low = 0.1 medium = 0.5 large = 1
-				"isActive": true, // 表示是否要執行該 type 的 duel，true 的情形就會自動執行
-				"heroes": [
-					["295922"],
-          ["96964"],
-          ["233167"],
-          ["1000000050447"]
-				], // 在這邊寫你想要嘗試送去 duel 的英雄 id solo 範例: [["1234"], ["5678"], ["91011"]]
-			},
-			{
-				"type": "squad", // duel 的類型，你不會更改這個值
-				"fee": "low", // 花費幣的數量 low = 0.3 medium = 1.5 large = 3
-				"isActive": false, // 表示是否要執行該 type 的 duel，true 的情形就會自動執行
-				"heroes": [
-
-				], // 在這邊寫你想要嘗試送去 duel 的英雄 id squad 範例: [["1234", "5678", "91011"], ["121314", "151617", "181920"]]
-			},
-			{
-				"type": "war", // duel 的類型，你不會更改這個值
-				"fee": "low", // 花費幣的數量 low = 1 medium = 5 large = 10
-				"isActive": false, // 表示是否要執行該 type 的 duel，true 的情形就會自動執行
-				"heroes": [
-          
-        ], // 在這邊寫你想要嘗試送去 duel 的英雄 id war 範例: [["1234", "5678", "91011", "121314", "151617", "181920", "444", "555", "6666"]]
-			}
-    ],
-    "newDuelSetting": {
+    "duelSetting": {
       "autoDuelerWalletIndex": 0, // 設定你用於自動 duel 的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
       "setDuelScriptTimeSecond": 1, // 設定你每次執行 duel 腳本的間隔秒數
       "type": "solo", // duel 的類型，solo, squad, war 其中一種
       "fee": "low", // 花費幣的數量 low, medium, large 其中一種
       "heroes": [ // 在這邊寫你打算送去 duel 的英雄 id
-
+        "1000000017580", "233167", "235300", "1000000021036",
+        "272569", "96964", "1000000052725", "273716", "1000000029882", 
+        "295922", "1000000075777", "302782", "1000000033947", "1000000050447"
       ]
     },
     "raffleSetting": { // 會在每個獎池放入 enterAmount 輸入的值，如果抽獎券不夠會直接跳過

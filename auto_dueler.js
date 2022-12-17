@@ -11,31 +11,41 @@ main = async() => {
 	if (baseGasPrice > config.defikingdoms.maxGasPrice) {
 		console.log(`DFK Current base gasPrice: ${baseGasPrice} is over then maxGasPrice setting: ${config.defikingdoms.maxGasPrice}, will retry later.`)
 	} else {
-		await autoDuelScript(config.walletAddressAndPrivateKeyMappings[config.autoDuelerWalletIndex])
+		await autoDuelScript(config.walletAddressAndPrivateKeyMappings[config.defikingdoms.duelSetting.autoDuelerWalletIndex])
 	}
 	await autils.sleep(config.defikingdoms.duelSetting.setDuelScriptTimeSecond * 1000)
 
   process.exit()
 }
 
-getHeroDailyDuelAmount = async(hero, duelRecords, duelType) => {
-  // to do
+getHeroDailyDuelAmount = (hero, duelRecords, currentBlockNumber) => {
+  const oneDayBlock = 86400
+
+  const heroDuelTypeAmount = duelRecords.filter((duelRecord) => {
+    return duelRecord.startBlock >= currentBlockNumber - oneDayBlock &&
+      duelRecord.player1Heroes.indexOf(hero.id) > -1
+  }).length
+
+  
+  return heroDuelTypeAmount
 }
 
-pickDueler = async(currentDuelers, waitingForPickDuelers, bounsClass) => {
-  waitingForPickDuelers.filter((heroObject) => currentDuelers.map(dueler => dueler.id).indexOf(heroObject.id) === -1).map((heroObject) => {
+pickDueler = (currentDuelers, waitingForPickDuelers, bounsClass) => {
+  const heroObjects = waitingForPickDuelers.filter((heroObject) => currentDuelers.map(dueler => dueler.id).indexOf(heroObject.id) === -1).map((heroObject) => {
     return {
       instance: heroObject,
       pickScore: heroObject.duelPickScore(currentDuelers, bounsClass)
     }
   }).sort((heroInfo, nextHeroInfo) => {
     return nextHeroInfo.pickScore - heroInfo.pickScore
-  })[0]
+  })
+
+  return heroObjects[0]
 }
 
 autoDuelScript = async (accountInfo) => {
   try {
-		const DFKDuelSetting = config.defikingdoms.newDuelSetting
+		const DFKDuelSetting = config.defikingdoms.duelSetting
     const DFKDuelS2Contract = new DFKDuelS2(accountInfo)
     const duelHeroAmount =  DFKDuelS2Contract.duelType()[DFKDuelSetting.type]
     const activeDuels = await DFKDuelS2Contract.getActiveDuels().then(res => res.filter(duel => duel.player1Heroes.length === duelHeroAmount))
@@ -51,10 +61,11 @@ autoDuelScript = async (accountInfo) => {
         res.filter(duelHistory => duelHistory.player1Heroes.length === duelHeroAmount)
       )
 
+      const currentBlockNumber = await DFKDuelS2Contract.provider.getBlock().then((res) => { return res.number })
       const filteredDuelHeroes = duelerHeroes.filter((heroObject) => {
         return !heroObject.isOnSale &&
           heroObject.owner === accountInfo.walletAddress &&
-          getHeroDailyDuelAmount(heroObject, duelRecords, DFKDuelSetting.type) < DFKDuelS2Contract.duelTypeDailyLimit()[DFKDuelSetting.type]
+          getHeroDailyDuelAmount(heroObject, duelRecords, currentBlockNumber) < DFKDuelS2Contract.duelTypeDailyLimit()[DFKDuelSetting.type]
       })
 
       if (filteredDuelHeroes.length < duelHeroAmount) {
@@ -64,8 +75,12 @@ autoDuelScript = async (accountInfo) => {
         
         let duelers = []
 
-        for (let i = 0; i < duelHeroAmount - 1; i++) {
-          duelers.push(pickDueler(duelers, filteredDuelHeroes, bounsClass))
+        for (let i = 0; i < duelHeroAmount; i++) {
+          const pickedHero = pickDueler(duelers, filteredDuelHeroes, bounsClass)
+
+          console.log(`${pickedHero.instance.id} picked, statPower: ${pickedHero.pickScore}`)
+
+          duelers.push(pickedHero.instance)
         }
 
         await DFKDuelS2Contract.enterDuelLobby(

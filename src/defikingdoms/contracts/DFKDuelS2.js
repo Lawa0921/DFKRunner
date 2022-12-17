@@ -86,7 +86,7 @@ module.exports = class DFKDuelS2Contract {
 				winner: data.winner,
 				player1Heroes: data.player1Heroes.map((heroId) => { return heroId.toString() }),
 				player2Heroes: data.player2Heroes.map((heroId) => { return heroId.toString() }),
-				startBlock: data.startBlock.toString(),
+				startBlock: parseInt(data.startBlock),
 				duelType: data.duelType,
 				status: data.status,
 			}
