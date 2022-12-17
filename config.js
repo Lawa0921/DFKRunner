@@ -871,7 +871,7 @@ const config = {
     "listStamina": 24, // 表示當你的英雄體力低於多少時要進行掛售，體力值高於這個設定的英雄如果是下架狀態會等做完任務才會再次上架
   },
   "autoBuyerSetting": {
-    "autoBuyerFloorPrice": 25, // 所有你沒有寫的組合都是用這個價格當作最低價
+    "autoBuyerFloorPrice": 15, // 所有你沒有寫的組合都是用這個價格當作最低價
     "KLAYnetworkBuyerEstimateAdjustment": 0.5, // KLAY 鏈的購買估價會再乘以這個數，如果覺得 KLAY 鏈估價太低或太高可以調整這個數字
     "DFKnetworkBuyerEstimateAdjustment": 1, // DFK 鏈的購買估價會再乘以這個數，如果覺得 DFK 鏈估價太低或太高可以調整這個數字
     "buyerEstimateAdjustment": 1, // 任何鏈的購買估價會再乘以這個數，如果覺得估價太低或太高可以調整這個數字

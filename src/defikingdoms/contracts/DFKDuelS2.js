@@ -203,17 +203,17 @@ module.exports = class DFKDuelS2Contract {
 			"solo": {
 				"low": "0.1",
 				"medium": "0.5",
-				"large": "1"
+				"high": "1"
 			},
 			"squad": {
 				"low": "0.3",
 				"medium": "1.5",
-				"large": "3"
+				"high": "3"
 			},
 			"war": {
 				"low": "1",
 				"medium": "5",
-				"large": "10"
+				"high": "10"
 			}
 		}
 	}
