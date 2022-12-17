@@ -1,12 +1,16 @@
 const config = require("~/config.js");
 const SaleAuction = require("~/src/defikingdoms/contracts/saleAuction");
+const AssistingAuctionUpgradeable = require("~/src/defikingdoms/contracts/assistingAuctionUpgradeable")
 
 const isShouldList = (heroObject) => {
-  return !heroObject.isOnSale && !heroObject.isOnRent && !heroObject.isOnQuesting && heroObject.currentStamina() <= config.defikingdoms.listStamina
+  return !heroObject.isOnSale && !heroObject.isOnQuesting && heroObject.currentStamina() <= config.defikingdoms.listStamina
+}
+
+const sellHero = async (heroId, price, saleAuctionContract) => {
+  await saleAuctionContract.listHero(heroId, price);
 }
 
 exports.runDFKSalesLogic = async (owningHeroObjects, accountInfo) => {
-  const saleAuctionContract = new SaleAuction(accountInfo)
   const heroList = config.defikingdoms.heroForSale.map((heroData) => {
     return {...heroData, instance: owningHeroObjects.find(heroObject => heroObject.id === heroData.id)}
   }).filter((heroObject) => {
@@ -18,12 +22,17 @@ exports.runDFKSalesLogic = async (owningHeroObjects, accountInfo) => {
       heroObject.instance.owner === accountInfo.walletAddress &&
       heroObject.instance.network === "dfk"
   })
+  const assistingAuctionUpgradeableContract = new AssistingAuctionUpgradeable(accountInfo)
+  const shouldSellHeroes = heroList.filter(heroObject => isShouldList(heroObject.instance))
 
-  const saleHandlerPromises = heroList.filter(heroObject => isShouldList(heroObject.instance)).map(shouldListHero => sellHero(shouldListHero.id, shouldListHero.price, saleAuctionContract))
+  for (let i = 0; i < shouldSellHeroes.length; i++) {
+    if (shouldSellHeroes[i].instance.isOnRent) {
+      await assistingAuctionUpgradeableContract.unlistHero(shouldSellHeroes[i].instance.id)
+    }
+  }
+
+  const saleAuctionContract = new SaleAuction(accountInfo)
+  const saleHandlerPromises = shouldSellHeroes.map(shouldListHero => sellHero(shouldListHero.id, shouldListHero.price, saleAuctionContract))
 
   await Promise.allSettled(saleHandlerPromises)
-}
-
-sellHero = async (heroId, price, saleAuctionContract) => {
-  await saleAuctionContract.listHero(heroId, price);
 }
