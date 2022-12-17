@@ -584,12 +584,16 @@ module.exports = class RentValuator {
   }
 
   priceLogicAdjustment() {
-    this.valuation = this.valuation * config.rentalEstimateAdjustment
+    if (this.valuation === 0 && config.autoRenterSetting.rentFloorSwitch) {
+      this.valuation = config.autoRenterSetting.rentFloorPrice
+    }
+
+    this.valuation *= config.autoRenterSetting.rentalEstimateAdjustment
 
     if (this.hero.network === "dfk") {
-      this.valuation = this.valuation * config.defikingdoms.networkRentalEstimateAdjustment
+      this.valuation *= config.autoRenterSetting.DFKNetworkRentalEstimateAdjustment
     } else if (this.hero.network === "kla") {
-      this.valuation = this.valuation * config.klay.networkRentalEstimateAdjustment
+      this.valuation *= config.autoRenterSetting.KLAYNetworkRentalEstimateAdjustment
     }
 
     this.valuation = Math.round(this.valuation * 100) / 100

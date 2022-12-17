@@ -403,7 +403,6 @@ const config = {
     "maxGasPrice": 10000000000, // 表示你可以接受的最大 baseFee 是多少，當 baseFee 超過這個值時任務腳本就會暫停，6000000000 表示 6 Gwei，請依你的需要調整
     "overBaseGasFeeWei": 550000000, // 表示你願意出高於 baseFee 多少的 gas，理論上這個數字越高你的交易速度就會越快， 110000000 表示 0.11 Gwei，請依你的需要調整
     "listStamina": 24, // 表示當你的英雄體力低於多少時要進行掛售，體力值高於這個設定的英雄如果是下架狀態會等做完任務才會再次上架
-    "networkRentalEstimateAdjustment": 1.1, // DFK 鏈的出租估價完會在乘以這個數，如果覺得 DFK 鏈估價太低或太高可以調整這個數字
   },
   "klay": {
     "quest": {
@@ -893,7 +892,6 @@ const config = {
     "maxGasPrice": 30000000000, // 表示你可以接受的最大 baseFee 是多少，當 baseFee 超過這個值時任務腳本就會暫停，6000000000 表示 6 Gwei，請依你的需要調整
     "overBaseGasFeeWei": 550000000, // 表示你願意出高於 baseFee 多少的 gas，理論上這個數字越高你的交易速度就會越快， 110000000 表示 0.11 Gwei，請依你的需要調整
     "listStamina": 24, // 表示當你的英雄體力低於多少時要進行掛售，體力值高於這個設定的英雄如果是下架狀態會等做完任務才會再次上架
-    "networkRentalEstimateAdjustment": 0.9, // KLAY 鏈的出租估價完會在乘以這個數，如果覺得 KLAY 鏈估價太低或太高可以調整這個數字
   },
   "autoBuyerSetting": {
     "autoBuyerFloorPrice": 25, // 所有你沒有寫的組合都是用這個價格當作最低價
@@ -1260,8 +1258,14 @@ const config = {
       "TranscendantTotal8": 2.5,
     }
   },
+  "autoRenterSetting": {
+    "rentalEstimateAdjustment": 1, // 出租估價完會在乘以這個數，如果覺得估價太低或太高可以調整這個數字
+    "KLAYNetworkRentalEstimateAdjustment": 0.9, // KLAY 鏈的出租估價完會在乘以這個數，如果覺得 KLAY 鏈估價太低或太高可以調整這個數字
+    "DFKNetworkRentalEstimateAdjustment": 1.1, // DFK 鏈的出租估價完會在乘以這個數，如果覺得 DFK 鏈估價太低或太高可以調整這個數字
+    "rentFloorPrice": 3, // 被評估為沒有任何出租價值的英雄會被用這個價格乘以上方的調整後出租
+    "rentFloorSwitch": false, // 設定是否要將沒有出租價值的英雄照地板價出租的開關，只有設為 true 才會自動出租 
+  },
   "sendHeroTo": null, // 可以填入一個地址，當完成任務時會把所有完成任務的英雄傳入這個地址，當你要換錢包的時候可以使用這個功能
-  "rentalEstimateAdjustment": 1, // 出租估價完會在乘以這個數，如果覺得估價太低或太高可以調整這個數字
   "setQuestScriptTimeSecond": 360, // 設定你每次任務腳本執行的間隔秒數
 }
 
