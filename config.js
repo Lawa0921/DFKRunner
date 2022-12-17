@@ -362,7 +362,7 @@ const config = {
       "autoDuelerWalletIndex": 0, // 設定你用於自動 duel 的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
       "setDuelScriptTimeSecond": 1, // 設定你每次執行 duel 腳本的間隔秒數
       "type": "squad", // duel 的類型，solo, squad, war 其中一種
-      "fee": "low", // 花費幣的數量 low, medium, large 其中一種
+      "fee": "low", // 花費幣的數量 low, medium, high 其中一種
       "heroes": [ 
         /*
           會自動抓取最適合出戰的英雄
