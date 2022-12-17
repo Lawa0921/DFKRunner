@@ -22,12 +22,15 @@ getHeroDailyDuelAmount = async(hero, duelRecords, duelType) => {
   // to do
 }
 
-getLeadHero = async(heroes, bounsClass) => {
-  // to do
-}
-
-pickDueler = async(currentDuelers, waitingForPickDuelers, duelRecords, bounsClass) => {
-  // to do
+pickDueler = async(currentDuelers, waitingForPickDuelers, bounsClass) => {
+  waitingForPickDuelers.filter((heroObject) => currentDuelers.map(dueler => dueler.id).indexOf(heroObject.id) === -1).map((heroObject) => {
+    return {
+      instance: heroObject,
+      pickScore: heroObject.duelPickScore(currentDuelers, bounsClass)
+    }
+  }).sort((heroInfo, nextHeroInfo) => {
+    return nextHeroInfo.pickScore - heroInfo.pickScore
+  })[0]
 }
 
 autoDuelScript = async (accountInfo) => {
@@ -59,11 +62,10 @@ autoDuelScript = async (accountInfo) => {
       } else {
         const bounsClass = await DFKDuelS2Contract.getCurrentClassBonuses()
         
-        let leadHero = getLeadHero(filteredDuelHeroes, bounsClass)
-        let duelers = [leadHero]
+        let duelers = []
 
         for (let i = 0; i < duelHeroAmount - 1; i++) {
-          duelers.push(pickDueler(duelers, filteredDuelHeroes, duelRecords, bounsClass))
+          duelers.push(pickDueler(duelers, filteredDuelHeroes, bounsClass))
         }
 
         await DFKDuelS2Contract.enterDuelLobby(

@@ -695,6 +695,31 @@ module.exports = class Hero {
     return sortedStat
   }
 
+  duelPickScore(duelers, bounsClass) {
+    const averageLevelGrowthPoint = 10
+    let statPower = this.totalPoint - ((this.level - 1) * averageLevelGrowthPoint)
+
+    if (bounsClass.bounsMainclasses.indexOf(this.mainClass) > -1) {
+      statPower += 20
+    }
+
+    if (bounsClass.bounsSubclasses.indexOf(this.subClass) > -1) {
+      statPower += 15
+    }
+
+    for (let i = 0; i < duelers.length; i++) {
+      if (duelers[i].background === this.background) {
+        statPower += 3
+      }
+
+      if (Object.keys(duelers[i].sortedStat())[0] === Object.keys(this.sortedStat())[0]) {
+        statPower += 2
+      }
+    }
+
+    return statPower
+  }
+
   async requireRunes() {
     const [requireShvasRuneCount, requireMokshaRuneCount, ...unknowRunes] = await meditationCircleContract.getRequiredRunes(this.level)
 
