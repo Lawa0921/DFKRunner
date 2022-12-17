@@ -704,7 +704,7 @@ module.exports = class Hero {
     }
 
     if (bounsClass.bounsSubclasses.indexOf(this.subClass) > -1) {
-      statPower += 15
+      statPower += 10
     }
 
     for (let i = 0; i < duelers.length; i++) {
