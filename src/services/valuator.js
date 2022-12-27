@@ -24,21 +24,24 @@ module.exports = class Valuator {
     const heroGens = [this.hero.generation.toString(), "?"]
     const heroSummonsRemainings = [this.hero.summonsRemaining.toString(), "?"]
     const heroSummons = [this.hero.maxSummons.toString(), "?"]
+    let configPrice
 
     heroGens.forEach((gen) => {
       heroSummonsRemainings.forEach((summonsRemaining) => {
         heroSummons.forEach((summon) => {
           const configString = heroRarity + heroMainclassTier + summonsRemaining + "/" + summon + "G" + gen
 
-          if (typeof(config.autoBuyerSetting.priceSetting[configString]) !== "undefined") {
-            this.valuation = config.autoBuyerSetting.priceSetting[configString]
+          if (typeof(config.autoBuyerSetting.priceSetting[configString]) !== "undefined" && typeof(configPrice) === "undefined") {
+            configPrice = config.autoBuyerSetting.priceSetting[configString]
           }
         })
       })
     })
 
-    if (this.valuation === 0) {
+    if (typeof(configPrice) === "undefined") {
       this.valuation = config.autoBuyerSetting.autoBuyerFloorPrice
+    } else {
+      this.valuation = configPrice
     }
   }
 
