@@ -9,7 +9,6 @@ module.exports = class Valuator {
 
   execute() {
     this.getConfigPrice();
-    this.evaluateRarityPrice()
     this.evaluateProfessionPrice()
     this.evaluateLevelPrice()
     this.evaluateHairPrice()
@@ -21,6 +20,7 @@ module.exports = class Valuator {
 
   getConfigPrice() {
     const heroMainclassTier = this.hero.attributeTier("mainClass");
+    const heroRarity = this.hero.formatRarity();
     const heroGens = [this.hero.generation.toString(), "?"]
     const heroSummonsRemainings = [this.hero.summonsRemaining.toString(), "?"]
     const heroSummons = [this.hero.maxSummons.toString(), "?"]
@@ -28,7 +28,7 @@ module.exports = class Valuator {
     heroGens.forEach((gen) => {
       heroSummonsRemainings.forEach((summonsRemaining) => {
         heroSummons.forEach((summon) => {
-          const configString = heroMainclassTier + summonsRemaining + "/" + summon + "G" + gen
+          const configString = heroRarity + heroMainclassTier + summonsRemaining + "/" + summon + "G" + gen
 
           if (typeof(config.autoBuyerSetting.priceSetting[configString]) !== "undefined") {
             this.valuation = config.autoBuyerSetting.priceSetting[configString]
@@ -39,17 +39,6 @@ module.exports = class Valuator {
 
     if (this.valuation === 0) {
       this.valuation = config.autoBuyerSetting.autoBuyerFloorPrice
-    }
-  }
-
-  evaluateRarityPrice() {
-    const heroMainclassTier = this.hero.attributeTier("mainClass");
-    const heroRarity = this.hero.formatRarity();
-    const rarityString = heroMainclassTier + heroRarity
-    const rarityPrice = config.autoBuyerSetting.raritySetting[rarityString]
-
-    if (typeof(rarityPrice) !== "undefined") {
-      this.valuation *= rarityPrice;
     }
   }
 
