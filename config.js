@@ -362,8 +362,8 @@ const config = {
       },
     ],
     "duelSetting": {
+      "isActive": false, // 表示是否要執行 DFK 自動 duel，true 的情形就會自動執行
       "autoDuelerWalletIndex": 0, // 設定你用於自動 duel 的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
-      "setDuelScriptTimeSecond": 1, // 設定你每次執行 duel 腳本的間隔秒數
       "type": "squad", // duel 的類型，solo, squad, war 其中一種
       "fee": "low", // 花費幣的數量 low, medium, high 其中一種
       "heroes": [ 
@@ -601,7 +601,8 @@ const config = {
             "name": "StatQuest_Agi", // 有地方會用到這個值，不要更改它
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
               "1000000027626", "1000000030876", "1000000036507", "1000000037933", "1000000038061",
-              "1000000091097", "2000000004273", "2000000006821", "1000000109415", "2000000005262"
+              "1000000091097", "2000000004273", "2000000006821", "1000000109415", "2000000005262",
+              "2000000015218"
             ],
             "contractAddress": "0x378052bbc8D2E1819194802b8A990E7Ae43655bA" // 合約的地址，你不會更改這個值
           },
@@ -875,6 +876,18 @@ const config = {
         "sale": true
       },
     ],
+    "duelSetting": {
+      "isActive": true, // 表示是否要執行 KLAY 自動 duel，true 的情形就會自動執行
+      "autoDuelerWalletIndex": 0, // 設定你用於自動 duel 的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
+      "type": "solo", // duel 的類型，solo, squad, war 其中一種
+      "fee": "low", // 花費幣的數量 low, medium, high 其中一種
+      "heroes": [ 
+        /*
+          會自動抓取最適合出戰的英雄
+          計算邏輯為: 英雄總數值 - ((等級 - 1) * 10) + 以選取的英雄有相同背景的數量 * 2 + 以選取的英雄有相同的最高屬秀 * 3 + 獎勵主屬性 20 點 + 獎勵副屬性 10 點
+        */
+      ]
+    },
     "maxGasPrice": 30000000000, // 表示你可以接受的最大 baseFee 是多少，當 baseFee 超過這個值時任務腳本就會暫停，6000000000 表示 6 Gwei，請依你的需要調整
     "overBaseGasFeeWei": 550000000, // 表示你願意出高於 baseFee 多少的 gas，理論上這個數字越高你的交易速度就會越快， 110000000 表示 0.11 Gwei，請依你的需要調整
     "listStamina": 24, // 表示當你的英雄體力低於多少時要進行掛售，體力值高於這個設定的英雄如果是下架狀態會等做完任務才會再次上架
@@ -1354,6 +1367,7 @@ const config = {
   },
   "sendHeroTo": null, // 可以填入一個地址，當完成任務時會把所有完成任務的英雄傳入這個地址，當你要換錢包的時候可以使用這個功能
   "setQuestScriptTimeSecond": 360, // 設定你每次任務腳本執行的間隔秒數
+  "setDuelScriptTimeSecond": 10, // 設定你每次執行 duel 腳本的間隔秒數
 }
 
 module.exports = config;
