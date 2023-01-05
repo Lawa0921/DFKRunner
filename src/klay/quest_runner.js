@@ -12,7 +12,7 @@ const { runKLAYLevelUpLogic } = require('~/src/klay/hero_level_up');
 const { runKLAYRentHeroLogic } = require('~/src/klay/hero_rent');
 const { sendHeroTo } = require("~/src/klay/send_hero");
 const { runVialLogic } = require('~/src/klay/vial_consumer');
-const { airdropClaim } = require("~/src/defikingdoms/airdrop_claim");
+const { airdropClaim } = require("~/src/klay/airdrop_claim");
 const autils = require("~/src/services/autils");
 const config = require("~/config.js");
 
