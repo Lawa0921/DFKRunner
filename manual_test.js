@@ -25,13 +25,7 @@ const { airdropClaim } = require("~/src/defikingdoms/airdrop_claim")
 
 
 async function test() {  
-  console.log(await DFKDuelS2Contract.getPlayerDuelEntries())
-
-  // const heroes = await autils.getHeroesInfoByIds(["1000000100455"])
-  // const valuator = new Valuator("100000000000000000", heroes[0])
-  // valuator.execute()
-  // console.log(valuator.valuation)
-  // await assistingAuctionUpgradeableContract.unlistHero("")
+  console.log(await assistingAuctionUpgradeableContract.userAuctions())
 
   // console.log(Math.round(8.5 * 100) / 100)
   // console.log(await crystalContract.allowance(config.defikingdoms.meditationCircle))
