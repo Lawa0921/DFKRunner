@@ -116,7 +116,7 @@ module.exports = class DFKDuelS2Contract {
 	}
 
 	async matchMake(type) {
-		const txn = await this.contract.matchMake(this.duelType()[type])
+		const txn = await this.contract.matchMake(this.duelType()[type], { gasPrice: await autils.getDFKGasFee() })
 		const receipt = await txn.wait()
 
 		if (receipt.status === 1) {

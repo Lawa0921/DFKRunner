@@ -28,7 +28,7 @@ module.exports = class DFKDuelS2Contract {
 			ethers.utils.parseEther(this.duelFee()[duelType][fee], "ether"),
 			this.duelBackground()[duelBackground],
 			this.duelStat()[duelStat],
-			{ gasPrice: await autils.getDFKGasFee() }
+			{ gasPrice: await autils.getKLAYGasFee() }
 		)
 
     const receipt = await txn.wait()
@@ -42,7 +42,7 @@ module.exports = class DFKDuelS2Contract {
   }
 
 	async completeDuel(duelId) {
-		const txn = await this.contract.completeDuel(duelId, { gasPrice: await autils.getDFKGasFee() })
+		const txn = await this.contract.completeDuel(duelId, { gasPrice: await autils.getKLAYGasFee() })
 		const receipt = await txn.wait()
 
 		if (receipt.status === 1) {
@@ -116,7 +116,7 @@ module.exports = class DFKDuelS2Contract {
 	}
 
 	async matchMake(type) {
-		const txn = await this.contract.matchMake(this.duelType()[type])
+		const txn = await this.contract.matchMake(this.duelType()[type], { gasPrice: await autils.getKLAYGasFee() })
 		const receipt = await txn.wait()
 
 		if (receipt.status === 1) {
