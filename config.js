@@ -741,9 +741,10 @@ const config = {
     "uniswapV2Router02": "0x9e987E5E9aB872598f601BE4aCC5ac23F484845E", // 合約的地址，你不會更改這個值
     "staminaVial": "0x4546DBaAb48Bf1BF2ad7B56d04952d946Ab6e2a7", // 合約的地址，你不會更改這個值
     "itemGoldTraderV2": "0x3Eab8a8F71dDA3e6c907C74302B734805C4f3278", // 合約的地址，你不會更改這個值
-    "raffleMaster": "", // 合約的地址，你不會更改這個值
-    "duelRaffleTicket": "", // 合約的地址，你不會更改這個值
-    "airdropClaim": "", // 合約的地址，你不會更改這個值
+    "DFKDuelS2": "0xF719C12a5A7C0f13F3c1B71074960A25E2f9Aa9e", // 合約的地址，你不會更改這個值
+    "raffleMaster": "0x9aE38Ba1A4bB847E6D77e29Db235B0037A0cfB30", // 合約的地址，你不會更改這個值
+    "duelRaffleTicket": "0x3E5081337d1a12F261b013Bc08745fB3cd756Eb3", // 合約的地址，你不會更改這個值
+    "airdropClaim": "0x86B70Cd6A405B84d1790021dC4F8c24B50727EA6", // 合約的地址，你不會更改這個值
     "itemConsumer": "0xF78cA21d7Da3227457138714F5bEd08D2604A156", // 合約的地址，你不會更改這個值
     "jade": "0xB3F5867E277798b50ba7A71C0b24FDcA03045eDF", // 合約的地址，你不會更改這個值
     "assistingAuctionUpgradable": "0xA2cef1763e59198025259d76Ce8F9E60d27B17B5", // 合約的地址，你不會更改這個值
