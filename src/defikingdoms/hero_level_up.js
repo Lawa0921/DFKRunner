@@ -30,13 +30,15 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
         await saleAuctionContract.unlistHero(activeLevelUpHeroes[i].id)
       }
 
-      const txn = await meditationCircleContract.completeMeditation(activeLevelUpHeroes[i].id)
-      const res = await txn.wait();
-
-      if (res.status === 1) {
-        console.log(`${accountInfo.accountName} DFK level up ${activeLevelUpHeroes[i].id} success!`)
-      } else {
-        console.log(`${accountInfo.accountName} DFK complete level up ${activeLevelUpHeroes[i].id} failed`)
+      if (activeLevelUpHeroes[i].owner === accountInfo.walletAddress) {
+        const txn = await meditationCircleContract.completeMeditation(activeLevelUpHeroes[i].id)
+        const res = await txn.wait();
+  
+        if (res.status === 1) {
+          console.log(`${accountInfo.accountName} DFK level up ${activeLevelUpHeroes[i].id} success!`)
+        } else {
+          console.log(`${accountInfo.accountName} DFK complete level up ${activeLevelUpHeroes[i].id} failed`)
+        }
       }
     }
   }
