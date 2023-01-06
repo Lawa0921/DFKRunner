@@ -917,7 +917,7 @@ const config = {
     "duelSetting": {
       "isActive": true, // 表示是否要執行 KLAY 自動 duel，true 的情形就會自動執行
       "autoDuelerWalletIndex": 0, // 設定你用於自動 duel 的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
-      "type": "solo", // duel 的類型，solo, squad, war 其中一種
+      "type": "squad", // duel 的類型，solo, squad, war 其中一種
       "fee": "low", // 花費幣的數量 low, medium, high 其中一種
       "notForDuelHeroes": [ 
         /*
@@ -926,6 +926,10 @@ const config = {
           如果你有完全不想在 duel 出戰的英雄請把 id 寫在這裡
         */
       ]
+    },
+    "raffleSetting": { // 會在每個獎池放入 enterAmount 輸入的值，如果抽獎券不夠會直接跳過
+      "isActive": true, // 表示是否要執行自動抽獎，true 的情形就會自動執行
+      "enterAmount": 30, // 每個獎池放入的券數量
     },
     "maxGasPrice": 30000000000, // 表示你可以接受的最大 baseFee 是多少，當 baseFee 超過這個值時任務腳本就會暫停，6000000000 表示 6 Gwei，請依你的需要調整
     "overBaseGasFeeWei": 550000000, // 表示你願意出高於 baseFee 多少的 gas，理論上這個數字越高你的交易速度就會越快， 110000000 表示 0.11 Gwei，請依你的需要調整

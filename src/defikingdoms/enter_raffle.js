@@ -8,14 +8,11 @@ exports.enterRaffle = async (accountInfo) => {
     const raffleMasterContract = new RaffleMaster(accountInfo)
     const currentRaffleData = await raffleMasterContract.getCurrentRaffleData()
     const duelRaffleTicketBalance = await duelRaffleTicketContract.balanceOf()
-    const enterRafflePromise = []
-  
-    currentRaffleData.forEach((raffleData, index) => {
-      if (raffleData.playerEntryAmount === 0 && duelRaffleTicketBalance - (config.defikingdoms.raffleSetting.enterAmount * index) > config.defikingdoms.raffleSetting.enterAmount) {
-        enterRafflePromise.push(raffleMasterContract.enterRaffle(raffleData.raffleId, config.defikingdoms.raffleSetting.enterAmount))
-      }
-    })
 
-    await Promise.allSettled(enterRafflePromise)
+    for (let i = 0; i < currentRaffleData.length; i++) {
+      if (currentRaffleData[i].status === 1 && currentRaffleData[i].playerEntryAmount === 0 && duelRaffleTicketBalance - config.defikingdoms.raffleSetting.enterAmount > config.defikingdoms.raffleSetting.enterAmount) {
+        await raffleMasterContract.enterRaffle(currentRaffleData[i].raffleId, config.defikingdoms.raffleSetting.enterAmount)
+      }
+    }
   }
 }

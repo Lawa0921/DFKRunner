@@ -18,16 +18,16 @@ const crystalContract = new Crystal(config.walletAddressAndPrivateKeyMappings[0]
 const assistingAuctionUpgradeableContract = new AssistingAuctionUpgradeable(config.walletAddressAndPrivateKeyMappings[0])
 const DFKDuelS2Contract = new DFKDuelS2(config.walletAddressAndPrivateKeyMappings[0])
 const KLAYQuestCoreContract = new KLAYQuestCore(config.walletAddressAndPrivateKeyMappings[0])
+const { enterRaffle } = require("~/src/klay/enter_raffle");
 
 const Valuator = require('~/src/services/valuator');
-
-
-const { enterRaffle } = require("~/src/defikingdoms/enter_raffle")
 const { airdropClaim } = require("~/src/defikingdoms/airdrop_claim")
 
 
 async function test() {  
-  console.log(await KLAYQuestCoreContract.cancelQuest("1000000065836"))
+  // console.log(Math.floor(new Date().getTime() / 1000))
+  await enterRaffle(config.walletAddressAndPrivateKeyMappings[0]);
+  // console.log(await KLAYQuestCoreContract.cancelQuest("1000000065836"))
   // console.log(await assistingAuctionUpgradeableContract.userAuctions())
   // console.log(Math.round(8.5 * 100) / 100)
   // console.log(await crystalContract.allowance(config.defikingdoms.meditationCircle))

@@ -57,7 +57,9 @@ module.exports = class DFKDuelS1Contract {
       return accumulator
     }, rawData[0].map((_element) => { return {}}))
 
-    return raffleData
+    const filterRaffleDate = raffleData.filter(raffleData => raffleData.raffleId !== "0" && parseInt(raffleData.endTime) >= Math.floor(new Date().getTime() / 1000))
+
+    return filterRaffleDate
   }
 
   async getLastRaffleBuckets() {
@@ -71,7 +73,7 @@ module.exports = class DFKDuelS1Contract {
   }
 
   async enterRaffle(raffleId, ticketAmount) {
-    const txn = await this.contract.enterRaffle(raffleId, ticketAmount, { gasPrice: await autils.getDFKGasFee() })
+    const txn = await this.contract.enterRaffle(raffleId, ticketAmount, { gasPrice: await autils.getKLAYGasFee() })
 		const receipt = await txn.wait()
 
 		if (receipt.status === 1) {
