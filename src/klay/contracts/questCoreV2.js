@@ -20,6 +20,19 @@ module.exports = class QuestCoreV2 {
     return await this.contract.completeQuest(heroId, { gasPrice: await autils.getKLAYGasFee() });
   }
 
+  async cancelQuest(heroId) {
+    const txn = await this.contract.cancelQuest(heroId, { gasPrice: await autils.getKLAYGasFee() });
+    const res = await txn.wait();
+
+    if (res.status === 1) {
+      console.log(`${this.accountName} KLAY cancel ${heroId} quest completed`)
+    } else {
+      console.log(`${this.accountName} KLAY cancel ${heroId} quest failed`)
+    }
+
+    return res;
+  }
+
   async startFishingQuest(heroIds, attempt) {
     const txn = await this.contract.startQuest(heroIds, config.klay.quest.fishing.contractAddress, attempt, 0, { gasPrice: await autils.getKLAYGasFee() })
     const res = await txn.wait();
