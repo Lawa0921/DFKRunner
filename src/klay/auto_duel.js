@@ -53,7 +53,7 @@ autoDuelScript = async (accountInfo) => {
     } else if (activeEntries.length > 0) {
       await KLAYDuelS2Contract.matchMake(KLAYDuelSetting.type)
     } else {
-      const duelerHeroes = await autils.getHeroesInfoByIds(KLAYDuelSetting.heroes)
+      const duelerHeroes = await autils.getHeroesInfoByIds(autils.getKLAYOwningHeroIds().filter(heroId => KLAYDuelSetting.notForDuelHeroes.indexOf(heroId) === -1))
       const duelRecords = await KLAYDuelS2Contract.getDuelHistory().then(res => 
         res.filter(duelHistory => duelHistory.player1Heroes.length === duelHeroAmount)
       )

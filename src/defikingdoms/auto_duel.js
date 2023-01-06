@@ -53,7 +53,7 @@ autoDuelScript = async (accountInfo) => {
     } else if (activeEntries.length > 0) {
       await DFKDuelS2Contract.matchMake(DFKDuelSetting.type)
     } else {
-      const duelerHeroes = await autils.getHeroesInfoByIds(DFKDuelSetting.heroes)
+      const duelerHeroes = await autils.getHeroesInfoByIds(autils.getDFKOwningHeroIds().filter(heroId => DFKDuelSetting.notForDuelHeroes.indexOf(heroId) === -1))
       const duelRecords = await DFKDuelS2Contract.getDuelHistory().then(res => 
         res.filter(duelHistory => duelHistory.player1Heroes.length === duelHeroAmount)
       )
