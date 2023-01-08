@@ -1,6 +1,5 @@
-const config = require("~/config.js");
-const autils = require('~/src/services/autils');
-const Valuator = require('~/src/services/valuator');
+const autils = require('./src/services/autils');
+const Valuator = require('./src/services/valuator');
 
 async function main() {
   console.log("start parse on sale heroes ...")

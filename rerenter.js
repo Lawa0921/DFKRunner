@@ -1,8 +1,8 @@
-const config = require("~/config.js");
-const autils = require('~/src/services/autils');
-const DFKAssistingAuctionUpgradeable = require("~/src/defikingdoms/contracts/assistingAuctionUpgradeable")
-const KLAYAssistingAuctionUpgradeable = require("~/src/klay/contracts/assistingAuctionUpgradeable")
-const RentValuator = require('~/src/services/rent_valuator')
+const config = require("./config.js");
+const autils = require('./src/services/autils');
+const DFKAssistingAuctionUpgradeable = require("./src/defikingdoms/contracts/assistingAuctionUpgradeable")
+const KLAYAssistingAuctionUpgradeable = require("./src/klay/contracts/assistingAuctionUpgradeable")
+const RentValuator = require('./src/services/rent_valuator')
 
 DFKRerenter = async () => {
   const DFKOwningHeroObjects = await autils.getHeroesInfoByIds(autils.getDFKOwningHeroIds());

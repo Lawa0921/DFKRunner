@@ -1,5 +1,5 @@
-const config = require("~/config.js");
-const autils = require('~/src/services/autils');
+const config = require("./config.js");
+const autils = require('./src/services/autils');
 
 async function main() {
   for (let i = 0; i < config.walletAddressAndPrivateKeyMappings.length; i++) {

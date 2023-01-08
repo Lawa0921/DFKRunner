@@ -1,11 +1,11 @@
-const autils = require('~/src/services/autils')
-const config = require("~/config.js")
+const autils = require('./src/services/autils')
+const config = require("./config.js")
 const axios = require('axios')
 const axiosRetry = require('axios-retry');
 const date = require('date-and-time');
-const Valuator = require('~/src/services/valuator');
-const DFKSaleAuction = require("~/src/defikingdoms/contracts/saleAuction");
-const KLAYSaleAuction = require("~/src/klay/contracts/saleAuction");
+const Valuator = require('./src/services/valuator');
+const DFKSaleAuction = require("./src/defikingdoms/contracts/saleAuction");
+const KLAYSaleAuction = require("./src/klay/contracts/saleAuction");
 const DFKSaleAuctionContract = new DFKSaleAuction(config.walletAddressAndPrivateKeyMappings[config.autoBuyerSetting.saleWatcherWalletIndex]);
 const KLAYSaleAuctionContract = new KLAYSaleAuction(config.walletAddressAndPrivateKeyMappings[config.autoBuyerSetting.saleWatcherWalletIndex]);
 

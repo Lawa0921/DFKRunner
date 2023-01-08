@@ -1,7 +1,7 @@
-const { runDFKChainQuest } = require('~/src/defikingdoms/quest_runner');
-const { runKLAYChainQuest } = require('~/src/klay/quest_runner');
-const autils = require("~/src/services/autils")
-const config = require("~/config.js")
+const { runDFKChainQuest } = require('./src/defikingdoms/quest_runner');
+const { runKLAYChainQuest } = require('./src/klay/quest_runner');
+const autils = require("./src/services/autils")
+const config = require("./config.js")
 
 async function main() {
   console.log(autils.getCurrentDateTime().toLocaleTimeString());

@@ -1,11 +1,11 @@
-const config = require("~/config.js")
-const autils = require("~/src/services/autils");
-const DFKAssistingAuctionUpgradeable = require("~/src/defikingdoms/contracts/assistingAuctionUpgradeable")
-const KLAYAssistingAuctionUpgradeable = require("~/src/klay/contracts/assistingAuctionUpgradeable")
-const DFKHeroBridge = require('~/src/defikingdoms/contracts/heroBridge');
-const KLAYHeroBridge = require('~/src/klay/contracts/heroBridge');
-const DFKSaleAuction = require("~/src/defikingdoms/contracts/saleAuction");
-const KLAYSaleAuction = require("~/src/klay/contracts/saleAuction");
+const config = require("./config.js")
+const autils = require("./src/services/autils");
+const DFKAssistingAuctionUpgradeable = require("./src/defikingdoms/contracts/assistingAuctionUpgradeable")
+const KLAYAssistingAuctionUpgradeable = require("./src/klay/contracts/assistingAuctionUpgradeable")
+const DFKHeroBridge = require('./src/defikingdoms/contracts/heroBridge');
+const KLAYHeroBridge = require('./src/klay/contracts/heroBridge');
+const DFKSaleAuction = require("./src/defikingdoms/contracts/saleAuction");
+const KLAYSaleAuction = require("./src/klay/contracts/saleAuction");
 
 main = async() => {
   try {

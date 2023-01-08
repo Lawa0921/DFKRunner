@@ -1,5 +1,5 @@
 const config = require("./config.js");
-const autils = require('~/src/services/autils');
+const autils = require('./src/services/autils');
 
 main = async() => {
   console.log("start parse config heroes ...")

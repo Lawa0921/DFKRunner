@@ -1,9 +1,9 @@
-const config = require("~/config.js")
+const config = require("./config.js")
 const ethers = require('ethers');
-const DFKInventoryItem = require('~/src/defikingdoms/contracts/inventoryItem')
-const DFKItemGoldTraderV2 = require('~/src/defikingdoms/contracts/ItemGoldTraderV2')
-const KLAYInventoryItem = require('~/src/klay/contracts/inventoryItem')
-const KLAYItemGoldTraderV2 = require('~/src/klay/contracts/ItemGoldTraderV2')
+const DFKInventoryItem = require('./src/defikingdoms/contracts/inventoryItem')
+const DFKItemGoldTraderV2 = require('./src/defikingdoms/contracts/ItemGoldTraderV2')
+const KLAYInventoryItem = require('./src/klay/contracts/inventoryItem')
+const KLAYItemGoldTraderV2 = require('./src/klay/contracts/ItemGoldTraderV2')
 
 DFKItemSeller = async () => {
   for (let i = 0; i < config.walletAddressAndPrivateKeyMappings.length; i++) {
