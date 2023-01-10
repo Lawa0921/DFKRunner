@@ -36,10 +36,10 @@ exports.runKLAYChainQuest = async (accountInfo) => {
       await enterRaffle(accountInfo);
       await airdropClaim(accountInfo);
 
+      await runKLAYLevelUpLogic(owningHeroObjects, accountInfo);
       await runKLAYSalesLogic(owningHeroObjects, accountInfo);
       await runKLAYRentHeroLogic(owningHeroObjects, accountInfo);
       await runVialLogic(owningHeroObjects, accountInfo);
-      await runKLAYLevelUpLogic(owningHeroObjects, accountInfo);
 
       await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects, accountInfo)
       await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects, accountInfo)

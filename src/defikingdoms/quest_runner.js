@@ -36,11 +36,10 @@ exports.runDFKChainQuest = async (accountInfo) => {
       await enterRaffle(accountInfo);
       await airdropClaim(accountInfo);
   
-      await runDFKSalesLogic(owningHeroObjects, accountInfo);
-      await runDFKRentHeroLogic(owningHeroObjects, accountInfo);
-  
-      await runVialLogic(owningHeroObjects, accountInfo);
       await runDFKLevelUpLogic(owningHeroObjects, accountInfo);
+      await runDFKSalesLogic(owningHeroObjects, accountInfo);
+      await runDFKRentHeroLogic(owningHeroObjects, accountInfo);  
+      await runVialLogic(owningHeroObjects, accountInfo);
   
       await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects, accountInfo)
       await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects, accountInfo)
