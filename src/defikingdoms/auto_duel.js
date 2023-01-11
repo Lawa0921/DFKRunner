@@ -10,12 +10,12 @@ exports.DFKAutoDueler = async() => {
     if (baseGasPrice > config.defikingdoms.maxGasPrice) {
       console.log(`DFK Current base gasPrice: ${baseGasPrice} is over then maxGasPrice setting: ${config.defikingdoms.maxGasPrice}, will retry later.`)
     } else {
-      await autoDuelScript(config.walletAddressAndPrivateKeyMappings[config.defikingdoms.duelSetting.autoDuelerWalletIndex])
+      await DFKAutoDuelScript(config.walletAddressAndPrivateKeyMappings[config.defikingdoms.duelSetting.autoDuelerWalletIndex])
     }
   }
 }
 
-getHeroDailyDuelAmount = (hero, duelRecords, currentBlockNumber) => {
+getDFKHeroDailyDuelAmount = (hero, duelRecords, currentBlockNumber) => {
   const oneDayBlock = 43200
 
   const heroDuelTypeAmount = duelRecords.filter((duelRecord) => {
@@ -40,7 +40,7 @@ pickDueler = (currentDuelers, waitingForPickDuelers, bounsClass) => {
   return heroObjects[0]
 }
 
-autoDuelScript = async (accountInfo) => {
+DFKAutoDuelScript = async (accountInfo) => {
   try {
 		const DFKDuelSetting = config.defikingdoms.duelSetting
     const DFKDuelS2Contract = new DFKDuelS2(accountInfo)
@@ -62,7 +62,7 @@ autoDuelScript = async (accountInfo) => {
       const filteredDuelHeroes = duelerHeroes.filter((heroObject) => {
         return !heroObject.isOnSale &&
           heroObject.owner === accountInfo.walletAddress &&
-          getHeroDailyDuelAmount(heroObject, duelRecords, currentBlockNumber) < DFKDuelS2Contract.duelTypeDailyLimit()[DFKDuelSetting.type]
+          getDFKHeroDailyDuelAmount(heroObject, duelRecords, currentBlockNumber) < DFKDuelS2Contract.duelTypeDailyLimit()[DFKDuelSetting.type]
       })
 
       if (filteredDuelHeroes.length < duelHeroAmount) {

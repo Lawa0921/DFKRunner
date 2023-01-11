@@ -696,7 +696,7 @@ module.exports = class Hero {
   }
 
   duelPickScore(duelers, bounsClass) {
-    const averageLevelGrowthPoint = 10
+    const averageLevelGrowthPoint = 4
     let statPower = this.totalPoint - ((this.level - 1) * averageLevelGrowthPoint)
 
     if (bounsClass.bounsMainclasses.indexOf(this.mainClass) > -1) {

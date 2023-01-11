@@ -10,12 +10,12 @@ exports.KLAYAutoDueler = async() => {
     if (baseGasPrice > config.klay.maxGasPrice) {
       console.log(`KLAY Current base gasPrice: ${baseGasPrice} is over then maxGasPrice setting: ${config.klay.maxGasPrice}, will retry later.`)
     } else {
-      await autoDuelScript(config.walletAddressAndPrivateKeyMappings[config.klay.duelSetting.autoDuelerWalletIndex])
+      await KLAYAutoDuelScript(config.walletAddressAndPrivateKeyMappings[config.klay.duelSetting.autoDuelerWalletIndex])
     }
   }
 }
 
-getHeroDailyDuelAmount = (hero, duelRecords, currentBlockNumber) => {
+getKLAYHeroDailyDuelAmount = (hero, duelRecords, currentBlockNumber) => {
   const oneDayBlock = 86400
 
   const heroDuelTypeAmount = duelRecords.filter((duelRecord) => {
@@ -40,7 +40,7 @@ pickDueler = (currentDuelers, waitingForPickDuelers, bounsClass) => {
   return heroObjects[0]
 }
 
-autoDuelScript = async (accountInfo) => {
+KLAYAutoDuelScript = async (accountInfo) => {
   try {
 		const KLAYDuelSetting = config.klay.duelSetting
     const KLAYDuelS2Contract = new KLAYDuelS2(accountInfo)
@@ -62,7 +62,7 @@ autoDuelScript = async (accountInfo) => {
       const filteredDuelHeroes = duelerHeroes.filter((heroObject) => {
         return !heroObject.isOnSale &&
           heroObject.owner === accountInfo.walletAddress &&
-          getHeroDailyDuelAmount(heroObject, duelRecords, currentBlockNumber) < KLAYDuelS2Contract.duelTypeDailyLimit()[KLAYDuelSetting.type]
+          getKLAYHeroDailyDuelAmount(heroObject, duelRecords, currentBlockNumber) < KLAYDuelS2Contract.duelTypeDailyLimit()[KLAYDuelSetting.type]
       })
 
       if (filteredDuelHeroes.length < duelHeroAmount) {
