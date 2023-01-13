@@ -20,7 +20,8 @@ getDFKHeroDailyDuelAmount = (hero, duelRecords, currentBlockNumber) => {
 
   const heroDuelTypeAmount = duelRecords.filter((duelRecord) => {
     return duelRecord.startBlock >= currentBlockNumber - oneDayBlock &&
-      duelRecord.player1Heroes.indexOf(hero.id) > -1
+      duelRecord.player1Heroes.indexOf(hero.id) > -1 ||
+      duelRecord.player2Heroes.indexOf(hero.id) > -1 
   }).length
 
   
