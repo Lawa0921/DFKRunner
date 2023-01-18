@@ -9,7 +9,7 @@ module.exports = class Hero {
     this.owner = heroInfo.owner.owner;
     this.rarity = heroInfo.rarity;
     this.summonsRemaining = heroInfo.summonsRemaining;
-    this.profession = heroInfo.profession;
+    this.profession = this.formatProfession(heroInfo.profession);
     this.mainClass = heroInfo.mainClass;
     this.subClass = heroInfo.subClass;
     this.generation = heroInfo.generation;
@@ -76,6 +76,27 @@ module.exports = class Hero {
         break;
       default:
         returnValue = "Out of rarity";
+    }
+
+    return returnValue;
+  }
+
+  formatProfession(professionInt) {
+    let returnValue;
+
+    switch(professionInt) {
+      case "0":
+        returnValue = "Mining"
+        break;
+      case "2":
+        returnValue = "Gardening"
+        break;
+      case "4":
+        returnValue = "Fishing"
+        break;
+      case "6":
+        returnValue = "Foraging"
+        break;
     }
 
     return returnValue;

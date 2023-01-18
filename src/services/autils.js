@@ -123,49 +123,49 @@ exports.getHeroesInfoByIds = async (heroIds) => {
     let heroObjects;
     queryStr = `{
         heroes(where: {id_in: ${JSON.stringify(heroIds)}}) {
-            id
-            owner {
-                owner
-            }
-            rarity
-            network
-            mainClass
-            subClass
-            summonsRemaining
-            profession
-            generation
-            level
-            passive1
-            passive2
-            active1
-            active2
-            statBoost1
-            statBoost2
-            hairStyle
-            backAppendage
-            maxSummons
-            currentQuest
-            xp
-            strength
-            intelligence
-            wisdom
-            luck
-            agility
-            vitality
-            endurance
-            dexterity
-            stamina
-            staminaFullAt
-            nextSummonTime
-            background
-            saleAuction {
-                startingPrice
-                open
-            }
-            assistingAuction {
-                startingPrice
-                open
-            }
+          id
+          owner {
+            owner
+          }
+          rarity
+          network
+          mainClass
+          subClass
+          summonsRemaining
+          profession
+          generation
+          level
+          passive1
+          passive2
+          active1
+          active2
+          statBoost1
+          statBoost2
+          hairStyle
+          backAppendage
+          maxSummons
+          currentQuest
+          xp
+          strength
+          intelligence
+          wisdom
+          luck
+          agility
+          vitality
+          endurance
+          dexterity
+          stamina
+          staminaFullAt
+          nextSummonTime
+          background
+          saleAuction {
+            startingPrice
+            open
+          }
+          assistingAuction {
+            startingPrice
+            open
+          }
         }
       }`
 
