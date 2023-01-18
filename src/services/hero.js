@@ -10,8 +10,8 @@ module.exports = class Hero {
     this.rarity = heroInfo.rarity;
     this.summonsRemaining = heroInfo.summonsRemaining;
     this.profession = this.formatProfession(heroInfo.profession);
-    this.mainClass = heroInfo.mainClass;
-    this.subClass = heroInfo.subClass;
+    this.mainClass = this.formatClass(heroInfo.mainClass);
+    this.subClass = this.formatClass(heroInfo.subClass);
     this.generation = heroInfo.generation;
     this.level = heroInfo.level;
     this.passive1 = this.formatSkill(heroInfo.passive1);
@@ -53,6 +53,81 @@ module.exports = class Hero {
 
   isAvailableQuest() {
     return (this.isOwning() && !this.isOnQuesting && !this.isOnSale) ? true : false;
+  }
+
+  formatClass(classInt) {
+    let returnValue;
+
+    switch(parseInt(classInt)) {
+      case 0:
+        returnValue = "Warrior"
+        break;
+      case 1:
+        returnValue = "Knight"
+        break;
+      case 2:
+        returnValue = "Thief"
+        break;
+      case 3:
+        returnValue = "Archer"
+        break;
+      case 4:
+        returnValue = "Priest"
+        break;
+      case 5:
+        returnValue = "Wizard"
+        break;
+      case 6:
+        returnValue = "Monk"
+        break;
+      case 7:
+        returnValue = "Pirate"
+        break;
+      case 8:
+        returnValue = "Berserker"
+        break;
+      case 9:
+        returnValue = "Seer"
+        break;
+      case 10:
+        returnValue = "Legionnaire"
+        break;
+      case 11:
+        returnValue = "Scholar"
+        break;
+      case 16:
+        returnValue = "Paladin"
+        break;
+      case 17:
+        returnValue = "DarkKnight"
+        break;
+      case 18:
+        returnValue = "Summoner"
+        break;
+      case 19:
+        returnValue = "Ninja"
+        break;
+      case 20:
+        returnValue = "Shapeshifter"
+        break;
+      case 21:
+        returnValue = "Bard"
+        break;
+      case 24:
+        returnValue = "Dragoon"
+        break;
+      case 25:
+        returnValue = "Sage"
+        break;
+      case 26:
+        returnValue = "SpellBow"
+        break;
+      case 28:
+        returnValue = "DreadKnight"
+        break;
+    }
+
+    return returnValue;
   }
 
   formatRarity() {
