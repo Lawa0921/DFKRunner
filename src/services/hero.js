@@ -14,10 +14,10 @@ module.exports = class Hero {
     this.subClass = heroInfo.subClass;
     this.generation = heroInfo.generation;
     this.level = heroInfo.level;
-    this.passive1 = heroInfo.passive1;
-    this.passive2 = heroInfo.passive2;
-    this.active1 = heroInfo.active1;
-    this.active2 = heroInfo.active2;
+    this.passive1 = this.formatSkill(heroInfo.passive1);
+    this.passive2 = this.formatSkill(heroInfo.passive2);
+    this.active1 = this.formatSkill(heroInfo.active1);
+    this.active2 = this.formatSkill(heroInfo.active2);
     this.statboost1 = this.formatStat(heroInfo.statBoost1);
     this.statboost2 = this.formatStat(heroInfo.statBoost2);
     this.hairStyle = heroInfo.hairStyle;
@@ -129,6 +129,60 @@ module.exports = class Hero {
         break;
       case "14":
         returnValue = "DEX"
+        break;
+    }
+
+    return returnValue;
+  }
+
+  formatSkill(skillInt) {
+    let returnValue;
+
+    switch(skillInt) {
+      case "0":
+        returnValue = "Basic1"
+        break;
+      case "1":
+        returnValue = "Basic2"
+        break;
+      case "2":
+        returnValue = "Basic3"
+        break;
+      case "3":
+        returnValue = "Basic4"
+        break;
+      case "4":
+        returnValue = "Basic5"
+        break;
+      case "5":
+        returnValue = "Basic6"
+        break;
+      case "6":
+        returnValue = "Basic7"
+        break;
+      case "7":
+        returnValue = "Basic8"
+        break;
+      case "16":
+        returnValue = "Advanced1"
+        break;
+      case "17":
+        returnValue = "Advanced2"
+        break;
+      case "18":
+        returnValue = "Advanced3"
+        break;
+      case "19":
+        returnValue = "Advanced4"
+        break;
+      case "24":
+        returnValue = "Elite1"
+        break;
+      case "25":
+        returnValue = "Elite2"
+        break;
+      case "28":
+        returnValue = "Exalted1"
         break;
     }
 
