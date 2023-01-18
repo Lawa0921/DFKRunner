@@ -21,7 +21,7 @@ module.exports = class Hero {
     this.statboost1 = this.formatStat(heroInfo.statBoost1);
     this.statboost2 = this.formatStat(heroInfo.statBoost2);
     this.hairStyle = heroInfo.hairStyle;
-    this.background = heroInfo.background;
+    this.background = this.formatBackground(heroInfo.background);
     this.backAppendage = heroInfo.backAppendage;
     this.maxSummons = heroInfo.maxSummons;
     this.network = heroInfo.network;
@@ -96,6 +96,39 @@ module.exports = class Hero {
         break;
       case "6":
         returnValue = "foraging"
+        break;
+    }
+
+    return returnValue;
+  }
+
+  formatBackground(backGroundStringInt) {
+    let returnValue;
+
+    switch(backGroundStringInt) {
+      case "0":
+        returnValue = "desert"
+        break;
+      case "2":
+        returnValue = "forest"
+        break;
+      case "4":
+        returnValue = "plains"
+        break;
+      case "6":
+        returnValue = "island"
+        break;
+      case "8":
+        returnValue = "swamp"
+        break;
+      case "10":
+        returnValue = "mountains"
+        break;
+      case "12":
+        returnValue = "city"
+        break;
+      case "14":
+        returnValue = "arctic"
         break;
     }
 
