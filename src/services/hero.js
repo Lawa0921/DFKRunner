@@ -86,16 +86,16 @@ module.exports = class Hero {
 
     switch(professionInt) {
       case "0":
-        returnValue = "Mining"
+        returnValue = "mining"
         break;
       case "2":
-        returnValue = "Gardening"
+        returnValue = "gardening"
         break;
       case "4":
-        returnValue = "Fishing"
+        returnValue = "fishing"
         break;
       case "6":
-        returnValue = "Foraging"
+        returnValue = "foraging"
         break;
     }
 

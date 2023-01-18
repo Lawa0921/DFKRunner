@@ -473,11 +473,11 @@ const heroSkillDyer = (hero, attributeName) => {
     returnValue = skill[0] + skill[skill.length - 1];
 
     if (attributeTier === "Advanced") {
-        returnValue = strToAnsiGreen(returnValue)
+      returnValue = strToAnsiGreen(returnValue)
     } else if (attributeTier === "Elite") {
-        returnValue = strToAnsiCyan(returnValue)
+      returnValue = strToAnsiCyan(returnValue)
     } else if (attributeTier === "Transcendant") {
-        returnValue = strToAnsiPurple(returnValue)
+      returnValue = strToAnsiPurple(returnValue)
     }
 
     return returnValue;
