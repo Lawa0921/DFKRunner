@@ -84,17 +84,17 @@ module.exports = class Hero {
   formatProfession(professionInt) {
     let returnValue;
 
-    switch(professionInt) {
-      case "0":
+    switch(parseInt(professionInt)) {
+      case 0:
         returnValue = "mining"
         break;
-      case "2":
+      case 2:
         returnValue = "gardening"
         break;
-      case "4":
+      case 4:
         returnValue = "fishing"
         break;
-      case "6":
+      case 6:
         returnValue = "foraging"
         break;
     }
@@ -105,29 +105,29 @@ module.exports = class Hero {
   formatBackground(backGroundStringInt) {
     let returnValue;
 
-    switch(backGroundStringInt) {
-      case "0":
+    switch(parseInt(backGroundStringInt)) {
+      case 0:
         returnValue = "desert"
         break;
-      case "2":
+      case 2:
         returnValue = "forest"
         break;
-      case "4":
+      case 4:
         returnValue = "plains"
         break;
-      case "6":
+      case 6:
         returnValue = "island"
         break;
-      case "8":
+      case 8:
         returnValue = "swamp"
         break;
-      case "10":
+      case 10:
         returnValue = "mountains"
         break;
-      case "12":
+      case 12:
         returnValue = "city"
         break;
-      case "14":
+      case 14:
         returnValue = "arctic"
         break;
     }
@@ -138,29 +138,29 @@ module.exports = class Hero {
   formatStat(statInt) {
     let returnValue;
 
-    switch(statInt) {
-      case "0":
+    switch(parseInt(statInt)) {
+      case 0:
         returnValue = "STR"
         break;
-      case "2":
+      case 2:
         returnValue = "AGI"
         break;
-      case "4":
+      case 4:
         returnValue = "INT"
         break;
-      case "6":
+      case 6:
         returnValue = "WIS"
         break;
-      case "8":
+      case 8:
         returnValue = "LCK"
         break;
-      case "10":
+      case 10:
         returnValue = "VIT"
         break;
-      case "12":
+      case 12:
         returnValue = "END"
         break;
-      case "14":
+      case 14:
         returnValue = "DEX"
         break;
     }
@@ -171,50 +171,50 @@ module.exports = class Hero {
   formatSkill(skillInt) {
     let returnValue;
 
-    switch(skillInt) {
-      case "0":
+    switch(parseInt(skillInt)) {
+      case 0:
         returnValue = "Basic1"
         break;
-      case "1":
+      case 1:
         returnValue = "Basic2"
         break;
-      case "2":
+      case 2:
         returnValue = "Basic3"
         break;
-      case "3":
+      case 3:
         returnValue = "Basic4"
         break;
-      case "4":
+      case 4:
         returnValue = "Basic5"
         break;
-      case "5":
+      case 5:
         returnValue = "Basic6"
         break;
-      case "6":
+      case 6:
         returnValue = "Basic7"
         break;
-      case "7":
+      case 7:
         returnValue = "Basic8"
         break;
-      case "16":
+      case 16:
         returnValue = "Advanced1"
         break;
-      case "17":
+      case 17:
         returnValue = "Advanced2"
         break;
-      case "18":
+      case 18:
         returnValue = "Advanced3"
         break;
-      case "19":
+      case 19:
         returnValue = "Advanced4"
         break;
-      case "24":
+      case 24:
         returnValue = "Elite1"
         break;
-      case "25":
+      case 25:
         returnValue = "Elite2"
         break;
-      case "28":
+      case 28:
         returnValue = "Exalted1"
         break;
     }
