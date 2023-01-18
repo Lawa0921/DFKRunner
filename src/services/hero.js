@@ -18,8 +18,8 @@ module.exports = class Hero {
     this.passive2 = heroInfo.passive2;
     this.active1 = heroInfo.active1;
     this.active2 = heroInfo.active2;
-    this.statboost1 = heroInfo.statBoost1;
-    this.statboost2 = heroInfo.statBoost2;
+    this.statboost1 = this.formatStat(heroInfo.statBoost1);
+    this.statboost2 = this.formatStat(heroInfo.statBoost2);
     this.hairStyle = heroInfo.hairStyle;
     this.background = heroInfo.background;
     this.backAppendage = heroInfo.backAppendage;
@@ -102,24 +102,46 @@ module.exports = class Hero {
     return returnValue;
   }
 
+  formatStat(statInt) {
+    let returnValue;
+
+    switch(statInt) {
+      case "0":
+        returnValue = "STR"
+        break;
+      case "2":
+        returnValue = "AGI"
+        break;
+      case "4":
+        returnValue = "INT"
+        break;
+      case "6":
+        returnValue = "WIS"
+        break;
+      case "8":
+        returnValue = "LCK"
+        break;
+      case "10":
+        returnValue = "VIT"
+        break;
+      case "12":
+        returnValue = "END"
+        break;
+      case "14":
+        returnValue = "DEX"
+        break;
+    }
+
+    return returnValue;
+  }
+
   attributeTier(attributeName) {
-    const integerList = ["backAppendage", "hairStyle"]
-    const skillList = ["passive1", "passive2", "active1", "active2"]
+    const integerList = ["backAppendage", "hairStyle", "passive1", "passive2", "active1", "active2"]
     const classList = ["subClass", "mainClass"]
 
     let attribute = this[attributeName];
 
-    if (skillList.includes(attributeName)) {
-      if (attribute.startsWith("Basic")) {
-        return "Basic"
-      } else if (attribute.startsWith("Advanced")) {
-        return "Advanced"
-      } else if (attribute.startsWith("Elite")) {
-        return "Elite"
-      } else if (attribute.startsWith("Transcendant")) {
-        return "Transcendant"
-      }
-    } else if (integerList.includes(attributeName)) {
+    if (integerList.includes(attributeName)) {
       if (parseInt(attribute) <= 15) {
         return "Basic"
       } else if (parseInt(attribute) >= 16 && parseInt(attribute) <= 23) {
