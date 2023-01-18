@@ -190,12 +190,23 @@ module.exports = class Hero {
   }
 
   attributeTier(attributeName) {
-    const integerList = ["backAppendage", "hairStyle", "passive1", "passive2", "active1", "active2"]
+    const skillList = ["passive1", "passive2", "active1", "active2"]
+    const integerList = ["backAppendage", "hairStyle"]
     const classList = ["subClass", "mainClass"]
 
     let attribute = this[attributeName];
 
-    if (integerList.includes(attributeName)) {
+    if (skillList.includes(attributeName)) {
+      if (attribute.startsWith("Basic")) {
+        return "Basic"
+      } else if (attribute.startsWith("Advanced")) {
+        return "Advanced"
+      } else if (attribute.startsWith("Elite")) {
+        return "Elite"
+      } else if (attribute.startsWith("Transcendant")) {
+        return "Transcendant"
+      }
+    } else if (integerList.includes(attributeName)) {
       if (parseInt(attribute) <= 15) {
         return "Basic"
       } else if (parseInt(attribute) >= 16 && parseInt(attribute) <= 23) {
