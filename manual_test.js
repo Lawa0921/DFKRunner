@@ -27,9 +27,10 @@ const { airdropClaim } = require("./src/defikingdoms/airdrop_claim")
 
 
 async function test() {  
+  // console.log(await autils.getOnAuctionHeroInfos())
   // console.log(Math.floor(new Date().getTime() / 1000))
   // await enterRaffle(config.walletAddressAndPrivateKeyMappings[0]);
-  console.log(await DFKQuestCoreContract.cancelQuest("162779"))
+  // console.log(await DFKQuestCoreContract.cancelQuest("162779"))
   // console.log(await assistingAuctionUpgradeableContract.userAuctions())
   // console.log(Math.round(8.5 * 100) / 100)
   // console.log(await crystalContract.allowance(config.defikingdoms.meditationCircle))

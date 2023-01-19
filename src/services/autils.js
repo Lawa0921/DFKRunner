@@ -311,8 +311,10 @@ exports.getOnAuctionHeroInfos = async () => {
       }`
 
       await axios.post(graphqlEndPoint, { query: queryStr }).then((res) => {
-        heroObjects = heroObjects.concat(res.data.data.saleAuctions.map((onAuctionHeroInfo) => { return { price: onAuctionHeroInfo.startingPrice, hero: new Hero(onAuctionHeroInfo.tokenId) }}))
-        skipCount += res.data.data.saleAuctions.length;
+        let queryCount = res.data.data.saleAuctions.length
+        let filteredSaleAuctions = res.data.data.saleAuctions.filter(onAuctionHeroInfo => typeof(onAuctionHeroInfo.tokenId) !== "undefined" && onAuctionHeroInfo.tokenId !== null)
+        heroObjects = heroObjects.concat(filteredSaleAuctions.map((onAuctionHeroInfo) => { return { price: onAuctionHeroInfo.startingPrice, hero: new Hero(onAuctionHeroInfo.tokenId) }}))
+        skipCount += queryCount
       }).catch((err) => {
         console.log(err);
       })
