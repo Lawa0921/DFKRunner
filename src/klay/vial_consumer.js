@@ -1,4 +1,4 @@
-const config = require("~/config.js");
+const config = require("../../config");
 const ethers = require('ethers');
 const ConsumableItem = require('~/src/klay/contracts/consumableItem');
 const ItemConsumer = require('~/src/klay/contracts/itemConsumer');

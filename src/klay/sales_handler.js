@@ -1,4 +1,4 @@
-const config = require("~/config.js");
+const config = require("../../config");
 const SaleAuction = require("~/src/klay/contracts/saleAuction");
 const AssistingAuctionUpgradeable = require("~/src/klay/contracts/assistingAuctionUpgradeable")
 

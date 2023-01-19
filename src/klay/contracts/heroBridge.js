@@ -1,4 +1,4 @@
-const config = require("~/config.js");
+const config = require("../../../config");
 const ethers = require('ethers');
 const heroBridgeABI = require('~/abis/HeroBridge.json');
 const { NonceManager } = require("@ethersproject/experimental")

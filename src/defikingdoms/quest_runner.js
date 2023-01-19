@@ -15,7 +15,7 @@ const { runDFKLevelUpLogic } = require('~/src/defikingdoms/hero_level_up');
 const { runDFKRentHeroLogic } = require('~/src/defikingdoms/hero_rent');
 const { runVialLogic } = require('~/src/defikingdoms/vial_consumer');
 const autils = require("~/src/services/autils");
-const config = require("~/config.js");
+const config = require("../../config");
 
 exports.runDFKChainQuest = async (accountInfo) => {
   try {

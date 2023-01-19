@@ -1,4 +1,4 @@
-const config = require("~/config.js");
+const config = require("../../config");
 const autils = require('~/src/services/autils')
 const QuestCoreV2 = require('~/src/klay/contracts/questCoreV2');
 const SaleAuction = require('~/src/klay/contracts/saleAuction');

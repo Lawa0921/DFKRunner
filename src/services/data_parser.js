@@ -1,5 +1,5 @@
 const autils = require('~/src/services/autils');
-const config = require("~/config.js");
+const config = require("../../config");
 
 /*
 

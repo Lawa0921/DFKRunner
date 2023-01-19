@@ -1,4 +1,4 @@
-const config = require("~/config.js");
+const config = require("../../../config");
 const ethers = require('ethers');
 const consumableItemABI = require('~/abis/consumableItem.json');
 const autils = require('~/src/services/autils');

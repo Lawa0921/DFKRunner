@@ -1,4 +1,4 @@
-const config = require("~/config.js");
+const config = require("../../config");
 const date = require('date-and-time');
 const fs = require('fs');
 const axios = require('axios');

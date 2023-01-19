@@ -1,4 +1,4 @@
-const config = require("~/config.js");
+const config = require("../../config");
 const autils = require('~/src/services/autils');
 const DFKDuelS2 = require('~/src/defikingdoms/contracts/DFKDuelS2')
 

@@ -1,4 +1,4 @@
-const config = require("~/config.js");
+const config = require("../../config");
 const SaleAuction = require("~/src/defikingdoms/contracts/saleAuction");
 const AssistingAuctionUpgradeable = require("~/src/defikingdoms/contracts/assistingAuctionUpgradeable")
 

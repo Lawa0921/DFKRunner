@@ -1,4 +1,4 @@
-const config = require("~/config.js");
+const config = require("../../../config");
 const ethers = require('ethers');
 const autils = require('~/src/services/autils');
 const questCoreV2ABI = require('~/abis/QuestCoreV2.json');

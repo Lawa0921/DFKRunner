@@ -1,4 +1,4 @@
-const config = require("~/config.js");
+const config = require("../../../config");
 const autils = require('~/src/services/autils');
 const ethers = require('ethers');
 const DFKDuelS2ABI = require('~/abis/DFKDuelS2.json')
