@@ -1,7 +1,7 @@
 const config = require("../../../config");
 const autils = require('../../services/autils');
 const ethers = require('ethers');
-const airdropClaimABI = require('~/abis/AirdropClaim.json')
+const airdropClaimABI = require('../../../abis/AirdropClaim.json')
 
 module.exports = class AirdropClaim {
   constructor(accountInfo) {

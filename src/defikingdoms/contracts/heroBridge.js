@@ -1,6 +1,6 @@
 const config = require("../../../config");
 const ethers = require('ethers');
-const heroBridgeABI = require('~/abis/HeroBridge.json');
+const heroBridgeABI = require('../../../abis/HeroBridge.json');
 const { NonceManager } = require("@ethersproject/experimental")
 
 const DFKToKLAYBridgeFee = "24000000000000000";

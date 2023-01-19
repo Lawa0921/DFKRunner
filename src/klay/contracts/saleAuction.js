@@ -1,6 +1,6 @@
 const config = require("../../../config");
 const ethers = require('ethers');
-const saleAuctionABI = require('~/abis/SaleAuction.json');
+const saleAuctionABI = require('../../../abis/SaleAuction.json');
 const autils = require('../../services/autils');
 const { NonceManager } = require("@ethersproject/experimental")
 

@@ -1,7 +1,7 @@
 const config = require("../../../config");
 const autils = require('../../services/autils');
 const ethers = require('ethers');
-const DuelRaffleTicketABI = require('~/abis/DuelRaffleTicket.json');
+const DuelRaffleTicketABI = require('../../../abis/DuelRaffleTicket.json');
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class DuelRaffleTicket {

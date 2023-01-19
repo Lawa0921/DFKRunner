@@ -1,6 +1,6 @@
 const config = require("../../../config");
 const ethers = require('ethers');
-const assistingAuctionUpgradeableABI = require('~/abis/AssistingAuctionUpgradeable.json');
+const assistingAuctionUpgradeableABI = require('../../../abis/AssistingAuctionUpgradeable.json');
 const autils = require('../../services/autils');
 const { NonceManager } = require("@ethersproject/experimental")
 

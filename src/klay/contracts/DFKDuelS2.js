@@ -1,7 +1,7 @@
 const config = require("../../../config");
 const autils = require('../../services/autils');
 const ethers = require('ethers');
-const DFKDuelS2ABI = require('~/abis/DFKDuelS2.json')
+const DFKDuelS2ABI = require('../../../abis/DFKDuelS2.json')
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class DFKDuelS2Contract {

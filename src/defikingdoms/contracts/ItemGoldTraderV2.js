@@ -1,7 +1,7 @@
 const config = require("../../../config");
 const autils = require('../../services/autils');
 const ethers = require('ethers');
-const itemGoldTraderV2ABI = require('~/abis/ItemGoldTraderV2.json')
+const itemGoldTraderV2ABI = require('../../../abis/ItemGoldTraderV2.json')
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class ItemGoldTraderV2 {

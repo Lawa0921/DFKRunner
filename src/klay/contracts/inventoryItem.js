@@ -1,7 +1,7 @@
 const config = require("../../../config");
 const autils = require('../../services/autils');
 const ethers = require('ethers');
-const InventoryItemABI = require('~/abis/InventoryItem.json');
+const InventoryItemABI = require('../../../abis/InventoryItem.json');
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class InventoryItem {

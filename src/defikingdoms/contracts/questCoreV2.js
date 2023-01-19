@@ -1,7 +1,7 @@
 const config = require("../../../config");
 const ethers = require('ethers');
 const autils = require('../../services/autils');
-const questCoreV2ABI = require('~/abis/QuestCoreV2.json');
+const questCoreV2ABI = require('../../../abis/QuestCoreV2.json');
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class QuestCoreV2 {

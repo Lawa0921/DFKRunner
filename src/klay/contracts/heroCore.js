@@ -1,7 +1,7 @@
 const config = require("../../../config");
 const autils = require('../../services/autils');
 const ethers = require('ethers');
-const heroCoreABI = require('~/abis/HeroCore.json')
+const heroCoreABI = require('../../../abis/HeroCore.json')
 
 module.exports = class HeroCore {
   constructor(accountInfo) {

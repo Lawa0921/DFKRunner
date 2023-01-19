@@ -1,7 +1,7 @@
 const config = require("../../../config");
 const autils = require('../../services/autils');
 const ethers = require('ethers');
-const ICrystalABI = require('~/abis/ICrystalToken.json');
+const ICrystalABI = require('../../../abis/ICrystalToken.json');
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class InventoryItem {

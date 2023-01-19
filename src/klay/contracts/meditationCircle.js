@@ -1,7 +1,7 @@
 const autils = require('../../services/autils');
 const config = require("../../../config");
 const ethers = require('ethers');
-const meditationCircleABI = require('~/abis/MeditationCircle.json')
+const meditationCircleABI = require('../../../abis/MeditationCircle.json')
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class MeditationCircle {
