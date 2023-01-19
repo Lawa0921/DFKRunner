@@ -1,5 +1,5 @@
 const config = require("../../config");
-const autils = require('~/src/services/autils');
+const autils = require('../services/autils');
 const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 const minStamina = config.defikingdoms.quest.fishing.minStamina;

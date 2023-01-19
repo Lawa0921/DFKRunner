@@ -1,4 +1,4 @@
-const autils = require('~/src/services/autils');
+const autils = require('./autils');
 const config = require("../../config");
 
 /*

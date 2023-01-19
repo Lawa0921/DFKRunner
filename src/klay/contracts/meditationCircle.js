@@ -1,4 +1,4 @@
-const autils = require("~/src/services/autils");
+const autils = require('../../services/autils');
 const config = require("../../../config");
 const ethers = require('ethers');
 const meditationCircleABI = require('~/abis/MeditationCircle.json')

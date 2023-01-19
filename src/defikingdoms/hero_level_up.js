@@ -3,7 +3,7 @@ const InventoryItem = require('~/src/defikingdoms/contracts/inventoryItem');
 const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
 const Crystal = require('~/src/defikingdoms/contracts/crystal');
 const config = require("~/config.js")
-const autils = require('~/src/services/autils');
+const autils = require('../services/autils');
 const ethers = require('ethers');
 
 exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {

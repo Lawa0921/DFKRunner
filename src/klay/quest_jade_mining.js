@@ -1,5 +1,5 @@
 const config = require("../../config");
-const autils = require('~/src/services/autils');
+const autils = require('../services/autils');
 const QuestCoreV2 = require('~/src/klay/contracts/questCoreV2');
 const SaleAuction = require('~/src/klay/contracts/saleAuction');
 const minStamina = config.klay.quest.jadeMining.minStamina;

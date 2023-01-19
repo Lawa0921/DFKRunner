@@ -1,5 +1,5 @@
 const config = require("../../config");
-const autils = require('~/src/services/autils');
+const autils = require('../services/autils');
 const DFKDuelS2 = require('~/src/defikingdoms/contracts/DFKDuelS2')
 
 exports.DFKAutoDueler = async() => {

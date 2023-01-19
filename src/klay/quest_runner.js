@@ -14,7 +14,7 @@ const { sendHeroTo } = require("~/src/klay/send_hero");
 const { enterRaffle } = require("~/src/klay/enter_raffle");
 const { runVialLogic } = require('~/src/klay/vial_consumer');
 const { airdropClaim } = require("~/src/klay/airdrop_claim");
-const autils = require("~/src/services/autils");
+const autils = require('../services/autils');
 const config = require("../../config");
 
 exports.runKLAYChainQuest = async (accountInfo) => {

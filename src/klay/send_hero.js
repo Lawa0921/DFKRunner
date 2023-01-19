@@ -1,5 +1,5 @@
 const config = require("../../config");
-const autils = require('~/src/services/autils');
+const autils = require('../services/autils');
 const ethers = require('ethers');
 const HeroCore = require('~/src/klay/contracts/heroCore');
 const KLAYAssistingAuctionUpgradeable = require("~/src/klay/contracts/assistingAuctionUpgradeable")

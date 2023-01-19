@@ -2,8 +2,8 @@ const MeditationCircle = require('~/src/klay/contracts/meditationCircle');
 const InventoryItem = require('~/src/klay/contracts/inventoryItem');
 const SaleAuction = require('~/src/klay/contracts/saleAuction');
 const Jade = require('~/src/klay/contracts/jade');
-const config = require("~/config.js")
-const autils = require('~/src/services/autils');
+const config = require("../../config");
+const autils = require('../services/autils');
 const ethers = require('ethers');
 
 exports.runKLAYLevelUpLogic = async (owningHeroObjects, accountInfo) => {

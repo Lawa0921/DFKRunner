@@ -1,5 +1,5 @@
 const config = require("../../config");
-const autils = require('~/src/services/autils');
+const autils = require('../services/autils');
 const KLAYDuelS2 = require('~/src/klay/contracts/DFKDuelS2')
 
 exports.KLAYAutoDueler = async() => {

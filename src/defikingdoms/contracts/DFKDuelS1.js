@@ -1,5 +1,5 @@
 const config = require("../../../config");
-const autils = require('~/src/services/autils');
+const autils = require('../../services/autils');
 const ethers = require('ethers');
 const DFKDuelS1ABI = require('~/abis/DFKDuelS1.json')
 const { NonceManager } = require("@ethersproject/experimental")

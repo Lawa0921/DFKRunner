@@ -1,5 +1,5 @@
 const AssistingAuctionUpgradeable = require("~/src/klay/contracts/assistingAuctionUpgradeable")
-const config = require("~/config.js")
+const config = require("../../config");
 const RentValuator = require('~/src/services/rent_valuator')
 
 exports.runKLAYRentHeroLogic = async (owningHeroObjects, accountInfo) => {
