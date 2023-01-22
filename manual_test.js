@@ -22,7 +22,7 @@ const KLAYQuestCoreContract = new KLAYQuestCore(config.walletAddressAndPrivateKe
 const DFKQuestCoreContract = new DFKQuestCore(config.walletAddressAndPrivateKeyMappings[0])
 const { enterRaffle } = require("./src/klay/enter_raffle");
 
-const Valuator = require('~/src/services/valuator');
+const Valuator = require('./src/services/valuator');
 const { airdropClaim } = require("./src/defikingdoms/airdrop_claim")
 
 
