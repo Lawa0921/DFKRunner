@@ -1,4 +1,4 @@
-const config = require("~/config.js")
+const config = require("../../config")
 const RaffleMaster = require("./contracts/raffleMaster")
 const DuelRaffleTicket = require("./contracts/duelRaffeTicket")
 

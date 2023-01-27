@@ -1,4 +1,4 @@
-const dataParser = require('~/src/services/data_parser') 
+const dataParser = require('../services/data_parser') 
 const QuestCoreV2 = require("./contracts/questCoreV2");
 const { CheckAndSendDFKFishers } = require("./quest_fishing");
 const { CheckAndSendDFKForagers } = require("./quest_foraging");

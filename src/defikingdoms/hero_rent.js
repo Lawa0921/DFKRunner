@@ -1,6 +1,6 @@
 const AssistingAuctionUpgradeable = require("./contracts/assistingAuctionUpgradeable")
-const config = require("~/config.js")
-const RentValuator = require('~/src/services/rent_valuator')
+const config = require("../../config")
+const RentValuator = require('../services/rent_valuator')
 
 exports.runDFKRentHeroLogic = async (owningHeroObjects, accountInfo) => {
   const assistingAuctionUpgradeableContract = new AssistingAuctionUpgradeable(accountInfo)

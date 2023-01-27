@@ -2,7 +2,7 @@ const MeditationCircle = require('./contracts/meditationCircle');
 const InventoryItem = require('./contracts/inventoryItem');
 const SaleAuction = require('./contracts/saleAuction');
 const Crystal = require('./contracts/crystal');
-const config = require("~/config.js")
+const config = require("../../config")
 const autils = require('../services/autils');
 const ethers = require('ethers');
 
