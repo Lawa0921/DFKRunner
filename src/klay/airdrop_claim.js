@@ -1,4 +1,4 @@
-const AirdropClaim = require("~/src/klay/contracts/airdropClaim")
+const AirdropClaim = require("./contracts/airdropClaim")
 
 exports.airdropClaim = async (accountInfo) => {
   const airdropClaimContract = new AirdropClaim(accountInfo)

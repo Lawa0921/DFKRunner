@@ -1,6 +1,6 @@
 const config = require("../../config");
 const autils = require('../services/autils');
-const KLAYDuelS2 = require('~/src/klay/contracts/DFKDuelS2')
+const KLAYDuelS2 = require('./contracts/DFKDuelS2')
 
 exports.KLAYAutoDueler = async() => {
   if (config.klay.duelSetting.isActive) {

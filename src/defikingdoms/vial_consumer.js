@@ -1,9 +1,9 @@
 const config = require("../../config");
 const ethers = require('ethers');
-const ConsumableItem = require('~/src/defikingdoms/contracts/consumableItem');
-const ItemConsumer = require('~/src/defikingdoms/contracts/itemConsumer');
-const SaleAuction = require("~/src/defikingdoms/contracts/saleAuction")
-const AssistingAuctionUpgradeable = require("~/src/defikingdoms/contracts/assistingAuctionUpgradeable")
+const ConsumableItem = require('./contracts/consumableItem');
+const ItemConsumer = require('./contracts/itemConsumer');
+const SaleAuction = require("./contracts/saleAuction")
+const AssistingAuctionUpgradeable = require("./contracts/assistingAuctionUpgradeable")
 const staminaVialRegenerateAmount = 25;
 
 exports.runVialLogic = async (owningHeroObjects, accountInfo) => {

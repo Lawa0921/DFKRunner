@@ -1,9 +1,9 @@
 const config = require("../../config");
 const ethers = require('ethers');
-const ConsumableItem = require('~/src/klay/contracts/consumableItem');
-const ItemConsumer = require('~/src/klay/contracts/itemConsumer');
-const SaleAuction = require("~/src/klay/contracts/saleAuction")
-const AssistingAuctionUpgradeable = require("~/src/klay/contracts/assistingAuctionUpgradeable")
+const ConsumableItem = require('./contracts/consumableItem');
+const ItemConsumer = require('./contracts/itemConsumer');
+const SaleAuction = require("./contracts/saleAuction")
+const AssistingAuctionUpgradeable = require("./contracts/assistingAuctionUpgradeable")
 const staminaVialRegenerateAmount = 25;
 
 exports.runVialLogic = async (owningHeroObjects, accountInfo) => {

@@ -1,7 +1,7 @@
 const config = require("../../config");
 const autils = require('../services/autils');
-const QuestCoreV2 = require('~/src/klay/contracts/questCoreV2');
-const SaleAuction = require('~/src/klay/contracts/saleAuction');
+const QuestCoreV2 = require('./contracts/questCoreV2');
+const SaleAuction = require('./contracts/saleAuction');
 const minStamina = config.klay.quest.goldMining.minStamina;
 const maxBatch = 6;
 

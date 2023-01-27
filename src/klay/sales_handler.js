@@ -1,6 +1,6 @@
 const config = require("../../config");
-const SaleAuction = require("~/src/klay/contracts/saleAuction");
-const AssistingAuctionUpgradeable = require("~/src/klay/contracts/assistingAuctionUpgradeable")
+const SaleAuction = require("./contracts/saleAuction");
+const AssistingAuctionUpgradeable = require("./contracts/assistingAuctionUpgradeable")
 
 const isShouldList = (heroObject) => {
   return !heroObject.isOnSale && !heroObject.isOnQuesting && heroObject.currentStamina() <= config.klay.listStamina

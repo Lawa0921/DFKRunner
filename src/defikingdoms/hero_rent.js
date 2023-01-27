@@ -1,4 +1,4 @@
-const AssistingAuctionUpgradeable = require("~/src/defikingdoms/contracts/assistingAuctionUpgradeable")
+const AssistingAuctionUpgradeable = require("./contracts/assistingAuctionUpgradeable")
 const config = require("~/config.js")
 const RentValuator = require('~/src/services/rent_valuator')
 

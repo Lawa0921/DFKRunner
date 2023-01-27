@@ -1,7 +1,7 @@
 const config = require("../../config");
 const autils = require('../services/autils');
-const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2');
-const SaleAuction = require('~/src/defikingdoms/contracts/saleAuction');
+const QuestCoreV2 = require('./contracts/questCoreV2');
+const SaleAuction = require('./contracts/saleAuction');
 const minStamina = config.defikingdoms.quest.gardening.minStamina;
 
 exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects, accountInfo) => {

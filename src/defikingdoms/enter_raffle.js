@@ -1,6 +1,6 @@
 const config = require("~/config.js")
-const RaffleMaster = require("~/src/defikingdoms/contracts/raffleMaster")
-const DuelRaffleTicket = require("~/src/defikingdoms/contracts/duelRaffeTicket")
+const RaffleMaster = require("./contracts/raffleMaster")
+const DuelRaffleTicket = require("./contracts/duelRaffeTicket")
 
 exports.enterRaffle = async (accountInfo) => {
   if (config.defikingdoms.raffleSetting.isActive) {

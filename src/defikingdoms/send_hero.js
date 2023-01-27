@@ -1,8 +1,8 @@
 const config = require("../../config");
 const autils = require('../services/autils');
 const ethers = require('ethers');
-const HeroCore = require('~/src/defikingdoms/contracts/heroCore');
-const DFKAssistingAuctionUpgradeable = require("~/src/defikingdoms/contracts/assistingAuctionUpgradeable")
+const HeroCore = require('./contracts/heroCore');
+const DFKAssistingAuctionUpgradeable = require("./contracts/assistingAuctionUpgradeable")
 
 exports.sendHeroTo = async (heroesStruct, accountInfo, owningHeroObjects) => {
   if (config.sendHeroTo !== null && ethers.utils.isAddress(config.sendHeroTo) && config.sendHeroTo !== accountInfo.walletAddress) {

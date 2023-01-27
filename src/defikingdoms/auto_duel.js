@@ -1,6 +1,6 @@
 const config = require("../../config");
 const autils = require('../services/autils');
-const DFKDuelS2 = require('~/src/defikingdoms/contracts/DFKDuelS2')
+const DFKDuelS2 = require('./contracts/DFKDuelS2')
 
 exports.DFKAutoDueler = async() => {
   if (config.defikingdoms.duelSetting.isActive) { 

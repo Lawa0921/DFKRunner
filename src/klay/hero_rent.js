@@ -1,4 +1,4 @@
-const AssistingAuctionUpgradeable = require("~/src/klay/contracts/assistingAuctionUpgradeable")
+const AssistingAuctionUpgradeable = require("./contracts/assistingAuctionUpgradeable")
 const config = require("../../config");
 const RentValuator = require('~/src/services/rent_valuator')
 

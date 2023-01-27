@@ -1,4 +1,4 @@
-const QuestCoreV2 = require('~/src/defikingdoms/contracts/questCoreV2')
+const QuestCoreV2 = require('./contracts/questCoreV2')
 
 exports.CompleteQuests = async (heroesStruct, accountInfo) => {
   const questCoreV2Contract = new QuestCoreV2(accountInfo)
