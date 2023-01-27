@@ -281,9 +281,6 @@ const config = {
         ]
       }
     },
-    "notForLevelUpHeroIds": [
-      // 把你不想自動升級的英雄 ID 寫在這裡，例如： "1716", "123456"
-    ],
     "useStaminaVialHeroIds": [ // 把你想要自動使用耐力藥水的英雄 ID 寫在這裡，例如 "1000000064538"
       
     ],
@@ -795,9 +792,6 @@ const config = {
         ]
       }
     },
-    "notForLevelUpHeroIds": [
-      // 把你不想自動升級的英雄 ID 寫在這裡，例如： "1716", "123456"
-    ],
     "useStaminaVialHeroIds": [ // 把你想要自動使用耐力藥水的英雄 ID 寫在這裡，例如 "1000000064538"
       
     ],
@@ -1461,6 +1455,9 @@ const config = {
   "notForRentHeroIds": [
     // 把你不想出租的英雄 ID 寫在這裡，例如： "1565", "1234" 
  ],
+  "notForLevelUpHeroIds": [
+    // 把你不想自動升級的英雄 ID 寫在這裡，例如： "1716", "123456"
+  ],
   "sendHeroTo": null, // 可以填入一個地址，當完成任務時會把所有完成任務的英雄傳入這個地址，當你要換錢包的時候可以使用這個功能
   "setQuestScriptTimeSecond": 360, // 設定你每次任務腳本執行的間隔秒數
   "setDuelScriptTimeSecond": 5, // 設定你每次執行 duel 腳本的間隔秒數

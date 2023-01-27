@@ -15,7 +15,7 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
 
   const activeMeditations = await meditationCircleContract.getActiveMeditations();
   const levelUpableHeros = owningHeroObjects.filter(hero => 
-    config.defikingdoms.notForLevelUpHeroIds.indexOf(hero.id) === -1 &&
+    config.notForLevelUpHeroIds.indexOf(hero.id) === -1 &&
     hero.levelUpable() && 
     activeMeditations.map(activeMeditation => parseInt(activeMeditation.heroId).toString()).indexOf(hero.id) === -1 &&
     hero.owner === accountInfo.walletAddress &&
