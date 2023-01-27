@@ -5,7 +5,7 @@ const RentValuator = require('../services/rent_valuator')
 exports.runKLAYRentHeroLogic = async (owningHeroObjects, accountInfo) => {
   const assistingAuctionUpgradeableContract = new AssistingAuctionUpgradeable(accountInfo)
   const filtedHeroObjects = owningHeroObjects.filter((heroObject) => {
-    return config.klay.notForRentHeroIds.indexOf(heroObject.id) === -1 && 
+    return config.notForRentHeroIds.indexOf(heroObject.id) === -1 && 
       config.klay.heroForSale.map(heroData => heroData.id).indexOf(heroObject.id) === -1 &&
       heroObject.owner === accountInfo.walletAddress &&
       config.klay.useStaminaVialHeroIds.indexOf(heroObject.id) === -1 &&

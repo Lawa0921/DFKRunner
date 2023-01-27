@@ -213,7 +213,7 @@ const config = {
               "248925"       , "1000000120304", "1000000041965", "162779"       , "162538"       ,
               "1000000087935", "1000000087038", "1000000000528", "1000000142255", "1000000155479",
               "2000000024151", "2000000026348", "256082"       , "1000000153919", "1000000031133",
-              "1000000038180",
+              "1000000038180", "1000000020702"
             ],
             "contractAddress": "0xb8828c687Fb1C875D5acb4281C5CDf9F49fA4637" // 合約的地址，你不會更改這個值
           },
@@ -274,16 +274,13 @@ const config = {
             "name": "StatQuest_Luk", // 有地方會用到這個值，不要更改它
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
               "1000000014120", "1000000087216", "1000000142831", "1000000139174", "248913"       ,
-              "2000000011488"
+              "2000000011488", "1000000080354"
             ],
             "contractAddress": "0x81fA8a2bfcd703dc83c5d4bEE1075899448A5CdE" // 合約的地址，你不會更改這個值
           }
         ]
       }
     },
-    "notForRentHeroIds": [
-       // 把你不想出租的英雄 ID 寫在這裡，例如： "1565", "1234" 
-    ],
     "notForLevelUpHeroIds": [
       // 把你不想自動升級的英雄 ID 寫在這裡，例如： "1716", "123456"
     ],
@@ -446,7 +443,7 @@ const config = {
       { "id": "1000000073224", "price": 125 },
       { "id": "1000000026278", "price": 125 },
       { "id": "2000000015254", "price": 119 },
-
+      { "id": "1000000095474", "price": 125 }
     ],
     "useRpcIndex": 0, // 表示你想要使用的 rpc ，0 是 下方 rpcs 的第一個，1 是第二個以次類推，網路卡頓的時候可以嘗試換個 rpc
     "rpcs": [
@@ -601,7 +598,7 @@ const config = {
     "duelSetting": {
       "isActive": true, // 表示是否要執行 DFK 自動 duel，true 的情形就會自動執行
       "autoDuelerWalletIndex": 0, // 設定你用於自動 duel 的 account 是哪一個，如果是 0 就是你寫在 env 的第一個帳號， 1 就是第二個以此類推
-      "type": "squad", // duel 的類型，solo, squad, war 其中一種
+      "type": "solo", // duel 的類型，solo, squad, war 其中一種
       "fee": "low", // 花費幣的數量 low, medium, high 其中一種
       "notForDuelHeroes": [ 
         /*
@@ -695,7 +692,7 @@ const config = {
             "pairAddress": "0xb911F5D6F9129365d1a415DD3CBa17F0240CFA70", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
-              
+              "196194", "235467", "245326", "258253", "261081", "1000000066888"
             ],
           },                 {
             "tokenPair": "JEWEL-wKLAY", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
@@ -730,7 +727,7 @@ const config = {
             "pairAddress": "0x7038F49cAA6e2f26677D237A2A40EC6354bA1eA5", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
-              "196194", "235467", "245326", "258253", "261081", "1000000066888"
+
             ], 
           }
         ],
@@ -798,9 +795,6 @@ const config = {
         ]
       }
     },
-    "notForRentHeroIds": [
-       "2000000027099" // 把你不想出租的英雄 ID 寫在這裡，例如： "1565", "1234" 
-    ],
     "notForLevelUpHeroIds": [
       // 把你不想自動升級的英雄 ID 寫在這裡，例如： "1716", "123456"
     ],
@@ -1459,11 +1453,14 @@ const config = {
   },
   "autoRenterSetting": {
     "rentalEstimateAdjustment": 1, // 出租估價完會在乘以這個數，如果覺得估價太低或太高可以調整這個數字
-    "KLAYNetworkRentalEstimateAdjustment": 1.25, // KLAY 鏈的出租估價完會在乘以這個數，如果覺得 KLAY 鏈估價太低或太高可以調整這個數字
+    "KLAYNetworkRentalEstimateAdjustment": 1.8, // KLAY 鏈的出租估價完會在乘以這個數，如果覺得 KLAY 鏈估價太低或太高可以調整這個數字
     "DFKNetworkRentalEstimateAdjustment": 2, // DFK 鏈的出租估價完會在乘以這個數，如果覺得 DFK 鏈估價太低或太高可以調整這個數字
     "rentFloorPrice": 3, // 被評估為沒有任何出租價值的英雄會被用這個價格乘以上方的調整後出租
     "rentFloorSwitch": false, // 設定是否要將沒有出租價值的英雄照地板價出租的開關，只有設為 true 才會自動出租 
   },
+  "notForRentHeroIds": [
+    // 把你不想出租的英雄 ID 寫在這裡，例如： "1565", "1234" 
+ ],
   "sendHeroTo": null, // 可以填入一個地址，當完成任務時會把所有完成任務的英雄傳入這個地址，當你要換錢包的時候可以使用這個功能
   "setQuestScriptTimeSecond": 360, // 設定你每次任務腳本執行的間隔秒數
   "setDuelScriptTimeSecond": 5, // 設定你每次執行 duel 腳本的間隔秒數
