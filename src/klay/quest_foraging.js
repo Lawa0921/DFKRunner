@@ -3,8 +3,8 @@ const autils = require('../services/autils');
 const QuestCoreV2 = require('./contracts/questCoreV2');
 const SaleAuction = require('./contracts/saleAuction');
 const minStamina = config.klay.quest.foraging.minStamina;
-const maxQueue = 10;
-const maxHeroCount = 6;
+const maxQueue = 5;
+const maxHeroCount = 5;
 
 exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects, accountInfo) => {
 	if (heroesStruct.foragingQuestCount >= maxQueue) {

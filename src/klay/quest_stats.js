@@ -3,8 +3,8 @@ const autils = require('../services/autils');
 const QuestCoreV2 = require('./contracts/questCoreV2');
 const SaleAuction = require('./contracts/saleAuction');
 const minStamina = 25;
-const maxQueue = 10;
-const maxHeroCount = 6;
+const maxQueue = 5;
+const maxHeroCount = 5;
 
 exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, accountInfo) => {
 	const statHeroIds = config.klay.quest.statQuest.quests.map(statQuestSetting => statQuestSetting.heroes).flat()

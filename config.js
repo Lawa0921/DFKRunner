@@ -993,7 +993,7 @@ const config = {
   },
   "autoBuyerSetting": {
     "autoBuyerFloorPrice": 15, // 所有你沒有寫的組合都是用這個價格當作最低價
-    "KLAYnetworkBuyerEstimateAdjustment": 0.8, // KLAY 鏈的購買估價會再乘以這個數，如果覺得 KLAY 鏈估價太低或太高可以調整這個數字
+    "KLAYnetworkBuyerEstimateAdjustment": 0.95, // KLAY 鏈的購買估價會再乘以這個數，如果覺得 KLAY 鏈估價太低或太高可以調整這個數字
     "DFKnetworkBuyerEstimateAdjustment": 1, // DFK 鏈的購買估價會再乘以這個數，如果覺得 DFK 鏈估價太低或太高可以調整這個數字
     "buyerEstimateAdjustment": 1, // 任何鏈的購買估價會再乘以這個數，如果覺得估價太低或太高可以調整這個數字
     "autoBuyerSwitch": true, // 自動購買的開關，設定為 false 時將不會自動購買，只會列出上架的英雄
