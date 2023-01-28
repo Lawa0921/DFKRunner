@@ -2,12 +2,13 @@ const config = require("../../../config");
 const autils = require('../../services/autils');
 const ethers = require('ethers');
 const heroCoreABI = require('../../../abis/HeroCore.json')
+const contractAddress = "0x268CC8248FFB72Cd5F3e73A9a20Fa2FF40EfbA61"
 
 module.exports = class HeroCore {
   constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.klay.rpcs[config.klay.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
-    this.contract = new ethers.Contract(config.klay.heroCore, heroCoreABI, this.wallet)
+    this.contract = new ethers.Contract(contractAddress, heroCoreABI, this.wallet)
     this.accountName = accountInfo.accountName
   }
 

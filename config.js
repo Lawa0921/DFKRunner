@@ -800,24 +800,9 @@ const config = {
       "https://klaytn.rpc.defikingdoms.com",
       "https://klaytn-rpc.gateway.pokt.network"
     ],
-    "questCoreV2": "0x8dc58d6327E1f65b18B82EDFb01A361f3AAEf624", // 合約的地址，你不會更改這個值
-    "heroCore": "0x268CC8248FFB72Cd5F3e73A9a20Fa2FF40EfbA61", // 合約的地址，你不會更改這個值
-    "saleAuction": "0x7F2B66DB2D02f642a9eb8d13Bc998d441DDe17A8", // 合約的地址，你不會更改這個值
-    "meditationCircle": "0xdbEE8C336B06f2d30a6d2bB3817a3Ae0E34f4900", // 合約的地址，你不會更改這個值
     "shvasRune": "0x907a98319AEB249e387246637149f4B2e7D21dB7", // 合約的地址，你不會更改這個值
     "mokshaRune": "0xd0223143057Eb44065e789b202E03A5869a6006C", // 合約的地址，你不會更改這個值
-    "heroBridge": "0xEE258eF5F4338B37E9BA9dE6a56382AdB32056E2", // 合約的地址，你不會更改這個值
-    "uniswapV2Factory": "0x36fAE766e51f17F8218C735f58426E293498Db2B", // 合約的地址，你不會更改這個值
-    "uniswapV2Router02": "0x9e987E5E9aB872598f601BE4aCC5ac23F484845E", // 合約的地址，你不會更改這個值
     "staminaVial": "0x4546DBaAb48Bf1BF2ad7B56d04952d946Ab6e2a7", // 合約的地址，你不會更改這個值
-    "itemGoldTraderV2": "0x3Eab8a8F71dDA3e6c907C74302B734805C4f3278", // 合約的地址，你不會更改這個值
-    "DFKDuelS2": "0xF719C12a5A7C0f13F3c1B71074960A25E2f9Aa9e", // 合約的地址，你不會更改這個值
-    "raffleMaster": "0x9aE38Ba1A4bB847E6D77e29Db235B0037A0cfB30", // 合約的地址，你不會更改這個值
-    "duelRaffleTicket": "0x3E5081337d1a12F261b013Bc08745fB3cd756Eb3", // 合約的地址，你不會更改這個值
-    "airdropClaim": "0x86B70Cd6A405B84d1790021dC4F8c24B50727EA6", // 合約的地址，你不會更改這個值
-    "itemConsumer": "0xF78cA21d7Da3227457138714F5bEd08D2604A156", // 合約的地址，你不會更改這個值
-    "jade": "0xB3F5867E277798b50ba7A71C0b24FDcA03045eDF", // 合約的地址，你不會更改這個值
-    "assistingAuctionUpgradable": "0xA2cef1763e59198025259d76Ce8F9E60d27B17B5", // 合約的地址，你不會更改這個值
     "availableForSaleTokens": [ // 可自由更改下方 "sale" 裡面的值成 true 或是 false，true 表示要賣，false 的則不會賣掉
       {
         "name": "Ambertaffy",

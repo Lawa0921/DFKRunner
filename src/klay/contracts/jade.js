@@ -2,13 +2,14 @@ const config = require("../../../config");
 const autils = require('../../services/autils');
 const ethers = require('ethers');
 const ICrystalABI = require('../../../abis/ICrystalToken.json');
+const contractAddress = "0xB3F5867E277798b50ba7A71C0b24FDcA03045eDF"
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class Jade {
   constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.klay.rpcs[config.klay.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
-    this.contract = new ethers.Contract(config.klay.jade, ICrystalABI, new NonceManager(this.wallet))
+    this.contract = new ethers.Contract(contractAddress, ICrystalABI, new NonceManager(this.wallet))
     this.accountName = accountInfo.accountName
   }
 

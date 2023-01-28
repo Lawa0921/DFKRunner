@@ -2,13 +2,14 @@ const config = require("../../../config");
 const autils = require('../../services/autils');
 const ethers = require('ethers');
 const DFKDuelS2ABI = require('../../../abis/DFKDuelS2.json')
+const contractAddress = "0xF719C12a5A7C0f13F3c1B71074960A25E2f9Aa9e"
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class DFKDuelS2Contract {
   constructor(accountInfo) {
 		this.provider = new ethers.providers.JsonRpcProvider(config.klay.rpcs[config.klay.useRpcIndex])
 		this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
-		this.contract = new ethers.Contract(config.klay.DFKDuelS2, DFKDuelS2ABI, new NonceManager(this.wallet))
+		this.contract = new ethers.Contract(contractAddress, DFKDuelS2ABI, new NonceManager(this.wallet))
 		this.accountName = accountInfo.accountName
 	}
 

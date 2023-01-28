@@ -2,13 +2,14 @@ const autils = require('../../services/autils');
 const config = require("../../../config");
 const ethers = require('ethers');
 const meditationCircleABI = require('../../../abis/MeditationCircle.json')
+const contractAddress = "0xdbEE8C336B06f2d30a6d2bB3817a3Ae0E34f4900"
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class MeditationCircle {
   constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.klay.rpcs[config.klay.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
-    this.contract = new ethers.Contract(config.klay.meditationCircle, meditationCircleABI, new NonceManager(this.wallet))
+    this.contract = new ethers.Contract(contractAddress, meditationCircleABI, new NonceManager(this.wallet))
     this.accountName = accountInfo.accountName
   }
 
