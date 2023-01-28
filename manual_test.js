@@ -11,6 +11,7 @@ const AirdropClaim = require("./src/defikingdoms/contracts/airdropClaim")
 const Crystal = require("./src/defikingdoms/contracts/crystal")
 const AssistingAuctionUpgradeable = require("./src/klay/contracts/assistingAuctionUpgradeable")
 const DFKDuelS2 = require('./src/defikingdoms/contracts/DFKDuelS2')
+const PowerUpManager = require("./src/defikingdoms/contracts/powerUpManager")
 const { BigNumber } = require("@ethersproject/bignumber")
 const raffleMasterContract = new RaffleMaster(config.walletAddressAndPrivateKeyMappings[0])
 const duelRaffleTicketContract = new DuelRaffleTicket(config.walletAddressAndPrivateKeyMappings[0])
@@ -20,6 +21,8 @@ const assistingAuctionUpgradeableContract = new AssistingAuctionUpgradeable(conf
 const DFKDuelS2Contract = new DFKDuelS2(config.walletAddressAndPrivateKeyMappings[0])
 const KLAYQuestCoreContract = new KLAYQuestCore(config.walletAddressAndPrivateKeyMappings[0])
 const DFKQuestCoreContract = new DFKQuestCore(config.walletAddressAndPrivateKeyMappings[0])
+const DFKPowerUpManagerContract = new PowerUpManager(config.walletAddressAndPrivateKeyMappings[0])
+
 const { enterRaffle } = require("./src/klay/enter_raffle");
 
 const Valuator = require('./src/services/valuator');
@@ -27,15 +30,8 @@ const { airdropClaim } = require("./src/defikingdoms/airdrop_claim")
 
 
 async function test() {  
-  // console.log(await autils.getOnAuctionHeroInfos())
-  // console.log(Math.floor(new Date().getTime() / 1000))
-  // await enterRaffle(config.walletAddressAndPrivateKeyMappings[0]);
-  // console.log(await DFKQuestCoreContract.cancelQuest("162779"))
-  // console.log(await assistingAuctionUpgradeableContract.userAuctions())
-  // console.log(Math.round(8.5 * 100) / 100)
-  // console.log(await crystalContract.allowance(config.defikingdoms.meditationCircle))
-  // await crystalContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
-  // console.log(ethers.constants.MaxUint256)
+
+  console.log(await DFKPowerUpManagerContract.getActivePowerUps())
 }
 
 test();
