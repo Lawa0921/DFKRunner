@@ -1,6 +1,7 @@
 const config = require("../../../config");
 const autils = require('../../services/autils');
 const ethers = require('ethers');
+const contractAddress = "0x0f85fdf6c561C42d6b46d0E27ea6Aa9Bf9476B3f"
 const itemGoldTraderV2ABI = require('../../../abis/ItemGoldTraderV2.json')
 const { NonceManager } = require("@ethersproject/experimental")
 
@@ -8,7 +9,7 @@ module.exports = class ItemGoldTraderV2 {
   constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
-    this.contract = new ethers.Contract(config.defikingdoms.itemGoldTraderV2, itemGoldTraderV2ABI, new NonceManager(this.wallet))
+    this.contract = new ethers.Contract(contractAddress, itemGoldTraderV2ABI, new NonceManager(this.wallet))
     this.accountName = accountInfo.accountName
   }
 

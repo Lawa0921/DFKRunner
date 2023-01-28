@@ -2,7 +2,7 @@ const config = require("../../../config");
 const ethers = require('ethers');
 const heroBridgeABI = require('../../../abis/HeroBridge.json');
 const { NonceManager } = require("@ethersproject/experimental")
-
+const contractAddress = "0x739B1666c2956f601f095298132773074c3E184b"
 const DFKToKLAYBridgeFee = "24000000000000000";
 const KlayChainId = 8217;
 
@@ -10,7 +10,7 @@ module.exports = class HeroBridgeContract {
   constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
-    this.contract = new ethers.Contract(config.defikingdoms.heroBridge, heroBridgeABI, new NonceManager(this.wallet))
+    this.contract = new ethers.Contract(contractAddress, heroBridgeABI, new NonceManager(this.wallet))
     this.accountName = accountInfo.accountName
   }
 

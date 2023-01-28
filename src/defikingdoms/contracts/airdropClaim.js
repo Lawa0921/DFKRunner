@@ -2,12 +2,13 @@ const config = require("../../../config");
 const autils = require('../../services/autils');
 const ethers = require('ethers');
 const airdropClaimABI = require('../../../abis/AirdropClaim.json')
+const contractAddress = "0x947873092dc57C1A70704033c41cB110f4462a8B"
 
 module.exports = class AirdropClaim {
   constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
-    this.contract = new ethers.Contract(config.defikingdoms.airdropClaim, airdropClaimABI, this.wallet)
+    this.contract = new ethers.Contract(contractAddress, airdropClaimABI, this.wallet)
     this.accountName = accountInfo.accountName
   }
 

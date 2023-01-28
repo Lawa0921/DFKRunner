@@ -1,6 +1,7 @@
 const autils = require('../../services/autils');
 const config = require("../../../config");
 const ethers = require('ethers');
+const contractAddress = "0xD507b6b299d9FC835a0Df92f718920D13fA49B47"
 const meditationCircleABI = require('../../../abis/MeditationCircle.json')
 const { NonceManager } = require("@ethersproject/experimental")
 
@@ -8,7 +9,7 @@ module.exports = class MeditationCircle {
   constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
-    this.contract = new ethers.Contract(config.defikingdoms.meditationCircle, meditationCircleABI, new NonceManager(this.wallet))
+    this.contract = new ethers.Contract(contractAddress, meditationCircleABI, new NonceManager(this.wallet))
     this.accountName = accountInfo.accountName
   }
 

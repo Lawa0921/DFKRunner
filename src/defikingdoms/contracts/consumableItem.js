@@ -2,6 +2,7 @@ const config = require("../../../config");
 const ethers = require('ethers');
 const consumableItemABI = require('../../../abis/consumableItem.json');
 const autils = require('../../services/autils');
+const contractAddress = ""
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class ConsumableItem {

@@ -243,6 +243,7 @@ const config = {
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
               "1000000026987", "1000000059047", "2000000018790", "1000000032435", "1000000146284",
               "1000000079362", "2000000015307", "2000000028749", "1000000146929", "265142"       ,
+              "1000000156448"
             ],
             "contractAddress": "0xE3edf52D33F2BB05DBdA5BA73903E27a9B9b7e9d" // 合約的地址，你不會更改這個值
           },
@@ -453,24 +454,10 @@ const config = {
       "https://subnets.avax.network/defi-kingdoms/dfk-chain/rpc",
       "https://avax-dfk.gateway.pokt.network/v1/lb/6244818c00b9f0003ad1b619/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc"
     ],
-    "questCoreV2": "0xE9AbfBC143d7cef74b5b793ec5907fa62ca53154", // 合約的地址，你不會更改這個值
-    "heroCore": "0xEb9B61B145D6489Be575D3603F4a704810e143dF", // 合約的地址，你不會更改這個值
     "saleAuction": "0xc390fAA4C7f66E4D62E59C231D5beD32Ff77BEf0", // 合約的地址，你不會更改這個值
-    "meditationCircle": "0xD507b6b299d9FC835a0Df92f718920D13fA49B47", // 合約的地址，你不會更改這個值
     "shvasRune": "0x75E8D8676d774C9429FbB148b30E304b5542aC3d", // 合約的地址，你不會更改這個值
     "mokshaRune": "0xCd2192521BD8e33559b0CA24f3260fE6A26C28e4", // 合約的地址，你不會更改這個值
-    "heroBridge": "0x739B1666c2956f601f095298132773074c3E184b", // 合約的地址，你不會更改這個值
-    "uniswapV2Factory": "0x794C07912474351b3134E6D6B3B7b3b4A07cbAAa", // 合約的地址，你不會更改這個值
-    "uniswapV2Router02": "0x3C351E1afdd1b1BC44e931E12D4E05D6125eaeCa", // 合約的地址，你不會更改這個值
     "staminaVial": "0x242078edFDca25ef2A497C8D9f256Fd641472E5F", // 合約的地址，你不會更改這個值
-    "itemGoldTraderV2": "0x0f85fdf6c561C42d6b46d0E27ea6Aa9Bf9476B3f", // 合約的地址，你不會更改這個值
-    "DFKDuelS2": "0x9EEaBBcf42F0c4900d302544Cce599811C2De2b9", // 合約的地址，你不會更改這個值
-    "raffleMaster": "0xd8D7CE8921490b75EC489bd076AD0f27DC765675", // 合約的地址，你不會更改這個值
-    "duelRaffleTicket": "0xBbd7c4Be2e54fF5e013471162e1ABAD7AB74c3C3", // 合約的地址，你不會更改這個值
-    "airdropClaim": "0x947873092dc57C1A70704033c41cB110f4462a8B", // 合約的地址，你不會更改這個值
-    "itemConsumer": "0xc9A9F352Aa188f422A8f8902B547FB3E59D37210", // 合約的地址，你不會更改這個值
-    "crystal": "0x04b9dA42306B023f3572e106B11D82aAd9D32EBb", // 合約的地址，你不會更改這個值
-    "assistingAuctionUpgradable": "0x8101CfFBec8E045c3FAdC3877a1D30f97d301209", // 合約的地址，你不會更改這個值
     "availableForSaleTokens": [ // 可自由更改下方 "sale" 裡面的值成 true 或是 false，true 表示要賣，false 的則不會賣掉
       {
         "name": "Ambertaffy",

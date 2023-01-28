@@ -2,13 +2,14 @@ const config = require("../../../config");
 const autils = require('../../services/autils');
 const ethers = require('ethers');
 const ICrystalABI = require('../../../abis/ICrystalToken.json');
+const contractAddress = "0x04b9dA42306B023f3572e106B11D82aAd9D32EBb"
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class InventoryItem {
   constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
-    this.contract = new ethers.Contract(config.defikingdoms.crystal, ICrystalABI, new NonceManager(this.wallet))
+    this.contract = new ethers.Contract(contractAddress, ICrystalABI, new NonceManager(this.wallet))
     this.accountName = accountInfo.accountName
   }
 

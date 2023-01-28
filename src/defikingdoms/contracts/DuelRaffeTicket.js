@@ -2,13 +2,14 @@ const config = require("../../../config");
 const autils = require('../../services/autils');
 const ethers = require('ethers');
 const DuelRaffleTicketABI = require('../../../abis/DuelRaffleTicket.json');
+const contractAddress = "0xBbd7c4Be2e54fF5e013471162e1ABAD7AB74c3C3"
 const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class DuelRaffleTicket {
   constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
-    this.contract = new ethers.Contract(config.defikingdoms.duelRaffleTicket, DuelRaffleTicketABI, new NonceManager(this.wallet))
+    this.contract = new ethers.Contract(contractAddress, DuelRaffleTicketABI, new NonceManager(this.wallet))
     this.accountName = accountInfo.accountName
   }
 
