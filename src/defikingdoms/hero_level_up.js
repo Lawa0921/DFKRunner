@@ -46,22 +46,22 @@ exports.runDFKLevelUpLogic = async (owningHeroObjects, accountInfo) => {
   if (levelUpableHeros.length > 0) {
     for (let i = 0; i < levelUpableHeros.length; i++ ) {
       const shvasRuneBalanceOf = await shvasRuneContract.balanceOf();
-      const shvasRuneAllowance = await shvasRuneContract.allowance(config.defikingdoms.meditationCircle);
+      const shvasRuneAllowance = await shvasRuneContract.allowance(meditationCircleContract.contract.address);
       const mokshaRuneBalanceOf = await mokshaRuneContract.balanceOf();
-      const mokshaRuneAllowance = await mokshaRuneContract.allowance(config.defikingdoms.meditationCircle)
-      const crystalAllowance = await crystalContract.allowance(config.defikingdoms.meditationCircle)
+      const mokshaRuneAllowance = await mokshaRuneContract.allowance(meditationCircleContract.contract.address)
+      const crystalAllowance = await crystalContract.allowance(meditationCircleContract.contract.address)
       const crystalBalanceOf = await crystalContract.balanceOf()
       const levelUpFee = levelUpableHeros[i].level * 0.1
       const [shvasRuneRequireCount, mokshaRuneRequireCount] = await meditationCircleContract.getRequiredRunes(levelUpableHeros[i].level);
 
       if (shvasRuneAllowance < shvasRuneRequireCount) {
-        await shvasRuneContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
+        await shvasRuneContract.approve(meditationCircleContract.contract.address, ethers.constants.MaxUint256)
       }
       if (mokshaRuneAllowance < mokshaRuneRequireCount) {
-        await mokshaRuneContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
+        await mokshaRuneContract.approve(meditationCircleContract.contract.address, ethers.constants.MaxUint256)
       }
       if (ethers.utils.formatEther(crystalAllowance) < levelUpFee) {
-        await crystalContract.approve(config.defikingdoms.meditationCircle, ethers.constants.MaxUint256)
+        await crystalContract.approve(meditationCircleContract.contract.address, ethers.constants.MaxUint256)
       }
 
       if (parseInt(shvasRuneRequireCount) > parseInt(shvasRuneBalanceOf)) {

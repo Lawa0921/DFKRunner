@@ -213,7 +213,7 @@ const config = {
               "248925"       , "1000000120304", "1000000041965", "162779"       , "162538"       ,
               "1000000087935", "1000000087038", "1000000000528", "1000000142255", "1000000155479",
               "2000000024151", "2000000026348", "256082"       , "1000000153919", "1000000031133",
-              "1000000038180", "1000000020702", "1000000082849", "1000000156245"
+              "1000000038180", "1000000020702", "1000000082849", "1000000156245", "1000000154673"
             ],
             "contractAddress": "0xb8828c687Fb1C875D5acb4281C5CDf9F49fA4637" // 合約的地址，你不會更改這個值
           },
@@ -454,7 +454,6 @@ const config = {
       "https://subnets.avax.network/defi-kingdoms/dfk-chain/rpc",
       "https://avax-dfk.gateway.pokt.network/v1/lb/6244818c00b9f0003ad1b619/ext/bc/q2aTwKuyzgs8pynF7UXBZCU7DejbZbZ6EUyHr3JQzYgwNPUPi/rpc"
     ],
-    "saleAuction": "0xc390fAA4C7f66E4D62E59C231D5beD32Ff77BEf0", // 合約的地址，你不會更改這個值
     "shvasRune": "0x75E8D8676d774C9429FbB148b30E304b5542aC3d", // 合約的地址，你不會更改這個值
     "mokshaRune": "0xCd2192521BD8e33559b0CA24f3260fE6A26C28e4", // 合約的地址，你不會更改這個值
     "staminaVial": "0x242078edFDca25ef2A497C8D9f256Fd641472E5F", // 合約的地址，你不會更改這個值
