@@ -30,34 +30,35 @@ module.exports = class powerUpManager {
     return powerUpData
   }
 
+  async isUserPowerUpActive(powerUpId) {
+    return await this.contract.isUserPowerUpActive(this.wallet.address, powerUpId)
+  }
+
   async getUserPowerUpDataForActivePowerUps() {
     const rawData = await this.contract.getUserPowerUpDataForActivePowerUps(this.wallet.address)
-    const userPowerUpDataForActivePowerUps = rawData.map((data, index) => {
+    const userPowerUpDataForActivePowerUps = rawData.reduce((accumulator, currentValue, index) => {
       if (index === 0) {
-        return data.map((powerUpUserData) => {
-          return {
-            isActivated: powerUpUserData.isActivated,
-            emergencyWithdrawHappened: powerUpUserData.emergencyWithdrawHappened,
-            tier: ethers.utils.formatUnits(powerUpUserData.tier, 0),
-            openHeroSlots: ethers.utils.formatUnits(powerUpUserData.openHeroSlots, 0),
-            cancellationHeldSlots: ethers.utils.formatUnits(powerUpUserData.cancellationHeldSlots, 0),
-            heldSlotExpiration: ethers.utils.formatUnits(powerUpUserData.heldSlotExpiration, 0),
-            govTokenHoldExpiration: ethers.utils.formatUnits(powerUpUserData.govTokenHoldExpiration, 18),
-            owner: powerUpUserData.owner
-          }
+        currentValue.forEach((powerUpUserData, j) => {
+          accumulator[j].isActivated = powerUpUserData.isActivated
+          accumulator[j].emergencyWithdrawHappened = powerUpUserData.emergencyWithdrawHappened
+          accumulator[j].tier = ethers.utils.formatUnits(powerUpUserData.tier, 0)
+          accumulator[j].openHeroSlots = ethers.utils.formatUnits(powerUpUserData.openHeroSlots, 0)
+          accumulator[j].cancellationHeldSlots = ethers.utils.formatUnits(powerUpUserData.cancellationHeldSlots, 0)
+          accumulator[j].heldSlotExpiration = ethers.utils.formatUnits(powerUpUserData.heldSlotExpiration, 0)
+          accumulator[j].govTokenHoldExpiration = ethers.utils.formatUnits(powerUpUserData.govTokenHoldExpiration, 18)
+          accumulator[j].owner = powerUpUserData.owner
         })
       } else if (index === 1) {
-        return data.map((powerUpLock) => {
-          return {
-            powerUpId: ethers.utils.formatUnits(powerUpLock.powerUpId, 0),
-            govTokens: ethers.utils.formatUnits(powerUpLock.govTokens, 18),
-            end: ethers.utils.formatUnits(powerUpLock.end, 0),
-            govTokenHoldExpiration: ethers.utils.formatUnits(powerUpLock.govTokenHoldExpiration, 0),
-            usedBalance: ethers.utils.formatUnits(powerUpLock.usedBalance, 18),
-          }
+        currentValue.forEach((powerUpLock, j) => {
+          accumulator[j].powerUpId = ethers.utils.formatUnits(powerUpLock.powerUpId, 0)
+          accumulator[j].govTokens = ethers.utils.formatUnits(powerUpLock.govTokens, 18)
+          accumulator[j].end = ethers.utils.formatUnits(powerUpLock.end, 0)
+          accumulator[j].usedBalance = ethers.utils.formatUnits(powerUpLock.usedBalance, 18)
         })
       }
-    })
+
+      return accumulator
+    }, rawData.map((_element) => { return {}}))
 
     return userPowerUpDataForActivePowerUps
   }
