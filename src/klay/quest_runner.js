@@ -14,6 +14,7 @@ const { sendHeroTo } = require("./send_hero");
 const { enterRaffle } = require("./enter_raffle");
 const { runVialLogic } = require('./vial_consumer');
 const { airdropClaim } = require("./airdrop_claim");
+const { assignPowerUp } = require("./powerUp")
 const autils = require('../services/autils');
 const config = require("../../config");
 

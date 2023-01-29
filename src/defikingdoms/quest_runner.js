@@ -14,6 +14,7 @@ const { runDFKSalesLogic } = require('./sales_handler');
 const { runDFKLevelUpLogic } = require('./hero_level_up'); 
 const { runDFKRentHeroLogic } = require('./hero_rent');
 const { runVialLogic } = require('./vial_consumer');
+const { assignPowerUp } = require("./powerUp")
 const autils = require('../services/autils');
 const config = require("../../config");
 
