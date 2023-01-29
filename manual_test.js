@@ -31,7 +31,7 @@ const { airdropClaim } = require("./src/defikingdoms/airdrop_claim")
 
 async function test() {  
 
-  console.log(await DFKPowerUpManagerContract.getActivePowerUps())
+  console.log(await DFKPowerUpManagerContract.getUserPowerUpDataForActivePowerUps())
 }
 
 test();

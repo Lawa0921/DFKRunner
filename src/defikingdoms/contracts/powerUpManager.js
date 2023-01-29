@@ -30,16 +30,72 @@ module.exports = class powerUpManager {
     return powerUpData
   }
 
-  // async claimAirdrop(dropId) {
-  //   const txn = await this.contract.claimAirdrop(dropId, { gasPrice: await autils.getDFKGasFee() })
-  //   const res = await txn.wait();
+  async getUserPowerUpDataForActivePowerUps() {
+    const rawData = await this.contract.getUserPowerUpDataForActivePowerUps(this.wallet.address)
+    const userPowerUpDataForActivePowerUps = rawData.map((data, index) => {
+      if (index === 0) {
+        return data.map((powerUpUserData) => {
+          return {
+            isActivated: powerUpUserData.isActivated,
+            emergencyWithdrawHappened: powerUpUserData.emergencyWithdrawHappened,
+            tier: ethers.utils.formatUnits(powerUpUserData.tier, 0),
+            openHeroSlots: ethers.utils.formatUnits(powerUpUserData.openHeroSlots, 0),
+            cancellationHeldSlots: ethers.utils.formatUnits(powerUpUserData.cancellationHeldSlots, 0),
+            heldSlotExpiration: ethers.utils.formatUnits(powerUpUserData.heldSlotExpiration, 0),
+            govTokenHoldExpiration: ethers.utils.formatUnits(powerUpUserData.govTokenHoldExpiration, 18),
+            owner: powerUpUserData.owner
+          }
+        })
+      } else if (index === 1) {
+        return data.map((powerUpLock) => {
+          return {
+            powerUpId: ethers.utils.formatUnits(powerUpLock.powerUpId, 0),
+            govTokens: ethers.utils.formatUnits(powerUpLock.govTokens, 18),
+            end: ethers.utils.formatUnits(powerUpLock.end, 0),
+            govTokenHoldExpiration: ethers.utils.formatUnits(powerUpLock.govTokenHoldExpiration, 0),
+            usedBalance: ethers.utils.formatUnits(powerUpLock.usedBalance, 18),
+          }
+        })
+      }
+    })
 
-  //   if (res.status === 1) {
-  //     console.log(`claim ${dropId} airdrop success`)
-  //   } else {
-  //     console.log(`claim ${dropId} airdrop failed`)
-  //   }
+    return userPowerUpDataForActivePowerUps
+  }
 
-  //   return res;
-  // }
+  async getAssignedHeroIds(powerUpId) {
+    const rawData = await this.contract.getAssignedHeroIds(this.wallet.address, powerUpId)
+    const heroIds = rawData.map(data => ethers.utils.formatUnits(data, 0))
+
+    return heroIds
+  }
+
+  async assignHeroes(powerUpIds, heroIds) {
+    const txn = await this.contract.assignHeroes(powerUpIds, heroIds, { gasPrice: await autils.getDFKGasFee() })
+    const res = await txn.wait();
+
+    if (res.status === 1) {
+      for (let i = 0; i < powerUpIds.length; i++) {
+        console.log(`assign Heroes ${heroIds[i]} ${powerUpIds[i]} success`)
+      }
+    } else {
+      for (let i = 0; i < powerUpIds.length; i++) {
+        console.log(`assign Heroes ${heroIds[i]} ${powerUpIds[i]} failed`)
+      }
+    }
+
+    return res;
+  }
+
+  async cancel(powerUpId) {
+    const txn = await this.contract.cancel(powerUpId, { gasPrice: await autils.getDFKGasFee() })
+    const res = await txn.wait();
+
+    if (res.status === 1) {
+      console.log(`cancel powerUp ${powerUpId} success`)
+    } else {
+      console.log(`cancel powerUp ${powerUpId} failed`)
+    }
+
+    return res;
+  }
 }
