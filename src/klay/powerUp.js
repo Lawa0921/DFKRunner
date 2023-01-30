@@ -5,7 +5,7 @@ const config = require("../../config")
 exports.runKLAYAssignPowerUp = async (owningHeroObjects, accountInfo) => {
   const powerUpManagerContract = new PowerUpManager(accountInfo)
   const userPowerUpDatas = await powerUpManagerContract.getUserPowerUpDataForActivePowerUps()
-  const activeUserPowerUpDatas = userPowerUpDatas.filter(userPowerUpData => userPowerUpData.isActivated)
+  const activeUserPowerUpDatas = userPowerUpDatas.filter(userPowerUpData => parseInt(userPowerUpData.openHeroSlots) > 0)
 
   for(let i = 0; i < activeUserPowerUpDatas.length; i++) {
     const assignedHeroIds = await powerUpManagerContract.getAssignedHeroIds(activeUserPowerUpDatas[i].powerUpId)
