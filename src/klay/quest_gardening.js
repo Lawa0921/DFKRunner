@@ -4,7 +4,7 @@ const QuestCoreV2 = require('./contracts/questCoreV2');
 const SaleAuction = require('./contracts/saleAuction');
 const minStamina = config.klay.quest.gardening.minStamina;
 
-exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects, accountInfo) => {
+exports.CheckAndSendKLAYGardeners = async (heroesStruct, owningHeroObjects, accountInfo) => {
   const questType = config.klay.quest.gardening
   const activeQuesterIds = heroesStruct.allQuesters
 

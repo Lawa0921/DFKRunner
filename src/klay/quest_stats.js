@@ -6,7 +6,7 @@ const minStamina = 25;
 const maxQueue = 5;
 const maxHeroCount = 5;
 
-exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, accountInfo) => {
+exports.CheckAndSendKLAYStatQuests = async (heroesStruct, owningHeroObjects, accountInfo) => {
 	const statHeroIds = config.klay.quest.statQuest.quests.map(statQuestSetting => statQuestSetting.heroes).flat()
 	const activeQuesterIds = heroesStruct.allQuesters
 	const saleAuctionContract = new SaleAuction(accountInfo);

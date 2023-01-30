@@ -6,7 +6,7 @@ const minStamina = config.klay.quest.foraging.minStamina;
 const maxQueue = 5;
 const maxHeroCount = 5;
 
-exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects, accountInfo) => {
+exports.CheckAndSendKLAYForagers = async (heroesStruct, owningHeroObjects, accountInfo) => {
 	if (heroesStruct.foragingQuestCount >= maxQueue) {
 		console.log(`${accountInfo.accountName} KLAY foraging queue has reached its maximum value.`)
 	} else {

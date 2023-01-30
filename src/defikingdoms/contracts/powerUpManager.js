@@ -3,12 +3,13 @@ const autils = require('../../services/autils');
 const ethers = require('ethers');
 const powerUpManagerABI = require('../../../abis/PowerUpManager.json')
 const contractAddress = "0xc20a268bc7c4dB28f1f6e1703676513Db06C1B93"
+const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class powerUpManager {
   constructor(accountInfo) {
     this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
-    this.contract = new ethers.Contract(contractAddress, powerUpManagerABI, this.wallet)
+    this.contract = new ethers.Contract(contractAddress, powerUpManagerABI, new NonceManager(this.wallet))
     this.accountName = accountInfo.accountName
   }
 
@@ -75,13 +76,24 @@ module.exports = class powerUpManager {
     const res = await txn.wait();
 
     if (res.status === 1) {
-      for (let i = 0; i < powerUpIds.length; i++) {
-        console.log(`assign Heroes ${heroIds[i]} ${powerUpIds[i]} success`)
-      }
+      console.log(`DFK Assign ${heroIds.length} heroes success`)
     } else {
-      for (let i = 0; i < powerUpIds.length; i++) {
-        console.log(`assign Heroes ${heroIds[i]} ${powerUpIds[i]} failed`)
-      }
+      console.log(`DFK Assign ${heroIds.length} heroes failed`)
+    }
+
+    return res;
+  }
+
+  async assignHero(powerUpId, heroId) {
+    console.log(`DFK Assign hero: ${heroId} powerUp: ${powerUpId}`)
+
+    const txn = await this.contract.assignHero(powerUpId, heroId, { gasPrice: await autils.getDFKGasFee() })
+    const res = await txn.wait();
+
+    if (res.status === 1) {
+      console.log(`DFK Assign hero: ${heroId} powerUp: ${powerUpId} success`)
+    } else {
+      console.log(`DFK Assign hero: ${heroId} powerUp: ${powerUpId} failed`)
     }
 
     return res;
@@ -92,9 +104,9 @@ module.exports = class powerUpManager {
     const res = await txn.wait();
 
     if (res.status === 1) {
-      console.log(`cancel powerUp ${powerUpId} success`)
+      console.log(`DFK cancel powerUp ${powerUpId} success`)
     } else {
-      console.log(`cancel powerUp ${powerUpId} failed`)
+      console.log(`DFK cancel powerUp ${powerUpId} failed`)
     }
 
     return res;

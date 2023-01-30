@@ -328,22 +328,35 @@ exports.get0xAddress = () => {
 }
 
 exports.getDFKOwningHeroIds = () => {
-    let heroIds = [];
+  let heroIds = [];
 
-    heroIds = heroIds.concat(config.defikingdoms.quest.fishing.heroes);
-    heroIds = heroIds.concat(config.defikingdoms.quest.foraging.heroes);
-    heroIds = heroIds.concat(config.defikingdoms.quest.goldMining.heroes);
-    heroIds = heroIds.concat(config.defikingdoms.quest.crystalMining.heroes);
+  heroIds = heroIds.concat(config.defikingdoms.quest.fishing.heroes);
+  heroIds = heroIds.concat(config.defikingdoms.quest.foraging.heroes);
+  heroIds = heroIds.concat(config.defikingdoms.quest.goldMining.heroes);
+  heroIds = heroIds.concat(config.defikingdoms.quest.crystalMining.heroes);
 
-    for (let i = 0; i < config.defikingdoms.quest.statQuest.quests.length; i++ ) {
-        heroIds = heroIds.concat(config.defikingdoms.quest.statQuest.quests[i].heroes);
-    }
+  for (let i = 0; i < config.defikingdoms.quest.statQuest.quests.length; i++ ) {
+    heroIds = heroIds.concat(config.defikingdoms.quest.statQuest.quests[i].heroes);
+  }
 
-    for (let i = 0; i < config.defikingdoms.quest.gardening.pairAddressMappings.length; i++) {
-        heroIds = heroIds.concat(config.defikingdoms.quest.gardening.pairAddressMappings[i].heroes);
-    }
-  
-    return heroIds;
+  for (let i = 0; i < config.defikingdoms.quest.gardening.pairAddressMappings.length; i++) {
+    heroIds = heroIds.concat(config.defikingdoms.quest.gardening.pairAddressMappings[i].heroes);
+  }
+
+  return heroIds;
+}
+
+exports.getDFK2fAndTrainingQuestHeroIds = () => {
+  let heroIds = [];
+
+  heroIds = heroIds.concat(config.defikingdoms.quest.fishing.heroes);
+  heroIds = heroIds.concat(config.defikingdoms.quest.foraging.heroes);
+
+  for (let i = 0; i < config.defikingdoms.quest.statQuest.quests.length; i++ ) {
+    heroIds = heroIds.concat(config.defikingdoms.quest.statQuest.quests[i].heroes);
+  }
+
+  return heroIds;
 }
 
 exports.getKLAYOwningHeroIds = () => {
@@ -364,6 +377,20 @@ exports.getKLAYOwningHeroIds = () => {
 
   return heroIds;
 }
+
+exports.getKLAY2fAndTrainingQuestHeroIds = () => {
+  let heroIds = [];
+
+  heroIds = heroIds.concat(config.klay.quest.fishing.heroes);
+  heroIds = heroIds.concat(config.klay.quest.foraging.heroes);
+
+  for (let i = 0; i < config.klay.quest.statQuest.quests.length; i++ ) {
+    heroIds = heroIds.concat(config.klay.quest.statQuest.quests[i].heroes);
+  }
+
+  return heroIds;
+}
+
 
 exports.getAllConfigHeroIds = () => {
     return this.getDFKOwningHeroIds().concat(this.getKLAYOwningHeroIds());

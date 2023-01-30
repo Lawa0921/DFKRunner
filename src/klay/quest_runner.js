@@ -1,12 +1,12 @@
 const dataParser = require('../services/data_parser') 
 const QuestCoreV2 = require("./contracts/questCoreV2");
 const { CompleteQuests } = require('./quest_complete');
-const { CheckAndSendDFKFishers } = require("./quest_fishing");
-const { CheckAndSendDFKForagers } = require("./quest_foraging");
-const { CheckAndSendDFKStatQuests } = require("./quest_stats");
-const { CheckAndSendDFKGardeners } = require("./quest_gardening");
-const { CheckAndSendDFKGoldMiners } = require('./quest_gold_mining');
-const { CheckAndSendDFKJadeMiners } = require('./quest_jade_mining');
+const { CheckAndSendKLAYFishers } = require("./quest_fishing");
+const { CheckAndSendKLAYForagers } = require("./quest_foraging");
+const { CheckAndSendKLAYStatQuests } = require("./quest_stats");
+const { CheckAndSendKLAYGardeners } = require("./quest_gardening");
+const { CheckAndSendKLAYGoldMiners } = require('./quest_gold_mining');
+const { CheckAndSendKLAYJadeMiners } = require('./quest_jade_mining');
 const { runKLAYSalesLogic } = require('./sales_handler');
 const { runKLAYLevelUpLogic } = require('./hero_level_up');
 const { runKLAYRentHeroLogic } = require('./hero_rent');
@@ -14,7 +14,7 @@ const { sendHeroTo } = require("./send_hero");
 const { enterRaffle } = require("./enter_raffle");
 const { runVialLogic } = require('./vial_consumer');
 const { airdropClaim } = require("./airdrop_claim");
-const { assignPowerUp } = require("./powerUp")
+const { runKLAYAssignPowerUp } = require("./powerUp")
 const autils = require('../services/autils');
 const config = require("../../config");
 
@@ -37,17 +37,18 @@ exports.runKLAYChainQuest = async (accountInfo) => {
       await enterRaffle(accountInfo);
       await airdropClaim(accountInfo);
 
+      await runKLAYAssignPowerUp(owningHeroObjects, accountInfo);
       await runKLAYLevelUpLogic(owningHeroObjects, accountInfo);
       await runKLAYSalesLogic(owningHeroObjects, accountInfo);
       await runKLAYRentHeroLogic(owningHeroObjects, accountInfo);
       await runVialLogic(owningHeroObjects, accountInfo);
 
-      await CheckAndSendDFKFishers(heroesStruct, owningHeroObjects, accountInfo)
-      await CheckAndSendDFKForagers(heroesStruct, owningHeroObjects, accountInfo)
-      await CheckAndSendDFKGardeners(heroesStruct, owningHeroObjects, accountInfo)
-      await CheckAndSendDFKGoldMiners(heroesStruct, owningHeroObjects, accountInfo)
-      await CheckAndSendDFKJadeMiners(heroesStruct, accountInfo)
-      await CheckAndSendDFKStatQuests(heroesStruct, owningHeroObjects, accountInfo)
+      await CheckAndSendKLAYFishers(heroesStruct, owningHeroObjects, accountInfo)
+      await CheckAndSendKLAYForagers(heroesStruct, owningHeroObjects, accountInfo)
+      await CheckAndSendKLAYGardeners(heroesStruct, owningHeroObjects, accountInfo)
+      await CheckAndSendKLAYGoldMiners(heroesStruct, owningHeroObjects, accountInfo)
+      await CheckAndSendKLAYJadeMiners(heroesStruct, accountInfo)
+      await CheckAndSendKLAYStatQuests(heroesStruct, owningHeroObjects, accountInfo)
     }
   } catch (error) {
     console.log(`fail reason: ${error.reason}`)

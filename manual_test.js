@@ -22,16 +22,24 @@ const DFKDuelS2Contract = new DFKDuelS2(config.walletAddressAndPrivateKeyMapping
 const KLAYQuestCoreContract = new KLAYQuestCore(config.walletAddressAndPrivateKeyMappings[0])
 const DFKQuestCoreContract = new DFKQuestCore(config.walletAddressAndPrivateKeyMappings[0])
 const DFKPowerUpManagerContract = new PowerUpManager(config.walletAddressAndPrivateKeyMappings[0])
-
 const { enterRaffle } = require("./src/klay/enter_raffle");
+const { runDFKAssignPowerUp } = require("./src/defikingdoms/powerUp")
 
 const Valuator = require('./src/services/valuator');
 const { airdropClaim } = require("./src/defikingdoms/airdrop_claim")
 
 
 async function test() {  
-
-  console.log(await DFKPowerUpManagerContract.getUserPowerUpDataForActivePowerUps())
+  try {
+    const owningHeroObjects = await autils.getHeroesInfoByIds(autils.getDFKOwningHeroIds());
+  
+    await runDFKAssignPowerUp(owningHeroObjects, config.walletAddressAndPrivateKeyMappings[0])
+  } catch(error) {
+    console.log(`fail reason: ${error.reason}`)
+    console.log(`error code: ${error.code}`)
+    console.log(`error message: ${error.message}`)
+    console.log(`raw error: ${error}`)
+  }
 }
 
 test();

@@ -5,7 +5,7 @@ const SaleAuction = require('./contracts/saleAuction');
 const minStamina = config.klay.quest.goldMining.minStamina;
 const maxBatch = 6;
 
-exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects, accountInfo) => {
+exports.CheckAndSendKLAYGoldMiners = async (heroesStruct, owningHeroObjects, accountInfo) => {
   const questType = config.klay.quest.goldMining
   const activeQuesterIds = heroesStruct.allQuesters
   const possibleGoldMiners = owningHeroObjects.filter((heroObject) => { 

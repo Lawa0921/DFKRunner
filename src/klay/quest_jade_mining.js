@@ -5,7 +5,7 @@ const SaleAuction = require('./contracts/saleAuction');
 const minStamina = config.klay.quest.jadeMining.minStamina;
 const maxBatch = 6;
 
-exports.CheckAndSendDFKJadeMiners = async (heroesStruct, accountInfo) => {
+exports.CheckAndSendKLAYJadeMiners = async (heroesStruct, accountInfo) => {
   const saleAuctionContract = new SaleAuction(accountInfo);
   const questType = config.klay.quest.jadeMining
   const activeQuesterIds = heroesStruct.allQuesters

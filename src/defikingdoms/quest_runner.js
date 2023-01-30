@@ -14,7 +14,7 @@ const { runDFKSalesLogic } = require('./sales_handler');
 const { runDFKLevelUpLogic } = require('./hero_level_up'); 
 const { runDFKRentHeroLogic } = require('./hero_rent');
 const { runVialLogic } = require('./vial_consumer');
-const { assignPowerUp } = require("./powerUp")
+const { runDFKAssignPowerUp } = require("./powerUp")
 const autils = require('../services/autils');
 const config = require("../../config");
 
@@ -36,7 +36,8 @@ exports.runDFKChainQuest = async (accountInfo) => {
       await sendHeroTo(heroesStruct, accountInfo, owningHeroObjects);
       await enterRaffle(accountInfo);
       await airdropClaim(accountInfo);
-  
+      
+      await runDFKAssignPowerUp(owningHeroObjects, accountInfo);
       await runDFKLevelUpLogic(owningHeroObjects, accountInfo);
       await runDFKSalesLogic(owningHeroObjects, accountInfo);
       await runDFKRentHeroLogic(owningHeroObjects, accountInfo);  

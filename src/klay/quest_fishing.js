@@ -6,7 +6,7 @@ const minStamina = config.klay.quest.fishing.minStamina;
 const maxQueue = 5;
 const maxHeroCount = 5;
 
-exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, accountInfo) => {
+exports.CheckAndSendKLAYFishers = async (heroesStruct, owningHeroObjects, accountInfo) => {
 	if (heroesStruct.fishingQuestCount >= maxQueue) {
 		console.log(`${accountInfo.accountName} KLAY fishing queue has reached its maximum value.`)
 	} else {

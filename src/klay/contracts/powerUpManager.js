@@ -3,12 +3,13 @@ const autils = require('../../services/autils');
 const ethers = require('ethers');
 const powerUpManagerABI = require('../../../abis/PowerUpManager.json')
 const contractAddress = "0xcd26DfD7EdAe42eD525266D9a53b466db4Ed4f7b"
+const { NonceManager } = require("@ethersproject/experimental")
 
 module.exports = class powerUpManager {
   constructor(accountInfo) {
-    this.provider = new ethers.providers.JsonRpcProvider(config.defikingdoms.rpcs[config.defikingdoms.useRpcIndex])
+    this.provider = new ethers.providers.JsonRpcProvider(config.klay.rpcs[config.klay.useRpcIndex])
     this.wallet = new ethers.Wallet(accountInfo.privateKey, this.provider)
-    this.contract = new ethers.Contract(contractAddress, powerUpManagerABI, this.wallet)
+    this.contract = new ethers.Contract(contractAddress, powerUpManagerABI, new NonceManager(this.wallet))
     this.accountName = accountInfo.accountName
   }
 
@@ -71,17 +72,28 @@ module.exports = class powerUpManager {
   }
 
   async assignHeroes(powerUpIds, heroIds) {
-    const txn = await this.contract.assignHeroes(powerUpIds, heroIds, { gasPrice: await autils.getKLAYGasFee() })
+    const txn = await this.contract.assignHeroes(powerUpIds, heroIds, { gasPrice: await autils.getDFKGasFee() })
     const res = await txn.wait();
 
     if (res.status === 1) {
-      for (let i = 0; i < powerUpIds.length; i++) {
-        console.log(`assign Heroes ${heroIds[i]} ${powerUpIds[i]} success`)
-      }
+      console.log(`KLAY Assign ${heroIds.length} heroes success`)
     } else {
-      for (let i = 0; i < powerUpIds.length; i++) {
-        console.log(`assign Heroes ${heroIds[i]} ${powerUpIds[i]} failed`)
-      }
+      console.log(`KLAY Assign ${heroIds.length} heroes failed`)
+    }
+
+    return res;
+  }
+
+  async assignHero(powerUpId, heroId) {
+    console.log(`KLAY Assign hero: ${heroId} powerUp: ${powerUpId}`)
+
+    const txn = await this.contract.assignHero(powerUpId, heroId, { gasPrice: await autils.getDFKGasFee() })
+    const res = await txn.wait();
+
+    if (res.status === 1) {
+      console.log(`KLAY Assign hero: ${heroId} powerUp: ${powerUpId} success`)
+    } else {
+      console.log(`KLAY Assign hero: ${heroId} powerUp: ${powerUpId} failed`)
     }
 
     return res;
@@ -92,9 +104,9 @@ module.exports = class powerUpManager {
     const res = await txn.wait();
 
     if (res.status === 1) {
-      console.log(`cancel powerUp ${powerUpId} success`)
+      console.log(`KLAY cancel powerUp ${powerUpId} success`)
     } else {
-      console.log(`cancel powerUp ${powerUpId} failed`)
+      console.log(`KLAY cancel powerUp ${powerUpId} failed`)
     }
 
     return res;
