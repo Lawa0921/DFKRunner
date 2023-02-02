@@ -31,9 +31,10 @@ const { airdropClaim } = require("./src/defikingdoms/airdrop_claim")
 
 async function test() {  
   try {
-    const owningHeroObjects = await autils.getHeroesInfoByIds(autils.getDFKOwningHeroIds());
+    console.log(await autils.getHeroesInfoByRestfulAPI(autils.getDFKOwningHeroIds()))
+    // const owningHeroObjects = await autils.getHeroesInfoByIds(autils.getDFKOwningHeroIds());
   
-    await runDFKAssignPowerUp(owningHeroObjects, config.walletAddressAndPrivateKeyMappings[0])
+    // await runDFKAssignPowerUp(owningHeroObjects, config.walletAddressAndPrivateKeyMappings[0])
   } catch(error) {
     console.log(`fail reason: ${error.reason}`)
     console.log(`error code: ${error.code}`)

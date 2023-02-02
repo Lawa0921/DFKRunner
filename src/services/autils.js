@@ -11,7 +11,7 @@ axiosRetry(axios, {
     retries: 5, // number of retries
     retryDelay: (retryCount) => {
       console.log(`retry attempt: ${retryCount}`);
-      return retryCount * 2000; // time interval between retries
+      return retryCount * 1000; // time interval between retries
     },
     retryCondition: (error) => {
       return error.response.status === 500 || error.response.status === 504;
@@ -176,6 +176,18 @@ exports.getHeroesInfoByIds = async (heroIds) => {
     })
 
     return heroObjects;
+}
+
+exports.getHeroesInfoByRestfulAPI = async (heroIds) => {
+  let heroObjects;
+
+  await axios.post("https://us-central1-defi-kingdoms-api.cloudfunctions.net/query_heroes", {"params":[{"field":"id","operator":"in","value": heroIds}]}).then((res) => {
+    heroObjects = res.data.map((heroData) => { return new Hero(heroData) });
+  }).catch((err) => {
+    console.log(err);
+  })
+
+  return heroObjects
 }
 
 exports.getHeroesInfoByAddressesAndNetworks = async (walletAddresses, networks) => {
