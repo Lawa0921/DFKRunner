@@ -1,6 +1,6 @@
 const config = require("../../config");
 const RaffleMaster = require("./contracts/raffleMaster")
-const DuelRaffleTicket = require("./contracts/duelRaffeTicket")
+const DuelRaffleTicket = require("./contracts/duelRaffleTicket")
 
 exports.enterRaffle = async (accountInfo) => {
   if (config.klay.raffleSetting.isActive) {
