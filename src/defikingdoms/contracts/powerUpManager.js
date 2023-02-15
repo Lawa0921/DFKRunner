@@ -40,28 +40,28 @@ module.exports = class powerUpManager {
     const userPowerUpDataForActivePowerUps = rawData.reduce((accumulator, currentValue, index) => {
       if (index === 0) {
         currentValue.forEach((powerUpUserData, j) => {
-          accumulator[j].isActivated = powerUpUserData.isActivated
-          accumulator[j].emergencyWithdrawHappened = powerUpUserData.emergencyWithdrawHappened
-          accumulator[j].tier = ethers.utils.formatUnits(powerUpUserData.tier, 0)
-          accumulator[j].openHeroSlots = ethers.utils.formatUnits(powerUpUserData.openHeroSlots, 0)
-          accumulator[j].cancellationHeldSlots = ethers.utils.formatUnits(powerUpUserData.cancellationHeldSlots, 0)
-          accumulator[j].heldSlotExpiration = ethers.utils.formatUnits(powerUpUserData.heldSlotExpiration, 0)
-          accumulator[j].govTokenHoldExpiration = ethers.utils.formatUnits(powerUpUserData.govTokenHoldExpiration, 18)
-          accumulator[j].owner = powerUpUserData.owner
+          accumulator[j].isActivated = powerUpUserData[0]
+          accumulator[j].emergencyWithdrawHappened = powerUpUserData[1]
+          accumulator[j].tier = ethers.utils.formatUnits(powerUpUserData[2], 0)
+          accumulator[j].openHeroSlots = ethers.utils.formatUnits(powerUpUserData[3], 0)
+          accumulator[j].cancellationHeldSlots = ethers.utils.formatUnits(powerUpUserData[4], 0)
+          accumulator[j].heldSlotExpiration = ethers.utils.formatUnits(powerUpUserData[5], 0)
+          accumulator[j].govTokenHoldExpiration = ethers.utils.formatUnits(powerUpUserData[6], 18)
+          accumulator[j].owner = powerUpUserData[7]
         })
       } else if (index === 1) {
         currentValue.forEach((powerUpLock, j) => {
-          accumulator[j].powerUpId = ethers.utils.formatUnits(powerUpLock.powerUpId, 0)
-          accumulator[j].govTokens = ethers.utils.formatUnits(powerUpLock.govTokens, 18)
-          accumulator[j].end = ethers.utils.formatUnits(powerUpLock.end, 0)
-          accumulator[j].usedBalance = ethers.utils.formatUnits(powerUpLock.usedBalance, 18)
+          accumulator[j].powerUpId = ethers.utils.formatUnits(powerUpLock[0], 0)
+          accumulator[j].govTokens = ethers.utils.formatUnits(powerUpLock[1], 18)
+          accumulator[j].end = ethers.utils.formatUnits(powerUpLock[2], 0)
+          accumulator[j].usedBalance = ethers.utils.formatUnits(powerUpLock[4], 18)
         })
       }
 
       return accumulator
-    }, rawData.map((_element) => { return {}}))
+    }, rawData[0].map((_element) => { return {}}))
 
-    return userPowerUpDataForActivePowerUps
+    return userPowerUpDataForActivePowerUps.filter(powerUp => powerUp.isActivated === true)
   }
 
   async getAssignedHeroIds(powerUpId) {
