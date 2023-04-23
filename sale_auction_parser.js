@@ -9,8 +9,8 @@ async function main() {
     const valuator = new Valuator(onSaleHeros[i].price, onSaleHeros[i].hero);
     valuator.execute();
 
-    if (valuator.price <= valuator.valuation * 1.2) {
-      autils.watchHeroLog(valuator.hero, valuator.price, valuator.valuation * 1.2, onSaleHeros[i].hero.network);
+    if (valuator.price <= valuator.valuation * 1.3) {
+      autils.watchHeroLog(valuator.hero, valuator.price, valuator.valuation * 1.3, onSaleHeros[i].hero.network);
     }
   }
 

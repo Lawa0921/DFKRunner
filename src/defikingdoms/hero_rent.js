@@ -19,6 +19,8 @@ exports.runDFKRentHeroLogic = async (owningHeroObjects, accountInfo) => {
 
       if (rentValuator.valuation > 0) {
         await assistingAuctionUpgradeableContract.listHero(filtedHeroObjects[i].id, rentValuator.valuation)
+      } else if (filtedHeroObjects[i].summonsRemaining === 0) {
+        console.log(`${filtedHeroObjects[i].id} summonsRemaining = 0`)
       } else {
         console.log(`${filtedHeroObjects[i].id} not have any rental value`)
       }
