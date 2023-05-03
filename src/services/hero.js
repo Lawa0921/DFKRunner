@@ -854,7 +854,7 @@ module.exports = class Hero {
   }
 
   summonable() {
-    return this.nextSummonTime.valueOf() <= Math.floor(new Date().getTime() / 1000) && this.summonsRemaining > 0 ? true : false;
+    return this.nextSummonTime.valueOf() <= Math.floor(new Date().getTime() / 1000) ? true : false;
   }
 
   rentable() {
