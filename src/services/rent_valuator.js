@@ -20,6 +20,7 @@ module.exports = class RentValuator {
     }
 
     this.evaluateLevelPrice()
+    this.evaluateProfession()
     this.priceLogicAdjustment()
   }
 
@@ -580,6 +581,14 @@ module.exports = class RentValuator {
       this.valuation *= 1.2
     } else if (heroSubclass === "Dragoon") {
       this.valuation *= 3
+    }
+  }
+
+  evaluateProfession() {
+    const profession = this.hero.profession
+
+    if (profession == "fishing" || profession == "foraging") {
+      this.valuation = this.valuation * 1.35
     }
   }
 
