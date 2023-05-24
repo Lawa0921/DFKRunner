@@ -35,7 +35,7 @@ module.exports = class QuestCoreV3 {
   }
 
   async startFishingQuest(heroIds, attempt) {
-    const txn = await this.contract.startQuest(heroIds, config.defikingdoms.quest.fishing.contractAddress, attempt, 0, { gasPrice: await autils.getDFKGasFee() })
+    const txn = await this.contract.startQuest(heroIds, 1, attempt, 0, 0, { gasPrice: await autils.getDFKGasFee() })
     const res = await txn.wait();
     if (res.status === 1) {
       console.log(`${this.accountName} DFK send ${heroIds} on a fishing quest completed`)
@@ -47,7 +47,7 @@ module.exports = class QuestCoreV3 {
   }
 
   async startForagingQuest(heroIds, attempt) {
-    const txn = await this.contract.startQuest(heroIds, config.defikingdoms.quest.foraging.contractAddress, attempt, 0, { gasPrice: await autils.getDFKGasFee() })
+    const txn = await this.contract.startQuest(heroIds, 2, attempt, 0, 0, { gasPrice: await autils.getDFKGasFee() })
     const res = await txn.wait();
     if (res.status === 1) {
       console.log(`${this.accountName} DFK send ${heroIds} on a foraging quest completed`)
@@ -58,8 +58,8 @@ module.exports = class QuestCoreV3 {
     return res;
   }
 
-  async startStatQuest(heroIds, attempt, address, type) {
-    const tx = await this.contract.startQuest(heroIds, address, attempt, 1, { gasPrice: await autils.getDFKGasFee() })
+  async startStatQuest(heroIds, attempt, questTypeId, type) {
+    const tx = await this.contract.startQuest(heroIds, 6, attempt, 1, questTypeId, { gasPrice: await autils.getDFKGasFee() })
     const res = await tx.wait();
     if (res.status === 1) {
       console.log(`${this.accountName} DFK send ${heroIds} on a ${type} stat quest completed`)
@@ -71,7 +71,7 @@ module.exports = class QuestCoreV3 {
   }
 
   async startGoldMining(heroIds, attempt) {
-    const tx = await this.contract.startQuest(heroIds, config.defikingdoms.quest.goldMining.contractAddress, attempt, 0, { gasPrice: await autils.getDFKGasFee() })
+    const tx = await this.contract.startQuest(heroIds, 3, attempt, 0, 0, { gasPrice: await autils.getDFKGasFee() })
     const res = await tx.wait();
 
     if (res.status === 1) {
@@ -84,7 +84,7 @@ module.exports = class QuestCoreV3 {
   }
 
   async startCrystalMining(heroIds, attempt) {
-    const tx = await this.contract.startQuest(heroIds, config.defikingdoms.quest.crystalMining.contractAddress, attempt, 0, { gasPrice: await autils.getDFKGasFee() })
+    const tx = await this.contract.startQuest(heroIds, 4, attempt, 0, 0, { gasPrice: await autils.getDFKGasFee() })
     const res = await tx.wait();
 
     if (res.status === 1) {
@@ -96,8 +96,8 @@ module.exports = class QuestCoreV3 {
     return res;
   }
 
-  async startGardeningQuest(heroIds, pairAddress, attempt) {
-    const tx = await this.contract.startQuest(heroIds, pairAddress, attempt, 0, { gasPrice: await autils.getDFKGasFee() })
+  async startGardeningQuest(heroIds, poolId, attempt) {
+    const tx = await this.contract.startQuest(heroIds, 5, attempt, 0, poolId, { gasPrice: await autils.getDFKGasFee() })
     const res = await tx.wait();
 
     if (res.status === 1) {

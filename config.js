@@ -114,6 +114,7 @@ const config = {
         "pairAddressMappings": [
           {
             "tokenPair": "CRYSTAL-AVAX", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 1,
             "pairAddress": "0x8eDA0ceA7a90E794B33708Cc0768727A1A612f3d", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -121,6 +122,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "CRYSTAL-wJEWEL", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 2,
             "pairAddress": "0xC4839Fb9A5466878168EaE3fD58c647B71475b61", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -128,6 +130,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "CRYSTAL-USDC", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 3,
             "pairAddress": "0x6FEF23498877bC4c3940ebE121dd7D138BdA4e11", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -135,6 +138,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "ETH-USDC", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 4,
             "pairAddress": "0xdeF7cBeE7d0B62037616ee26BCAc1C8364f53476", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -142,6 +146,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "wJEWEL-USDC", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 5,
             "pairAddress": "0xaac3933Faa3B668304C9276d10CA88853463BD42", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -149,6 +154,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "CRYSTAL-ETH", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 6,
             "pairAddress": "0x810e1fF51fDd58c474c66A31013713D1A17BF458", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -156,6 +162,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "CRYSTAL-BTC.b", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 7,
             "pairAddress": "0x706916dbC3b66d89632708CC193080ea05E0534A", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -163,6 +170,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "CRYSTAL-KLAY", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 8,
             "pairAddress": "0x1fCc67a01525fd715A67bCcbF73665Fb3dBE76c7", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -170,6 +178,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "JEWEL-KLAY", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 9,
             "pairAddress": "0x2A70aA48f9dBF859239ae5E7f98fe95aE27A6CD4", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -177,6 +186,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "JEWEL-AVAX", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 10,
             "pairAddress": "0xA0d17554F09047d65E0ae0e76CD8923A9525183c", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -184,6 +194,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "JEWEL-BTC.b", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 11,
             "pairAddress": "0x3391B9384AC66C7Aa3BF4A75A4f441942B1dCf30", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -191,6 +202,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "JEWEL-ETH", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 12,
             "pairAddress": "0xbaEc39Dd81b964B57bc5fa5f5421Cd82185409E6", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -198,6 +210,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "BTC.b-USDC", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 13,
             "pairAddress": "0x045838dBfb8026520E872c8298F4Ed542B81Eaca", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -228,7 +241,7 @@ const config = {
               "2000000091165", "1000000202859", "2000000104726", "2000000031100",
               "1000000221984", "1000000222021", "1000000222059",
             ],
-            "contractAddress": "0xb8828c687Fb1C875D5acb4281C5CDf9F49fA4637" // 合約的地址，你不會更改這個值
+            "questTypeId": 0,
           },
           {
             "name": "StatQuest_Dex", // 有地方會用到這個值，不要更改它
@@ -241,7 +254,7 @@ const config = {
               "1000000168542", "1000000164335", "2000000049215", "2000000054006", "2000000049643",
               "1000000184845", "2000000060504", "1000000196916"
             ],
-            "contractAddress": "0x9ec92963d0387bA57D5f2D505319b1c135C6f1D3" // 合約的地址，你不會更改這個值
+            "questTypeId": 7,
           },
           {
             "name": "StatQuest_Agi", // 有地方會用到這個值，不要更改它
@@ -253,7 +266,7 @@ const config = {
               "1000000143553", "2000000046022", "1000000190986", "2000000137179",
               "2000000059161", "2000000068137", "171977"       , "2000000088527"
             ],
-            "contractAddress": "0x801b7296f106d8818DA1D04Ed769e5a76e8911fe" // 合約的地址，你不會更改這個值
+            "questTypeId": 4,
           },
           {
             "name": "StatQuest_Vit", // 有地方會用到這個值，不要更改它
@@ -265,7 +278,7 @@ const config = {
               "151604"       , "2000000086742", "2000000096624", "1000000222072",
               "1000000219338"
             ],
-            "contractAddress": "0xE3edf52D33F2BB05DBdA5BA73903E27a9B9b7e9d" // 合約的地址，你不會更改這個值
+            "questTypeId": 5,
           },
           {
             "name": "StatQuest_End", // 有地方會用到這個值，不要更改它
@@ -274,7 +287,7 @@ const config = {
               "260621"       , "2000000044503", "2000000045488", "2000000088107", "1000000222082",
               "1000000224106", "2000000132747"
             ],
-            "contractAddress": "0xBD391e4641E1bce989a246602EcDC746efA9d845" // 合約的地址，你不會更改這個值
+            "questTypeId": 6,
           },
           {
             "name": "StatQuest_Int", // 有地方會用到這個值，不要更改它
@@ -285,7 +298,7 @@ const config = {
               "2000000095913", "1000000222032", "1000000222034",
               "1000000222035", "1000000224093", "1000000226105"
             ],
-            "contractAddress": "0xD8cCf866959830a8E397442B5F7DDD790F230962" // 合約的地址，你不會更改這個值
+            "questTypeId": 1,
           },
           {
             "name": "StatQuest_Wis", // 有地方會用到這個值，不要更改它
@@ -294,7 +307,7 @@ const config = {
               "1000000136226", "1000000137771", "273458"       , "1000000154076", "1000000195838",
               "1000000196716", "1000000138226", "1000000222413"
             ],
-            "contractAddress": "0x0832A218c2202088A1800D424248fC689ae74600" // 合約的地址，你不會更改這個值
+            "questTypeId": 2,
           },
           {
             "name": "StatQuest_Luk", // 有地方會用到這個值，不要更改它
@@ -304,7 +317,7 @@ const config = {
               "293177"       , "2000000044504", "2000000050856", "1000000187118", "2000000069199",
               "2000000072425", "2000000076405", "2000000081252", "1000000201148", "250566"       ,
             ],
-            "contractAddress": "0x81fA8a2bfcd703dc83c5d4bEE1075899448A5CdE" // 合約的地址，你不會更改這個值
+            "questTypeId": 3,
           }
         ]
       }
@@ -714,6 +727,7 @@ const config = {
         "pairAddressMappings": [
           {
             "tokenPair": "JADE-JEWEL", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 0,
             "pairAddress": "0x3837612f3A14C92Da8E0186AB398A753fe169dc1", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -721,6 +735,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "JADE-wKLAY", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 1,
             "pairAddress": "0xc1C01a860B841F47f8191026D9Ca8eE2F1f37ab3", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -728,6 +743,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "JADE-AVAX", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 2,
             "pairAddress": "0x7643ADB5AaF129A424390CB055d6e23231fFd690", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -735,6 +751,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "JADE-oUSDT", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 3,
             "pairAddress": "0x177D9F3A92630CB8C46F169b1F99a12A7a326c45", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -742,6 +759,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "JADE-oBTC", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 4,
             "pairAddress": "0x05305c97e9A2FDC0F5Ea23824c1348DEeD9Aff04", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -749,6 +767,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "JADE-oETH", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 5,
             "pairAddress": "0xb911F5D6F9129365d1a415DD3CBa17F0240CFA70", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -756,6 +775,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "JEWEL-wKLAY", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 6,
             "pairAddress": "0x3198f51A1c8cFC5f1FeaD58feaa19E6dFc8e9737", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -763,6 +783,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "JEWEL-AVAX", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 7,
             "pairAddress": "0xDAd93871e42a11aD577E4DCa02c7C426800A47D5", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -770,6 +791,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "JEWEL-oUSDT", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 8,
             "pairAddress": "0x0831f733870e847263907F32B3367De2f47CeAf0", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -777,6 +799,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "JEWEL-oBTC", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 9,
             "pairAddress": "0x85106b1aF8B0337CB39a9aacDa87849B882a3170", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -784,6 +807,7 @@ const config = {
             ],
           },                 {
             "tokenPair": "JEWEL-oETH", // 沒有邏輯用到這個字串，單純是方便你辨識當前任務用的
+            "poolId": 10,
             "pairAddress": "0x7038F49cAA6e2f26677D237A2A40EC6354bA1eA5", // pair 的合約地址，你不會更改這個值
             "singleBatchAmount": 2, // 單次送出的英雄數量
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
@@ -801,56 +825,56 @@ const config = {
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
 
             ],
-            "contractAddress": "0xF2143c7c8Dfca976415bDf7d37dfa63aed8Ef741" // 合約的地址，你不會更改這個值
+            "questTypeId": 0,
           },
           {
             "name": "StatQuest_Dex", // 有地方會用到這個值，不要更改它
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
 
             ],
-            "contractAddress": "0x8F3acf63fd09ceCD1F387B7bC45bc245f43D4B5e" // 合約的地址，你不會更改這個值
+            "questTypeId": 7,
           },
           {
             "name": "StatQuest_Agi", // 有地方會用到這個值，不要更改它
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
 
             ],
-            "contractAddress": "0x378052bbc8D2E1819194802b8A990E7Ae43655bA" // 合約的地址，你不會更改這個值
+            "questTypeId": 4,
           },
           {
             "name": "StatQuest_Vit", // 有地方會用到這個值，不要更改它
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
 
             ],
-            "contractAddress": "0x89a60d8B332ce2Dd3bE8b170c6391F98a03a665F" // 合約的地址，你不會更改這個值
+            "questTypeId": 5,
           },
           {
             "name": "StatQuest_End", // 有地方會用到這個值，不要更改它
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
               
             ],
-            "contractAddress": "0x058282847F1C8E893edcdfea5df6eb203ECA7832" // 合約的地址，你不會更改這個值
+            "questTypeId": 6,
           },
           {
             "name": "StatQuest_Int", // 有地方會用到這個值，不要更改它
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
               
             ],
-            "contractAddress": "0xe606f6548Ae34DA9065B4fee88990F239b445403" // 合約的地址，你不會更改這個值
+            "questTypeId": 1,
           },
           {
             "name": "StatQuest_Wis", // 有地方會用到這個值，不要更改它
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
 
             ],
-            "contractAddress": "0x80F93836811a9A7721A21D7d8751aFd6A8fC9308" // 合約的地址，你不會更改這個值
+            "questTypeId": 2,
           },
           {
             "name": "StatQuest_Luk", // 有地方會用到這個值，不要更改它
             "heroes": [ // 這裡面只會寫你自己擁有的 hero id
 
             ],
-            "contractAddress": "0x5C01d797d0Cc3D79c01ef98f7ffAe25E4dCEB400" // 合約的地址，你不會更改這個值
+            "questTypeId": 3,
           }
         ]
       }

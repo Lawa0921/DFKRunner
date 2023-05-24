@@ -45,7 +45,7 @@ exports.CheckAndSendDFKStatQuests = async (heroesStruct, owningHeroObjects, acco
 
 						console.log(`${accountInfo.accountName} DFK sending ${sentHeroes.map(heroObject => heroObject.id)} to ${questType.name} quest`)
 
-						await new QuestCoreV3(accountInfo).startStatQuest(sentHeroes.map(heroObject => heroObject.id), attemp, questType.contractAddress, questType.name);
+						await new QuestCoreV3(accountInfo).startStatQuest(sentHeroes.map(heroObject => heroObject.id), attemp, questType.questTypeId, questType.name);
 						sendHeroCount += sentHeroes.length
 					}
 				}

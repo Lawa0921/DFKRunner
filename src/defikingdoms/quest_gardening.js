@@ -34,7 +34,7 @@ exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects, accou
       }
 
       console.log(`${accountInfo.accountName} DFK sending ${sentGardenerIds} to ${questType.pairAddressMappings[i].tokenPair} gardening quest`)
-      await new QuestCoreV3(accountInfo).startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].pairAddress, minStamina)
+      await new QuestCoreV3(accountInfo).startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].poolId, minStamina)
     } else {
       console.log(`${accountInfo.accountName} DFK no gardener sent to ${questType.pairAddressMappings[i].tokenPair}`)
     }
