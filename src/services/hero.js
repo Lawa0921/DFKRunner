@@ -38,6 +38,10 @@ module.exports = class Hero {
     this.stamina = heroInfo.stamina;
     this.staminaFullAt = heroInfo.staminaFullAt;
     this.xp = heroInfo.xp;
+    this.fishing = heroInfo.fishing;
+    this.foraging = heroInfo.foraging;
+    this.gardening = heroInfo.gardening;
+    this.mining = heroInfo.mining;
     this.maxXp = this.maxXp();
     this.isXpFull = this.xp >= this.maxXp;
     this.isOnQuesting = heroInfo.currentQuest !== autils.get0xAddress();

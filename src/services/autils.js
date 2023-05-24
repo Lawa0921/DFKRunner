@@ -158,6 +158,10 @@ exports.getHeroesInfoByIds = async (heroIds) => {
           staminaFullAt
           nextSummonTime
           background
+          fishing
+          foraging
+          gardening
+          mining
           saleAuction {
             startingPrice
             open

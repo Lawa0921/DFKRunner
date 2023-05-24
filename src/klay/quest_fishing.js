@@ -29,34 +29,62 @@ exports.CheckAndSendKLAYFishers = async (heroesStruct, owningHeroObjects, accoun
 		}
 	
 		if (possibleFishers.length > 0) {
-			const professionFishers = possibleFishers.filter(heroObject => heroObject.profession === "fishing")
-			const nonProfessionFishers = possibleFishers.filter(heroObject => heroObject.profession !== "fishing")
+			const LV10professionFishers = possibleFishers.filter(heroObject => heroObject.profession === "fishing" && heroObject.fishing >= 100)
+			const LV0professionFishers = possibleFishers.filter(heroObject => heroObject.profession === "fishing" && heroObject.fishing < 100)
+			const LV10nonProfessionFishers = possibleFishers.filter(heroObject => heroObject.profession !== "fishing" && heroObject.fishing >= 100)
+			const LV0nonProfessionFishers = possibleFishers.filter(heroObject => heroObject.profession !== "fishing" && heroObject.fishing < 100)
 
 			let questCount = heroesStruct.fishingQuestCount
 			let sendProfessionHeroesCount = 0
 			let sendNonProfessionHeroesCount = 0;
 
-			if (professionFishers.length > 0) {
-				for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(professionFishers.length / maxHeroCount); i++) {
-					const sendProfessionHeroes = professionFishers.slice(sendProfessionHeroesCount, maxHeroCount + sendProfessionHeroesCount)
+			if (LV10professionFishers.length > 0) {
+				for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(LV10professionFishers.length / maxHeroCount); i++) {
+					const sendProfessionHeroes = LV10professionFishers.slice(sendProfessionHeroesCount, maxHeroCount + sendProfessionHeroesCount)
 					const attemp = Math.floor(minStamina / 5)
 
-					console.log(`${accountInfo.accountName} KLAY sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
+					console.log(`${accountInfo.accountName} KLAY sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to LV 10 fishing quest`)
 
-					await new QuestCoreV3(accountInfo).startFishingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
+					await new QuestCoreV3(accountInfo).startFishingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp, 10);
 					sendProfessionHeroesCount += sendProfessionHeroes.length
 					questCount++
 				}
 			}
 
-			if (nonProfessionFishers.length > 0) {
-				for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(nonProfessionFishers.length / maxHeroCount); i++) {
-					const sendNonProfessionHeroes = nonProfessionFishers.slice(sendProfessionHeroesCount, maxHeroCount + sendNonProfessionHeroesCount)
+			if (LV0professionFishers.length > 0) {
+				for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(LV0professionFishers.length / maxHeroCount); i++) {
+					const sendProfessionHeroes = LV0professionFishers.slice(sendProfessionHeroesCount, maxHeroCount + sendProfessionHeroesCount)
+					const attemp = Math.floor(minStamina / 5)
+
+					console.log(`${accountInfo.accountName} KLAY sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to LV 0 fishing quest`)
+
+					await new QuestCoreV3(accountInfo).startFishingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp, 0);
+					sendProfessionHeroesCount += sendProfessionHeroes.length
+					questCount++
+				}
+			}
+
+			if (LV10nonProfessionFishers.length > 0) {
+				for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(LV10nonProfessionFishers.length / maxHeroCount); i++) {
+					const sendNonProfessionHeroes = LV10nonProfessionFishers.slice(sendProfessionHeroesCount, maxHeroCount + sendNonProfessionHeroesCount)
 					const attemp = Math.floor(minStamina / 7)
 
-					console.log(`${accountInfo.accountName} KLAY sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
+					console.log(`${accountInfo.accountName} KLAY sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to LV 10 fishing quest`)
 
-					await new QuestCoreV3(accountInfo).startFishingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp);
+					await new QuestCoreV3(accountInfo).startFishingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp, 10);
+					sendNonProfessionHeroesCount += sendNonProfessionHeroes.length
+					questCount++
+				}
+			}
+
+			if (LV0nonProfessionFishers.length > 0) {
+				for (let i = 0; i < maxQueue - questCount - 1 && i < Math.ceil(LV0nonProfessionFishers.length / maxHeroCount); i++) {
+					const sendNonProfessionHeroes = LV0nonProfessionFishers.slice(sendProfessionHeroesCount, maxHeroCount + sendNonProfessionHeroesCount)
+					const attemp = Math.floor(minStamina / 7)
+
+					console.log(`${accountInfo.accountName} KLAY sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to LV 0 fishing quest`)
+
+					await new QuestCoreV3(accountInfo).startFishingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp, 0);
 					sendNonProfessionHeroesCount += sendNonProfessionHeroes.length
 					questCount++
 				}

@@ -34,13 +34,13 @@ module.exports = class QuestCoreV3 {
     return res;
   }
 
-  async startFishingQuest(heroIds, attempt) {
-    const txn = await this.contract.startQuest(heroIds, 1, attempt, 0, 0, { gasPrice: await autils.getDFKGasFee() })
+  async startFishingQuest(heroIds, attempt, level) {
+    const txn = await this.contract.startQuest(heroIds, 1, attempt, level, 0, { gasPrice: await autils.getDFKGasFee() })
     const res = await txn.wait();
     if (res.status === 1) {
-      console.log(`${this.accountName} DFK send ${heroIds} on a fishing quest completed`)
+      console.log(`${this.accountName} DFK send ${heroIds} on a ${level} fishing quest completed`)
     } else {
-      console.log(`${this.accountName} DFK send ${heroIds} on a fishing quest failed`)
+      console.log(`${this.accountName} DFK send ${heroIds} on a ${level} fishing quest failed`)
     }
 
     return res;
