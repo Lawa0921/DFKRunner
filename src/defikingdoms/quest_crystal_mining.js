@@ -1,6 +1,6 @@
 const config = require("../../config");
 const autils = require('../services/autils');
-const QuestCoreV2 = require('./contracts/questCoreV2');
+const QuestCoreV3 = require('./contracts/questCoreV3');
 const SaleAuction = require('./contracts/saleAuction');
 const minStamina = config.defikingdoms.quest.crystalMining.minStamina;
 const maxBatch = 6;
@@ -38,7 +38,7 @@ exports.CheckAndSendDFKCrystalMiners = async (heroesStruct, accountInfo) => {
     }
     console.log(`${accountInfo.accountName} DFK sending ${sentMinerIds} to crystal mining quest`)
 
-    await new QuestCoreV2(accountInfo).startCrystalMining(sentMinerIds, minStamina)
+    await new QuestCore3(accountInfo).startCrystalMining(sentMinerIds, minStamina)
   } else {
     console.log(`${accountInfo.accountName} DFK no crystal miner sent`)
   }

@@ -1,11 +1,11 @@
-const QuestCoreV2 = require('./contracts/questCoreV2')
+const QuestCoreV3 = require('./contracts/questCoreV3')
 
 exports.CompleteQuests = async (heroesStruct, accountInfo) => {
-  const questCoreV2Contract = new QuestCoreV2(accountInfo)
+  const questCoreV3Contract = new QuestCoreV3(accountInfo)
 
   if (heroesStruct.completedLeadQuesters.length > 0) {
     let completeQuestPromises = heroesStruct.completedLeadQuesters.map((completedQuesterId) => {
-      return completeQuest(completedQuesterId, questCoreV2Contract, accountInfo.accountName)
+      return completeQuest(completedQuesterId, questCoreV3Contract, accountInfo.accountName)
     })
 
     await Promise.allSettled(completeQuestPromises)
@@ -14,9 +14,9 @@ exports.CompleteQuests = async (heroesStruct, accountInfo) => {
   }
 }
 
-completeQuest = async (completedQuesterId, questCoreV2Contract, accountName) => {
+completeQuest = async (completedQuesterId, questCoreV3Contract, accountName) => {
   console.log(`${accountName} sending complete ${completedQuesterId} quest`)
-  const tx = await questCoreV2Contract.completeQuest(completedQuesterId)
+  const tx = await questCoreV3Contract.completeQuest(completedQuesterId)
   const res = await tx.wait();
 
   if (res.status === 1) {

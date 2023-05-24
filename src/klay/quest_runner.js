@@ -1,5 +1,5 @@
 const dataParser = require('../services/data_parser') 
-const QuestCoreV2 = require("./contracts/questCoreV2");
+const QuestCoreV3 = require("./contracts/questCoreV3");
 const { CompleteQuests } = require('./quest_complete');
 const { CheckAndSendKLAYFishers } = require("./quest_fishing");
 const { CheckAndSendKLAYForagers } = require("./quest_foraging");
@@ -26,9 +26,9 @@ exports.runKLAYChainQuest = async (accountInfo) => {
     if (baseGasPrice > config.klay.maxGasPrice) {
       console.log(`KLAY Current base gasPrice: ${baseGasPrice} is over then maxGasPrice setting: ${config.klay.maxGasPrice}, will retry later.`)
     } else {
-      const questCoreV2Contract = new QuestCoreV2(accountInfo);
+      const questCoreV3Contract = new QuestCoreV3(accountInfo);
   
-      const activeQuests = await questCoreV2Contract.getAccountActiveQuests();
+      const activeQuests = await questCoreV3Contract.getAccountActiveQuests();
       const heroesStruct = dataParser.questDataParser(activeQuests);
       const owningHeroObjects = await autils.getHeroesInfoByIds(autils.getKLAYOwningHeroIds());
 

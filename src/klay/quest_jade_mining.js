@@ -1,6 +1,6 @@
 const config = require("../../config");
 const autils = require('../services/autils');
-const QuestCoreV2 = require('./contracts/questCoreV2');
+const QuestCoreV3 = require('./contracts/questCoreV3');
 const SaleAuction = require('./contracts/saleAuction');
 const minStamina = config.klay.quest.jadeMining.minStamina;
 const maxBatch = 6;
@@ -38,7 +38,7 @@ exports.CheckAndSendKLAYJadeMiners = async (heroesStruct, accountInfo) => {
     }
     console.log(`${accountInfo.accountName} KLAY sending ${sentMinerIds} to jade mining quest`)
 
-    await new QuestCoreV2(accountInfo).startJadeMining(sentMinerIds, minStamina)
+    await new QuestCoreV3(accountInfo).startJadeMining(sentMinerIds, minStamina)
   } else {
     console.log(`${accountInfo.accountName} KLAY no jade miner sent`)
   }

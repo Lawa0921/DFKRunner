@@ -1,6 +1,6 @@
 const config = require("../../config");
 const autils = require('../services/autils');
-const QuestCoreV2 = require('./contracts/questCoreV2');
+const QuestCoreV3 = require('./contracts/questCoreV3');
 const SaleAuction = require('./contracts/saleAuction');
 const minStamina = config.klay.quest.goldMining.minStamina;
 const maxBatch = 6;
@@ -31,7 +31,7 @@ exports.CheckAndSendKLAYGoldMiners = async (heroesStruct, owningHeroObjects, acc
     }
 
     console.log(`${accountInfo.accountName} KLAY sending ${sentMinerIds} to gold mining quest`)
-    await new QuestCoreV2(accountInfo).startGoldMining(sentMinerIds, minStamina)
+    await new QuestCoreV3(accountInfo).startGoldMining(sentMinerIds, minStamina)
   } else {
     console.log(`${accountInfo.accountName} KLAY no gold miner sent`)
   }

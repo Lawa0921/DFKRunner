@@ -1,6 +1,6 @@
 const config = require("../../config");
 const autils = require('../services/autils');
-const QuestCoreV2 = require('./contracts/questCoreV2');
+const QuestCoreV3 = require('./contracts/questCoreV3');
 const SaleAuction = require('./contracts/saleAuction');
 const minStamina = config.defikingdoms.quest.fishing.minStamina;
 const maxQueue = 10;
@@ -43,7 +43,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, account
 
 					console.log(`${accountInfo.accountName} DFK sending ${sendProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
 
-					await new QuestCoreV2(accountInfo).startFishingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
+					await new QuestCoreV3(accountInfo).startFishingQuest(sendProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendProfessionHeroesCount += sendProfessionHeroes.length
 					questCount++
 				}
@@ -56,7 +56,7 @@ exports.CheckAndSendDFKFishers = async (heroesStruct, owningHeroObjects, account
 
 					console.log(`${accountInfo.accountName} DFK sending (N) ${sendNonProfessionHeroes.map(heroObject => heroObject.id)} to fishing quest`)
 
-					await new QuestCoreV2(accountInfo).startFishingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp);
+					await new QuestCoreV3(accountInfo).startFishingQuest(sendNonProfessionHeroes.map(heroObject => heroObject.id), attemp);
 					sendNonProfessionHeroesCount += sendNonProfessionHeroes.length
 					questCount++
 				}

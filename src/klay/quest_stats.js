@@ -1,6 +1,6 @@
 const config = require("../../config");
 const autils = require('../services/autils');
-const QuestCoreV2 = require('./contracts/questCoreV2');
+const QuestCoreV3 = require('./contracts/questCoreV3');
 const SaleAuction = require('./contracts/saleAuction');
 const minStamina = 25;
 const maxQueue = 5;
@@ -45,7 +45,7 @@ exports.CheckAndSendKLAYStatQuests = async (heroesStruct, owningHeroObjects, acc
 
 						console.log(`${accountInfo.accountName} KLAY sending ${sentHeroes.map(heroObject => heroObject.id)} to ${questType.name} quest`)
 
-						await new QuestCoreV2(accountInfo).startStatQuest(sentHeroes.map(heroObject => heroObject.id), attemp, questType.contractAddress, questType.name);
+						await new QuestCoreV3(accountInfo).startStatQuest(sentHeroes.map(heroObject => heroObject.id), attemp, questType.contractAddress, questType.name);
 						sendHeroCount += sentHeroes.length
 					}
 				}

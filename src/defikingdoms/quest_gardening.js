@@ -1,6 +1,6 @@
 const config = require("../../config");
 const autils = require('../services/autils');
-const QuestCoreV2 = require('./contracts/questCoreV2');
+const QuestCoreV3 = require('./contracts/questCoreV3');
 const SaleAuction = require('./contracts/saleAuction');
 const minStamina = config.defikingdoms.quest.gardening.minStamina;
 
@@ -34,7 +34,7 @@ exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects, accou
       }
 
       console.log(`${accountInfo.accountName} DFK sending ${sentGardenerIds} to ${questType.pairAddressMappings[i].tokenPair} gardening quest`)
-      await new QuestCoreV2(accountInfo).startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].pairAddress, minStamina)
+      await new QuestCoreV3(accountInfo).startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].pairAddress, minStamina)
     } else {
       console.log(`${accountInfo.accountName} DFK no gardener sent to ${questType.pairAddressMappings[i].tokenPair}`)
     }
