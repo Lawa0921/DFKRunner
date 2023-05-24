@@ -66,13 +66,13 @@ module.exports = class powerUpManager {
 
   async getAssignedHeroIds(powerUpId) {
     const rawData = await this.contract.getAssignedHeroIds(this.wallet.address, powerUpId)
-    const heroIds = rawData.map(data => ethers.utils.formatUnits(data.id, 0))
-
+    const heroIds = rawData.map(data => ethers.utils.formatUnits(data, 0))
+    
     return heroIds
   }
 
   async assignHeroes(powerUpIds, heroIds) {
-    const txn = await this.contract.assignHeroes(powerUpIds, heroIds, { gasPrice: await autils.getDFKGasFee() })
+    const txn = await this.contract.assignHeroes(powerUpIds, heroIds, { gasPrice: await autils.getKLAYGasFee() })
     const res = await txn.wait();
 
     if (res.status === 1) {
@@ -87,7 +87,7 @@ module.exports = class powerUpManager {
   async assignHero(powerUpId, heroId) {
     console.log(`KLAY Assign hero: ${heroId} powerUp: ${powerUpId}`)
 
-    const txn = await this.contract.assignHero(powerUpId, heroId, { gasPrice: await autils.getDFKGasFee() })
+    const txn = await this.contract.assignHero(powerUpId, heroId, { gasPrice: await autils.getKLAYGasFee() })
     const res = await txn.wait();
 
     if (res.status === 1) {

@@ -60,29 +60,30 @@ exports.questDataParser = (activeQuests) => {
     quest.heroes.forEach(heroId => {
       returnValue.allQuesters.push(heroId.toString());
     })
-
-    if (quest.questAddress) {
-      if (quest.questAddress === config.defikingdoms.quest.fishing.contractAddress || quest.questAddress === config.klay.quest.fishing.contractAddress) {
-        returnValue.fishingQuestCount ++
-      } else if (quest.questAddress === config.defikingdoms.quest.foraging.contractAddress || quest.questAddress === config.klay.quest.foraging.contractAddress) {
-        returnValue.foragingQuestCount ++
-      } else if (quest.questAddress === config.defikingdoms.quest.statQuest.quests[0].contractAddress || quest.questAddress === config.klay.quest.statQuest.quests[0].contractAddress) {
-        returnValue.statQuestStrCount ++
-      } else if (quest.questAddress === config.defikingdoms.quest.statQuest.quests[1].contractAddress || quest.questAddress === config.klay.quest.statQuest.quests[1].contractAddress) {
-        returnValue.statQuestDexCount ++
-      } else if (quest.questAddress === config.defikingdoms.quest.statQuest.quests[2].contractAddress || quest.questAddress === config.klay.quest.statQuest.quests[2].contractAddress) {
-        returnValue.statQuestAgiCount ++
-      } else if (quest.questAddress === config.defikingdoms.quest.statQuest.quests[3].contractAddress || quest.questAddress === config.klay.quest.statQuest.quests[3].contractAddress) {
-        returnValue.statQuestVitCount ++
-      } else if (quest.questAddress === config.defikingdoms.quest.statQuest.quests[4].contractAddress || quest.questAddress === config.klay.quest.statQuest.quests[4].contractAddress) {
-        returnValue.statQuestEndCount ++
-      } else if (quest.questAddress === config.defikingdoms.quest.statQuest.quests[5].contractAddress || quest.questAddress === config.klay.quest.statQuest.quests[5].contractAddress) {
-        returnValue.statQuestIntCount ++
-      } else if (quest.questAddress === config.defikingdoms.quest.statQuest.quests[6].contractAddress || quest.questAddress === config.klay.quest.statQuest.quests[6].contractAddress) {
-        returnValue.statQuestWisCount ++
-      } else if (quest.questAddress === config.defikingdoms.quest.statQuest.quests[7].contractAddress || quest.questAddress === config.klay.quest.statQuest.quests[7].contractAddress) {
-        returnValue.statQuestLukCount ++
-      }
+    
+    questInstanceId = parseInt(quest.questInstanceId)
+    questType = parseInt(quest.questType)
+    
+    if (questInstanceId === 1) {
+      returnValue.fishingQuestCount ++
+    } else if (questInstanceId === 2) {
+      returnValue.foragingQuestCount ++
+    } else if (questInstanceId === 6 && questType === 0) {
+      returnValue.statQuestStrCount ++
+    } else if (questInstanceId === 6 && questType === 7) {
+      returnValue.statQuestDexCount ++
+    } else if (questInstanceId === 6 && questType === 4) {
+      returnValue.statQuestAgiCount ++
+    } else if (questInstanceId === 6 && questType === 5) {
+      returnValue.statQuestVitCount ++
+    } else if (questInstanceId === 6 && questType === 6) {
+      returnValue.statQuestEndCount ++
+    } else if (questInstanceId === 6 && questType === 1) {
+      returnValue.statQuestIntCount ++
+    } else if (questInstanceId === 6 && questType === 2) {
+      returnValue.statQuestWisCount ++
+    } else if (questInstanceId === 6 && questType === 3) {
+      returnValue.statQuestLukCount ++
     }
   });
 
