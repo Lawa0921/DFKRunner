@@ -46,13 +46,13 @@ module.exports = class QuestCoreV3 {
     return res;
   }
 
-  async startForagingQuest(heroIds, attempt) {
-    const txn = await this.contract.startQuest(heroIds, 2, attempt, 0, 0, { gasPrice: await autils.getDFKGasFee() })
+  async startForagingQuest(heroIds, attempt, level) {
+    const txn = await this.contract.startQuest(heroIds, 2, attempt, level, 0, { gasPrice: await autils.getDFKGasFee() })
     const res = await txn.wait();
     if (res.status === 1) {
-      console.log(`${this.accountName} DFK send ${heroIds} on a foraging quest completed`)
+      console.log(`${this.accountName} DFK send ${heroIds} on a ${level} foraging quest completed`)
     } else {
-      console.log(`${this.accountName} DFK send ${heroIds} on a foraging quest failed`)
+      console.log(`${this.accountName} DFK send ${heroIds} on a ${level} foraging quest failed`)
     }
 
     return res;
