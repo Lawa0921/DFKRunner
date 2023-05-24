@@ -1,0 +1,2732 @@
+[
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "facetAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "enum IDiamondCut.FacetCutAction",
+              "name": "action",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes4[]",
+              "name": "functionSelectors",
+              "type": "bytes4[]"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct IDiamondCut.FacetCut[]",
+          "name": "_diamondCut",
+          "type": "tuple[]"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "_init",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "bytes",
+          "name": "_calldata",
+          "type": "bytes"
+        }
+      ],
+      "name": "DiamondCut",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "facetAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "enum IDiamondCut.FacetCutAction",
+              "name": "action",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bytes4[]",
+              "name": "functionSelectors",
+              "type": "bytes4[]"
+            }
+          ],
+          "internalType": "struct IDiamondCut.FacetCut[]",
+          "name": "_diamondCut",
+          "type": "tuple[]"
+        },
+        {
+          "internalType": "address",
+          "name": "_init",
+          "type": "address"
+        },
+        {
+          "internalType": "bytes",
+          "name": "_calldata",
+          "type": "bytes"
+        }
+      ],
+      "name": "diamondCut",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "_functionSelector",
+          "type": "bytes4"
+        }
+      ],
+      "name": "facetAddress",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "facetAddress_",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "facetAddresses",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "facetAddresses_",
+          "type": "address[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_facet",
+          "type": "address"
+        }
+      ],
+      "name": "facetFunctionSelectors",
+      "outputs": [
+        {
+          "internalType": "bytes4[]",
+          "name": "facetFunctionSelectors_",
+          "type": "bytes4[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "facets",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "facetAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "bytes4[]",
+              "name": "functionSelectors",
+              "type": "bytes4[]"
+            }
+          ],
+          "internalType": "struct IDiamondLoupe.Facet[]",
+          "name": "facets_",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes4",
+          "name": "_interfaceId",
+          "type": "bytes4"
+        }
+      ],
+      "name": "supportsInterface",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "previousOwner",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "OwnershipTransferred",
+      "type": "event"
+    },
+    {
+      "inputs": [],
+      "name": "owner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "owner_",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_newOwner",
+          "type": "address"
+        }
+      ],
+      "name": "transferOwnership",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "UintUtils__InsufficientHexLength",
+      "type": "error"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "previousAdminRole",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "newAdminRole",
+          "type": "bytes32"
+        }
+      ],
+      "name": "RoleAdminChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleGranted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "sender",
+          "type": "address"
+        }
+      ],
+      "name": "RoleRevoked",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_questInstanceId",
+          "type": "uint256"
+        }
+      ],
+      "name": "activateQuest",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_questInstanceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_account",
+          "type": "address"
+        }
+      ],
+      "name": "adminClearActiveQuests",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_offset",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "address",
+          "name": "_player",
+          "type": "address"
+        }
+      ],
+      "name": "adminClearActiveQuestsAndHeroesWithOffset",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_heroId",
+          "type": "uint256"
+        }
+      ],
+      "name": "cancelActiveHeroQuesting",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_questInstanceId",
+          "type": "uint256"
+        }
+      ],
+      "name": "clearActiveQuests",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "clearActiveQuestsAndHeroes",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_offset",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "clearActiveQuestsAndHeroesWithOffset",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        }
+      ],
+      "name": "clearFishingData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        }
+      ],
+      "name": "clearForagingData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        }
+      ],
+      "name": "clearGardeningData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        }
+      ],
+      "name": "clearGoldMiningData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_questInstanceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        }
+      ],
+      "name": "clearLevelQuestData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        }
+      ],
+      "name": "clearTokenMiningData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "_stat",
+          "type": "uint8"
+        }
+      ],
+      "name": "clearTrainingData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_questInstanceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_questIndex",
+          "type": "uint256"
+        }
+      ],
+      "name": "deactivateQuest",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        }
+      ],
+      "name": "getRoleAdmin",
+      "outputs": [
+        {
+          "internalType": "bytes32",
+          "name": "",
+          "type": "bytes32"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "grantRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "hasRole",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        }
+      ],
+      "name": "renounceRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bytes32",
+          "name": "role",
+          "type": "bytes32"
+        },
+        {
+          "internalType": "address",
+          "name": "account",
+          "type": "address"
+        }
+      ],
+      "name": "revokeRole",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_startedAt",
+          "type": "uint256"
+        }
+      ],
+      "name": "setAnnealingStartedAt",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        },
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "itemAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "itemChance",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "expBonus",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "skillUpChance",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "smallSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "mediumSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "largeSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "skillMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "statMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "luckMod",
+                  "type": "int256"
+                }
+              ],
+              "internalType": "struct RewardItem[]",
+              "name": "items",
+              "type": "tuple[]"
+            },
+            {
+              "internalType": "uint32",
+              "name": "nothingInd",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "trashInd",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "eggInd",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32[]",
+              "name": "goldCropItemInds",
+              "type": "uint32[]"
+            },
+            {
+              "internalType": "uint32[]",
+              "name": "rareItemInds",
+              "type": "uint32[]"
+            }
+          ],
+          "internalType": "struct FishingData",
+          "name": "_fishingData",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "itemAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "int256",
+              "name": "itemChance",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "expBonus",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "skillUpChance",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "smallSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "mediumSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "largeSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "skillMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "statMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "luckMod",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct RewardItem[]",
+          "name": "_rewards",
+          "type": "tuple[]"
+        },
+        {
+          "internalType": "uint32[]",
+          "name": "_goldCropItemInds",
+          "type": "uint32[]"
+        },
+        {
+          "internalType": "uint32[]",
+          "name": "_rareItemInds",
+          "type": "uint32[]"
+        }
+      ],
+      "name": "setFishingData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        },
+        {
+          "components": [
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "itemAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "itemChance",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "expBonus",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "skillUpChance",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "smallSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "mediumSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "largeSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "skillMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "statMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "luckMod",
+                  "type": "int256"
+                }
+              ],
+              "internalType": "struct RewardItem[]",
+              "name": "items",
+              "type": "tuple[]"
+            },
+            {
+              "internalType": "uint32",
+              "name": "nothingInd",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "trashInd",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "eggInd",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32[]",
+              "name": "goldCropItemInds",
+              "type": "uint32[]"
+            },
+            {
+              "internalType": "uint32[]",
+              "name": "rareItemInds",
+              "type": "uint32[]"
+            }
+          ],
+          "internalType": "struct ForagingData",
+          "name": "_foragingData",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "itemAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "int256",
+              "name": "itemChance",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "expBonus",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "skillUpChance",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "smallSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "mediumSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "largeSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "skillMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "statMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "luckMod",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct RewardItem[]",
+          "name": "_rewards",
+          "type": "tuple[]"
+        },
+        {
+          "internalType": "uint32[]",
+          "name": "_goldCropItemInds",
+          "type": "uint32[]"
+        },
+        {
+          "internalType": "uint32[]",
+          "name": "_rareItemInds",
+          "type": "uint32[]"
+        }
+      ],
+      "name": "setForagingData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "ticTimeRegular",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "ticTimeGene",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "rewardModBase",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "statsRateN",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "statsRateD",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "gardeningRateN",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "gardeningRateD",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "baseN",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "baseD",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "trueMinN",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "itemAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "itemChance",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "expBonus",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "skillUpChance",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "smallSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "mediumSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "largeSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "skillMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "statMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "luckMod",
+                  "type": "int256"
+                }
+              ],
+              "internalType": "struct RewardItem[]",
+              "name": "items",
+              "type": "tuple[]"
+            },
+            {
+              "internalType": "uint32",
+              "name": "nothingInd",
+              "type": "uint32"
+            },
+            {
+              "internalType": "uint32",
+              "name": "eggInd",
+              "type": "uint32"
+            }
+          ],
+          "internalType": "struct GardeningData",
+          "name": "_gardeningData",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "itemAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "int256",
+              "name": "itemChance",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "expBonus",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "skillUpChance",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "smallSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "mediumSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "largeSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "skillMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "statMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "luckMod",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct RewardItem[]",
+          "name": "_rewards",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "setGardeningQuestData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "ticTimeRegular",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "ticTimeGene",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "sRateN",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "sRateD",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "mRateD",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "baseRate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "multiplier",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "itemAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "itemChance",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "expBonus",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "skillUpChance",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "smallSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "mediumSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "largeSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "skillMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "statMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "luckMod",
+                  "type": "int256"
+                }
+              ],
+              "internalType": "struct RewardItem[]",
+              "name": "items",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct GoldMiningData",
+          "name": "_miningData",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "itemAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "int256",
+              "name": "itemChance",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "expBonus",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "skillUpChance",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "smallSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "mediumSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "largeSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "skillMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "statMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "luckMod",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct RewardItem[]",
+          "name": "_rewards",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "setGoldMiningData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_heroCore",
+          "type": "address"
+        }
+      ],
+      "name": "setHeroCore",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_itemMinter",
+          "type": "address"
+        }
+      ],
+      "name": "setItemMinter",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_questInstanceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        },
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "exists",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "baseTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "requiredStamina",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "maxAttempts",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "minHeroes",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "maxHeroes",
+              "type": "uint8"
+            },
+            {
+              "internalType": "bool",
+              "name": "usesSharedQueue",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct QuestData",
+          "name": "_questData",
+          "type": "tuple"
+        }
+      ],
+      "name": "setLevelQuestData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8[]",
+          "name": "_levels",
+          "type": "uint8[]"
+        }
+      ],
+      "name": "setLevels",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_powerUpManager",
+          "type": "address"
+        }
+      ],
+      "name": "setPowerUpManager",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_questCounter",
+          "type": "uint256"
+        }
+      ],
+      "name": "setQuestCounter",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_randomGenerator",
+          "type": "address"
+        }
+      ],
+      "name": "setRandomGenerator",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_timePerStamina",
+          "type": "uint256"
+        }
+      ],
+      "name": "setTimePerStamina",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "ticTimeRegular",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "ticTimeGene",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "sRateN",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "sRateD",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "mRateD",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "baseRate",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "minLocked",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "bonusMinLocked",
+              "type": "uint256"
+            },
+            {
+              "components": [
+                {
+                  "internalType": "address",
+                  "name": "itemAddress",
+                  "type": "address"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "itemChance",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "expBonus",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "skillUpChance",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "smallSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "mediumSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "largeSkillUpMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "skillMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "statMod",
+                  "type": "int256"
+                },
+                {
+                  "internalType": "int256",
+                  "name": "luckMod",
+                  "type": "int256"
+                }
+              ],
+              "internalType": "struct RewardItem[]",
+              "name": "items",
+              "type": "tuple[]"
+            }
+          ],
+          "internalType": "struct TokenMiningData",
+          "name": "_miningData",
+          "type": "tuple"
+        },
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "itemAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "int256",
+              "name": "itemChance",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "expBonus",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "skillUpChance",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "smallSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "mediumSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "largeSkillUpMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "skillMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "statMod",
+              "type": "int256"
+            },
+            {
+              "internalType": "int256",
+              "name": "luckMod",
+              "type": "int256"
+            }
+          ],
+          "internalType": "struct RewardItem[]",
+          "name": "_rewards",
+          "type": "tuple[]"
+        }
+      ],
+      "name": "setTokenMiningData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "_stat",
+          "type": "uint8"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint8",
+              "name": "minStatLevel",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "maxStatLevel",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256",
+              "name": "statBonusGene",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "npcStatValue",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "crystalAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "crystalChance",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "runeAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "runeChance",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "pageAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "pageChance",
+              "type": "uint256"
+            },
+            {
+              "internalType": "address",
+              "name": "goldAddress",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "goldAmount",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct TrainingData",
+          "name": "_trainingData",
+          "type": "tuple"
+        }
+      ],
+      "name": "setTrainingData",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_gardeningPool",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "_value",
+          "type": "bool"
+        }
+      ],
+      "name": "setValidGardeningPoolIds",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "questId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "heroId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "petId",
+          "type": "uint256"
+        }
+      ],
+      "name": "PetBonusReceived",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "questId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "heroId",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "questInstanceId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "level",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "heroes",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "address",
+              "name": "player",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startBlock",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startAtTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "completeAtTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "attempts",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum QuestStatus",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "questType",
+              "type": "uint8"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct Quest",
+          "name": "quest",
+          "type": "tuple"
+        }
+      ],
+      "name": "QuestCanceled",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "questId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "heroId",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "questInstanceId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "level",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "heroes",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "address",
+              "name": "player",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startBlock",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startAtTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "completeAtTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "attempts",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum QuestStatus",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "questType",
+              "type": "uint8"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct Quest",
+          "name": "quest",
+          "type": "tuple"
+        }
+      ],
+      "name": "QuestCompleted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "questId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "heroId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "rewardItem",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "itemQuantity",
+          "type": "uint256"
+        }
+      ],
+      "name": "QuestReward",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "questId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "heroId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint8",
+          "name": "profession",
+          "type": "uint8"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint16",
+          "name": "skillUp",
+          "type": "uint16"
+        }
+      ],
+      "name": "QuestSkillUp",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "questId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "heroId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "staminaFullAt",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "staminaSpent",
+          "type": "uint256"
+        }
+      ],
+      "name": "QuestStaminaSpent",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "questId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "heroId",
+          "type": "uint256"
+        },
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "questInstanceId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "level",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "heroes",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "address",
+              "name": "player",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startBlock",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startAtTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "completeAtTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "attempts",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum QuestStatus",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "questType",
+              "type": "uint8"
+            }
+          ],
+          "indexed": false,
+          "internalType": "struct Quest",
+          "name": "quest",
+          "type": "tuple"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "startAtTime",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "completeAtTime",
+          "type": "uint256"
+        }
+      ],
+      "name": "QuestStarted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "questId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "heroId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint64",
+          "name": "xpEarned",
+          "type": "uint64"
+        }
+      ],
+      "name": "QuestXP",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "questId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "heroId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "reward",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "data",
+          "type": "uint256"
+        }
+      ],
+      "name": "RewardMinted",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "questId",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "player",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "heroId",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "TokenBonusAwarded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "bool",
+          "name": "success",
+          "type": "bool"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "attempt",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "heroId",
+          "type": "uint256"
+        }
+      ],
+      "name": "TrainingAttemptDone",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "winCount",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "attempts",
+          "type": "uint256"
+        },
+        {
+          "indexed": true,
+          "internalType": "uint256",
+          "name": "heroId",
+          "type": "uint256"
+        }
+      ],
+      "name": "TrainingSuccessRatio",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_heroId",
+          "type": "uint256"
+        }
+      ],
+      "name": "cancelQuest",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_heroId",
+          "type": "uint256"
+        }
+      ],
+      "name": "completeQuest",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_account",
+          "type": "address"
+        }
+      ],
+      "name": "getAccountActiveQuests",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "questInstanceId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "level",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "heroes",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "address",
+              "name": "player",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startBlock",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startAtTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "completeAtTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "attempts",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum QuestStatus",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "questType",
+              "type": "uint8"
+            }
+          ],
+          "internalType": "struct Quest[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_heroId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getCurrentStamina",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "heroId",
+          "type": "uint256"
+        }
+      ],
+      "name": "getHeroQuest",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "questInstanceId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "level",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "heroes",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "address",
+              "name": "player",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startBlock",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startAtTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "completeAtTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "attempts",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum QuestStatus",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "questType",
+              "type": "uint8"
+            }
+          ],
+          "internalType": "struct Quest",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getQuestInstanceIds",
+      "outputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "",
+          "type": "uint256[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_heroId",
+          "type": "uint256"
+        }
+      ],
+      "name": "heroToQuest",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "_heroIds",
+          "type": "uint256[]"
+        }
+      ],
+      "name": "multiCompleteQuest",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256[][]",
+          "name": "_heroIds",
+          "type": "uint256[][]"
+        },
+        {
+          "internalType": "uint256[]",
+          "name": "_questInstanceId",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint8[]",
+          "name": "_attempts",
+          "type": "uint8[]"
+        },
+        {
+          "internalType": "uint8[]",
+          "name": "_level",
+          "type": "uint8[]"
+        },
+        {
+          "internalType": "uint8[]",
+          "name": "_type",
+          "type": "uint8[]"
+        }
+      ],
+      "name": "multiStartQuest",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "questCounter",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_id",
+          "type": "uint256"
+        }
+      ],
+      "name": "quests",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "uint256",
+              "name": "id",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "questInstanceId",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "level",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint256[]",
+              "name": "heroes",
+              "type": "uint256[]"
+            },
+            {
+              "internalType": "address",
+              "name": "player",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startBlock",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "startAtTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint256",
+              "name": "completeAtTime",
+              "type": "uint256"
+            },
+            {
+              "internalType": "uint8",
+              "name": "attempts",
+              "type": "uint8"
+            },
+            {
+              "internalType": "enum QuestStatus",
+              "name": "status",
+              "type": "uint8"
+            },
+            {
+              "internalType": "uint8",
+              "name": "questType",
+              "type": "uint8"
+            }
+          ],
+          "internalType": "struct Quest",
+          "name": "",
+          "type": "tuple"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256[]",
+          "name": "_heroIds",
+          "type": "uint256[]"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_questInstanceId",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint8",
+          "name": "_attempts",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "_level",
+          "type": "uint8"
+        },
+        {
+          "internalType": "uint8",
+          "name": "_type",
+          "type": "uint8"
+        }
+      ],
+      "name": "startQuest",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ]
