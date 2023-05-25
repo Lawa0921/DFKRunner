@@ -31,8 +31,8 @@ exports.CheckAndSendDFKForagers = async (heroesStruct, owningHeroObjects, accoun
 		if (possibleForagers.length > 0) {
 			const LV10professioForagers = possibleForagers.filter(heroObject => heroObject.profession === "foraging" && heroObject.foraging >= 100)
 			const LV0professioForagers = possibleForagers.filter(heroObject => heroObject.profession === "foraging" && heroObject.foraging < 100)
-			const LV10nonProfessioForagers = possibleForagers.filter(heroObject => heroObject.profession === "foraging" && heroObject.foraging >= 100)
-			const LV0nonProfessioForagers = possibleForagers.filter(heroObject => heroObject.profession === "foraging" && heroObject.foraging < 100)
+			const LV10nonProfessioForagers = possibleForagers.filter(heroObject => heroObject.profession !== "foraging" && heroObject.foraging >= 100)
+			const LV0nonProfessioForagers = possibleForagers.filter(heroObject => heroObject.profession !== "foraging" && heroObject.foraging < 100)
 
 			let questCount = heroesStruct.foragingQuestCount
 			let sendProfessionHeroesCount = 0
