@@ -24,7 +24,7 @@ exports.CheckAndSendDFKCrystalMiners = async (heroesStruct, accountInfo) => {
 
   if (possibleCrystalMiners.length > 0 && possibleCrystalMiners.length >= batchAmount) {
     const sendCrystalMiners = possibleCrystalMiners.slice(0, batchAmount)
-    const questLevel = sendCrystalMiners.filter(heroObject => heroObject.mining >= 100).length === questType.singleBatchAmount ? 0 : 10
+    const questLevel = sendCrystalMiners.filter(heroObject => heroObject.mining >= 100).length === questType.singleBatchAmount ? 0 : 0
     for (let i = 0; i < sendCrystalMiners.length; i++) {
       if (sendCrystalMiners[i].isOnSale) {
         await saleAuctionContract.unlistHero(sendCrystalMiners[i].id)

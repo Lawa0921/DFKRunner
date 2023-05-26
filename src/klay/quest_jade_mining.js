@@ -24,7 +24,7 @@ exports.CheckAndSendKLAYJadeMiners = async (heroesStruct, accountInfo) => {
 
   if (possibleJadeMiners.length > 0 && possibleJadeMiners.length >= batchAmount) {
     const sendJadeMiners = possibleJadeMiners.slice(0, batchAmount)
-    const questLevel = sendJadeMiners.filter(heroObject => heroObject.mining >= 100).length === questType.singleBatchAmount ? 0 : 10
+    const questLevel = sendJadeMiners.filter(heroObject => heroObject.mining >= 100).length === questType.singleBatchAmount ? 0 : 0
     for (let i = 0; i < sendJadeMiners.length; i++) {
       if (sendJadeMiners[i].isOnSale) {
         await saleAuctionContract.unlistHero(sendJadeMiners[i].id)
