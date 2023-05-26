@@ -24,7 +24,7 @@ exports.CheckAndSendKLAYJadeMiners = async (heroesStruct, accountInfo) => {
 
   if (possibleJadeMiners.length > 0 && possibleJadeMiners.length >= batchAmount) {
     const sendJadeMiners = possibleJadeMiners.slice(0, batchAmount)
-
+    const questLevel = sendJadeMiners.filter(heroObject => heroObject.mining >= 100).length === questType.singleBatchAmount ? 0 : 10
     for (let i = 0; i < sendJadeMiners.length; i++) {
       if (sendJadeMiners[i].isOnSale) {
         await saleAuctionContract.unlistHero(sendJadeMiners[i].id)
@@ -36,9 +36,9 @@ exports.CheckAndSendKLAYJadeMiners = async (heroesStruct, accountInfo) => {
     if (batchAmount > 1) {
       sentMinerIds = sentMinerIds.concat(sendJadeMiners.map(heroObject => heroObject.id).slice((batchAmount - 1) * -1))
     }
-    console.log(`${accountInfo.accountName} KLAY sending ${sentMinerIds} to jade mining quest`)
+    console.log(`${accountInfo.accountName} KLAY sending ${sentMinerIds} to LV ${questLevel} jade mining quest`)
 
-    await new QuestCoreV3(accountInfo).startJadeMining(sentMinerIds, minStamina)
+    await new QuestCoreV3(accountInfo).startJadeMining(sentMinerIds, minStamina, questLevel)
   } else {
     console.log(`${accountInfo.accountName} KLAY no jade miner sent`)
   }

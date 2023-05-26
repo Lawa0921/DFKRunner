@@ -25,7 +25,7 @@ exports.CheckAndSendKLAYGardeners = async (heroesStruct, owningHeroObjects, acco
       const sendGardeners = currentPossibleGardeners.slice(0, questType.pairAddressMappings[i].singleBatchAmount)
       const sentGardenerIds = sendGardeners.map(heroObject => heroObject.id)
       const saleAuctionContract = new SaleAuction(accountInfo)
-
+      const questLevel = sendGardeners.filter(heroObject => heroObject.gardening >= 100).length === questType.pairAddressMappings[i].singleBatchAmount ? 0 : 10
       const unsellPromise = sendGardeners.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
 
       if (unsellPromise.length > 0) {
@@ -33,8 +33,8 @@ exports.CheckAndSendKLAYGardeners = async (heroesStruct, owningHeroObjects, acco
         await autils.sleep(5000)
       }
 
-      console.log(`${accountInfo.accountName} KLAY sending ${sentGardenerIds} to ${questType.pairAddressMappings[i].tokenPair} gardening quest`)
-      await new QuestCoreV3(accountInfo).startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].poolId, minStamina)
+      console.log(`${accountInfo.accountName} KLAY sending ${sentGardenerIds} to ${questType.pairAddressMappings[i].tokenPair} LV ${questLevel} gardening quest`)
+      await new QuestCoreV3(accountInfo).startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].poolId, minStamina, questLevel)
     } else {
       console.log(`${accountInfo.accountName} KLAY no gardener sent to ${questType.pairAddressMappings[i].tokenPair}`)
     }

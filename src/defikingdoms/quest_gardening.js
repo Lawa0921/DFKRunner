@@ -25,7 +25,7 @@ exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects, accou
       const sendGardeners = currentPossibleGardeners.slice(0, questType.pairAddressMappings[i].singleBatchAmount)
       const sentGardenerIds = sendGardeners.map(heroObject => heroObject.id)
       const saleAuctionContract = new SaleAuction(accountInfo)
-
+      const questLevel = sendGardeners.filter(heroObject => heroObject.gardening >= 100).length === questType.pairAddressMappings[i].singleBatchAmount ? 0 : 10
       const unsellPromise = sendGardeners.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
 
       if (unsellPromise.length > 0) {
@@ -34,7 +34,7 @@ exports.CheckAndSendDFKGardeners = async (heroesStruct, owningHeroObjects, accou
       }
 
       console.log(`${accountInfo.accountName} DFK sending ${sentGardenerIds} to ${questType.pairAddressMappings[i].tokenPair} gardening quest`)
-      await new QuestCoreV3(accountInfo).startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].poolId, minStamina)
+      await new QuestCoreV3(accountInfo).startGardeningQuest(sentGardenerIds, questType.pairAddressMappings[i].poolId, minStamina, questLevel)
     } else {
       console.log(`${accountInfo.accountName} DFK no gardener sent to ${questType.pairAddressMappings[i].tokenPair}`)
     }

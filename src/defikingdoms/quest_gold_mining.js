@@ -22,7 +22,7 @@ exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects, acco
     const sendGoldMiners = possibleGoldMiners.slice(0, batchAmount)
     const sentMinerIds = sendGoldMiners.map(heroObject => heroObject.id)
     const saleAuctionContract = new SaleAuction(accountInfo);
-
+    const questLevel = sendGardeners.filter(heroObject => heroObject.mining >= 100).length === questType.singleBatchAmount ? 0 : 10
     const unsellPromise = sendGoldMiners.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
 
     if (unsellPromise.length > 0) {
@@ -30,8 +30,8 @@ exports.CheckAndSendDFKGoldMiners = async (heroesStruct, owningHeroObjects, acco
       await autils.sleep(5000)
     }
 
-    console.log(`${accountInfo.accountName} DFK sending ${sentMinerIds} to gold mining quest`)
-    await new QuestCoreV3(accountInfo).startGoldMining(sentMinerIds, minStamina)
+    console.log(`${accountInfo.accountName} DFK sending ${sentMinerIds} to LV ${questLevel} gold mining quest`)
+    await new QuestCoreV3(accountInfo).startGoldMining(sentMinerIds, minStamina, questLevel)
   } else {
     console.log(`${accountInfo.accountName} DFK no gold miner sent`)
   }

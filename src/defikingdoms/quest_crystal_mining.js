@@ -24,7 +24,7 @@ exports.CheckAndSendDFKCrystalMiners = async (heroesStruct, accountInfo) => {
 
   if (possibleCrystalMiners.length > 0 && possibleCrystalMiners.length >= batchAmount) {
     const sendCrystalMiners = possibleCrystalMiners.slice(0, batchAmount)
-
+    const questLevel = sendCrystalMiners.filter(heroObject => heroObject.mining >= 100).length === questType.singleBatchAmount ? 0 : 10
     for (let i = 0; i < sendCrystalMiners.length; i++) {
       if (sendCrystalMiners[i].isOnSale) {
         await saleAuctionContract.unlistHero(sendCrystalMiners[i].id)
@@ -36,9 +36,9 @@ exports.CheckAndSendDFKCrystalMiners = async (heroesStruct, accountInfo) => {
     if (batchAmount > 1) {
       sentMinerIds = sentMinerIds.concat(sendCrystalMiners.map(heroObject => heroObject.id).slice((batchAmount - 1) * -1))
     }
-    console.log(`${accountInfo.accountName} DFK sending ${sentMinerIds} to crystal mining quest`)
+    console.log(`${accountInfo.accountName} DFK sending ${sentMinerIds} to LV ${questLevel} crystal mining quest`)
 
-    await new QuestCoreV3(accountInfo).startCrystalMining(sentMinerIds, minStamina)
+    await new QuestCoreV3(accountInfo).startCrystalMining(sentMinerIds, minStamina, questLevel)
   } else {
     console.log(`${accountInfo.accountName} DFK no crystal miner sent`)
   }

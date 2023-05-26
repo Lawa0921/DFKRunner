@@ -70,12 +70,12 @@ module.exports = class QuestCoreV3 {
     return res;
   }
 
-  async startGoldMining(heroIds, attempt) {
-    const tx = await this.contract.startQuest(heroIds, 3, attempt, 0, 0, { gasPrice: await autils.getDFKGasFee() })
+  async startGoldMining(heroIds, attempt, level) {
+    const tx = await this.contract.startQuest(heroIds, 3, attempt, level, 0, { gasPrice: await autils.getDFKGasFee() })
     const res = await tx.wait();
 
     if (res.status === 1) {
-      console.log(`${this.accountName} DFK send ${heroIds} on a gold mining quest completed`)
+      console.log(`${this.accountName} DFK send ${heroIds} on a LV ${level} gold mining quest completed`)
     } else {
       console.log(`${this.accountName} DFK send ${heroIds} on a gold mining quest failed`)
     }
@@ -83,12 +83,12 @@ module.exports = class QuestCoreV3 {
     return res;
   }
 
-  async startCrystalMining(heroIds, attempt) {
-    const tx = await this.contract.startQuest(heroIds, 4, attempt, 0, 0, { gasPrice: await autils.getDFKGasFee() })
+  async startCrystalMining(heroIds, attempt, level) {
+    const tx = await this.contract.startQuest(heroIds, 4, attempt, level, 0, { gasPrice: await autils.getDFKGasFee() })
     const res = await tx.wait();
 
     if (res.status === 1) {
-      console.log(`${this.accountName} DFK send ${heroIds} on a crystal mining quest completed`)
+      console.log(`${this.accountName} DFK send ${heroIds} on a LV ${level} crystal mining quest completed`)
     } else {
       console.log(`${this.accountName} DFK send ${heroIds} on a crystal mining quest failed`)
     }
@@ -96,12 +96,12 @@ module.exports = class QuestCoreV3 {
     return res;
   }
 
-  async startGardeningQuest(heroIds, poolId, attempt) {
-    const tx = await this.contract.startQuest(heroIds, 5, attempt, 0, poolId, { gasPrice: await autils.getDFKGasFee() })
+  async startGardeningQuest(heroIds, poolId, attempt, level) {
+    const tx = await this.contract.startQuest(heroIds, 5, attempt, level, poolId, { gasPrice: await autils.getDFKGasFee() })
     const res = await tx.wait();
 
     if (res.status === 1) {
-      console.log(`${this.accountName} DFK send ${heroIds} on a gardening quest completed`)
+      console.log(`${this.accountName} DFK send ${heroIds} on a LV ${level} gardening quest completed`)
     } else {
       console.log(`${this.accountName} DFK send ${heroIds} on a gardening quest failed`)
     }
