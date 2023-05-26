@@ -15,10 +15,10 @@ DFKItemSeller = async () => {
 
         if (itemBalanceOf > 0) {
           console.log(`${inventoryItemContract.accountName} DFK Sell ${parseInt(itemBalanceOf)} ${config.defikingdoms.availableForSaleTokens[j].name}`)
-          const contractAllowance = await inventoryItemContract.allowance(config.defikingdoms.itemGoldTraderV2)
+          const contractAllowance = await inventoryItemContract.allowance(new DFKItemGoldTraderV2(config.walletAddressAndPrivateKeyMappings[i]).contract.address)
   
           if (itemBalanceOf > contractAllowance) {
-            await inventoryItemContract.approve(config.defikingdoms.itemGoldTraderV2, ethers.constants.MaxUint256)
+            await inventoryItemContract.approve(DFKItemGoldTraderV2.contract.address, ethers.constants.MaxUint256)
           }
   
           await new DFKItemGoldTraderV2(config.walletAddressAndPrivateKeyMappings[i]).sellItem(config.defikingdoms.availableForSaleTokens[j].contractAddress, itemBalanceOf)
@@ -38,10 +38,10 @@ KLAYItemSeller = async () => {
 
         if (itemBalanceOf > 0) {
           console.log(`${inventoryItemContract.accountName} KLAY Sell ${parseInt(itemBalanceOf)} ${config.klay.availableForSaleTokens[j].name}`)
-          const contractAllowance = await inventoryItemContract.allowance(config.klay.itemGoldTraderV2)
+          const contractAllowance = await inventoryItemContract.allowance(new KLAYItemGoldTraderV2(config.walletAddressAndPrivateKeyMappings[i]).contract.address)
   
           if (itemBalanceOf > contractAllowance) {
-            await inventoryItemContract.approve(config.klay.itemGoldTraderV2, ethers.constants.MaxUint256)
+            await inventoryItemContract.approve(KLAYItemGoldTraderV2.contract.address, ethers.constants.MaxUint256)
           }
   
           await new KLAYItemGoldTraderV2(config.walletAddressAndPrivateKeyMappings[i]).sellItem(config.klay.availableForSaleTokens[j].contractAddress, itemBalanceOf)
@@ -55,8 +55,7 @@ main = async() => {
   try {
     console.log("start sale items")
 
-    await DFKItemSeller()
-    await KLAYItemSeller()
+    await Promise.allSettled([DFKItemSeller(), KLAYItemSeller()])
 
     console.log("process complete")
   } catch(error) {
