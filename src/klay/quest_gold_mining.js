@@ -22,7 +22,7 @@ exports.CheckAndSendKLAYGoldMiners = async (heroesStruct, owningHeroObjects, acc
     const sendGoldMiners = possibleGoldMiners.slice(0, batchAmount)
     const sentMinerIds = sendGoldMiners.map(heroObject => heroObject.id)
     const saleAuctionContract = new SaleAuction(accountInfo);
-    const questLevel = sendGardeners.filter(heroObject => heroObject.mining >= 100).length === questType.singleBatchAmount ? 0 : 0
+    const questLevel = sendGoldMiners.filter(heroObject => heroObject.mining >= 100).length === questType.singleBatchAmount ? 0 : 0
     const unsellPromise = sendGoldMiners.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
 
     if (unsellPromise.length > 0) {
