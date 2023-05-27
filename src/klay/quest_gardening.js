@@ -25,7 +25,7 @@ exports.CheckAndSendKLAYGardeners = async (heroesStruct, owningHeroObjects, acco
       const sendGardeners = currentPossibleGardeners.slice(0, questType.pairAddressMappings[i].singleBatchAmount)
       const sentGardenerIds = sendGardeners.map(heroObject => heroObject.id)
       const saleAuctionContract = new SaleAuction(accountInfo)
-      const questLevel = sendGardeners.filter(heroObject => heroObject.gardening >= 100).length === questType.pairAddressMappings[i].singleBatchAmount ? 0 : 10
+      const questLevel = sendGardeners.filter(heroObject => heroObject.gardening >= 100).length === questType.pairAddressMappings[i].singleBatchAmount ? 10 : 0
       const unsellPromise = sendGardeners.filter(heroObject => heroObject.isOnSale).map(onSaleHeroObject => saleAuctionContract.unlistHero(onSaleHeroObject.id))
 
       if (unsellPromise.length > 0) {
