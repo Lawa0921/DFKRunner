@@ -41,7 +41,7 @@ KLAYItemSeller = async () => {
           const contractAllowance = await inventoryItemContract.allowance(new KLAYItemGoldTraderV2(config.walletAddressAndPrivateKeyMappings[i]).contract.address)
   
           if (itemBalanceOf > contractAllowance) {
-            await inventoryItemContract.approve(KLAYItemGoldTraderV2.contract.address, ethers.constants.MaxUint256)
+            await inventoryItemContract.approve(new KLAYItemGoldTraderV2(config.walletAddressAndPrivateKeyMappings[i]).contract.address, ethers.constants.MaxUint256)
           }
   
           await new KLAYItemGoldTraderV2(config.walletAddressAndPrivateKeyMappings[i]).sellItem(config.klay.availableForSaleTokens[j].contractAddress, itemBalanceOf)
