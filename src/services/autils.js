@@ -116,70 +116,76 @@ exports.getKLAYGasFee = async () => {
 }
 
 exports.getHeroesInfoByIds = async (heroIds) => {
-    if (heroIds.length === 0) {
-        return []
-    }
+  let skipCount = 0;
+  let heroObjects = [];
 
-    let heroObjects;
+  if (heroIds.length === 0) {
+    return []
+  }
+
+  while(skipCount === 0 || skipCount % 1000 === 0) {
     queryStr = `{
-        heroes(where: {id_in: ${JSON.stringify(heroIds)}}) {
-          id
-          owner {
-            owner
-          }
-          rarity
-          network
-          mainClass
-          subClass
-          summonsRemaining
-          profession
-          generation
-          level
-          passive1
-          passive2
-          active1
-          active2
-          statBoost1
-          statBoost2
-          hairStyle
-          backAppendage
-          maxSummons
-          currentQuest
-          xp
-          strength
-          intelligence
-          wisdom
-          luck
-          agility
-          vitality
-          endurance
-          dexterity
-          stamina
-          staminaFullAt
-          nextSummonTime
-          background
-          fishing
-          foraging
-          gardening
-          mining
-          saleAuction {
-            startingPrice
-            open
-          }
-          assistingAuction {
-            startingPrice
-            open
-          }
+      heroes(where: {id_in: ${JSON.stringify(heroIds)}}, skip: ${JSON.stringify(skipCount)}) {
+        id
+        owner {
+          owner
         }
-      }`
+        rarity
+        network
+        mainClass
+        subClass
+        summonsRemaining
+        profession
+        generation
+        level
+        passive1
+        passive2
+        active1
+        active2
+        statBoost1
+        statBoost2
+        hairStyle
+        backAppendage
+        maxSummons
+        currentQuest
+        xp
+        strength
+        intelligence
+        wisdom
+        luck
+        agility
+        vitality
+        endurance
+        dexterity
+        stamina
+        staminaFullAt
+        nextSummonTime
+        background
+        fishing
+        foraging
+        gardening
+        mining
+        saleAuction {
+          startingPrice
+          open
+        }
+        assistingAuction {
+          startingPrice
+          open
+        }
+      }
+    }`
 
     await axios.post(graphqlEndPoint, { query: queryStr }).then((res) => {
-        heroObjects = res.data.data.heroes.map((heroData) => { return new Hero(heroData) });
+      let queryCount = res.data.data.heroes.length
+      heroObjects = heroObjects.concat(res.data.data.heroes.map((hero) => { return new Hero(hero) }))
+      skipCount += queryCount
     }).catch((err) => {
-        console.log(err);
+      console.log(err);
     })
+  }
 
-    return heroObjects;
+  return heroObjects;
 }
 
 exports.getHeroesInfoByRestfulAPI = async (heroIds) => {
