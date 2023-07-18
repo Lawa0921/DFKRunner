@@ -5,7 +5,7 @@ const axios = require('axios');
 const ethers = require('ethers');
 const axiosRetry = require('axios-retry');
 const Hero = require('./hero');
-const graphqlEndPoint = "https://defi-kingdoms-community-api-gateway-co06z8vi.uc.gateway.dev/graphql"
+const graphqlEndPoint = "https://api.defikingdoms.com/graphql"
 
 axiosRetry(axios, {
     retries: 5, // number of retries
