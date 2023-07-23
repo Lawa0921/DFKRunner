@@ -854,7 +854,7 @@ module.exports = class Hero {
   }
 
   levelUpable() {
-    return (this.isXpFull && !this.isOnQuesting && !this.isOnSale) ? true : false;
+    return (this.isXpFull && !this.isOnQuesting && !this.isOnSale && this.level < config.autoLevelUpLimit) ? true : false;
   }
 
   summonable() {
