@@ -37,7 +37,7 @@ exports.runDFKChainQuest = async (accountInfo) => {
       await enterRaffle(accountInfo);
       await airdropClaim(accountInfo);
       
-      await runDFKAssignPowerUp(owningHeroObjects, accountInfo);
+      // await runDFKAssignPowerUp(owningHeroObjects, accountInfo);
       await runDFKLevelUpLogic(owningHeroObjects, accountInfo);
       await runDFKSalesLogic(owningHeroObjects, accountInfo);
       await runDFKRentHeroLogic(owningHeroObjects, accountInfo);  
