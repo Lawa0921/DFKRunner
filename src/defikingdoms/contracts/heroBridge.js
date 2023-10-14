@@ -3,7 +3,7 @@ const ethers = require('ethers');
 const heroBridgeABI = require('../../../abis/HeroBridge.json');
 const { NonceManager } = require("@ethersproject/experimental")
 const contractAddress = "0x739B1666c2956f601f095298132773074c3E184b"
-const DFKToKLAYBridgeFee = "30000000000000000";
+const DFKToKLAYBridgeFee = "60000000000000000";
 const KlayChainId = 8217;
 
 module.exports = class HeroBridgeContract {
