@@ -26,7 +26,7 @@ npm 即為 Node Package Manager 的縮寫，是一個管理 node.js 插件的工
 ##### Homebrew
 
 ```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" # 安裝 homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)" # 安裝 homebrew
 brew --version # 確認是否安裝成功
 ```
 
