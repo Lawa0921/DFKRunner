@@ -55,7 +55,8 @@ main = async() => {
   try {
     console.log("start sale items")
 
-    await Promise.allSettled([DFKItemSeller(), KLAYItemSeller()])
+    await DFKItemSeller()
+    await KLAYItemSeller()
 
     console.log("process complete")
   } catch(error) {
