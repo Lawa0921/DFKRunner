@@ -11,7 +11,7 @@ main = async() => {
   try {
     console.log("start bridge heroes")
 
-    const toNetwork = "dfk" // kla 或是 dfk，表示你要去的鏈
+    const toNetwork = "kla" // kla 或是 dfk，表示你要去的鏈
     const bridgeHeroIds = [ // 把你要跨鏈的英雄 id 填到裡面
       
     ]
