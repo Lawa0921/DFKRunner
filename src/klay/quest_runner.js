@@ -33,22 +33,22 @@ exports.runKLAYChainQuest = async (accountInfo) => {
       const owningHeroObjects = await autils.getHeroesInfoByIds(autils.getKLAYOwningHeroIds());
 
       await CompleteQuests(heroesStruct, accountInfo);
-      await sendHeroTo(heroesStruct, accountInfo, owningHeroObjects);
-      await enterRaffle(accountInfo);
-      await airdropClaim(accountInfo);
+      // await sendHeroTo(heroesStruct, accountInfo, owningHeroObjects);
+      // await enterRaffle(accountInfo);
+      // await airdropClaim(accountInfo);
 
       // await runKLAYAssignPowerUp(owningHeroObjects, accountInfo);
-      await runKLAYLevelUpLogic(owningHeroObjects, accountInfo);
+      // await runKLAYLevelUpLogic(owningHeroObjects, accountInfo);
       await runKLAYSalesLogic(owningHeroObjects, accountInfo);
       await runKLAYRentHeroLogic(owningHeroObjects, accountInfo);
-      await runVialLogic(owningHeroObjects, accountInfo);
+      // await runVialLogic(owningHeroObjects, accountInfo);
 
-      await CheckAndSendKLAYFishers(heroesStruct, owningHeroObjects, accountInfo)
-      await CheckAndSendKLAYForagers(heroesStruct, owningHeroObjects, accountInfo)
-      await CheckAndSendKLAYGardeners(heroesStruct, owningHeroObjects, accountInfo)
-      await CheckAndSendKLAYGoldMiners(heroesStruct, owningHeroObjects, accountInfo)
+      // await CheckAndSendKLAYFishers(heroesStruct, owningHeroObjects, accountInfo)
+      // await CheckAndSendKLAYForagers(heroesStruct, owningHeroObjects, accountInfo)
+      // await CheckAndSendKLAYGardeners(heroesStruct, owningHeroObjects, accountInfo)
+      // await CheckAndSendKLAYGoldMiners(heroesStruct, owningHeroObjects, accountInfo)
       await CheckAndSendKLAYJadeMiners(heroesStruct, accountInfo)
-      await CheckAndSendKLAYStatQuests(heroesStruct, owningHeroObjects, accountInfo)
+      // await CheckAndSendKLAYStatQuests(heroesStruct, owningHeroObjects, accountInfo)
     }
   } catch (error) {
     console.log(`fail reason: ${error.reason}`)
