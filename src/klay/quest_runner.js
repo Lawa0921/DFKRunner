@@ -38,13 +38,13 @@ exports.runKLAYChainQuest = async (accountInfo) => {
       // await airdropClaim(accountInfo);
 
       // await runKLAYAssignPowerUp(owningHeroObjects, accountInfo);
-      // await runKLAYLevelUpLogic(owningHeroObjects, accountInfo);
+      await runKLAYLevelUpLogic(owningHeroObjects, accountInfo);
       await runKLAYSalesLogic(owningHeroObjects, accountInfo);
       await runKLAYRentHeroLogic(owningHeroObjects, accountInfo);
       // await runVialLogic(owningHeroObjects, accountInfo);
 
       // await CheckAndSendKLAYFishers(heroesStruct, owningHeroObjects, accountInfo)
-      // await CheckAndSendKLAYForagers(heroesStruct, owningHeroObjects, accountInfo)
+      await CheckAndSendKLAYForagers(heroesStruct, owningHeroObjects, accountInfo)
       // await CheckAndSendKLAYGardeners(heroesStruct, owningHeroObjects, accountInfo)
       // await CheckAndSendKLAYGoldMiners(heroesStruct, owningHeroObjects, accountInfo)
       await CheckAndSendKLAYJadeMiners(heroesStruct, accountInfo)
